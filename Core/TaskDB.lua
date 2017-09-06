@@ -24,7 +24,7 @@ local pairs = pairs
 local dump = dump
 
 -- Shorthands
-local TaskDB = "AltMasteryTaskDB"
+local savedVarsName = "AltMasteryTaskDB"
 
 --
 function AM.TaskDB:GetDefaults()
@@ -63,7 +63,7 @@ end
 -- For testing purposes only
 function AM.TaskDB:Print()
 	
-	local db = _G[TaskDB]
+	local db = _G[savedVarsName]
 	for key, value in pairs(db) do -- Print entry in human-readable format
 		
 		AM:Print(" Dumping task entry with ID = " .. tostring(key))
@@ -76,11 +76,11 @@ end
 -- Setup the TaskDB
 function AM.TaskDB:Initialise()
 	
-	if not _G[TaskDB] then -- First startup (after a SavedVars reset)
-		_G[TaskDB] = {}
+	if not _G[savedVarsName] then -- First startup (after a SavedVars reset)
+		_G[savedVarsName] = {}
 	end
 	-- Initial structure now exists
-	local db = _G[TaskDB]
+	local db = _G[savedVarsName]
 	
 	-- Load default tasks (so that the addon can always be used, even if no custom tasks were created yet)
 	local defaultTasks = AM.TaskDB:GetDefaults()

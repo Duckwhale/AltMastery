@@ -17,9 +17,8 @@ local addonName, AM = ...
 if not AM then return end
 
 -- Set up table structures
-
 AM.Controllers = {}
-
+AM.TaskDB = {}
 
 -- Localization table
 AM.L = LibStub("AceLocale-3.0"):GetLocale("AltMastery", false)
