@@ -19,6 +19,7 @@ if not AM then return end
 -- Set up table structures
 AM.Controllers = {}
 AM.TaskDB = {}
+AM.Parser = {}
 
 -- Localization table
 AM.L = LibStub("AceLocale-3.0"):GetLocale("AltMastery", false)
@@ -33,3 +34,5 @@ function AM:Debug(msg, source)
 	source = source or ""
 	print(format("|c000072CA" .. "%s-Debug: " .. "|c00E6CC80%s", addonName .. (source ~= "" and "_" .. source or ""), msg)) -- Display source/module if any was given
 end
+
+return AM

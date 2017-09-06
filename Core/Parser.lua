@@ -17,11 +17,10 @@ local addonName, AM = ...
 if not AM then return end
 
 
-local Parser = {}
-
 -- Upvalues
 local type = type
 
+local Parser = {}
 
 -- Validates completion critera format given as an expression
 function Parser:IsValid(expression)
@@ -29,7 +28,7 @@ function Parser:IsValid(expression)
 	local isValid
 	
 	-- Rule out wrong argument types
-	if type(expression) ~= "string" then isValid = false end -- Also rejects empty expressions = type is nil
+	if type(expression) ~= "string" then isValid = false -- Also rejects empty expressions = type is nil
 	else -- Check if the expression has valid syntax
 		
 		-- Check parentheses (number of functions)
@@ -57,5 +56,8 @@ function Parser:Evaluate(expression)
 	-- Evaluate expression criteria
 
 end
+
+
+AM.Parser = Parser
 
 return Parser
