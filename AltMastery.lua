@@ -17,7 +17,7 @@ local addonName, AM = ...
 if not AM then return end
 
 
-local Addon = LibStub("AceAcddon-3.0"):NewAddon("AltMastery")
+local Addon = LibStub("AceAddon-3.0"):NewAddon("AltMastery")
 
 
 function Addon:OnInitialize()
