@@ -23,6 +23,7 @@ Locales\Locales.xml
 Core\Setup.lua
 
 ## Core modules ##
+Core\Parser.lua
 Core\TaskDB.lua
 
 ## Controllers ##
