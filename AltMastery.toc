@@ -1,0 +1,32 @@
+## Interface: 70300
+## Version: 1.0 (@project-version@)
+## Author: Cakechart
+
+## Title: AltMastery - Tasks and Milestones Management
+## Notes: Helps manage repeatable tasks, track long-time progress towards milestones, and organize personal goals
+
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: AltMasteryTaskDB, AltMasterySettings, AltMasteryGroups
+
+## OptionalDeps:LibStub, AceAddon-3.0, AceLocale-3.0
+#@no-lib-strip@
+Libs\LibStub\LibStub.lua
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+#@end-no-lib-strip@
+
+## Localization - needs to be loaded before the initialisation routine ##
+Locales\Locales.xml
+
+## Setup - needs to be loaded before other modules become usable ##
+Core\Setup.lua
+
+## Core modules ##
+Core\TaskDB.lua
+
+## Controllers ##
+Core\Controllers\SlashCmdHandler.lua
+
+## Loader - needs to be called last ##
+AltMastery.lua
