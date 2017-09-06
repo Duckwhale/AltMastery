@@ -16,6 +16,7 @@
 local addonName, AM = ...
 if not AM then return end
 
+AltMastery = AM -- Global to create an alias for keybinds, unit tests, and general convenience (ingame access/debugging)
 
 local Addon = LibStub("AceAddon-3.0"):NewAddon("AltMastery")
 

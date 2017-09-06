@@ -1,5 +1,7 @@
 Test_Parser_IsValid = {}
 
+local AM = AltMastery
+
 -- Helper function
 local function eval(expression, expectedValue)
 		luaunit.assertEquals(AM.Parser:IsValid(expression), expectedValue)
