@@ -39,7 +39,7 @@ function AM.TaskDB:GetDefaults()
 			DateEdited = time(),
 			Priority = "OPTIONAL", -- TODO: Localise priorities
 			ResetType = "ONE_TIME", -- TODO
-			Criteria = "(Class(Warrior) OR Class(Paladin) OR Class(Death Knight)) AND NOT Achievement(ID)",
+			Criteria = "(Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT)) AND NOT Achievement(4623)",
 			StepsToCompletion = {
 			
 				"Quest(24545) AS The Sacred and the Corrupt", -- TODO: Localise steps/quest names?

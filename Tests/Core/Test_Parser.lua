@@ -51,6 +51,6 @@ function Test_Parser_IsValid:Test_ValidSyntax()
 	eval("Quest(24548) AS The Splintered Throne", true)
 	eval("Quest(24549) AS Shadowmourne...", true)
 	eval("Quest(24748) AS The Lich King's Last Stand", true)
-	eval("(Class(Warrior) OR Class(Paladin) OR Class(Death Knight)) AND NOT Achievement(ID)", true) -- Tricky, tricky - it's got ALL the things!
+	eval("(Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT)) AND NOT Achievement(4623)", true) -- Tricky, tricky - it's got ALL the things!
 
 end
