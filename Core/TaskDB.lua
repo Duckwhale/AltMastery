@@ -84,10 +84,10 @@ function AM.TaskDB:Initialise()
 	
 	-- Load default tasks (so that the addon can always be used, even if no custom tasks were created yet)
 	local defaultTasks = AM.TaskDB:GetDefaults()
-	for id, taskObj in pairs(defaultTasks) do -- Add to TaskDB if the entry doesn't exists
+	for id, taskObj in pairs(defaultTasks) do -- Add to TaskDB (will overwrite previous values to make sure the defaults always work, even after API changes)
 
 		AM:Debug("Adding default task with id = " .. tostring(id), "TaskDB")
-		db[id] = db[id] or taskObj
+		db[id] = taskObj
 
 	end
 	-- TaskDB is now usable
