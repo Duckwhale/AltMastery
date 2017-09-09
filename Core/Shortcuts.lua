@@ -16,24 +16,36 @@
 local addonName, AM = ...
 if not AM then return end
 
--- Set up table structures
-AM.Controllers = {}
-AM.TaskDB = {}
-AM.Shortcuts = {}
-AM.Parser = {}
 
--- Localization table
-AM.L = LibStub("AceLocale-3.0"):GetLocale("AltMastery", false)
+local S = {}
 
 
--- Global functions
-function AM:Print(msg)
-	print(format("|c00CC5500" .. "%s: " .. "|c00E6CC80%s", addonName, msg))
+-- Evaluator functions (TODO: can be moved elsewhere later)
+function S:Quest(questID)
+	return IsQuestFlaggedCompleted(questID)
 end
 
-function AM:Debug(msg, source)
-	source = source or ""
-	print(format("|c000072CA" .. "%s: " .. "|c00E6CC80%s", addonName .. (source ~= "" and "_" .. source or ""), msg)) -- Display source/module if any was given
+function S:Class(classNameOrID)
+	
+	local class, classFileName, classID = UnitClass("player")
+		
+	if type(classNameOrID) == "string" then -- Compare to classFileName
+		return (classNameOrID == classFileName)
+	else -- Compare to classID
+		return(classNameOrID == classID)
+	end
+	
 end
 
-return AM
+function S:Achievement(achievementID)
+
+	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID)
+	
+	return wasEarnedByMe
+	
+end
+
+
+AM.Shortcuts = S
+
+return S

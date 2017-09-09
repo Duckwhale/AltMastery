@@ -36,38 +36,13 @@ local GetAchievementInfo = GetAchievementInfo
 ---- / Upvalues
 
 
--- Evaluator functions (TODO: can be moved elsewhere later)
-function Parser.Quest(questID)
-	return IsQuestFlaggedCompleted(questID)
-end
-
-function Parser:Class(classNameOrID)
-	
-	local class, classFileName, classID = UnitClass("player")
-		
-	if type(classNameOrID) == "string" then -- Compare to classFileName
-		return (classNameOrID == classFileName)
-	else -- Compare to classID
-		return(classNameOrID == classID)
-	end
-	
-end
-
-function Parser:Achievement(achievementID)
-
-	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID)
-	
-	return wasEarnedByMe
-	
-end
-
 -- Valid terms that need to be substituted
 local operands = { "AND", "OR", "NOT" }
 local evaluators = {
 	
-	["Class"] = "AltMastery.Parser.Class",
-	["Achievement"] = "AltMastery.Parser.Achievement",
-	["Quest"] = "AltMastery.Parser.Quest",
+	["Class"] = "AltMastery.Shortcuts.Class",
+	["Achievement"] = "AltMastery.Shortcuts.Achievement",
+	["Quest"] = "AltMastery.Shortcuts.Quest",
 	["WorldQuest"] = false,
 	["WorldQuestReward"] = false,
 	["Reputation"] = false,

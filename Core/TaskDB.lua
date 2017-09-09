@@ -32,7 +32,7 @@ function AM.TaskDB:GetDefaults()
 	local defaultTasks = {
 -- TODO: Move to different file once TaskDB is functional
 
-		SHADOWMOURNE = {
+		DEFAULT_TASK_SHADOWMOURNE = {
 			Description = "Unlock Shadowmourne",
 			Notes = "Retrieve Shadowmourne from the depths of Icecrown Citadel",
 			DateAdded = time(),
