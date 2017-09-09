@@ -12,6 +12,8 @@ The addon comes with three key features you should understand in order to use it
 
 Please understand that this document can only provide a brief overview. For a detailed list and explanation on how to use the more advanced features, feel free to browse the [Wiki](https://github.com/SacredDuckwhale/AltMastery/wiki) (currently a work-in-progress).
 
+**Note: As the addon is still in beta, not all features are fully implemented yet! I decided to leave the design blueprint in here so everyone could give feedback and see what I've planned for the future.**
+
 ### Groups
 
 Groups are the main structure used to organize your tasks and milestones. They can contain tasks or other groups, which means you get to customize the layout of your character's TODO lists in whichever way suits you best. A few of the things you can do with them are:
@@ -19,6 +21,7 @@ Groups are the main structure used to organize your tasks and milestones. They c
 * Create, edit, delete and move Groups around easily without affecting the Tasks themselves
 * Assign Groups to characters to have them become the "active" list, and start tracking the referenced Tasks in it
 * Import and export Groups to easily copy them or create alternative versions for multiple characters (*Note: Does not copy the Tasks themselves, so if you want to share your custom groups with others you will have to export any task not part of the default list separately for them to add to their database*)
+* Order tasks by priority, or manually if you prefer
 
 It should be said that Tasks and Groups are independent of each other; this means that Groups are used to *organize* tasks but they don't actually *contain* them. You can think of it more like containing a reference, so that Groups can be changed repeatedly and Tasks will not be deleted and can be re-used without difficulty, though they also need to be managed separately.
 
