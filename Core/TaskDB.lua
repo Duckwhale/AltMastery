@@ -26,41 +26,8 @@ local dump = dump
 -- Shorthands
 local savedVarsName = "AltMasteryTaskDB"
 
---
-function AM.TaskDB:GetDefaults()
-	
-	local defaultTasks = {
--- TODO: Move to different file once TaskDB is functional
 
-		DEFAULT_TASK_SHADOWMOURNE = {
-			Description = "Unlock Shadowmourne",
-			Notes = "Retrieve Shadowmourne from the depths of Icecrown Citadel",
-			DateAdded = time(),
-			DateEdited = time(),
-			Priority = "OPTIONAL", -- TODO: Localise priorities
-			ResetType = "ONE_TIME", -- TODO
-			Criteria = "(Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT)) AND NOT Achievement(4623)",
-			StepsToCompletion = {
-			
-				"Quest(24545) AS The Sacred and the Corrupt", -- TODO: Localise steps/quest names?
-				"Quest(24743) AS Shadow's Edge",
-				"Quest(24547) AS A Feast of Souls",
-				"Quest(24749) AS Unholy Infusion",
-				"Quest(24756) AS Blood Infusion",
-				"Quest(24757) AS Frost Infusion",
-				"Quest(24548) AS The Splintered Throne",
-				"Quest(24549) AS Shadowmourne...",
-				"Quest(24748) AS The Lich King's Last Stand",
-				
-			}
-		}
-	}
-	
-	return defaultTasks
-
-end
-
--- For testing purposes only
+-- Print contents of the TaskDB (for testing purposes only)
 function AM.TaskDB:Print()
 	
 	local db = _G[savedVarsName]
