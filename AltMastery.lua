@@ -18,14 +18,24 @@ if not AM then return end
 
 AltMastery = AM -- Global to create an alias for keybinds, unit tests, and general convenience (ingame access/debugging)
 
+
+-- Shared variables
+local L = AM.L
+
+-- Libraries
 local Addon = LibStub("AceAddon-3.0"):NewAddon("AltMastery", "AceConsole-3.0")
 
 
+-- Initialisation
 function Addon:OnInitialize()
 	self:RegisterChatCommand("altmastery", AM.Controllers.SlashCmdHandler)
 	self:RegisterChatCommand("am", AM.Controllers.SlashCmdHandler) -- Alias
 end
 
 function Addon:OnEnable()
-	print("AM: AltMastery loaded")
+	
+	local clientVersion, clientBuild = GetBuildInfo()
+	
+	AM:Print(format(L["%s %s for WOW %s loaded!"], addonName, AM.versionString, clientVersion))
+	
 end

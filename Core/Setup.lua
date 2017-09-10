@@ -26,6 +26,12 @@ AM.Parser = {}
 AM.L = LibStub("AceLocale-3.0"):GetLocale("AltMastery", false)
 
 
+-- Shared variables
+AM.versionString = GetAddOnMetadata("AltMastery", "Version")
+--@debug@
+AM.versionString = "DEBUG"
+--@end-debug@
+
 -- Global functions
 function AM:Print(msg)
 	print(format("|c00CC5500" .. "%s: " .. "|c00E6CC80%s", addonName, msg))
