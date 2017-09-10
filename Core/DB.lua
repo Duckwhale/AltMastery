@@ -31,6 +31,7 @@ local migrations = {
 		[[
 			AltMastery.db.global.tasks = AltMastery.db.global.tasks or {}
 			AltMastery.db.global.groups = AltMastery.db.global.groups or {}
+			AltMastery.db.version = 1
 		]],
 		"Initial creation of table structures"
 	} 
@@ -77,7 +78,8 @@ local function Initialise()
 			
 			tasks = defaultTasks,
 			groups = defaultGroups,
-			
+			version = 0,
+
 		}, 
 		
 		profile = { -- Settings go there
