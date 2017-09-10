@@ -64,12 +64,25 @@ local function NeedsMigration()
 	else AM:Debug("Database model is up-to-date and doesn't need migrating at this point", "DB") end
 
 	return false
+--- Initialises all databases via AceDB-3.0 (run at startup) so they are available for other modules to use
+local function Initialise()
+
+	local defaults = {
+		
+		global = {}, -- Tasks and Groups belong here
+		
+		profile = {} -- Settings go there
+		
+	}
 	
+	AM.db = LibStub("AceDB-3.0"):New("AltMasteryDB", defaults, true)
+
 end
 
 DB = {
 	
-	NeedsMigration = NeedsMigration
+	NeedsMigration = NeedsMigration,
+	Initialise = Initialise,
 	
 }
 

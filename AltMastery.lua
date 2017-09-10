@@ -28,8 +28,14 @@ local Addon = LibStub("AceAddon-3.0"):NewAddon("AltMastery", "AceConsole-3.0")
 
 -- Initialisation
 function Addon:OnInitialize()
+
+	-- Initialise AceDB-3.0 database (used to store the settings, tasks, and groups)
+	AM.DB.Initialise()
+	
+	-- Register slash commands
 	self:RegisterChatCommand("altmastery", AM.Controllers.SlashCmdHandler)
 	self:RegisterChatCommand("am", AM.Controllers.SlashCmdHandler) -- Alias
+	
 end
 
 function Addon:OnEnable()
