@@ -29,11 +29,9 @@ local DB
 local migrations = {
 	{1, -- AceDB handles initial creation, so AltMastery.db always exists
 		[[
-			AltMastery.db.global.tasks = AltMastery.db.global.tasks or {}
-			AltMastery.db.global.groups = AltMastery.db.global.groups or {}
 			AltMastery.db.version = 1
 		]],
-		"Initial creation of table structures"
+		"Set db.version to 1 (mostly just to test the migration routine)"
 	} 
 }
 
@@ -45,12 +43,20 @@ local function NeedsMigration()
 	local currentAddonVersion = AM.versionString:match("r(%d+)") or "DEBUG"
 	if currentAddonVersion == "DEBUG" then return true end -- Always apply all upgrades while debugging (to see if something breaks)
 	
-	local lastUpdate = #migrations -- Update occured in r<X>, where X is the version stored in the first field of each migration entry
-	AM:Debug("Detected most recent model update in r" .. tostring(lastUpdate) .. " - checking if current DB needs migration...", "DB")
+	local currentDatabaseVersion = AM.db.global.version or 0 -- Last DB update occured in r<X>, where X is the version no. stored in the global AceDB-3.0 data type
+	local lastUpdateVersion = migrations[#migrations][1] -- Last change to the DB structure occured in r<X>, where X is the version no. stored in the first field of the migration table
+	AM:Debug("Detected most recent model upgrade in r" .. tostring(lastUpdateVersion) .. " - current database structure was last changed in r" .. tostring(currentDatabaseVersion), "DB")
 	
-	if currentAddonVersion <= lastUpdate then -- Apply as many updates as necessary to get to the most current version
+	if currentDatabaseVersion < lastUpdateVersion then -- This version requires an upgrade
 	
-		for releaseVersion, migrationTable in ipairs(migrations) do -- Apply the necessary updates
+		AM:Debug("Database model was altered since the currently used DB was last updated -> Needs migration", "DB")
+		return true
+	
+	else AM:Debug("Database model is up-to-date and doesn't need to be migrated at this point", "DB") end
+
+	return false
+	
+end
 		
 			local updateVersion, taskMigrationCode, groupMigrationCode = unpack(migrationTable)
 			if currentAddonVersion <= releaseVersion then -- Apply this update
@@ -61,10 +67,7 @@ local function NeedsMigration()
 			end
 			
 		end
-	
-	else AM:Debug("Database model is up-to-date and doesn't need migrating at this point", "DB") end
 
-	return false
 --- Initialises all databases via AceDB-3.0 (run at startup) so they are available for other modules to use
 local function Initialise()
 
