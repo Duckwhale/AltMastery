@@ -67,6 +67,8 @@ local function NeedsMigration()
 --- Initialises all databases via AceDB-3.0 (run at startup) so they are available for other modules to use
 local function Initialise()
 
+	local defaultTasks = AM.GetDefaultTasks()
+
 	local defaults = {
 		
 		global = {}, -- Tasks and Groups belong here
