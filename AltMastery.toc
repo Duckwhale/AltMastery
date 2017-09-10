@@ -9,10 +9,11 @@
 ## LoadOnDemand: 0
 ## SavedVariables: AltMasteryDB
 
-## OptionalDeps: LibStub, AceAddon-3.0, AceDB-3.0, AceLocale-3.0
+## OptionalDeps: LibStub, AceAddon-3.0, AceConfig-3.0, AceDB-3.0, AceLocale-3.0
 #@no-lib-strip@
 Libs\LibStub\LibStub.lua
 Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceConfig-3.0\AceConfig-3.0.xml
 Libs\AceDB-3.0\AceDB-3.0.xml
 Libs\AceLocale-3.0\AceLocale-3.0.xml
 #@end-no-lib-strip@
@@ -36,6 +37,9 @@ Core\TaskDB.lua
 
 ## Controllers ##
 Core\Controllers\SlashCmdHandler.lua
+
+## Graphical user interface
+Core\GUI\Config.lua
 
 ## Loader - needs to be called last ##
 AltMastery.lua
