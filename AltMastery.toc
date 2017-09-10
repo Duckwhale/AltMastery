@@ -7,7 +7,7 @@
 
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
-## SavedVariables: AltMasteryTaskDB, AltMasterySettings, AltMasteryGroups
+## SavedVariables: AltMasteryDB
 
 ## OptionalDeps: LibStub, AceAddon-3.0, AceDB-3.0, AceLocale-3.0
 #@no-lib-strip@
