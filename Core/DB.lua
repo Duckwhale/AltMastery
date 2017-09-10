@@ -115,6 +115,7 @@ DB = {
 	
 	NeedsMigration = NeedsMigration,
 	Initialise = Initialise,
+	Migrate = Migrate,
 	
 }
 
