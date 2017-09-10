@@ -20,6 +20,12 @@ if not AM then return end
 -- Locals
 local DB
 
+--- Changes to the DB model are stored here for each version, allowing them to be applied sequentially during a migration to the most recent format
+-- Layout: index/changeNo	= { release/version	migrationCode/tasks	migrationCode/groups }
+local migrations = {
+	{1, "AltMasteryTaskDB = AltMasteryTaskDB or {}", "AltMasteryGroupDB = AltMasteryGroupDB or {}"}
+}
+
 
 
 
