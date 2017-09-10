@@ -16,6 +16,10 @@
 local addonName, AM = ...
 if not AM then return end
 
-function AM.Controllers:SlashCmdHandler()
-	print("AM: SlashCmdHandler called")
+function SlashCmdHandler()
+	AM:Debug("SlashCmdHandler called", "Controllers")
 end
+
+AM.Controllers.SlashCmdHandler = SlashCmdHandler
+
+return AM
