@@ -41,7 +41,12 @@ local migrations = {
 local function NeedsMigration()
 
 	local currentAddonVersion = AM.versionString:match("r(%d+)") or "DEBUG"
-	if currentAddonVersion == "DEBUG" then return true end -- Always apply all upgrades while debugging (to see if something breaks)
+	if currentAddonVersion == "DEBUG" then -- Always apply all upgrades while debugging (to see if something breaks)
+
+		AM:Debug("Forcing complete migration because this version of the addon is a DEBUG release", "DB")
+		return true
+
+	end
 	
 	local currentDatabaseVersion = AM.db.global.version or 0 -- Last DB update occured in r<X>, where X is the version no. stored in the global AceDB-3.0 data type
 	local lastUpdateVersion = migrations[#migrations][1] -- Last change to the DB structure occured in r<X>, where X is the version no. stored in the first field of the migration table
@@ -69,7 +74,7 @@ local function Migrate()
 			local newDatabaseVersion, migrationCode, upgradeNotes = unpack(migrationTable)
 			if currentDatabaseVersion < newDatabaseVersion then -- Apply this update
 			
-				AM:Debug("Found change set that hasn't been applied yet -> Upgrading structures from r" .. tostring(currentDatabaseVersion) .. "to r" .. tostring(newDatabaseVersion), "DB")
+				AM:Debug("Found migration changeset that hasn't been applied yet -> Upgrading structures from r" .. tostring(currentDatabaseVersion) .. " to r" .. tostring(newDatabaseVersion), "DB")
 				
 			
 			end
