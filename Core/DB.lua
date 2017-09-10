@@ -68,12 +68,23 @@ local function NeedsMigration()
 local function Initialise()
 
 	local defaultTasks = AM.GetDefaultTasks()
+	local defaultGroups = AM.GetDefaultGroups()
+	local defaultSettings = AM.GetDefaultSettings()
 
 	local defaults = {
 		
-		global = {}, -- Tasks and Groups belong here
+		global = { -- Tasks and Groups belong here
+			
+			tasks = defaultTasks,
+			groups = defaultGroups,
+			
+		}, 
 		
-		profile = {} -- Settings go there
+		profile = { -- Settings go there
+		
+			settings = defaultSettings,
+		
+		}
 		
 	}
 	

@@ -25,6 +25,8 @@ Core\Setup.lua
 
 ## Core modules ##
 Core\Tasks\Defaults.lua
+Core\Defaults\Groups.lua
+Core\Defaults\Settings.lua
 
 Core\DB.lua
 Core\GroupDB.lua
