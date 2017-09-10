@@ -24,6 +24,8 @@ Core\Setup.lua
 
 ## Core modules ##
 Core\Tasks\Defaults.lua
+
+Core\DB.lua
 Core\Parser.lua
 Core\Shortcuts.lua
 Core\TaskDB.lua
