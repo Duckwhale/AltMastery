@@ -22,7 +22,8 @@ local Addon = LibStub("AceAddon-3.0"):NewAddon("AltMastery", "AceConsole-3.0")
 
 
 function Addon:OnInitialize()
-	self:RegisterChatCommand("/am", AM.Controllers.SlashCmdHandler)
+	self:RegisterChatCommand("altmastery", AM.Controllers.SlashCmdHandler)
+	self:RegisterChatCommand("am", AM.Controllers.SlashCmdHandler) -- Alias
 end
 
 function Addon:OnEnable()
