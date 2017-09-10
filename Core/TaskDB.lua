@@ -26,9 +26,10 @@ local dump = dump
 -- Shorthands
 local savedVarsName = "AltMasteryTaskDB"
 
+local TaskDB
 
 -- Print contents of the TaskDB (for testing purposes only)
-function AM.TaskDB:Print()
+local function Print()
 	
 	local db = _G[savedVarsName]
 	for key, value in pairs(db) do -- Print entry in human-readable format
@@ -41,7 +42,7 @@ function AM.TaskDB:Print()
 end
 
 -- Setup the TaskDB
-function AM.TaskDB:Initialise()
+local function Initialise()
 	
 	if not _G[savedVarsName] then -- First startup (after a SavedVars reset)
 		_G[savedVarsName] = {}
@@ -60,3 +61,12 @@ function AM.TaskDB:Initialise()
 	-- TaskDB is now usable
 	
 end
+
+TaskDB = {
+
+	Print = Print,
+	Initialise = Initialise
+	
+}
+
+return TaskDB
