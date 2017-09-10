@@ -17,15 +17,14 @@ local addonName, AM = ...
 if not AM then return end
 
 
-local S = {}
+local S
 
-
--- Evaluator functions (TODO: can be moved elsewhere later)
-function S:Quest(questID)
+-- Evaluator functions
+local function Quest(questID)
 	return IsQuestFlaggedCompleted(questID)
 end
 
-function S:Class(classNameOrID)
+local function Class(classNameOrID)
 	
 	local class, classFileName, classID = UnitClass("player")
 		
@@ -37,7 +36,7 @@ function S:Class(classNameOrID)
 	
 end
 
-function S:Achievement(achievementID)
+local function Achievement(achievementID)
 
 	local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID)
 	
@@ -45,6 +44,13 @@ function S:Achievement(achievementID)
 	
 end
 
+S = {
+	
+	Quest = Quest,
+	Class = Class,
+	Achievement = Achievement,
+
+}
 
 AM.Shortcuts = S
 
