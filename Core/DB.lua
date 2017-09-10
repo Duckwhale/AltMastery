@@ -17,6 +17,10 @@ local addonName, AM = ...
 if not AM then return end
 
 
+-- Upvalues
+local tostring, ipairs, unpack = tostring, ipairs, unpack -- Lua API
+
+
 -- Locals
 local DB
 
