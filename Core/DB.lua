@@ -25,9 +25,15 @@ local tostring, ipairs, unpack = tostring, ipairs, unpack -- Lua API
 local DB
 
 --- Changes to the DB model are stored here for each version, allowing them to be applied sequentially during a migration to the most recent format
--- Layout: index/changeNo	= { release/version	migrationCode/tasks	migrationCode/groups }
+-- Layout: index/changeNo	= { release/version	migrationCode	notes }
 local migrations = {
-	{1, "AltMastery.db.global.tasks = AltMastery.db.global.tasks or {}; AltMastery.db.global.groups = AltMastery.db.global.groups or {}"} -- AceDB handles initial creation, so AltMastery.db.global always exists
+	{1, -- AceDB handles initial creation, so AltMastery.db always exists
+		[[
+			AltMastery.db.global.tasks = AltMastery.db.global.tasks or {}
+			AltMastery.db.global.groups = AltMastery.db.global.groups or {}
+		]],
+		"Initial creation of table structures"
+	} 
 }
 
 
