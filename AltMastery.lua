@@ -31,7 +31,7 @@ function Addon:OnInitialize()
 
 	-- Initialise AceDB-3.0 database (used to store the settings, tasks, and groups) and upgrade it if the internal structures have changed
 	AM.DB.Initialise()
-	if AM.DB.NeedsMigration() then DB.Migrate() end
+	if AM.DB.NeedsMigration() then AM.DB.Migrate() end
 	
 	-- Register slash commands
 	self:RegisterChatCommand("altmastery", AM.Controllers.SlashCmdHandler)
