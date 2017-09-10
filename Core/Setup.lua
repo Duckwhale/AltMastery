@@ -16,12 +16,17 @@
 local addonName, AM = ...
 if not AM then return end
 
--- Set up table structures
+-- Set up table structures for modules
 AM.Controllers = {}
 AM.DB = {}
+
+AM.GroupDB = {}
 AM.TaskDB = {}
+AM.Settings = {}
+
 AM.Shortcuts = {}
 AM.Parser = {}
+
 
 -- Localization table
 AM.L = LibStub("AceLocale-3.0"):GetLocale("AltMastery", false)

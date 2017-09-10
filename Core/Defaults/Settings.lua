@@ -29,7 +29,7 @@ function GetDefaultSettings()
 end
 
 
-AM.TaskDB.GetDefaultSettings = GetDefaultSettings
+AM.Settings.GetDefaultSettings = GetDefaultSettings
 
 
 return AM

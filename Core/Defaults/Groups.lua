@@ -29,7 +29,7 @@ function GetDefaultGroups()
 end
 
 
-AM.TaskDB.GetDefaultGroups = GetDefaultGroups
+AM.GroupDB.GetDefaultGroups = GetDefaultGroups
 
 
 return AM

@@ -85,9 +85,9 @@ end
 --- Initialises all databases via AceDB-3.0 (run at startup) so they are available for other modules to use
 local function Initialise()
 
-	local defaultTasks = AM.GetDefaultTasks()
-	local defaultGroups = AM.GetDefaultGroups()
-	local defaultSettings = AM.GetDefaultSettings()
+	local defaultTasks = AM.TaskDB.GetDefaultTasks()
+	local defaultGroups = AM.GroupDB.GetDefaultGroups()
+	local defaultSettings = AM.Settings.GetDefaultSettings()
 
 	local defaults = {
 		
