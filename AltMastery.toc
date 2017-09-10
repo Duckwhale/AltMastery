@@ -26,6 +26,7 @@ Core\Setup.lua
 Core\Tasks\Defaults.lua
 
 Core\DB.lua
+Core\GroupDB.lua
 Core\Parser.lua
 Core\Shortcuts.lua
 Core\TaskDB.lua
