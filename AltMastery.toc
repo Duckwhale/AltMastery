@@ -24,9 +24,9 @@ Locales\Locales.xml
 Core\Setup.lua
 
 ## Core modules ##
-Core\Tasks\Defaults.lua
 Core\Defaults\Groups.lua
 Core\Defaults\Settings.lua
+Core\Defaults\Tasks.lua
 
 Core\DB.lua
 Core\GroupDB.lua
