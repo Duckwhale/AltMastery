@@ -57,16 +57,30 @@ local function NeedsMigration()
 	return false
 	
 end
+
+--- Apply any DB model upgrades that the current release version requires
+local function Migrate()
+
+-- Apply as many updates as necessary to get to the most current version
+	for index, migrationTable in ipairs(migrations) do -- Apply the necessary updates
 		
-			local updateVersion, taskMigrationCode, groupMigrationCode = unpack(migrationTable)
-			if currentAddonVersion <= releaseVersion then -- Apply this update
+			local currentDatabaseVersion = AM.db.global.version or 0
+		
+			local newDatabaseVersion, migrationCode, upgradeNotes = unpack(migrationTable)
+			if currentDatabaseVersion < newDatabaseVersion then -- Apply this update
 			
-				AM:Debug("Found model update for r" .. tostring(releaseVersion) .. " that hasn't been applied yet -> migration is needed", "DB")
-				return true
+				AM:Debug("Found change set that hasn't been applied yet -> Upgrading structures from r" .. tostring(currentDatabaseVersion) .. "to r" .. tostring(newDatabaseVersion), "DB")
+				
 			
 			end
 			
 		end
+
+		local currentAddonVersion = AM.versionString:match("r(%d+)") or 0 -- Always apply all upgrades while debugging (to see if something breaks)
+		AM.db.global.version = currentAddonVersion -- If it is set to 0 here due to being run in a debug release, it will simply apply all upgrades the next time migration is initiated
+		
+end
+
 
 --- Initialises all databases via AceDB-3.0 (run at startup) so they are available for other modules to use
 local function Initialise()
