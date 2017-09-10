@@ -27,10 +27,40 @@ local migrations = {
 }
 
 
+--- Returns whether or not databases need to be migrated to a more recent format
+-- @return True if at least one of the two DB models has changed; false otherwise
+local function NeedsMigration()
 
+	local currentAddonVersion = AM.versionString:match("r(%d+)") or "DEBUG"
+	if currentAddonVersion == "DEBUG" then return true end -- Always apply all upgrades while debugging (to see if something breaks)
+	
+	local lastUpdate = #migrations -- Update occured in r<X>, where X is the version stored in the first field of each migration entry
+	AM:Debug("Detected most recent model update in r" .. tostring(lastUpdate) .. " - checking if current DB needs migration...", "DB")
+	
+	if currentAddonVersion <= lastUpdate then -- Apply as many updates as necessary to get to the most current version
+	
+		for releaseVersion, migrationTable in ipairs(migrations) do -- Apply the necessary updates
+		
+			local updateVersion, taskMigrationCode, groupMigrationCode = unpack(migrationTable)
+			if currentAddonVersion <= releaseVersion then -- Apply this update
+			
+				AM:Debug("Found model update for r" .. tostring(releaseVersion) .. " that hasn't been applied yet -> migration is needed", "DB")
+				return true
+			
+			end
+			
+		end
+	
+	else AM:Debug("Database model is up-to-date and doesn't need migrating at this point", "DB") end
 
+	return false
+	
+end
 
 DB = {
+	
+	NeedsMigration = NeedsMigration
+	
 }
 
 AM.DB = DB
