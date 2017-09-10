@@ -18,6 +18,7 @@ if not AM then return end
 
 -- Set up table structures
 AM.Controllers = {}
+AM.DB = {}
 AM.TaskDB = {}
 AM.Shortcuts = {}
 AM.Parser = {}

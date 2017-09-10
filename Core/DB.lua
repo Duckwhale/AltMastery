@@ -16,13 +16,17 @@
 local addonName, AM = ...
 if not AM then return end
 
+
+-- Locals
 local DB
 
 
 
 
-DB = {
 
+DB = {
 }
+
+AM.DB = DB
 
 return DB
