@@ -18,7 +18,6 @@ if not AM then return end
 
 
 -- Upvalues
-local _G = _G
 local tostring = tostring
 local pairs = pairs
 local dump = dump
