@@ -49,7 +49,7 @@ local function AddTask(self, key, TaskObject, fixDuplicateKeys)
 			AM:Debug("Attempting to resolve the conflict by changing the supplied key before adding this Task", "TaskDB")
 			
 			-- Find a free key (should be simple in almost all cases) -> Use first empty integer index
-			local index = AM.TaskDB:GetNumCustomTasks(false) -- Don't include the default tasks, because they use string keys (hashs) and not integers
+			local index = AM.TaskDB:GetNumTasks(false) -- Don't include the default tasks, because they use string keys (hashs) and not integers
 			key = (index + 1)
 			
 			AM:Debug("Picked new key = " .. tostring(key) .. " - I hope you like it! You'll have to choose a key that wasn't already taken otherwise :)")
