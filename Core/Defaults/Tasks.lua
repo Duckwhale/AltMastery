@@ -78,7 +78,7 @@ local PrototypeTask = {
 			return #self.completions
 		else return 0 end
 	
-	end
+	end,
 	
 }
 
