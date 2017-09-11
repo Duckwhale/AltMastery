@@ -35,8 +35,8 @@ local function Print()
 end
 
 --- Adds a new Task to the TaskDB. Will fail if one with the given key already exists (default behaviour) or try to fix the collision if set to do so
--- @return True if the task was added; false if it already existed and the operation was aborted
-local function AddTask(self, key, TaskObject, fixDuplicateKeys)
+-- @return True if the task was added; false if it already existed/the operation was aborted for some other reason
+local function AddTask(self,  TaskObject, key, fixDuplicateKeys)
 
 	-- Make sure the Task is valid (will always be the case if it was just created, but it could've been changed in the meantime)
 
