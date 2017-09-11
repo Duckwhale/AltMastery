@@ -38,6 +38,43 @@ local function Print()
 	
 end
 
+--- Adds a new Task to the TaskDB. Will fail if one with the given key already exists (default behaviour) or try to fix the collision if set to do so
+-- @return True if the task was added; false if it already existed and the operation was aborted
+local function AddTask(self, key, TaskObject, fixDuplicateKeys)
+
+	-- Make sure the Task is valid (will always be the case if it was just created, but it could've been changed in the meantime)
+
+	-- Check key for duplicates
+	if self:GetTask(key) ~= nil then -- A task already exists using this key
+		AM:Debug("Trying to add Task with key = " .. tostring(key) .. ", but one already exists", "TaskDB")
+	
+		if fixDuplicateKeys == true then -- Rename key to avoid overwriting the existing entry (will discard the given key and turn it into an integer)
+			
+			AM:Debug("Attempting to resolve the conflict by changing the supplied key before adding this Task", "TaskDB")
+			
+			-- Find a free key (should be simple in almost all cases) -> Use first empty integer index
+			local index = AM.TaskDB:GetNumCustomTasks(false) -- Don't include the default tasks, because they use string keys (hashs) and not integers
+			key = (index + 1)
+			
+			AM:Debug("Picked new key = " .. tostring(key) .. " - I hope you like it! You'll have to choose a key that wasn't already taken otherwise :)")
+		
+		else
+		
+			AM:Debug("Aborting to not overwrite existing entries. Please use the fixDuplicateKeys option if you wish to automatically generate an unused key")
+			return false
+			
+		end
+	
+	-- Update dateAdded in case there were significant delays between CreateTask and this (shouldn't really happen, though?)
+	TaskObject.dateAdded = time()
+	
+	-- Finally, add it to the TaskDB
+	AM.db.global.tasks[key] = TaskObject
+	
+	-- Return status as true, as otherwise the operation would've been aborted
+	return true
+	
+end
 
 --- Returns the number of (non-default) tasks contained in the TaskDB
 -- @param[opt] countDefaults Count the default tasks, too (which use String keys and not integers)
@@ -85,6 +122,7 @@ TaskDB = {
 
 	Print = Print,
 	CreateTask = CreateTask,
+	AddTask = AddTask,
 	GetNumTasks = GetNumTasks,
 	
 }
