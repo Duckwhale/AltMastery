@@ -38,10 +38,31 @@ local function Print()
 	
 end
 
+--- Creates a new Task object with the given name and returns a reference to it
+-- The name can be used as its key in the TaskDB later, although it's not mandatory to honour that convention
+-- @return A reference to the newly-created Task object
+local function CreateTask(self, name)
+
+	-- Create new object and have it inherit from the Prototype
+	local NewTaskObject = {}
+	
+	local prototype = AM.TaskDB.PrototypeTask
+	local mt = {__index = prototype } -- Simply look up any key that can't be found (right now, that means everything because the NewTaskObject is empty) in the prototypeTask table
+	setmetatable(NewTaskObject, mt)
+	
+	-- Overwrite some of the parts that only apply to default Tasks (as this creates a custom one, which behaves slightly differently)
+	NewTaskObject.isReadOnly = false -- Custom Tasks should obviously not be locked
+	NewTaskObject.dateAdded = time()
+	NewTaskObject.dateEdited = time()
+	
+	return NewTaskObject
+	
+end
 
 TaskDB = {
 
 	Print = Print,
+	CreateTask = CreateTask,
 	
 }
 
