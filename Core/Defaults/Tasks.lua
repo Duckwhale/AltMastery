@@ -33,39 +33,39 @@ local PrototypeTask = {
 	dateEdited = time(),
 	Criteria = "false", -- Will never be "completed"
 	isReadOnly = true, -- Can't be edited (because it's a default Task; Changes would be overwritten with each relog, anyway)
-	SubTasks = {}, -- No steps to completion that would have to be displayed/checked
+	Objectives = {}, -- No steps to completion that would have to be displayed/checked
 	iconPath = "Interface\\Icons\\inv_misc_questionmark",
 	isEnabled = true, -- This Task will be available in any list that references it
 	completions = {}, -- It will never be completed, thusly there is no completions data
 	
 	-- Inherited functions
-	GetAlias = function(subtaskNo) -- Get alias for a given SubTask
+	GetAlias = function(objectiveNo) -- Get alias for a given SubTask
 	
-		if self.SubTasks ~= nil -- Task has SubTasks
-		and type(subtaskNo) == "number" -- Parameter has correct type
-		and self.SubTasks[subtaskNo] ~= nil -- The subtask exists
+		if self.Objectives ~= nil -- Task has Objectives
+		and type(objectiveNo) == "number" -- Parameter has correct type
+		and self.Objectives[objectiveNo] ~= nil -- The subtask exists
 		then -- Extract Alias, if one was assigned	
 		
-			local alias = string.match(self.SubTasks[subtaskNo], ".*AS%s(.*)") -- Extract alias
+			local alias = string.match(self.Objectives[objectiveNo], ".*AS%s(.*)") -- Extract alias
 			return alias or ""
 			
 		end
 	
 	end,
 	
-	SetAlias = function(subtaskNo, newAlias) --- Set alias for a given SubTask
+	SetAlias = function(objectiveNo, newAlias) --- Set alias for a given SubTask
 		
-		if self.SubTasks ~= nil -- Task has SubTasks
-		and type(subtaskNo) == "number" -- Parameter has correct type
+		if self.Objectives ~= nil -- Task has Objectives
+		and type(objectiveNo) == "number" -- Parameter has correct type
 		and newAlias ~= nil and newAlias ~= "" -- Alias has correct type (can't be empty)
-		and self.SubTasks[subtaskNo] ~= nil -- The subtask exists
+		and self.Objectives[objectiveNo] ~= nil -- The subtask exists
 		then -- Replace Alias, if one was assigned; Add a new one otherwise
 		
-			local alias = string.match(self.SubTasks[subtaskNo], ".*AS%s(.*)") -- Extract alias
+			local alias = string.match(self.Objectives[objectiveNo], ".*AS%s(.*)") -- Extract alias
 			if alias then -- Replace existing alias with the new one
-				self.SubTasks[subtaskNo] = string.gsub(self.SubTasks[subtaskNo], alias, tostring(newAlias)) -- TODO. What if Alias has special characters?
+				self.Objectives[objectiveNo] = string.gsub(self.Objectives[objectiveNo], alias, tostring(newAlias)) -- TODO. What if Alias has special characters?
 			else -- Append the new alias, with the AS-prefix
-				self.SubTasks[subtaskNo] = self.SubTasks[subtaskNo] .. "AS " .. tostring(newAlias)
+				self.Objectives[objectiveNo] = self.Objectives[objectiveNo] .. "AS " .. tostring(newAlias)
 			end
 			
 		end
@@ -119,6 +119,6 @@ end
 
 
 AM.TaskDB.GetDefaultTasks = GetDefaultTasks
-AM.TaskDB.PrototypeTask = AM.TaskDB.PrototypeTask
+AM.TaskDB.PrototypeTask = PrototypeTask
 
 return AM
