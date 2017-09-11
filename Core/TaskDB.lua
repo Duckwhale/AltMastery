@@ -20,7 +20,6 @@ if not AM then return end
 -- Upvalues
 local tostring, pairs, dump, time = tostring, pairs, dump, time -- Lua APIs
 
-local TaskDB
 
 -- Print contents of the TaskDB (for testing purposes only)
 local function Print()
@@ -115,13 +114,11 @@ local function CreateTask() -- TODO: Parameters could be used to automatically s
 	
 end
 
-TaskDB = {
 
-	Print = Print,
-	CreateTask = CreateTask,
-	AddTask = AddTask,
-	GetNumTasks = GetNumTasks,
-	
-}
+AM.TaskDB.Print = Print
+AM.TaskDB.CreateTask = CreateTask
+AM.TaskDB.AddTask = AddTask
+AM.TaskDB.GetNumTasks = GetNumTasks
+AM.TaskDB.GetTask = GetTask
 
-return TaskDB
+return AM
