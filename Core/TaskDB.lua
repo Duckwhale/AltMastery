@@ -61,6 +61,8 @@ local function AddTask(self, key, TaskObject, fixDuplicateKeys)
 			
 		end
 	
+	end
+	
 	-- Update dateAdded in case there were significant delays between CreateTask and this (shouldn't really happen, though?)
 	TaskObject.dateAdded = time()
 	
