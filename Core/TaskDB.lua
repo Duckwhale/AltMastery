@@ -38,8 +38,24 @@ end
 -- @return True if the task was added; false if it already existed/the operation was aborted for some other reason
 local function AddTask(self,  TaskObject, key, fixDuplicateKeys)
 
-	-- Make sure the Task is valid (will always be the case if it was just created, but it could've been changed in the meantime)
+	if not TaskObject then -- Can't add what isn't there
+	
+		AM:Debug("Aborting AddTask() because TaskObject was not given", "TaskDB")
+		return false
+		
+	end
 
+	if type(key) ~= "number" then
+		
+		local newKey = AM.TaskDB:GetNumTasks(false) + 1
+		AM:Debug("Invalid key = " .. tostring(key) .. " can't be used to add a Task. Only integer keys are allowed! -> Generated key = " .. tostring(newKey) .. " for you :)", "TaskDB")
+		key = newKey
+		
+	end
+	
+	-- Make sure the Task is valid (will always be the case if it was just created, but it could've been changed in the meantime)
+	-- TODO
+	
 	-- Check key for duplicates
 	if self:GetTask(key) ~= nil then -- A task already exists using this key
 		AM:Debug("Trying to add Task with key = " .. tostring(key) .. ", but one already exists", "TaskDB")
