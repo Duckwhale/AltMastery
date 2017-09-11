@@ -52,12 +52,14 @@ local function Initialise()
 	
 	-- Load default tasks (so that the addon can always be used, even if no custom tasks were created yet)
 	local defaultTasks = AM.TaskDB:GetDefaults()
+	defaultTasks.INVALID_TASK = AM.TaskDB.PrototypeTask -- Add prototype to default tasks (so that AceDB won't try to store it, causing localisation issues if users switch the client language and suddenly have their old locale's prototype task as an actual TaskDB entry because it is considered a non-default entry)
 	for id, taskObj in pairs(defaultTasks) do -- Add to TaskDB (will overwrite previous values to make sure the defaults always work, even after API changes)
 
 		AM:Debug("Adding default task with id = " .. tostring(id), "TaskDB")
 		db[id] = taskObj
 
 	end
+	
 	-- TaskDB is now usable
 	
 end
