@@ -102,10 +102,16 @@ end
 --- Initialises all databases via AceDB-3.0 (run at startup) so they are available for other modules to use
 local function Initialise()
 
+	-- Load default tasks, groups, and settings
 	local defaultTasks = AM.TaskDB.GetDefaultTasks()
 	local defaultGroups = AM.GroupDB.GetDefaultGroups()
 	local defaultSettings = AM.Settings.GetDefaultSettings()
 
+	-- Add prototype to default tasks (so that AceDB won't try to store it, causing localisation issues if users switch the client language and suddenly have their old locale's prototype task as an actual TaskDB entry because it is considered a non-default entry)
+	local prototype = AM.TaskDB.PrototypeTask
+	defaultTasks[prototype.name] = prototype 
+	
+	-- Assemble the defaults table for AceDB-3.0 (contains all predefined Groups, Tasks, and the current default settings)
 	local defaults = {
 		
 		global = { -- Tasks and Groups belong here
