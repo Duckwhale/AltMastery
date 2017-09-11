@@ -33,6 +33,9 @@ function Addon:OnInitialize()
 	AM.DB.Initialise()
 	if AM.DB.NeedsMigration() then AM.DB.Migrate() end
 	
+	-- Create config GUI
+	AM.GUI.CreateBlizOptions()
+	
 	-- Register slash commands
 	self:RegisterChatCommand("altmastery", AM.Controllers.SlashCmdHandler)
 	self:RegisterChatCommand("am", AM.Controllers.SlashCmdHandler) -- Alias

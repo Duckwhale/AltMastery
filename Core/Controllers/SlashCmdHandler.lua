@@ -17,8 +17,17 @@ local addonName, AM = ...
 if not AM then return end
 
 function SlashCmdHandler()
+	
 	AM:Debug("SlashCmdHandler called", "Controllers")
+	
+	-- TODO: Taint?
+	
+	-- Open config GUI (Blizzard options interface)
+	InterfaceOptionsFrame_OpenToCategory(AM.optionsFrame) -- Thanks to a Blizzard bug, this doesn't go to the intended category right away (see http://www.wowinterface.com/forums/showthread.php?t=54599)
+	InterfaceOptionsFrame_OpenToCategory(AM.optionsFrame) -- So this second call SHOULD usually fix it (unless there are loads of addons which are listed before this one - which is unlikely thanks to the name starting with an "A")
+	
 end
+
 
 AM.Controllers.SlashCmdHandler = SlashCmdHandler
 
