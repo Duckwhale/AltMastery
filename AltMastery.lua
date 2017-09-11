@@ -21,6 +21,12 @@ AltMastery = AM -- Global to create an alias for keybinds, unit tests, and gener
 
 -- Shared variables
 local L = AM.L
+local FF = { -- "Feature flags" -> Disable incomplete features & "Proof of concept" code that was already committed to test out ideas and interaction between features  in the master branch
+
+	Config = false, -- Works, but doesn't do anything yet. It's easy enough to complete once the key addon features are implemented, so I put it on hold
+	
+}
+AM.FF = FF
 
 -- Libraries
 local Addon = LibStub("AceAddon-3.0"):NewAddon("AltMastery", "AceConsole-3.0")
@@ -34,7 +40,7 @@ function Addon:OnInitialize()
 	if AM.DB.NeedsMigration() then AM.DB.Migrate() end
 	
 	-- Create config GUI
-	AM.GUI.CreateBlizOptions()
+	if FF.Config then AM.GUI.CreateBlizOptions() end
 	
 	-- Register slash commands
 	self:RegisterChatCommand("altmastery", AM.Controllers.SlashCmdHandler)

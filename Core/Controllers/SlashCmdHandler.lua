@@ -20,11 +20,13 @@ function SlashCmdHandler()
 	
 	AM:Debug("SlashCmdHandler called", "Controllers")
 	
-	-- TODO: Taint?
-	
-	-- Open config GUI (Blizzard options interface)
-	InterfaceOptionsFrame_OpenToCategory(AM.optionsFrame) -- Thanks to a Blizzard bug, this doesn't go to the intended category right away (see http://www.wowinterface.com/forums/showthread.php?t=54599)
-	InterfaceOptionsFrame_OpenToCategory(AM.optionsFrame) -- So this second call SHOULD usually fix it (unless there are loads of addons which are listed before this one - which is unlikely thanks to the name starting with an "A")
+	if AM.FF.Config then
+		-- TODO: Taint?
+		-- Open config GUI (Blizzard options interface)
+		InterfaceOptionsFrame_OpenToCategory(AM.optionsFrame) -- Thanks to a Blizzard bug, this doesn't go to the intended category right away (see http://www.wowinterface.com/forums/showthread.php?t=54599)
+		InterfaceOptionsFrame_OpenToCategory(AM.optionsFrame) -- So this second call SHOULD usually fix it (unless there are loads of addons which are listed before this one - which is unlikely thanks to the name starting with an "A")
+		-- TODO: Actually, even just scrolling down (so addons with "A" aren't displayed anymore) will cause this issue to manifest... Yay >_>
+	end
 	
 end
 
