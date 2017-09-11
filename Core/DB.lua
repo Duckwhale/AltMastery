@@ -29,9 +29,9 @@ local DB
 local migrations = {
 	{1, -- AceDB handles initial creation, so AltMastery.db always exists
 		[[
-			AltMastery.db.version = 1
+			-- Do stuff here if the structures changed
 		]],
-		"Set db.version to 1 (mostly just to test the migration routine)"
+		"Didn't change anything - just testing the migration process (still updates the db version to 1)"
 	} 
 }
 
@@ -74,8 +74,20 @@ local function Migrate()
 			local newDatabaseVersion, migrationCode, upgradeNotes = unpack(migrationTable)
 			if currentDatabaseVersion < newDatabaseVersion then -- Apply this update
 			
-				AM:Debug("Found migration changeset that hasn't been applied yet -> Upgrading structures from r" .. tostring(currentDatabaseVersion) .. " to r" .. tostring(newDatabaseVersion), "DB")
-				
+				AM:Debug("Found that migration changeset #" .. index .. " hasn't been applied yet -> Upgrading structures from r" .. tostring(currentDatabaseVersion) .. " to r" .. tostring(newDatabaseVersion), "DB")
+				local Migrate, err = loadstring(migrationCode)
+				if not err then -- Migration code is valid (SHOULD always be the case... but to err is human - heh) -> Run it
+					
+					Migrate()
+					AM:Debug("Upgraded successfully. Notes: " .. tostring(upgradeNotes))
+					-- TODO: Set new DB version here?
+					
+				else -- Yeah, that didn't go as planned...
+					
+					AM:Debug("Error loading migration changeset to upgrade from r" .. tostring(currentDatabaseVersion) .. " to r" .. tostring(newDatabaseVerson), "DB")
+					AM:Debug("Error message: " .. tostring(err), "DB")
+					
+				end
 			
 			end
 			
@@ -83,7 +95,7 @@ local function Migrate()
 
 		local currentAddonVersion = AM.versionString:match("r(%d+)") or 0 -- Always apply all upgrades while debugging (to see if something breaks)
 		AM.db.global.version = currentAddonVersion -- If it is set to 0 here due to being run in a debug release, it will simply apply all upgrades the next time migration is initiated
-		
+
 end
 
 
@@ -115,6 +127,7 @@ local function Initialise()
 	AM.db = LibStub("AceDB-3.0"):New("AltMasteryDB", defaults, true)
 
 end
+
 
 DB = {
 	
