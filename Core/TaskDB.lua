@@ -72,6 +72,23 @@ local function AddTask(self, key, TaskObject, fixDuplicateKeys)
 	
 end
 
+--- Returns a reference to a given Task from the TaskDB
+-- @return Reference to the TaskObject if it exists; nil otherwise
+local function GetTask(self, key)
+
+	if not type(key) == "number" or type(key) == "string" then
+		AM:Debug("GetTask failed with key = " .. tostring(key) .. " - invalid type", "TaskDB")
+	end
+	
+	local TaskObject = AM.db.global.tasks[key]
+	if not TaskObject then
+		AM:Debug("GetTask failed with key = " .. tostring(key) .. " - no entry exists in db", "TaskDB")
+	return end
+	
+	return TaskObject
+
+end
+
 --- Returns the number of (non-default) tasks contained in the TaskDB
 -- @param[opt] countDefaults Count the default tasks, too (which use String keys and not integers)
 -- @return the number of (non-default) tasks
