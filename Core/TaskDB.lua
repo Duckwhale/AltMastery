@@ -31,7 +31,7 @@ local TaskDB
 -- Print contents of the TaskDB (for testing purposes only)
 local function Print()
 	
-	local db = _G[savedVarsName]
+	local db = AM.db.global.tasks
 	for key, value in pairs(db) do -- Print entry in human-readable format
 		
 		AM:Print(" Dumping task entry with ID = " .. tostring(key))
