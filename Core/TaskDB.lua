@@ -18,9 +18,7 @@ if not AM then return end
 
 
 -- Upvalues
-local tostring = tostring
-local pairs = pairs
-local dump = dump
+local tostring, pairs, dump, time = tostring, pairs, dump, time -- Lua APIs
 
 -- Shorthands
 local savedVarsName = "AltMasteryTaskDB"
