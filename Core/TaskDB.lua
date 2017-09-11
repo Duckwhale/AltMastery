@@ -89,7 +89,7 @@ local function GetNumTasks(countDefaults)
 	-- Count default Tasks, also -> It's not difficult but does require some extra effort
 	local defaultTasks = AM.TaskDB:GetDefaultTasks()
 	local numDefaultTasks = 0 -- Can't get them as easily, since they don't use integer keys
-	for k, v in pairs(defaultTasks)
+	for k, v in pairs(defaultTasks) do -- Count entries
 		numDefaultTasks = numDefaultTasks + 1
 	end
 	
@@ -111,7 +111,7 @@ local function CreateTask() -- TODO: Parameters could be used to automatically s
 	
 	-- Overwrite some of the parts that only apply to default Tasks (as this creates a custom one, which behaves slightly differently)
 	NewTaskObject.isReadOnly = false -- Custom Tasks should obviously not be locked
-	NewTaskObject.dateAdded = time()
+	NewTaskObject.dateAdded = time() -- This is technically false, as it isn't added to the TaskDB yet - but it's better than taking the prototype's date, which will refer to the time the addon was loaded
 	NewTaskObject.dateEdited = time()
 	
 	return NewTaskObject
