@@ -75,7 +75,7 @@ end
 --- Returns the number of (non-default) tasks contained in the TaskDB
 -- @param[opt] countDefaults Count the default tasks, too (which use String keys and not integers)
 -- @return the number of (non-default) tasks
-local function GetNumTasks(countDefaults)
+local function GetNumTasks(self, countDefaults)
 
 	local numCustomTasks = #AM.db.global.tasks
 	
