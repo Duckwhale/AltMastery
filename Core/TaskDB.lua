@@ -21,7 +21,8 @@ if not AM then return end
 local tostring, pairs, dump, time = tostring, pairs, dump, time -- Lua APIs
 
 
---- Validator functions for standard data types (serve as shortcut)
+-- Validator functions for standard data types (serve as shortcut)
+-- TODO: Move to separate Validation module?
 local function IsValidString(arg) -- Can't allow empty strings
 
 	if type(arg) == "string"
