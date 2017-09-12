@@ -46,7 +46,7 @@ end
 
 --- Adds a new Task to the TaskDB. Will fail if one with the given key already exists (default behaviour) or try to fix the collision if set to do so
 -- @return True if the task was added; false if it already existed/the operation was aborted for some other reason
-local function AddTask(self,  TaskObject, key, fixDuplicateKeys)
+local function AddTask(self, TaskObject, key, fixDuplicateKeys)
 
 	if not TaskObject then -- Can't add what isn't there
 	
