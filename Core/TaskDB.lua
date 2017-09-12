@@ -241,11 +241,41 @@ local function GetTask(self, key)
 end
 
 --- Updates the given Task in the TaskDB if it exists; creates a new one with the given specifications otherwise
--- @return True if the Task was updated without issue; false if it didn't exists and had to be created first
+-- @return True if the Task was updated/created without issue; false if it couldn't be added
 local function SetTask(self, key, TaskObject)
 
+	if not TaskObject then -- Can't use what isn't there
+	
+		AM:Debug("Aborting SetTask() because TaskObject was not given", "TaskDB")
+		return false
+		
+	end
+	
+	if not IsIntegerNumber(key) then -- Can't use the given key because it's invalid
+		
+		AM:Debug("SetTask() failed  because the given key = " .. tostring(key) .. "is invalid. Only integer keys are allowed! -> Try AddTask() instead or supply a valid key?", "TaskDB")
+		return false
+		
+	end
+	
 	-- TODO
-
+	
+	if not self:IsValidTask(TaskObject) then -- Can't use the given TaskObject because it's invalid
+	
+		AM:Debug("Aborting SetTask() because the given TaskObject failed to validate", "TaskDB")
+		return false
+		
+	end
+	
+	local taskAlreadyExists = self:GetTask(key) ~= nil
+	if taskAlreadyExists then	-- Overwrite ("update") existing Task
+		AM.db.global.tasks[key] = TaskObject
+	else -- Create new Task and add it to the DB
+		self:AddTask(TaskObject, key)
+	end
+	
+	return true
+	
 end
 
 --- Returns the number of (non-default) tasks contained in the TaskDB
