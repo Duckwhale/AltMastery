@@ -32,7 +32,6 @@ local PrototypeTask = {
 	dateAdded = time(),
 	dateEdited = time(),
 	Criteria = "false", -- Will never be "completed"
-	isReadOnly = true, -- Can't be edited (because it's a default Task; Changes would be overwritten with each relog, anyway)
 	Objectives = {}, -- No steps to completion that would have to be displayed/checked
 	iconPath = "Interface\\Icons\\inv_misc_questionmark",
 	isEnabled = true, -- This Task will be available in any list that references it
@@ -112,10 +111,6 @@ local PrototypeTask = {
 	
 	UpdateObjective = function(objectiveNo, newObjective)
 		-- Update this objective's critera
-	end,
-	
-	IsReadOnly = function()
-		-- Consider key, not readOnly property (which will be removed)
 	end,
 	
 }
