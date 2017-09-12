@@ -177,7 +177,7 @@ local function AddTask(self, TaskObject, key, fixDuplicateKeys)
 	-- Make sure the Task is valid (will always be the case if it was just created, but it could've been changed in the meantime)
 	if not self:IsValidTask(TaskObject) then -- Task can't be added, for obvious reasons
 		
-		AM:Debug("Can't add new Task for key = " .. tostring(key) .. " because the given TaskObject is invalid", "TaskDB",)
+		AM:Debug("Can't add new Task for key = " .. tostring(key) .. " because the given TaskObject is invalid", "TaskDB")
 		return false
 	
 	end
