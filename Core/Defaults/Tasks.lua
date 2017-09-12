@@ -17,6 +17,105 @@ local addonName, AM = ...
 if not AM then return end
 
 
+-- Upvalues
+local time, type, string = time, type, string -- Lua APIs
+
+
+--- This Task prototype contains the default values for a newly-created task (represents the "invalid task")
+-- Also serves as a definition of each task's internal data structures
+local PrototypeTask = {
+	
+	-- TODO: L
+	name = "INVALID_TASK", -- Also saves as ID, and therefore needs to be unique
+	description = "Invalid Task",
+	notes = "Sadly, this task is unusable. You can create a custom Task of your own, or import some from the predefined list :)",
+	dateAdded = time(),
+	dateEdited = time(),
+	Criteria = "false", -- Will never be "completed"
+	Objectives = {}, -- No steps to completion that would have to be displayed/checked
+	iconPath = "Interface\\Icons\\inv_misc_questionmark",
+	isEnabled = true, -- This Task will be available in any list that references it
+	Completions = {}, -- It will never be completed, thusly there is no completions data
+	
+	-- Inherited functions
+	GetAlias = function(objectiveNo) -- Get alias for a given SubTask
+	
+		if self.Objectives ~= nil -- Task has Objectives
+		and type(objectiveNo) == "number" -- Parameter has correct type
+		and self.Objectives[objectiveNo] ~= nil -- The subtask exists
+		then -- Extract Alias, if one was assigned	
+		
+			local alias = string.match(self.Objectives[objectiveNo], ".*AS%s(.*)") -- Extract alias
+			return alias or ""
+			
+		end
+	
+	end,
+	
+	SetAlias = function(objectiveNo, newAlias) --- Set alias for a given SubTask
+		
+		if self.Objectives ~= nil -- Task has Objectives
+		and type(objectiveNo) == "number" -- Parameter has correct type
+		and newAlias ~= nil and newAlias ~= "" -- Alias has correct type (can't be empty)
+		and self.Objectives[objectiveNo] ~= nil -- The subtask exists
+		then -- Replace Alias, if one was assigned; Add a new one otherwise
+		
+			local alias = string.match(self.Objectives[objectiveNo], ".*AS%s(.*)") -- Extract alias
+			if alias then -- Replace existing alias with the new one
+				self.Objectives[objectiveNo] = string.gsub(self.Objectives[objectiveNo], alias, tostring(newAlias)) -- TODO. What if Alias has special characters?
+			else -- Append the new alias, with the AS-prefix
+				self.Objectives[objectiveNo] = self.Objectives[objectiveNo] .. "AS " .. tostring(newAlias)
+			end
+			
+		end
+		
+	end,
+	
+	GetNumCompletions = function() --- Get number of completions (data sets)
+	
+		if self.completions ~= nil then
+			return #self.completions
+		else return 0 end
+	
+	end,
+	
+	-- Stubs - TODO: Fill out as necessary (and remove the rest later)
+	
+	-- Get/Set<Property>: NYI (TODO)
+	
+	-- Completions API: NYI (TODO)
+	
+	GetObjectives = function()
+		-- Is this actually needed?
+	end,
+	
+	GetNumObjectives = function()
+	
+	end,
+	
+	IsObjectiveCompleted = function(objectiveNo)
+	
+	end,
+	
+	GetNumCompletedObjectives = function()
+	
+	end,
+		
+	AddObjective = function(criterion)
+		-- Add new objective
+	end,
+	
+	RemoveObjective = function(objectiveNo)
+		-- Remove from the table
+	end,
+	
+	UpdateObjective = function(objectiveNo, newObjective)
+		-- Update this objective's critera
+	end,
+	
+}
+
+
 --- Table containing the default task entries
 local defaultTasks = {
 
@@ -53,6 +152,6 @@ end
 
 
 AM.TaskDB.GetDefaultTasks = GetDefaultTasks
-
+AM.TaskDB.PrototypeTask = PrototypeTask
 
 return AM
