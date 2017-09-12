@@ -16,8 +16,51 @@
 local addonName, AM = ...
 if not AM then return end
 
-local GroupDB
 
-GroupDB = {}
+local activeGroup = "EMPTY_GROUP" -- Start with prototype if no Group exists
 
-return GroupDB
+
+local function IsValidGroup()
+
+end
+
+
+local function Print()
+
+end
+
+local function AddGroup()
+
+end
+
+local function RemoveGroup()
+	-- TODO: What about nested groups? They should still be a part of the DB, as everything uses references only
+end
+
+local function GetGroup()
+
+end
+
+local function SetGroup()
+
+end
+
+local function GetNumGroups()
+	
+end
+
+local function CreateGroup()
+
+end
+
+
+AM.GroupDB.IsValidGroup = IsValidGroup
+AM.GroupDB.Print = Print
+AM.GroupDB.AddGroup = AddGroup
+AM.GroupDB.RemoveGroup = RemoveGroup
+AM.GroupDB.GetGroup = GetGroup
+AM.GroupDB.SetGroup = SetGroup
+AM.GroupDB.GetNumGroups = GetNumGroups
+AM.GroupDB.CreateGroup = CreateGroup
+
+return AM
