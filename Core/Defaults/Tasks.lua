@@ -26,7 +26,7 @@ local time, type, string = time, type, string -- Lua APIs
 local PrototypeTask = {
 	
 	-- TODO: L
-	name = "INVALID_TASK", -- Also saves as ID, and therefore needs to be unique (TODO: Check while validating a newly created Task)
+	name = "INVALID_TASK", -- Also saves as ID, and therefore needs to be unique
 	description = "Invalid Task",
 	notes = "Sadly, this task is unusable. You can create a custom Task of your own, or import some from the predefined list :)",
 	dateAdded = time(),
