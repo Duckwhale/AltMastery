@@ -32,7 +32,7 @@ local function IsValidString(arg) -- Can't allow empty strings
 		
 end
 
-local function IsIntegerNumber(arg) -- Can't allow negative numbers
+local function IsInteger(arg) -- Can't allow negative numbers
 
 	if type(arg) == "number"
 	and arg > 0
@@ -51,8 +51,8 @@ local validators = {
 	name = function(arg) return IsValidString(arg) end,
 	description = function(arg) return IsValidString(arg)	end,
 	notes = function(arg) return IsValidString(arg) end,
-	dateAdded = function(arg) return IsIntegerNumber(arg) end,
-	dateEdited = function(arg) return IsIntegerNumber(arg) end,
+	dateAdded = function(arg) return IsInteger(arg) end,
+	dateEdited = function(arg) return IsInteger(arg) end,
 	Criteria = function(arg) return AM.Parser:IsValid(arg) end,
 	iconPath = function(arg) return IsValidString(arg) end,
 	isEnabled = function(arg) return (type(arg) == "boolean") end,
@@ -166,9 +166,9 @@ local function AddTask(self, TaskObject, key, fixDuplicateKeys)
 		
 	end
 
-	if type(key) ~= "number" then
+	if not IsInteger(key) then  -- Can't add a new Task with this key (as custom Tasks are only allowed to occupy integer keys)
 		
-		local newKey = AM.TaskDB:GetNumTasks(false) + 1
+		local newKey = AM.TaskDB:GetNumTasks(false) + 1 -- TODO: Duplicate code
 		AM:Debug("Invalid key = " .. tostring(key) .. " can't be used to add a Task. Only integer keys are allowed! -> Generated key = " .. tostring(newKey) .. " for you :)", "TaskDB")
 		key = newKey
 		
@@ -251,7 +251,7 @@ local function SetTask(self, key, TaskObject)
 		
 	end
 	
-	if not IsIntegerNumber(key) then -- Can't use the given key because it's invalid
+	if not IsInteger(key) then -- Can't use the given key because it's invalid
 		
 		AM:Debug("SetTask() failed  because the given key = " .. tostring(key) .. "is invalid. Only integer keys are allowed! -> Try AddTask() instead or supply a valid key?", "TaskDB")
 		return false
