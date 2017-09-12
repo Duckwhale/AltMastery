@@ -32,10 +32,10 @@ Core\Defaults\Groups.lua
 Core\Defaults\Settings.lua
 Core\Defaults\Tasks.lua
 
+Core\Criteria.lua
 Core\DB.lua
 Core\GroupDB.lua
 Core\Parser.lua
-Core\Shortcuts.lua
 Core\TaskDB.lua
 
 ## Controllers ##

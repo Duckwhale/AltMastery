@@ -52,6 +52,6 @@ S = {
 
 }
 
-AM.Shortcuts = S
+AM.Criteria = S
 
 return S

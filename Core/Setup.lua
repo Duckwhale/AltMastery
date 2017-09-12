@@ -25,7 +25,7 @@ AM.GroupDB = {}
 AM.TaskDB = {}
 AM.Settings = {}
 
-AM.Shortcuts = {}
+AM.Criteria = {}
 AM.Parser = {}
 
 

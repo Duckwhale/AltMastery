@@ -40,9 +40,9 @@ local GetAchievementInfo = GetAchievementInfo
 local operands = { "AND", "OR", "NOT" }
 local evaluators = {
 	
-	["Class"] = "AltMastery.Shortcuts.Class",
-	["Achievement"] = "AltMastery.Shortcuts.Achievement",
-	["Quest"] = "AltMastery.Shortcuts.Quest",
+	["Class"] = "AltMastery.Criteria.Class",
+	["Achievement"] = "AltMastery.Criteria.Achievement",
+	["Quest"] = "AltMastery.Criteria.Quest",
 	["WorldQuest"] = false,
 	["WorldQuestReward"] = false,
 	["Reputation"] = false,
