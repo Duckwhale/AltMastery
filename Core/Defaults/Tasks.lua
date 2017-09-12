@@ -101,10 +101,7 @@ local PrototypeTask = {
 	GetNumCompletedObjectives = function()
 	
 	end,
-	
-	-- What about changing the order? Reorder? Insert between X and Y?
-	
-	
+		
 	AddObjective = function(criterion)
 		-- Add new objective
 	end,
