@@ -20,6 +20,16 @@ if not AM then return end
 -- Upvalues
 local tostring, pairs, dump, time = tostring, pairs, dump, time -- Lua APIs
 
+--- Validates a given TaskObject
+-- @param TaskObject The table that is (hopefully) representing a Task
+-- @return true if the Task is valid; false otherwise
+local function IsValidTask(self, TaskObject)
+
+	-- TODO
+	
+	-- Compare to prototype Task and make sure a) all fields exists, and b) are of the proper format (run validator function for it)
+
+end
 
 -- Print contents of the TaskDB (for testing purposes only)
 local function Print()
@@ -54,7 +64,12 @@ local function AddTask(self,  TaskObject, key, fixDuplicateKeys)
 	end
 	
 	-- Make sure the Task is valid (will always be the case if it was just created, but it could've been changed in the meantime)
-	-- TODO
+	if not self:IsValidTask(TaskObject) then -- Task can't be added, for obvious reasons
+		
+		AM:Debug("Can't add new Task for key = " .. tostring(key) .. " because the given TaskObject is invalid", "TaskDB",)
+		return false
+	
+	end
 	
 	-- Check key for duplicates
 	if self:GetTask(key) ~= nil then -- A task already exists using this key
@@ -90,6 +105,13 @@ local function AddTask(self,  TaskObject, key, fixDuplicateKeys)
 	
 end
 
+--- Removes a given Task from the TaskDB
+local function RemoveTask(self, key)
+
+	-- TODO
+
+end
+
 --- Returns a reference to a given Task from the TaskDB
 -- @return Reference to the TaskObject if it exists; nil otherwise
 local function GetTask(self, key)
@@ -104,6 +126,14 @@ local function GetTask(self, key)
 	return end
 	
 	return TaskObject
+
+end
+
+--- Updates the given Task in the TaskDB if it exists; creates a new one with the given specifications otherwise
+-- @return True if the Task was updated without issue; false if it didn't exists and had to be created first
+local function SetTask(self, key, TaskObject)
+
+	-- TODO
 
 end
 
@@ -153,7 +183,10 @@ end
 AM.TaskDB.Print = Print
 AM.TaskDB.CreateTask = CreateTask
 AM.TaskDB.AddTask = AddTask
+AM.TaskDB.RemoveTask = RemoveTask
 AM.TaskDB.GetNumTasks = GetNumTasks
 AM.TaskDB.GetTask = GetTask
+AM.TaskDB.SetTask = SetTask
+AM.TaskDB.IsValidTask = IsValidTask
 
 return AM
