@@ -108,8 +108,11 @@ local function Initialise()
 	local defaultSettings = AM.Settings.GetDefaultSettings()
 
 	-- Add prototype to default tasks (so that AceDB won't try to store it, causing localisation issues if users switch the client language and suddenly have their old locale's prototype task as an actual TaskDB entry because it is considered a non-default entry)
-	local prototype = AM.TaskDB.PrototypeTask
-	defaultTasks[prototype.name] = prototype 
+	local prototypeTask = AM.TaskDB.PrototypeTask
+	defaultTasks[prototypeTask.name] = prototypeTask 
+	
+	local prototypeGroup = AM.GroupDB.PrototypeGroup
+	defaultGroups[prototypeGroup.name] = prototypeGroup
 	
 	-- Assemble the defaults table for AceDB-3.0 (contains all predefined Groups, Tasks, and the current default settings)
 	local defaults = {
