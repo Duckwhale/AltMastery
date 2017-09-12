@@ -218,10 +218,20 @@ local function AddTask(self, TaskObject, key, fixDuplicateKeys)
 end
 
 --- Removes a given Task from the TaskDB
+-- @return True if the Task was removed successfully (or it didn't exist); false if the key was invalid
 local function RemoveTask(self, key)
 
-	-- TODO
-
+	if not IsInteger(key) then -- Since it isn't a valid key, there can be no custom Task that would be removed (defaults must not be removed)
+	
+		AM:Debug("Failed to remove task for key = " .. tostring(key) .. " because the given key is invalid")
+		return false
+		
+	end
+	
+	-- Remove entry from DB
+	AM.db.global.tasks[key] = nil
+	return true
+	
 end
 
 --- Returns a reference to a given Task from the TaskDB
