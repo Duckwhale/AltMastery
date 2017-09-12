@@ -114,6 +114,8 @@ local function Initialise()
 	local prototypeGroup = AM.GroupDB.PrototypeGroup
 	defaultGroups[prototypeGroup.name] = prototypeGroup
 	
+	-- TODO: Add default settings? (Not necessary, as they aren't object-oriented)
+	
 	-- Assemble the defaults table for AceDB-3.0 (contains all predefined Groups, Tasks, and the current default settings)
 	local defaults = {
 		

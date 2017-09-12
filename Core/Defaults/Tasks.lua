@@ -26,18 +26,21 @@ local time, type, string = time, type, string -- Lua APIs
 local PrototypeTask = {
 	
 	-- TODO: L
-	name = "INVALID_TASK", -- Also saves as ID, and therefore needs to be unique
+	-- Simple data types
+	name = "INVALID_TASK",
 	description = "Invalid Task",
 	notes = "Sadly, this task is unusable. You can create a custom Task of your own, or import some from the predefined list :)",
 	dateAdded = time(),
 	dateEdited = time(),
 	Criteria = "false", -- Will never be "completed"
-	Objectives = {}, -- No steps to completion that would have to be displayed/checked
 	iconPath = "Interface\\Icons\\inv_misc_questionmark",
 	isEnabled = true, -- This Task will be available in any list that references it
-	Completions = {}, -- It will never be completed, thusly there is no completions data
 	
-	-- Inherited functions
+	-- Complex data types
+	Completions = {}, -- It will never be completed, thusly there is no completions data
+	Objectives = {}, -- No steps to completion that would have to be displayed/checked
+	
+	-- Functions
 	GetAlias = function(objectiveNo) -- Get alias for a given SubTask
 	
 		if self.Objectives ~= nil -- Task has Objectives
