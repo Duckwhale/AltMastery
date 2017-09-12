@@ -108,10 +108,38 @@ local validators = {
 -- @return true if the Task is valid; false otherwise
 local function IsValidTask(self, TaskObject)
 
-	-- TODO
+	if not type(TaskObject) == "table" then -- TaskObject isn't even a table...
+
+		AM:Debug("Validation of TaskObject failed because the given object is not a table", "TaskDB")
+		return false
+
+	end
 	
 	-- Compare to prototype Task and make sure a) all fields exists, and b) are of the proper format (run validator function for it)
-
+	local prototype = self.PrototypeTask
+	for k, v in pairs(prototype) do -- Compare field layouts
+		
+		if not TaskObject[k] then -- TaskObject is missing a field
+		
+			AM:Debug("Validation of TaskObject failed for key = " .. tostring(k) .. " because the key didn't exist", "TaskDB")
+			return false
+		
+		end
+		
+		local ValidateField = validators(k)
+		local arg = TaskObject[k]
+		if not ValidateField(arg) then -- Field contains invalid data and must be rejected
+		
+			AM:Debug("Validation of TaskObject failed for key = " .. tostring(k) .. ", value = " .. tostring(arg), "TaskDB")
+			return false
+		
+		end
+		
+	end
+	
+	-- If no error was encountered, it's a valid TaskObject
+	return true
+	
 end
 
 -- Print contents of the TaskDB (for testing purposes only)
