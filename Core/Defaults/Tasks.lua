@@ -80,6 +80,47 @@ local PrototypeTask = {
 	
 	end,
 	
+	-- Stubs - TODO: Fill out as necessary (and remove the rest later)
+	
+	-- Get/Set<Property>: NYI (TODO)
+	
+	-- Completions API: NYI (TODO)
+	
+	GetObjectives = function()
+		-- Is this actually needed?
+	end,
+	
+	GetNumObjectives = function()
+	
+	end,
+	
+	IsObjectiveCompleted = function(objectiveNo)
+	
+	end,
+	
+	GetNumCompletedObjectives = function()
+	
+	end,
+	
+	-- What about changing the order? Reorder? Insert between X and Y?
+	
+	
+	AddObjective = function(criterion)
+		-- Add new objective
+	end,
+	
+	RemoveObjective = function(objectiveNo)
+		-- Remove from the table
+	end,
+	
+	UpdateObjective = function(objectiveNo, newObjective)
+		-- Update this objective's critera
+	end,
+	
+	IsReadOnly = function()
+		-- Consider key, not readOnly property (which will be removed)
+	end,
+	
 }
 
 
