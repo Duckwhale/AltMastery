@@ -36,7 +36,7 @@ local PrototypeTask = {
 	Objectives = {}, -- No steps to completion that would have to be displayed/checked
 	iconPath = "Interface\\Icons\\inv_misc_questionmark",
 	isEnabled = true, -- This Task will be available in any list that references it
-	completions = {}, -- It will never be completed, thusly there is no completions data
+	Completions = {}, -- It will never be completed, thusly there is no completions data
 	
 	-- Inherited functions
 	GetAlias = function(objectiveNo) -- Get alias for a given SubTask

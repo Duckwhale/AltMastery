@@ -20,6 +20,89 @@ if not AM then return end
 -- Upvalues
 local tostring, pairs, dump, time = tostring, pairs, dump, time -- Lua APIs
 
+
+--- Validator functions for standard data types (serve as shortcut)
+local function IsValidString(arg) -- Can't allow empty strings
+
+	if type(arg) == "string"
+	and arg ~= ""
+	then return true end
+	
+	return false
+		
+end
+
+local function IsIntegerNumber(arg) -- Can't allow negative numbers
+
+	if type(arg) == "number"
+	and arg > 0
+	then return true end
+	
+	return false
+
+end
+
+--- Validator functions for TaskObjects
+-- @param arg The argument that is to be checked
+-- @return true if the given field is valid; false otherwise
+local validators = {
+
+	-- Validating simple data types is pretty straight-forward
+	name = function(arg) return IsValidString(arg) end,
+	description = function(arg) return IsValidString(arg)	end,
+	notes = function(arg) return IsValidString(arg) end,
+	dateAdded = function(arg) return IsIntegerNumber(arg) end,
+	dateEdited = function(arg) return IsIntegerNumber(arg) end,
+	Criteria = function(arg) return AM.Parser:IsValid(arg) end,
+	iconPath = function(arg) return IsValidString(arg) end,
+	isEnabled = function(arg) return (type(arg) == "boolean") end,
+		
+	-- The tables need some more attention, though
+	Objectives = function(arg)
+	
+		local isTable = type(arg) == "table" -- Objectives table needs to be an actual table (though it can be empty)
+		
+		if isTable then -- Check individual entries, which need to be valid Criteria in and of themselves
+		
+			for k, v in ipairs(arg) do -- Check entries
+			
+				if not type(k) == "number" or not tonumber(k) > 0 -- Key needs to be an integer (custom Tasks always have integer keys)
+				or not AM.Parser:IsValid(arg[i]) -- Table entry is not a valid Criteria
+				then -- Some entry is not valid -> The entire Objectives table is invalid
+					
+					AM.Debug("Failed validation of Objectives table for key = " .. i .. ", arg = " .. tostring(arg[i]), "TaskDB")
+					return false
+				
+				end	
+				
+			end
+			
+		end
+		
+		return isTable
+	
+	end,
+	
+	Completions = function(arg)
+	
+		local isTable = type(arg) == "table" -- Completions table needs to be an actual table (though it can be empty)
+		
+		if isTable then -- Check individual entries, which need to be valid Completions
+		
+			for k, v in ipairs(arg) do -- Check entry
+			
+						-- TODO: Completions are NYI
+			
+			end
+		
+		end
+		
+		return 
+		
+	end,
+
+}
+
 --- Validates a given TaskObject
 -- @param TaskObject The table that is (hopefully) representing a Task
 -- @return true if the Task is valid; false otherwise
