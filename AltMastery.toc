@@ -43,6 +43,7 @@ Core\Controllers\SlashCmdHandler.lua
 
 ## Graphical user interface
 Core\GUI\Config.lua
+Core\GUI\FrameFactory.lua
 Core\GUI\DisplayStyles.lua
 
 ## Loader - needs to be called last ##
