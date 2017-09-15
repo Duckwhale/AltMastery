@@ -19,6 +19,34 @@ if not AM then return end
 -- TODO: Try different fonts to see which works best and use those for the default style (after key features are done)
 -- TODO: Recognize fonts from LibSharedMedia3-.0? (allow user to pick them for custom styles)
  
+ 
+ 
+-- HexToRGB() Taken from TotalAP's Utils module (already tested for robustness, but not useful enough to be its own library)
+-- TODO: Move to Utils; new param
+--- Translates HTML colour codes to RGB values
+-- @param hexString A string representing a colour code in hexadecimal/HTML notation (the leading '#' symbol is optional)
+-- @return Red value; 0 if invalid string was given
+-- @return Green value; 0 if invalid string was given
+-- @return Blue value; 0 if invalid string was given
+-- @usage HexToRGB("#FFFEFD") -> { 255, 254, 253 }
+-- @usage HexToRGB("FFFEFD") -> { 255, 254, 253 }
+-- @usage HexToRGB("asdf") -> { 0, 0, 0 }
+local function HexToRGB(hexString, divisor)
+	
+	local R = { 0, 0, 0 } -- This is used for invalid parameters and as a default value
+
+	if not hexString or type(hexString) ~= "string" then return R end
+
+	local r, g, b = hexString:match("^#?(%x%x)(%x%x)(%x%x)$")
+	
+	if not (r and g and b) then return R end
+	
+	return tonumber("0x" .. r) / divisor or 1, tonumber("0x" .. g) / divisor or 1, tonumber("0x" .. b) / divisor or 1
+	
+end
+
+
+ 
 -- Default style for the display (TODO: It's the only one, as others are NYI)
 local defaultStyle = {
 	
@@ -53,7 +81,7 @@ local defaultStyle = {
 		-- TODO: Hex2RGB from TAP/Utils (already tested)
 		test1 = "#828296", -- blue-ish grey
 		test2 = "#55B408", -- "Legion-like" green (but brighter)
-		test3 = "#1A1A1A", -- black-ish / IT background
+		ActiveGroupTracker = { backdrop = "#1A1A1A", border = "#9398A1", alpha = 0.9}, -- black-ish / IT background
 		test4 = "#666666", -- grey (IT button bg)
 		test5 = "#4D4D4D", -- dark grey (IT scrollbar bg)
 		test6 = "#404040", -- dark grey (IT active button bg)
@@ -61,6 +89,10 @@ local defaultStyle = {
 		
 	},
 	
+	edgeSize = 1.5,
+	
+}
+
 }
 
 
@@ -86,9 +118,33 @@ local function GetActiveStyle(self)
 	
 end
 
+-- Sets the backdrop (and border) colour(s) for a given frame or texture
+-- @param frameObject A reference to the frame object
+-- @colours A table containing the frame colours in hexadecimal #rrggbb representation (HTML style)
+local function SetFrameColour(frameObject, colours)
+
+	local backdrop = { HexToRGB(colours.backdrop, 255) }
+	tinsert(backdrop, colours.alpha)
+	local border = { HexToRGB(colours.border, 255) }
+	
+	if not frameObject then return colours end
+	
+	local edgeSize = AM.GUI:GetActiveStyle().edgeSize
+	
+	if frameObject:IsObjectType("Frame") then
+		frameObject:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8", edgeFile="Interface\\Buttons\\WHITE8X8", edgeSize = edgeSize}) 
+		frameObject:SetBackdropColor(unpack(backdrop)) -- TODO: alpha?
+		frameObject:SetBackdropBorderColor(unpack(border))
+	else -- frame is texture
+		frameObject:SetColorTexture(backdrop) -- TODO: Not needed?
+	end
+	
+end
 
 
 AM.GUI.GetActiveStyle = GetActiveStyle
 AM.GUI.UpdateStyles = UpdateStyles
+
+AM.GUI.SetFrameColour = SetFrameColour
 
 return AM
