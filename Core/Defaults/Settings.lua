@@ -19,7 +19,13 @@ if not AM then return end
 
 --- Table containing the default task entries
 local defaults = {
-
+	
+	display = {
+		
+		activeStyle = "Default",
+		
+	}
+	
 }
 
 

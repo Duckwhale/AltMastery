@@ -63,7 +63,8 @@ local defaultStyle = {
 	
 }
 
--- Update all stored display styles with their most current value
+
+-- Update all stored display styles with their most current value (in case the user has changed it)
 -- TODO: Only relevant later, as the default style is static and cannot be changed by the user
 local function UpdateStyles()
 
@@ -73,7 +74,21 @@ local function UpdateStyles()
 
 end
 
+--- Retrieves the currently active style (TODO; Right now, this is always the default style)
+-- @return A table containing styling info that can be applied to the display
+local function GetActiveStyle(self)
 
+	-- Update styles in case the user edited them in the meantime (TODO: NYI)
+	self:UpdateStyles()
+
+	local style = AM.db.profile.settings.display.activeStyle or AM.GUI:GetDefaultSettings().display.activeStyle
+	return AM.GUI.Styles[style] or defaultStyle
+	
+end
+
+
+
+AM.GUI.GetActiveStyle = GetActiveStyle
 AM.GUI.UpdateStyles = UpdateStyles
 
 return AM

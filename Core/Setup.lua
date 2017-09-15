@@ -19,7 +19,7 @@ if not AM then return end
 -- Set up table structures for modules
 AM.Controllers = {}
 AM.DB = {}
-AM.GUI = {}
+AM.GUI = { Styles = {} }
 
 AM.GroupDB = {}
 AM.TaskDB = {}
