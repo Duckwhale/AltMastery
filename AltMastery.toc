@@ -42,9 +42,12 @@ Core\TaskDB.lua
 Core\Controllers\SlashCmdHandler.lua
 
 ## Graphical user interface
+Core\GUI\Frames\AMActiveGroupTracker.lua
+
+Core\GUI\ActiveGroupTracker.lua
 Core\GUI\Config.lua
-Core\GUI\FrameFactory.lua
 Core\GUI\DisplayStyles.lua
+Core\GUI\FrameFactory.lua
 Core\GUI\Layouts.lua
 
 ## Loader - needs to be called last ##
