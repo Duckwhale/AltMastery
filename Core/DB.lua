@@ -124,6 +124,7 @@ local function Initialise()
 			tasks = defaultTasks,
 			groups = defaultGroups,
 			version = 0,
+			layoutCache = {}
 
 		}, 
 		
