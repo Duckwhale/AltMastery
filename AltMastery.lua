@@ -21,7 +21,7 @@ AltMastery = AM -- Global to create an alias for keybinds, unit tests, and gener
 
 -- Shared variables
 local L = AM.L
-local FF = { -- "Feature flags" -> Disable incomplete features & "Proof of concept" code that was already committed to test out ideas and interaction between features  in the master branch
+local FF = { -- "Feature flags" -> Disable incomplete features & "Proof of concept" code that was already committed to test out ideas and interaction between features in the master branch
 
 	Config = false, -- Works, but doesn't do anything yet. It's easy enough to complete once the key addon features are implemented, so I put it on hold
 	

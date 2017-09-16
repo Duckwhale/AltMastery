@@ -70,7 +70,7 @@ local function CreateMovableFrame(self, name, defaults, parent)
 
 end
 
---- Build frames according to the given specifications
+--- Build complex frames according to the given specifications
 -- @param frameSpecs A table containing the specific information needed to build the particular widget
 -- @return A reference to the created widget object
 local function BuildFrame(frameSpecs)
