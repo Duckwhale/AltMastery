@@ -61,7 +61,7 @@ local function Constructor()
 	
 	local activeStyle = AM.GUI:GetActiveStyle() -- TODO: Get active style (NYI, there's only the default right now)
 	local colours = activeStyle.frameColours.ActiveGroupTracker
-	AM.GUI.SetFrameColour(frame, colours)
+	AM.GUI:SetFrameColour(frame, colours)
 
 	-- TODO: Not sure if resizing should even be supported with the tracker?
 	--frame:SetResizable(true)

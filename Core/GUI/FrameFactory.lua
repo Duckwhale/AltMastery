@@ -73,7 +73,7 @@ end
 --- Build complex frames according to the given specifications
 -- @param frameSpecs A table containing the specific information needed to build the particular widget
 -- @return A reference to the created widget object
-local function BuildFrame(frameSpecs)
+local function BuildFrame(self, frameSpecs)
 
 	-- TODO: Typical Factory pattern, I guess? We'll see what is needed later.
 
