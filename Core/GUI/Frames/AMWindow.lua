@@ -43,6 +43,10 @@ local methods = {
 		self.frame:Show()
 	end,
 
+	["Reset"] = function(self)
+		self.frame:Reset()
+	end,	
+	
 }
 
 

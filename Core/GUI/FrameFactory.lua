@@ -45,6 +45,16 @@ local function CreateMovableFrame(self, name, defaults, parent)
 	frame:SetSize(defaults.width, defaults.height)
 	frame:SetPoint("CENTER", frame:GetParent(), "CENTER") -- Default position: Right in the center (so the user can move it to where they prefer to have it)
 	
+	frame.Reset = function(self) -- Restore position to its default value (before the frame was moved; ignoring and updating the saved vars)
+	
+		self:ClearAllPoints()
+		AM.db.global.layoutCache[name] = CopyTable(defaults) -- Reset layout cache for this frame
+		cacheEntry = AM.db.global.layoutCache[name] -- And update the reference used (requires a reload for the change to effect otherwise)
+		AM:Debug("Resetting position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+		self:SetPoint("BOTTOMLEFT", UIParent, cacheEntry.x, cacheEntry.y)
+		
+	end
+	
 	frame.Reposition = function(self) -- Restore position from saved vars
 	
 		self:ClearAllPoints()

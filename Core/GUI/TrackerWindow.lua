@@ -87,9 +87,17 @@ local function Show(self)
 
 end
 
+-- Reset the window to its original position (calls method on widget, which calls method on frame...)
+local function Reset(self)
+
+	self.frame:Reset()
+
+end
+
 local TrackerWindow = {
 
 	Show = Show,
+	Reset = Reset,
 	
 }
 
