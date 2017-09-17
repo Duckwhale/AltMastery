@@ -77,8 +77,8 @@ local function Constructor()
 	
 	-- Create content pane
 	local content = CreateFrame("Frame", nil, frame)	-- Empty frame that will be used to contain all children later
-	content:SetPoint("TOPLEFT", 11, -62)
-	content:SetPoint("BOTTOMRIGHT", -11, 40)
+	content:SetPoint("TOPLEFT", 5, -5)
+	content:SetPoint("BOTTOMRIGHT", -5, 5)
 	
 	
 	-- Assemble widget object (to register with AceGUI)
