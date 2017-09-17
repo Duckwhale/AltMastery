@@ -38,12 +38,29 @@ local function Show(self)
 		
 		
 		-- Add the individual display elements
-		-- Interactive Logo image (serves as title and controls the window's visibility)		
-		local InteractiveLogo = AceGUI:Create("InteractiveLabel")
-		InteractiveLogo:SetImage("Interface\\Addons\\AltMastery\\Media\\logo_simple_1") -- TODO: Using Static Logo as placeholder -> No interactivity yet (depend on style also?)
-		InteractiveLogo:SetImageSize(132, 60)
-		InteractiveLogo:SetText("InteractiveLogo")
-		self.frame:AddChild(InteractiveLogo)
+		
+		-- Interactive Logo image (serves as title and controls the window's visibility)
+		-- local LogoGroup = AceGUI:Create("InlineGroup")
+		-- LogoGroup:SetTitle("LogoGroup Title")
+		local logoSpecs = {
+			
+			type = "Logo",
+			parent = self.frame.frame,
+			size = { 132, 60 }
+			
+		}
+		local InteractiveLogo = AM.GUI:BuildFrame(logoSpecs)
+	--	InteractiveLogo:SetImage("Interface\\Addons\\AltMastery\\Media\\logo_simple_") -- TODO: Using Static Logo as placeholder -> No interactivity yet (depend on style also?)
+		-- InteractiveLogo:SetImageSize(132, 60)
+		InteractiveLogo:SetPoint("TOPLEFT", self.frame.frame, "TOPLEFT", 0, 60)
+		--InteractiveLogo:SetPoint("BOTTOMRIGHT", self.frame.frame, -100, 0)
+		-- InteractiveLogo:SetText("AltMastery")
+		-- InteractiveLogo:SetScript("OnEnter", function(self) -- TODO: Proper animation etc. (not that important and requires the actual logo, not the placeholder)
+			-- InteractiveLogo:SetImage("Interface\\Addons\\AltMastery\\Media\\logo_simple_2")
+		-- end)
+		-- InteractiveLogo:SetScript("OnLeave", function(self) -- TODO: Proper animation etc. (not that important and requires the actual logo, not the placeholder)
+			-- InteractiveLogo:SetImage("Interface\\Addons\\AltMastery\\Media\\logo_simple_1")
+		-- end)
 		
 		-- Group control panel (displays currently active group and allows changing it via dropdown) (or maybe find directly via Filters? TODO...)
 		local activeStyle = AM.GUI:GetActiveStyle()
