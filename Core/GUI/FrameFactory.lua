@@ -87,6 +87,64 @@ local function BuildFrame(self, frameSpecs)
 
 	-- TODO: Typical Factory pattern, I guess? We'll see what is needed later.
 
+	local widget
+	if frameSpecs.type == "MovableFrame" then -- Build a frame that can be moved
+		widget = AM.GUI:CreateMovableFrame(frameSpecs.name, defaults)
+	elseif frameSpecs.type == "Frame" then -- Build a regular static frame
+		widget = CreateFrame("Frame", frameSpecs.name, frameSpecs.parent)
+		-- if frameSpecs.strata then
+			-- widget:SetFrameStrata(frameSpecs.strata)
+		-- end
+		--widget:EnableMouse(frameSpecs.mouse)
+	elseif frameSpecs.type == "Logo" then -- Build a logo image that animates when hovered over
+		--assert(not frameSpecs.scripts, "No scripts are allowed for the Logo type!") -- TODO: Why not?
+		widget = CreateFrame("Frame", nil, frameSpecs.parent)
+		local icon = widget:CreateTexture(nil, "ARTWORK")
+		icon:SetAllPoints()
+		icon:SetTexture("Interface\\Addons\\AltMastery\\Media\\logo_simple_1")
+		
+		-- AnimationGroup test below >_> Never mind this, it will be replaced eventually (TODO)
+		--local ag = widget:CreateAnimationGroup()
+		-- local spin = ag:CreateAnimation("Rotation")
+		-- spin:SetOrder(1)
+		-- spin:SetDuration(1)
+		-- spin:SetDegrees(360)
+		-- -- local spin = ag:CreateAnimation("Rotation")
+		-- -- spin:SetOrder(2)
+		-- -- spin:SetDuration(1)
+		-- -- spin:SetDegrees(-180)
+		-- -- local spin = ag:CreateAnimation("Rotation")
+		-- -- spin:SetOrder(3)
+		-- -- spin:SetDuration(1)
+		-- -- spin:SetDegrees(180)
+		-- ag:SetLooping("REPEAT")
+		-- widget:SetScript("OnEnter", function() ag:Play() end)
+		-- widget:SetScript("OnLeave", function() ag:Stop() end)
+	
+	end
+	
+	-- Resize
+	if frameSpecs.size then -- Apply size to the frame
+		widget:SetWidth(frameSpecs.size[1] or 0)
+		widget:SetHeight(frameSpecs.size[2] or 0)
+	end
+	-- Reposition
+	
+	-- Control visibility
+	
+	-- Add children (only for container frames)
+	
+	-- Set text properties (only for text-based widgets)
+	
+	-- Add script handlers
+	
+	if not widget then -- Specs were invalid
+		AM:Debug("Attempted to create invalid widget via BuildFrame()", "GUI")
+		return
+	end
+	
+	return widget
+	
 end
 
 
