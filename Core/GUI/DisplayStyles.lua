@@ -81,7 +81,7 @@ local defaultStyle = {
 		-- TODO: Hex2RGB from TAP/Utils (already tested)
 		test1 = "#828296", -- blue-ish grey
 		test2 = "#55B408", -- "Legion-like" green (but brighter)
-		ActiveGroupTracker = { backdrop = "#1A1A1A", border = "#9398A1", alpha = 0.9}, -- black-ish / IT background
+		Window = { backdrop = "#1A1A1A", border = "#9398A1", alpha = 0.9}, -- Identical style for all top-level windows
 		test4 = "#666666", -- grey (IT button bg)
 		test5 = "#4D4D4D", -- dark grey (IT scrollbar bg)
 		test6 = "#404040", -- dark grey (IT active button bg)
@@ -121,22 +121,26 @@ end
 -- Sets the backdrop (and border) colour(s) for a given frame or texture
 -- @param frameObject A reference to the frame object
 -- @colours A table containing the frame colours in hexadecimal #rrggbb representation (HTML style)
-local function SetFrameColour(frameObject, colours)
+local function SetFrameColour(self, frameObject, colours)
 
 	local backdrop = { HexToRGB(colours.backdrop, 255) }
 	tinsert(backdrop, colours.alpha)
-	local border = { HexToRGB(colours.border, 255) }
 	
 	if not frameObject then return colours end
 	
 	local edgeSize = AM.GUI:GetActiveStyle().edgeSize
 	
-	if frameObject:IsObjectType("Frame") then
+	if frameObject:IsObjectType("Frame") then -- Set backdrop via Frame API
 		frameObject:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8", edgeFile="Interface\\Buttons\\WHITE8X8", edgeSize = edgeSize}) 
 		frameObject:SetBackdropColor(unpack(backdrop)) -- TODO: alpha?
-		frameObject:SetBackdropBorderColor(unpack(border))
-	else -- frame is texture
-		frameObject:SetColorTexture(backdrop) -- TODO: Not needed?
+		
+		if colours.border then -- Set border (this is optional)
+			local border = { HexToRGB(colours.border, 255) }
+			frameObject:SetBackdropBorderColor(unpack(border))
+		end
+		
+	else -- Frame is texture -> Set backdrop by simply colouring it differently
+		frameObject:SetColorTexture(backdrop) -- TODO: Not currently used anywhere? (No textures exist)
 	end
 	
 end

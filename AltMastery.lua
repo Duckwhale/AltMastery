@@ -55,6 +55,9 @@ function Addon:OnEnable()
 	AM:Print(format(L["%s %s for WOW %s loaded!"], addonName, AM.versionString, clientVersion))
 	
 	-- Show main display
-	AM.ActiveGroupTracker:Show()
+	AM.TrackerWindow:Show()
+	
+	-- TODO: Database Editor
+	--AM.DatabaseEditor:Show()
 	
 end
