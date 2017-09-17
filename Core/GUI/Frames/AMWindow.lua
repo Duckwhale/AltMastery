@@ -29,10 +29,10 @@ local methods = {
 		self.frame:SetFrameStrata("MEDIUM")
 		self:Show()
 	end,
-
-	["OnRelease"] = function(self) -- TODO: Does it still error if this is removed? It's not like I'm using the status table...
-		-- self.status = nil
-		-- wipe(self.localstatus)
+	
+	["OnRelease"] = function(self)
+		self.frame:ClearAllPoints()
+		-- TODO: Is there any data left that should be cleared? Not sure which parts AceGUI wants to be reset
 	end,
 
 	["Hide"] = function(self)
@@ -85,7 +85,6 @@ local function Constructor()
 	local widget = {
 	
 		type = Type,
-		localstatus = {},
 		frame = frame,
 		content = content,
 		
