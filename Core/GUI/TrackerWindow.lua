@@ -96,6 +96,32 @@ local function Show(self)
 		-- GroupControlPanel:AddChild(ActiveGroupLabel)
 		-- GroupControlPanel:AddChild(ActiveGroupSelector)
 		
+		-- Add container for the tracker groups
+		local TrackerPane = AceGUI:Create("InlineGroup") -- TODO: Use same type as content panes?
+		border = TrackerPane.content:GetParent()
+		
+		border:ClearAllPoints()
+		border:SetPoint("TOPLEFT", 2, -20)
+		border:SetPoint("BOTTOMRIGHT", -2, 2)
+		--TrackerPane.content:SetAllPoints()
+		TrackerPane.content:ClearAllPoints()
+	
+	local trackerPaneBorderSize = 3
+	TrackerPane.content:SetPoint("TOPLEFT", trackerPaneBorderSize, -trackerPaneBorderSize)
+	TrackerPane.content:SetPoint("BOTTOMRIGHT", -trackerPaneBorderSize, trackerPaneBorderSize)
+	
+	TrackerPane:SetAutoAdjustHeight(false)
+	TrackerPane:SetHeight(490) -- TODO: Calculate size based on number of displayed items (Groups/Tasks/Objectives) -> Use TrackerPane:GetNumDisplayedTasks, GetNumDisplayedGroups, GetNumTrackedTasks and border from settings
+	
+		AM.GUI:SetFrameColour(border, activeStyle.frameColours.TrackerPane)
+		border:SetBackdropColor(1,0,0,1)
+		border:SetBackdropBorderColor(0,1,0,1)
+		TrackerPane:SetTitle("Tracker Pane")
+	--	TrackerPane:SetFullHeight(true)
+		TrackerPane:SetRelativeWidth(1)
+		TrackerPane:SetLayout("List")
+		LeftPane:AddChild(TrackerPane)
+		
 		-- local GroupControlPanel = AceGUI:Create("SimpleGroup")
 		-- dump(GroupControlPanel)
 		--	AM.GUI:SetFrameColour(GroupControlPanel, colours)
