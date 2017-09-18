@@ -28,6 +28,45 @@ local numDisplayedTasks = 0
 local numDisplayedObjectives = 0
 
 
+--- Calculate the total height of the TrackerPane considering all the items that need to be displayed, and the style's display settings 
+-- @param self
+-- @return The total height that is required for the TrackerPane to display all children properly
+local function GetTrackerHeight(self)
+	
+	-- Get value for all display items
+	local activeStyle = AM.GUI:GetActiveStyle()
+	local borderSize = activeStyle.edgeSize
+	
+	-- Get values for each display item (TODO: They are not final)
+	local groupSize = AM.db.profile.settings.display.groupSize
+	local taskSize = AM.db.profile.settings.display.taskSize
+	local objectiveSize = AM.db.profile.settings.display.objectiveSize
+	local groupEntrySize = (2 * borderSize + groupSize)
+	local taskEntrySize =  (2 * borderSize + taskSize) 
+	local objectiveEntrySize = (2 * borderSize + objectiveSize)
+	
+	-- Calculate total height
+	local height = 0
+	
+	-- Add the border for the tracker pane itself
+	height = height + 2 * borderSize
+--AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")	
+	-- For each maximized group, add its tasks and objectives
+	height = height + (numDisplayedGroups - #minimizedGroups) * groupEntrySize
+--AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")		
+	-- For each task without objectives, simply add one entry
+	height = height + numDisplayedTasks * taskEntrySize
+--AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")	
+	-- For each objective, add another entry
+	height = height + numDisplayedObjectives * objectiveEntrySize
+--AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")	
+	-- For each minimized group, simply add one entry
+	height = height + (#minimizedGroups) * groupEntrySize
+--AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")		
+	return height
+
+end
+
 --- Release all the children into the widget pool (managed by AceGUI-3.0)
 local function ReleaseAllChildren(self)
 
@@ -198,6 +237,8 @@ local TrackerPane = {
 	numDisplayedTasks = numDisplayedTasks,
 	numDisplayedObjectives = numDisplayedObjectives,
 
+	GetTrackerHeight = GetTrackerHeight,
+	
 	Create = Create,
 
 	UpdateGroups = UpdateGroups,

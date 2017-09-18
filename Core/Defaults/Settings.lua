@@ -23,6 +23,9 @@ local defaults = {
 	display = {
 		
 		activeStyle = "Default",
+		groupSize = 32,
+		taskSize = 28,
+		objectiveSize = 24,
 		
 	}
 	
