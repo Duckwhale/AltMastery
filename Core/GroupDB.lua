@@ -67,7 +67,8 @@ local function CreateGroup()
 	local mt = {
 		__index = prototype, -- Simply look up any key that can't be found (right now, that means everything because the NewTaskObject is empty) in the prototypeTask table
 		__tostring = function(self) -- Serialise object for debug output and return a string representation
-			return "TOSTRING GROUP - TODO"
+			local strrep = self.name .. " = { icon = " .. self.iconPath .. ", isEnabled = " .. tostring(self.isEnabled) .. ", isReadOnly = " .. tostring(self.isReadOnly) .. ", taskList = <" .. #self.taskList .. " Tasks>, nestedGroups = <" .. #self.nestedGroups .. " Groups> }"
+			return strrep
 		end,
 	}
 	setmetatable(NewGroupObject, mt)
