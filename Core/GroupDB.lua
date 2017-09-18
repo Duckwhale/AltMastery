@@ -17,7 +17,7 @@ local addonName, AM = ...
 if not AM then return end
 
 
-local activeGroup = "EMPTY_GROUP" -- Start with prototype if no Group exists
+local activeGroup = "ALL_THE_TASKS" -- Start with prototype if no Group exists (TODO: Set to EMPTY_GROUP once the dropdown is implemented)
 
 
 local function IsValidGroup()
