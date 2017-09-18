@@ -102,19 +102,23 @@ local function IsValidTask(self, TaskObject)
 	local prototype = self.PrototypeTask
 	for k, v in pairs(prototype) do -- Compare field layouts
 		
-		if not TaskObject[k] then -- TaskObject is missing a field
+		if not type(v) == "function" then -- This field needs to be validated (functions are always inherited and won't be present in the instanced object)
 		
-			AM:Debug("Validation of TaskObject failed for key = " .. tostring(k) .. " because the key didn't exist", "TaskDB")
-			return false
-		
-		end
-		
-		local ValidateField = validators(k)
-		local arg = TaskObject[k]
-		if not ValidateField(arg) then -- Field contains invalid data and must be rejected
-		
-			AM:Debug("Validation of TaskObject failed for key = " .. tostring(k) .. ", value = " .. tostring(arg), "TaskDB")
-			return false
+			if not TaskObject[k] then -- TaskObject is missing a field
+			
+				AM:Debug("Validation of TaskObject failed for key = " .. tostring(k) .. " because the key didn't exist", "TaskDB")
+				return false
+			
+			end
+			
+			local ValidateField = validators(k)
+			local arg = TaskObject[k]
+			if not ValidateField(arg) then -- Field contains invalid data and must be rejected
+			
+				AM:Debug("Validation of TaskObject failed for key = " .. tostring(k) .. ", value = " .. tostring(arg), "TaskDB")
+				return false
+			
+			end
 		
 		end
 		
