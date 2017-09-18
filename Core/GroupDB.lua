@@ -55,7 +55,25 @@ local function GetNumGroups()
 end
 
 local function CreateGroup()
-
+	-- Create new object and have it inherit from the Prototype
+	local NewGroupObject = {}
+	
+	local prototype = AM.GroupDB.PrototypeGroup
+	local mt = {
+		__index = prototype, -- Simply look up any key that can't be found (right now, that means everything because the NewTaskObject is empty) in the prototypeTask table
+		__tostring = function(self) -- Serialise object for debug output and return a string representation
+			return "TOSTRING GROUP - TODO"
+		end,
+	}
+	setmetatable(NewGroupObject, mt)
+	
+	-- Overwrite some of the parts that only apply to default Tasks (as this creates a custom one, which behaves slightly differently)
+	NewGroupObject.isReadOnly = false -- Custom Tasks should obviously not be locked
+	NewGroupObject.dateAdded = time() -- This is technically false, as it isn't added to the TaskDB yet - but it's better than taking the prototype's date, which will refer to the time the addon was loaded
+	NewGroupObject.dateEdited = time()
+	
+	return NewGroupObject
+	
 end
 
 
