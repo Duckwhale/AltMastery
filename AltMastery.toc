@@ -44,6 +44,7 @@ Core\Controllers\SlashCmdHandler.lua
 ## Graphical user interface
 Core\GUI\Frames\AMWindow.lua
 
+Core\GUI\Widgets\AMInlineGroup.lua
 Core\GUI\TrackerWindow.lua
 
 Core\GUI\Config.lua
