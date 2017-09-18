@@ -88,9 +88,62 @@ local function AddTask(self, Task, group)
 		end
 
 end
---- Adds all tasks of the given Group to the tracker
+
+--- Adds all tasks for the given Group to the tracker
+-- @param Group The group object (must be valid)
 -- Also adds all nested Groups (and their Tasks) -> Up to a limit of X levels? (TODO)
 local function AddGroup(self, Group)
+
+	if not AM.GroupDB:IsValidGroup(Group) then -- Can't add this Group because it's invalid
+		AM:Debug("Attempted to add an invalid Group -> Aborted", "TrackerPane")
+		return
+	end
+
+	if #Group.taskList == 0 and #Group.nestedGroups == 0 then -- Group is empty -> Don't add it (TODO: Or add an instance of the EMPTY_GROUP instead?)
+		AM:Debug("Attempted to add an empty Group -> Aborted", "TrackerPane")
+		return
+	end
+	
+	-- Add the given Group and all its tasks (if it has any)
+	local groupWidget = AceGUI:Create("AMInlineGroup")
+	groupWidget:SetText(Group.name)
+	groupWidget:SetIcon(Group.iconPath)
+	groupWidget:SetRelativeWidth(1)
+	numDisplayedGroups = numDisplayedGroups + 1
+	usedFrames[#usedFrames+1] = groupWidget
+	AM.TrackerPane.widget:AddChild(groupWidget)
+	
+	if minimizedGroups[Group.name] then -- Don't show Tasks for this Group (TODO -> MinimizeGroup/Maximize Group are NYI)
+			
+		AM:Debug("Group " .. tostring(Group.name) .. " is minimized and its Tasks won't be shown", "TrackerPane")
+		return
+			
+	end
+	
+	-- Add top level Tasks
+	for index, taskID in ipairs(Group.taskList) do -- Add Tasks to the Tracker
+		
+		AM:Debug("Adding Task " .. tostring(index) .. " to Group " .. tostring(Group.name) .. " -> Looking up " .. tostring(taskID) .. " in global TaskDB", "TrackerPane")
+		
+		local Task = AM.db.global.tasks[taskID]
+		if not Task then -- Task does not exist -> Keep reference, but add INVALID_TASK instead
+			AM:Debug("Task was not found in TaskDB -> Replacing it with INVALID_TASK while keeping the entry for later", "TrackerPane")
+			-- TODO: Add it and test stuff
+		end
+		
+		self:AddTask(Task, groupWidget)
+		
+	end
+	
+	-- TODO: Test nested groups
+	for index, NestedGroup in ipairs(Group.nestedGroups) do -- Add frame for this group
+		
+		-- TODO: Limit recursion to X levels (2 or 3 should suffice for most users...)
+		AM:Debug("Adding nested group " .. tostring(index) .. " = " .. tostring(NestedGroup.name) .. " to the TrackerPane")
+		self:AddGroup(NestedGroup)
+		
+	end
+	
 end
 
 local function UpdateGroups(self)
