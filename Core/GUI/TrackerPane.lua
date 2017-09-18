@@ -22,6 +22,12 @@ local usedFrames = {}
 local minimizedGroups = {} -- Groups that are minimized -> Default is shown (for all Groups that don't have an entry here)
 local trackedTasks = {} -- Similar to the default Quest tracker, mark tasks to show their objectives (toggled by clicking on their name) -> Default is hide (for all Tasks that don't have an entry here)
 
+-- Count how many items are displayed (to calculate the size of the tracker window and for automatically aligning the contents)
+local numDisplayedGroups = 0
+local numDisplayedTasks = 0
+local numDisplayedObjectives = 0
+
+
 --- Release all the children into the widget pool (managed by AceGUI-3.0)
 local function ReleaseAllChildren(self)
 
@@ -41,6 +47,9 @@ local function ClearGroups(self)
 	self:ReleaseAllChildren()
 	self.widget:SetTitle("Empty Tracker") -- TODO: The title should likely not be used, but formatting/removing it can wait until later
 
+	-- Reset displayed item counters
+	numDisplayedGroups, numDisplayedTasks, numDisplayedObjectives = 0, 0, 0
+	
 end
 --- Adds a given TaskObject to the given groupWidget
 -- @param self
@@ -89,6 +98,13 @@ end
 local TrackerPane = {
 
 	usedFrames = usedFrames,
+	minimizedGroups = minimizedGroups, -- TODO: Not needed?
+	trackedTasks = trackedTasks, -- TODO: Not needed?
+
+	numDisplayedGroups = numDisplayedGroups,
+	numDisplayedTasks = numDisplayedTasks,
+	numDisplayedObjectives = numDisplayedObjectives,
+
 	Create = Create,
 
 	UpdateGroups = UpdateGroups,
