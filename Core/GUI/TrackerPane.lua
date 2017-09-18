@@ -36,6 +36,11 @@ local function ReleaseAllChildren(self)
 end
 --- Clears the Tracker and displays some info text so it isn't entirely blank
 local function ClearGroups(self)
+
+	AM:Debug("Cleared all Groups to display an empty tracker", "TrackerPane")
+	self:ReleaseAllChildren()
+	self.widget:SetTitle("Empty Tracker") -- TODO: The title should likely not be used, but formatting/removing it can wait until later
+
 end
 --- Adds all tasks of the given Group to the tracker
 -- Also adds all nested Groups (and their Tasks) -> Up to a limit of X levels? (TODO)
