@@ -22,11 +22,116 @@ local tostring = tostring -- Lua APIs
 
 local activeGroup = "ALL_THE_TASKS" -- Start with prototype if no Group exists (TODO: Set to EMPTY_GROUP once the dropdown is implemented)
 
+-- Validator functions for standard data types (serve as shortcut)
+local IsValidString, IsInteger = AM.Utils.Validation.IsValidString, AM.Utils.Validation.IsInteger
 
-local function IsValidGroup()
+--- Validator functions for GroupObjects
+-- @param arg The argument that is to be checked
+-- @return true if the given field is valid; false otherwise
+local validators = { -- TODO. DRY (lots of same properties as Task objects -> move to Utils.Validation)
 
+	-- Validating simple data types is pretty straight-forward
+	name = function(arg) return IsValidString(arg) end,
+	dateAdded = function(arg) return IsInteger(arg) end,
+	dateEdited = function(arg) return IsInteger(arg) end,
+	iconPath = function(arg) return IsValidString(arg) end,
+	isEnabled = function(arg) return (type(arg) == "boolean") end,
+	isReadOnly = function(arg) return (type(arg) == "boolean") end,
+
+	-- The tables need some more attention, though
+	taskList = function(arg)
+	
+		local isTable = type(arg) == "table" -- Objectives table needs to be an actual table (though it can be empty)
+		
+		if isTable then -- Check individual entries, which need to be valid Tasks in and of themselves
+		
+			for k, v in ipairs(arg) do -- Check entries
+			
+				if not type(k) == "number" or not tonumber(k) > 0 -- Key needs to be an integer (Tasks stored in a taskList always have integer keys, which represents the default display order)
+				or not AM.Task:IsValidTask(v) -- Table entry is not a valid Task object
+				then -- Some entry is not valid -> The entire taskList table is invalid
+					
+					AM:Debug("Failed validation of taskList table for key = " .. k .. ", arg = " .. tostring(v), "GroupDB")
+					return false
+				
+				end	
+				
+			end
+			
+		end
+		
+		return isTable
+	
+	end,
+	
+	nestedGroups = function(arg)
+	
+		local isTable = type(arg) == "table" -- Completions table needs to be an actual table (though it can be empty)
+		
+		if isTable then -- Check individual entries, which need to be valid Completions
+		
+			for k, v in ipairs(arg) do -- Check entry
+						
+						-- TODO: Key?
+						if not AM.GroupDB:IsValidGroup(v) then
+							
+							AM:Debug("Failed validation of nestedGroups table for key = " .. k .. ", arg = " .. tostring(v), "GroupDB")
+							return false
+							
+						end
+			
+			end
+		
+		end
+		
+		return isTable
+		
+	end,
+
+}
+
+--- Validates a given GroupObject
+-- @param GroupObject The table that is (hopefully) representing a Group
+-- @return true if the Group is valid; false otherwise
+local function IsValidGroup(self, GroupObject)
+
+	if not type(GroupObject) == "table" then -- GroupObject isn't even a table...
+
+		AM:Debug("Validation of GroupObject failed because the given object is not a table", "GroupDB")
+		return false
+
+	end
+	
+	-- Compare to prototype Group and make sure a) all fields exists, and b) are of the proper format (run validator function for it)
+	local prototype = self.PrototypeGroup
+	for k, v in pairs(prototype) do -- Compare field layouts
+	
+		if not type(v) == "function" then -- This field needs to be validated (functions are always inherited and won't be present in the instanced object)
+		
+			if not GroupObject[k] then -- GroupObject is missing a field
+			
+				AM:Debug("Validation of GroupObject failed for key = " .. tostring(k) .. " because the key didn't exist", "GroupDB")
+				return false
+			
+			end
+			
+			local ValidateField = validators(k)
+			local arg = GroupObject[k]
+			if not ValidateField(arg) then -- Field contains invalid data and must be rejected
+			
+				AM:Debug("Validation of GroupObject failed for key = " .. tostring(k) .. ", value = " .. tostring(arg), "GroupDB")
+				return false
+			
+			end
+		
+		end
+		
+	end
+	
+	-- If no error was encountered, it's a valid TaskObject
+	return true
+	
 end
-
 
 local function Print()
 
