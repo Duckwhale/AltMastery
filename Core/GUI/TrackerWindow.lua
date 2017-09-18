@@ -36,11 +36,7 @@ local function Show(self)
 		self.frame = AceGUI:Create("AMWindow")
 		self.frame:SetLayout("AMRows")
 		
-		-- Add the individual display elements
-		
-		-- Interactive Logo image (serves as title and controls the window's visibility)
-		-- local LogoGroup = AceGUI:Create("InlineGroup")
-		-- LogoGroup:SetTitle("LogoGroup Title")
+		-- Add logo image (TODO: Not very interactive yet)
 		local logoSpecs = {
 			
 			type = "Logo",
@@ -49,17 +45,7 @@ local function Show(self)
 			
 		}
 		local InteractiveLogo = AM.GUI:BuildFrame(logoSpecs)
-	--	InteractiveLogo:SetImage("Interface\\Addons\\AltMastery\\Media\\logo_simple_") -- TODO: Using Static Logo as placeholder -> No interactivity yet (depend on style also?)
-		-- InteractiveLogo:SetImageSize(132, 60)
 		InteractiveLogo:SetPoint("TOPLEFT", self.frame.frame, "TOPLEFT", 0, 60)
-		--InteractiveLogo:SetPoint("BOTTOMRIGHT", self.frame.frame, -100, 0)
-		-- InteractiveLogo:SetText("AltMastery")
-		-- InteractiveLogo:SetScript("OnEnter", function(self) -- TODO: Proper animation etc. (not that important and requires the actual logo, not the placeholder)
-			-- InteractiveLogo:SetImage("Interface\\Addons\\AltMastery\\Media\\logo_simple_2")
-		-- end)
-		-- InteractiveLogo:SetScript("OnLeave", function(self) -- TODO: Proper animation etc. (not that important and requires the actual logo, not the placeholder)
-			-- InteractiveLogo:SetImage("Interface\\Addons\\AltMastery\\Media\\logo_simple_1")
-		-- end)
 		
 		-- Group control panel (displays currently active group and allows changing it via dropdown) (or maybe find directly via Filters? TODO...)
 		local activeStyle = AM.GUI:GetActiveStyle()
@@ -91,8 +77,6 @@ local function Show(self)
 		--	AM.GUI:SetFrameColour(GroupControlPanel, colours)
 
 		-- Tracker content pane (contains all nested groups and tasks for the currently active Group)
-		local TCP = AM.TrackerContentPane:Create() -- todo: needs to have separate API so that it can get SetEmpty, SetGroup, CheckCompletion or similar methods
-		self.frame:AddChild(TCP)
 
 	end
 	
