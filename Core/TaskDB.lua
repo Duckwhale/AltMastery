@@ -22,26 +22,7 @@ local tostring, pairs, dump, time = tostring, pairs, dump, time -- Lua APIs
 
 
 -- Validator functions for standard data types (serve as shortcut)
--- TODO: Move to separate Validation module?
-local function IsValidString(arg) -- Can't allow empty strings
-
-	if type(arg) == "string"
-	and arg ~= ""
-	then return true end
-	
-	return false
-		
-end
-
-local function IsInteger(arg) -- Can't allow negative numbers
-
-	if type(arg) == "number"
-	and arg > 0
-	then return true end
-	
-	return false
-
-end
+local IsValidString, IsInteger = AM.Utils.Validation.IsValidString, AM.Utils.Validation.IsInteger
 
 --- Validator functions for TaskObjects
 -- @param arg The argument that is to be checked
