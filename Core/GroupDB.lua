@@ -17,6 +17,9 @@ local addonName, AM = ...
 if not AM then return end
 
 
+-- Upvalues
+local tostring = tostring -- Lua APIs
+
 local activeGroup = "ALL_THE_TASKS" -- Start with prototype if no Group exists (TODO: Set to EMPTY_GROUP once the dropdown is implemented)
 
 
