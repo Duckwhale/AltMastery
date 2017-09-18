@@ -41,6 +41,42 @@ local function ClearGroups(self)
 	self:ReleaseAllChildren()
 	self.widget:SetTitle("Empty Tracker") -- TODO: The title should likely not be used, but formatting/removing it can wait until later
 
+--- Adds a given TaskObject to the given groupWidget
+-- @param self
+-- @param Task A valid TaskObject to be added
+-- @param groupWidet Valid AceGUI widget representing the Group entry in the Tracker
+local function AddTask(self, Task, group)
+
+	if not AM.TaskDB:IsValidTask(Task) then -- Don't add it, obviously
+		
+		AM:Debug("Attempted to add an invalid Task -> Skipped", "TrackerPane")
+		return
+		
+	end
+	
+	local taskWidget = AceGUI:Create("AMInlineGroup")
+		taskWidget:SetText(Task.name)
+		taskWidget:SetRelativeWidth(1)
+		taskWidget:SetIcon(Task.iconPath)
+		--taskWidget:SetFullHeight(true)
+		-- Set layout to List? Depends on the contents
+		usedFrames[#usedFrames+1] = taskWidget
+		AM.TrackerPane.widget:AddChild(taskWidget)
+		numDisplayedTasks = numDisplayedTasks + 1
+--		dump(Task)
+
+		if trackedTasks[Task.name] then -- Show objectives and their status for this Task
+		
+			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Show objectives for it", "TrackerPane")
+			local objectivesWidget = AceGUI:Create("AMInlineGroup")
+			objectivesWidget:SetRelativeWidth(1)
+			objectivesWidget:SetTitle("Objectives")
+			usedFrames[#usedFrames+1] = objectivesWidget -- TODO: Use(frame) as shortcut?
+			taskWidget:AddChild(objectivesWidget)
+			numDisplayedObjectives = numDisplayedObjectives + 1
+			
+		end
+
 end
 --- Adds all tasks of the given Group to the tracker
 -- Also adds all nested Groups (and their Tasks) -> Up to a limit of X levels? (TODO)
@@ -59,8 +95,9 @@ local TrackerPane = {
 	
 	ReleaseAllChildren = ReleaseAllChildren,
 	
-	-- TODO
 	AddGroup = AddGroup,
+	AddTask = AddTask,
+	-- TODO
 	MinimizeGroup = MinimizeGroup,
 	MaximizeGroup = MaximizeGroup,
 	RemoveGroup = RemoveGroup,
