@@ -47,6 +47,27 @@ local function Show(self)
 		local InteractiveLogo = AM.GUI:BuildFrame(logoSpecs)
 		InteractiveLogo:SetPoint("TOPLEFT", self.frame.frame, "TOPLEFT", 0, 60)
 		
+		-- Retrieve style for the content panes
+		local activeStyle = AM.GUI:GetActiveStyle()
+		local contentPaneStyle = activeStyle.frameColours.ContentPane
+	
+		-- Add left content pane
+		local LeftPane = AceGUI:Create("SimpleGroup")
+		LeftPane:SetRelativeWidth(0.7)
+		LeftPane:SetLayout("List")
+		local leftPaneBorder = LeftPane.content:GetParent()
+		AM.GUI:SetFrameColour(leftPaneBorder, contentPaneStyle)
+		LeftPane:SetFullHeight(true)
+		self.frame:AddChild(LeftPane)
+		
+		-- -- Add right (spacer) pane
+		local RightPane = AceGUI:Create("SimpleGroup")
+		RightPane:SetRelativeWidth(0.3)
+		local rightPaneBorder = RightPane.content:GetParent()
+		AM.GUI:SetFrameColour(rightPaneBorder, contentPaneStyle)
+		self.frame:AddChild(RightPane)
+		RightPane:SetFullHeight(true)
+		
 		-- Group control panel (displays currently active group and allows changing it via dropdown) (or maybe find directly via Filters? TODO...)
 		local activeStyle = AM.GUI:GetActiveStyle()
 		local colours = activeStyle.frameColours.GroupControlPanel
