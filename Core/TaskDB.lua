@@ -38,7 +38,8 @@ local validators = {
 	Criteria = function(arg) return AM.Parser:IsValid(arg) end,
 	iconPath = function(arg) return IsValidString(arg) end,
 	isEnabled = function(arg) return (type(arg) == "boolean") end,
-		
+	isReadOnly = function(arg) return (type(arg) == "boolean") end,
+	
 	-- The tables need some more attention, though
 	Objectives = function(arg)
 	
