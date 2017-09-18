@@ -79,6 +79,7 @@ local function ReleaseAllChildren(self)
 	end
 	
 end
+
 --- Clears the Tracker and displays some info text so it isn't entirely blank
 local function ClearGroups(self)
 
@@ -90,6 +91,7 @@ local function ClearGroups(self)
 	numDisplayedGroups, numDisplayedTasks, numDisplayedObjectives = 0, 0, 0
 	
 end
+
 --- Adds a given TaskObject to the given groupWidget
 -- @param self
 -- @param Task A valid TaskObject to be added
@@ -185,7 +187,6 @@ local function AddGroup(self, Group)
 	
 end
 
-
 -- Update the active group display (requires )
 local function UpdateGroups(self)
 	
@@ -212,11 +213,6 @@ local function UpdateGroups(self)
 	-- TODO: self:AddGroup(activeGroup) - recursively... could just append nested groups?
 	self:AddGroup(activeGroup)
 
-	
-	-- Fill each Group/Task with the entries from DB? (TODO: Not here, belongs into Controllers?) ... But so does the entire call to UpdateGroups (which is done in TrackerWindow:Show()...)
-	
-	-- Add top-level Tasks (if there are any)
-	
 	-- Update object vars with locally cached ones (TODO: Change structure to use TrackerPane directly, although that seems to break LDoc?)
 	self.usedFrames = usedFrames
 	self.minimizedGroups = minimizedGroups
@@ -227,6 +223,7 @@ local function UpdateGroups(self)
 	AM:Debug("Updated display -> Total " .. self.numDisplayedGroups .. " Group(s), " .. self.numDisplayedTasks .. " Task(s), " .. self.numDisplayedObjectives .. " Objective(s)", "TrackerPane")
 	
 end
+
 local TrackerPane = {
 
 	usedFrames = usedFrames,
