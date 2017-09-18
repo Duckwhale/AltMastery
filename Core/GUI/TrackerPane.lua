@@ -22,7 +22,17 @@ local usedFrames = {}
 local minimizedGroups = {} -- Groups that are minimized -> Default is shown (for all Groups that don't have an entry here)
 local trackedTasks = {} -- Similar to the default Quest tracker, mark tasks to show their objectives (toggled by clicking on their name) -> Default is hide (for all Tasks that don't have an entry here)
 
+--- Release all the children into the widget pool (managed by AceGUI-3.0)
 local function ReleaseAllChildren(self)
+
+	AM:Debug("Releasing " .. tostring(#usedFrames) .. " children (into the widget pool, silly...)", "TrackerPane")
+	self.widget:ReleaseChildren()
+
+	for _, frame in ipairs(usedFrames) do -- Release them, as some of them might be unused (and can be recycled) -> TODO: What about those that are still used? Maybe don't release those? Not sure how much effort that takes,to check vs. the performance hit of simply re-using them for the same purpose, which should be negligible...
+		frame:ReleaseChildren() -- Do they have children? I think so, since they're all AceGUI widgets (TODO: Check and make sure? If they don't have any, it shouldn't cause any issues though)
+		frame:Release()
+	end
+	
 end
 --- Clears the Tracker and displays some info text so it isn't entirely blank
 local function ClearGroups(self)
