@@ -310,8 +310,7 @@ local function GetNumTasks(self, countDefaults)
 
 end
 
---- Creates a new Task object with the given name and returns a reference to it
--- The name can be used as its key in the TaskDB later, although it's not mandatory to honour that convention
+--- Creates a new Task object and returns a reference to it
 -- @return A reference to the newly-created Task object
 local function CreateTask() -- TODO: Parameters could be used to automatically set those values, but I am too lazy right now
 
