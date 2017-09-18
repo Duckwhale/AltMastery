@@ -45,6 +45,11 @@ local function GetActiveGroup()
 	return AM.db.global.groups[activeGroupName], activeGroupName -- Should always exist, as it will default to the EMPTY_GROUP if need be
 end
 
+local function SetActiveGroup(name)
+	-- TODO: Check if Group exists
+	
+end
+
 local function GetGroup()
 
 end
