@@ -131,13 +131,18 @@ local function SetFrameColour(self, frameObject, colours)
 	local edgeSize = AM.GUI:GetActiveStyle().edgeSize
 	
 	if frameObject:IsObjectType("Frame") then -- Set backdrop via Frame API
-		frameObject:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8", edgeFile="Interface\\Buttons\\WHITE8X8", edgeSize = edgeSize}) 
-		frameObject:SetBackdropColor(unpack(backdrop)) -- TODO: alpha?
+		 
+		if colours.border then -- Add border (this is optional)
 		
-		if colours.border then -- Set border (this is optional)
+			frameObject:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8", edgeFile="Interface\\Buttons\\WHITE8X8", edgeSize = edgeSize})
 			local border = { HexToRGB(colours.border, 255) }
 			frameObject:SetBackdropBorderColor(unpack(border))
+			
+		else -- Don't add a border texture
+			frameObject:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8" })
 		end
+		
+		frameObject:SetBackdropColor(unpack(backdrop))
 		
 	else -- Frame is texture -> Set backdrop by simply colouring it differently
 		frameObject:SetColorTexture(backdrop) -- TODO: Not currently used anywhere? (No textures exist)
