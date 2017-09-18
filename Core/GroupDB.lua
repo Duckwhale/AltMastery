@@ -37,6 +37,11 @@ local function RemoveGroup()
 	-- TODO: What about nested groups? They should still be a part of the DB, as everything uses references only
 end
 
+local function GetActiveGroup()
+	local activeGroupName = AM.db.profile.settings.activeGroup or activeGroup
+	return AM.db.global.groups[activeGroupName], activeGroupName -- Should always exist, as it will default to the EMPTY_GROUP if need be
+end
+
 local function GetGroup()
 
 end
