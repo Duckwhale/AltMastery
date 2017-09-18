@@ -76,9 +76,10 @@ local function Constructor()
 	AM.GUI:SetFrameColour(frame, style)
 	
 	-- Create content pane
-	local content = CreateFrame("Frame", nil, frame)	-- Empty frame that will be used to contain all children later
-	content:SetPoint("TOPLEFT", 5, -5)
-	content:SetPoint("BOTTOMRIGHT", -5, 5)
+	local content = CreateFrame("Frame", name .. "Content", frame)	-- Empty frame that will be used to contain all children later
+	local padding = 5
+	content:SetPoint("TOPLEFT", padding, -padding)
+	content:SetPoint("BOTTOMRIGHT", -padding, padding)
 	
 	
 	-- Assemble widget object (to register with AceGUI)
