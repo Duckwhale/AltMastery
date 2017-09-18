@@ -146,7 +146,47 @@ local function AddGroup(self, Group)
 	
 end
 
+
+-- Update the active group display (requires )
 local function UpdateGroups(self)
+	
+	-- TODO: Nested Groups -> Limit level of nesting to 2 or 3?
+	
+	self:ReleaseAllChildren()
+	
+	-- Actually add children via AddChild()?
+	
+	-- Rebuild them? Or only release those that are no longer used?
+	local activeGroup, activeGroupName = AM.GroupDB:GetActiveGroup()
+	AM:Debug("Updating display to show active group -> " .. tostring(activeGroupName), "TrackerPane")
+	
+	-- For each nested Group, add one TrackerGroup (which consists of the header and task entries)
+
+	-- TODO: Err, what? Shouldn't it be #activeGroup.nestedGroups == 0 ? Also, it will return 0 for default tasks (string key), so this doesn't work -> Maybe have an :IsEmpty() in GroupDB?
+	if #activeGroup.nestedGroups == 0 and #activeGroup.taskList == 0 then -- Group is empty -> Clear Tracker and show notice
+	
+		AM:Debug("The selected Group is empty -> Clearing Tracker", "TrackerPane")
+		self:ClearGroups()
+		
+	end
+	
+	-- TODO: self:AddGroup(activeGroup) - recursively... could just append nested groups?
+	self:AddGroup(activeGroup)
+
+	
+	-- Fill each Group/Task with the entries from DB? (TODO: Not here, belongs into Controllers?) ... But so does the entire call to UpdateGroups (which is done in TrackerWindow:Show()...)
+	
+	-- Add top-level Tasks (if there are any)
+	
+	-- Update object vars with locally cached ones (TODO: Change structure to use TrackerPane directly, although that seems to break LDoc?)
+	self.usedFrames = usedFrames
+	self.minimizedGroups = minimizedGroups
+	self.trackedTasks = trackedTasks
+	self.numDisplayedGroups = numDisplayedGroups
+	self.numDisplayedTasks = numDisplayedTasks
+	self.numDisplayedObjectives = numDisplayedObjectives
+	AM:Debug("Updated display -> Total " .. self.numDisplayedGroups .. " Group(s), " .. self.numDisplayedTasks .. " Task(s), " .. self.numDisplayedObjectives .. " Objective(s)", "TrackerPane")
+	
 end
 local TrackerPane = {
 
