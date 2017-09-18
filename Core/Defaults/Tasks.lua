@@ -116,21 +116,22 @@ local PrototypeTask = {
 		-- Update this objective's critera
 	end,
 	
+		-- Stubs - TODO: Fill out as necessary (and remove the rest later)
+
 }
 
 
---- Table containing the default task entries
+--- Table containing the default Tasks (as DIFF - only the entries that differ from the Prototype are included here)
 local defaultTasks = {
 
-		DEFAULT_TASK_SHADOWMOURNE = {
-			Description = "Unlock Shadowmourne",
-			Notes = "Retrieve Shadowmourne from the depths of Icecrown Citadel",
-			DateAdded = time(),
-			DateEdited = time(),
-			Priority = "OPTIONAL", -- TODO: Localise priorities
-			ResetType = "ONE_TIME", -- TODO
+		LEGENDARY_SHADOWMOURNE = {
+			name = "Unlock Shadowmourne",
+			description = "Retrieve Shadowmourne from the depths of Icecrown Citadel",
+--			Priority = "OPTIONAL", -- TODO: Localise priorities
+--			ResetType = "ONE_TIME", -- TODO
+			iconPath = "inv_axe_113",
 			Criteria = "(Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT)) AND NOT Achievement(4623)",
-			StepsToCompletion = {
+			Objectives = {
 			
 				"Quest(24545) AS The Sacred and the Corrupt", -- TODO: Localise steps/quest names?
 				"Quest(24743) AS Shadow's Edge",
@@ -142,15 +143,51 @@ local defaultTasks = {
 				"Quest(24549) AS Shadowmourne...",
 				"Quest(24748) AS The Lich King's Last Stand",
 				
-			}
-		}
+			},
+		},
+		
+		WEEKLY_LEGION_WQEVENT = { -- TODO: CalendarEvent OR Buff and then Objectives = 20 WQ? 44175 = The World Awaits
+			name = "Legion World Quest Event",
+			description = "Complete the weekly quest \"The World Awaits\" and claim your reward",
+			notes = "5000 Order Hall Resources",
+			iconPath = "achievement_reputation_08",
+			Criteria = "Buff(225788) AND Quest(44175)", -- "Sign of the Emissary" buff is only available when the event is active (TODO: This should be a criteria to show the Task in the default group, not for completion. But is that implemented yet?)
+			Objectives = {
+				"Level(110) AS Level 100",
+				"Quest(43341) AS Uniting the Isles",
+				-- TODO: 20 WQs
+			},
+		},
 
 }
 
 
 --- Return the table containing default task entries
-function GetDefaultTasks()
-	return defaultTasks
+local function GetDefaultTasks()
+
+	local defaults = {}
+	
+	for key, entry in pairs(defaultTasks) do -- Create Task object and store it
+
+		-- Add values
+		local Task = AM.TaskDB:CreateTask() -- Is not readOnly by default, as this is usually used to create custom Tasks
+		Task.isReadOnly = true -- Lock as it's a default Task
+		
+		Task.name = entry.name
+		Task.description = entry.description
+		Task.notes = entry.notes or ""
+		Task.iconPath = "Interface\\Icons\\" .. (entry.iconPath or "inv_misc_questionmark")
+		Task.Criteria = entry.Criteria or ""
+		Task.Objectives = entry.Objectives or {}
+		
+		-- Store in table that will be added to AceDB defaults
+		AM:Debug("Loaded default Task with key = " .. tostring(key) .. ", tostring() = " .. tostring(Task) , "TaskDB")
+		defaults[key] = Task
+		
+	end
+	
+	return defaults
+	
 end
 
 
