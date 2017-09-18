@@ -318,7 +318,13 @@ local function CreateTask() -- TODO: Parameters could be used to automatically s
 	local NewTaskObject = {}
 	
 	local prototype = AM.TaskDB.PrototypeTask
-	local mt = {__index = prototype } -- Simply look up any key that can't be found (right now, that means everything because the NewTaskObject is empty) in the prototypeTask table
+	local mt = {
+		__index = prototype, -- Simply look up any key that can't be found (right now, that means everything because the NewTaskObject is empty) in the prototypeTask table
+		__tostring = function(self) -- Serialise object for debug output and return a string representation
+			local strrep = self.name .. " = { icon = " .. self.iconPath .. ", description = " .. self.description .. ", notes = " .. self.notes .. ", isReadOnly = " .. tostring(self.isReadOnly) .. ", Criteria = " .. self.Criteria .. ", Objectives = <" .. #self.Objectives .. " Objectives> }"
+			return strrep
+		end,
+	}
 	setmetatable(NewTaskObject, mt)
 	
 	-- Overwrite some of the parts that only apply to default Tasks (as this creates a custom one, which behaves slightly differently)
