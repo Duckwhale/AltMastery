@@ -72,8 +72,8 @@ local function Constructor()
 	
 	-- Apply visuals according to the active style
 	local activeStyle = AM.GUI:GetActiveStyle()
-	local colours = activeStyle.frameColours.Window
-	AM.GUI:SetFrameColour(frame, colours)
+	local style = activeStyle.frameColours.Window
+	AM.GUI:SetFrameColour(frame, style)
 	
 	-- Create content pane
 	local content = CreateFrame("Frame", nil, frame)	-- Empty frame that will be used to contain all children later
