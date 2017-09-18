@@ -41,6 +41,7 @@ local function ClearGroups(self)
 	self:ReleaseAllChildren()
 	self.widget:SetTitle("Empty Tracker") -- TODO: The title should likely not be used, but formatting/removing it can wait until later
 
+end
 --- Adds a given TaskObject to the given groupWidget
 -- @param self
 -- @param Task A valid TaskObject to be added
