@@ -49,11 +49,11 @@ local validators = {
 		
 			for k, v in ipairs(arg) do -- Check entries
 			
-				if not type(k) == "number" or not tonumber(k) > 0 -- Key needs to be an integer (custom Tasks always have integer keys)
-				or not AM.Parser:IsValid(arg[k]) -- Table entry is not a valid Criteria
+				if not type(k) == "number" or not tonumber(k) > 0 -- Key needs to be an integer (Objectives always have integer keys)
+				or not AM.Parser:IsValid(v) -- Table entry is not a valid Criteria
 				then -- Some entry is not valid -> The entire Objectives table is invalid
 					
-					AM.Debug("Failed validation of Objectives table for key = " .. k .. ", arg = " .. tostring(arg[k]), "TaskDB")
+					AM:Debug("Failed validation of Objectives table for key = " .. k .. ", arg = " .. tostring(v), "TaskDB")
 					return false
 				
 				end	
