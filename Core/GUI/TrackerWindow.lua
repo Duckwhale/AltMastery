@@ -69,29 +69,32 @@ local function Show(self)
 		RightPane:SetFullHeight(true)
 		
 		-- Group control panel (displays currently active group and allows changing it via dropdown) (or maybe find directly via Filters? TODO...)
-		local activeStyle = AM.GUI:GetActiveStyle()
-		local colours = activeStyle.frameColours.GroupControlPanel
+		-- local activeStyle = AM.GUI:GetActiveStyle()
+		-- local colours = activeStyle.frameColours.GroupControlPanel
 	
-		local gcp = {
+		-- local gcp = {
 			
-			type = "Frame",
-			--hidden = true,
-			--strata = "FULLSCREEN_DIALOG",
-			size = {350, 50},
-			--points = {{"BOTTOMRIGHT", -100, 100}},
-			--scripts = {"OnMouseDown", "OnMouseUp"},
-			--children = { }
+			-- type = "Frame",
+			-- --hidden = true,
+			-- --strata = "FULLSCREEN_DIALOG",
+			-- size = {350, 50},
+			-- --points = {{"BOTTOMRIGHT", -100, 100}},
+			-- --scripts = {"OnMouseDown", "OnMouseUp"},
+			-- --children = { }
 		
-		}
-		local GroupControlPanel = AceGUI:Create("InlineGroup")
-		GroupControlPanel:SetTitle("Active Group")
-		self.frame:AddChild(GroupControlPanel)
-		local ActiveGroupLabel = AceGUI:Create("Label")
-		ActiveGroupLabel:SetText("ActiveGroupLabel")
-		local ActiveGroupSelector = AceGUI:Create("Dropdown") -- TODO: LibDD
-		ActiveGroupSelector:SetLabel("ActiveGroupSelector Label text")
-		GroupControlPanel:AddChild(ActiveGroupLabel)
-		GroupControlPanel:AddChild(ActiveGroupSelector)
+		-- }
+		-- local GroupControlPanel = AceGUI:Create("InlineGroup")
+		-- GroupControlPanel:SetTitle("Active Group")
+		-- GroupControlPanel:SetRelativeWidth(0.8)
+		-- LeftPane:AddChild(GroupControlPanel)
+		-- local ActiveGroupLabel = AceGUI:Create("Label")
+		-- ActiveGroupLabel:SetRelativeWidth(0.8)
+		-- ActiveGroupLabel:SetText("ActiveGroupLabel")
+		-- local ActiveGroupSelector = AceGUI:Create("Dropdown") -- TODO: LibDD
+		-- ActiveGroupSelector:SetLabel("ActiveGroupSelector Label text")
+		-- ActiveGroupSelector:SetRelativeWidth(0.8)
+		-- GroupControlPanel:AddChild(ActiveGroupLabel)
+		-- GroupControlPanel:AddChild(ActiveGroupSelector)
 		
 		-- local GroupControlPanel = AceGUI:Create("SimpleGroup")
 		-- dump(GroupControlPanel)
