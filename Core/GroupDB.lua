@@ -54,6 +54,8 @@ local function GetNumGroups()
 	
 end
 
+--- Creates a new Group object and returns a reference to it
+-- @return A reference to the newly-created Group object
 local function CreateGroup()
 	-- Create new object and have it inherit from the Prototype
 	local NewGroupObject = {}
