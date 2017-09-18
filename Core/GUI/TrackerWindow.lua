@@ -34,8 +34,7 @@ local function Show(self)
 	if not self.frame then -- First call -> Create new instance via AceGUI and configure it
 	
 		self.frame = AceGUI:Create("AMWindow")
-		self.frame:SetLayout("List") -- TODO? It's the default layout, as far as I know...
-		
+		self.frame:SetLayout("AMRows")
 		
 		-- Add the individual display elements
 		
