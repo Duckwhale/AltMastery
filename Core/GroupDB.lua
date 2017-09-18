@@ -20,6 +20,7 @@ if not AM then return end
 -- Upvalues
 local tostring = tostring -- Lua APIs
 
+-- Locals
 local activeGroup = "ALL_THE_TASKS" -- Start with prototype if no Group exists (TODO: Set to EMPTY_GROUP once the dropdown is implemented)
 
 -- Validator functions for standard data types (serve as shortcut)
