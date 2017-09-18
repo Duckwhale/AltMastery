@@ -85,7 +85,14 @@ end
 -- @return A reference to the created widget object
 local function BuildFrame(self, frameSpecs)
 
-	-- TODO: Typical Factory pattern, I guess? We'll see what is needed later.
+	local defaults = { -- Default frame properties, to be applied in case no specification was given (TODO: Only matters for custom frame types created via AM.GUI:CreateX(...))
+	
+		height = 40,
+		width = 40,
+		x = 0,
+		y = 0
+		
+	}
 
 	local widget
 	if frameSpecs.type == "MovableFrame" then -- Build a frame that can be moved
