@@ -136,6 +136,7 @@ local function SetFrameColour(self, frameObject, colours)
 		
 			frameObject:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8", edgeFile="Interface\\Buttons\\WHITE8X8", edgeSize = edgeSize})
 			local border = { HexToRGB(colours.border, 255) }
+			tinsert(border, colours.borderAlpha or 1)
 			frameObject:SetBackdropBorderColor(unpack(border))
 			
 		else -- Don't add a border texture
