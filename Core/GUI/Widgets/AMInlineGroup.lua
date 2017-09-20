@@ -31,17 +31,22 @@ local function Label_OnClick(self)
 	AM:Debug("Label clicked!", "AMInlineGroup")
 end
 
--- Color differently to indicate that some action is possible
+--- Color differently to indicate that some action is possible
 local function Label_OnEnter(self)
--- TODO: Why self and not self.label? (userdata...)
-dump(self)
-	local r, g, b = 232/255, 178/255, 48/255 -- TODO: Load from style?
+
+	-- Set text colour to highlight
+	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.highlight, 255)
 	self:SetColor(r, g, b)
 
 end
 
+--- Reset text colour to the default value
 local function Label_OnLeave(self)
-	self:SetColor(1, 1, 1) -- TODO: Back to default colour
+
+	-- Set text colour to normal
+	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
+	self:SetColor(r, g, b)
+	
 end
 
 -- Set the icon to a new image

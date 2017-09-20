@@ -45,6 +45,8 @@ local defaultStyle = {
 		completed = "#00FF00", -- bright green - completed/confirmation
 		incomplete = "#FF2020", -- red - incomplete/invalid/error
 	
+		highlight = "#E8B230", -- regular display text
+		normal = "#FFFFFF",
 	},
 	
 	frameColours = {
