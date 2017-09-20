@@ -185,6 +185,7 @@ local function Constructor()
 	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.TaskEntry) -- TODO: Colour differently based on type
 	
 	-- Add Text
+	local iconSize = AM.db.profile.settings.display.iconSize
 	local label = AceGUI:Create("InteractiveLabel")
 	label:SetText("<ERROR>")
 	label:SetImage("Interface\\Icons\\inv_misc_questionmark")
