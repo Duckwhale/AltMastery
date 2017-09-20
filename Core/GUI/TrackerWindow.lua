@@ -121,15 +121,13 @@ local function Show(self)
 		TrackerPane:SetLayout("List")
 		LeftPane:AddChild(TrackerPane)
 		
-		-- local GroupControlPanel = AceGUI:Create("SimpleGroup")
-		-- dump(GroupControlPanel)
-		--	AM.GUI:SetFrameColour(GroupControlPanel, colours)
-
-		-- Tracker content pane (contains all nested groups and tasks for the currently active Group)
-
+		-- Save the widget so that it can be used with the TrackerPane API
+		AM.TrackerPane.widget = TrackerPane
+		
 	end
 	
-	AM.TrackerContentPane:UpdateGroups() -- Update tracker to display all Tasks and nested Groups for the currently active Group
+	
+	AM.TrackerPane:UpdateGroups() -- Update tracker to display all Tasks and nested Groups for the currently active Group
 	
 	-- Show the frame
 	self.frame:Show()
