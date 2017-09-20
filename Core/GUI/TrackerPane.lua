@@ -49,7 +49,7 @@ local function GetTrackerHeight(self)
 	local height = 0
 	
 	-- Add the border for the tracker pane itself
-	height = height + 2 * borderSize + 12 -- TODO: Where'd those 12 come from?
+	height = height + 2 * borderSize + ((borderSize + 1) * (numDisplayedGroups + numDisplayedTasks + numDisplayedObjectives)) -- TODO: The 2nd part needs to be tested for different situations (later)
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")	
 	-- For each maximized group, add its tasks and objectives
 	height = height + (numDisplayedGroups - #minimizedGroups) * groupEntrySize
@@ -220,7 +220,7 @@ local function UpdateGroups(self)
 	-- Update the size of each element
 	self.widget:SetHeight(self:GetTrackerHeight())
 	local activeStyle = AM.GUI:GetActiveStyle()
-	local trackerPaneBorderSize = 1 + activeStyle.edgeSize -- TODO: via settings (Apply to border during update) -> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible?
+	local trackerPaneBorderSize = activeStyle.edgeSize -- TODO: Needs more testing-> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible?
 	self.widget.content:ClearAllPoints()
 	self.widget.content:SetPoint("TOPLEFT", trackerPaneBorderSize, -trackerPaneBorderSize)
 	self.widget.content:SetPoint("BOTTOMRIGHT", -trackerPaneBorderSize, trackerPaneBorderSize)
