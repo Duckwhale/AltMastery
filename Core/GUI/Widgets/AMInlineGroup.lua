@@ -21,6 +21,20 @@ local Type, Version = "AMInlineGroup", 1
 local AceGUI = LibStub("AceGUI-3.0")
 if not AceGUI or (AceGUI:GetWidgetVersion(Type) or 0) >= Version then return end
 
+-- TODO: Use SetType or sth. instead of flags
+
+-- Flag as group (for slightly different look & behaviour of the widget)
+local function FlagAsGroup(self, value)
+	self.isFlaggedAsGroup = value -- TODO: Userdata instead of this (so AceGUI can clean it properly)
+--print(tostring(value), tostring(self.isFlaggedAsGroup))
+end
+
+-- Returns whether or not the widget represents a group in the tracker
+local function IsFlaggedAsGroup(self)
+--print(tostring(value), tostring(self.isFlaggedAsGroup))
+	return self.isFlaggedAsGroup
+end
+
 --- TODO: Allow changing of the icon? (or maybe just do this in the DB)
 local function Icon_OnClick(self)
 	AM:Debug("Icon clicked!", "AMInlineGroup")
@@ -29,6 +43,21 @@ end
 -- Minimize group or track Task (TODO)?
 local function Label_OnClick(self)
 	AM:Debug("Label clicked!", "AMInlineGroup")
+	
+	-- For Groups: Minimize the respective Group, set its text colour to indicate the fact, and hide all contained Tasks (as well as their objectives)
+	local isGroup = self:IsFlaggedAsGroup()
+	if isGroup then
+	
+		AM:Debug("This label represents a Group - click to minimize or maximize it")
+	
+	else
+	
+		AM:Debug("This label represents a Task - click to show its objectives or hide them")
+	
+	end
+	
+	-- For Tasks: Hide objectivs if the task is tracked; otherwise, set the Task to tracked and show all objectives by expanding the window
+	
 end
 
 --- Color differently to indicate that some action is possible
