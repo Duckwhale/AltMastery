@@ -174,7 +174,12 @@ local function Constructor()
 	for method, func in pairs(methods) do
 		container[method] = func
 	end
-	
+	-- Custom AM functions
+	container.SetText = SetText
+	container.SetIcon = SetIcon
+	container.FlagAsGroup = FlagAsGroup
+	container.IsFlaggedAsGroup = IsFlaggedAsGroup
+	 
 	-- Remove the ugly border / unwanted frames
 	local titletext = container.titletext
 	titletext:Hide() -- Pointless, as this isn't shown? But better be safe than sorry...
@@ -230,7 +235,6 @@ local function Constructor()
 	label:SetCallback("OnEnter", Label_OnEnter)
 	label:SetCallback("OnLeave", Label_OnLeave)
 	container:AddChild(label)
-	 container.SetText = SetText
 	container.label = label
 	label.parent = container -- Backreference so the label functions can access container methods and change its state
 
