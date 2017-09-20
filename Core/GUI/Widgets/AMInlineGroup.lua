@@ -96,7 +96,7 @@ local function SetText(self, text)
 	local activeStyle = AM.GUI:GetActiveStyle()
 	local isGroup = self:IsFlaggedAsGroup() -- 4, 5
 	local fontSize = (isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small -- isGroupHeader has to be set by the Tracker when creating the widget (will default to Task otherwise)
-	self.label:SetFont(isGroup and activeStyle.fonts.test4 or activeStyle.fonts.test3, fontSize)
+	self.label:SetFont(isGroup and activeStyle.fonts.default or activeStyle.fonts.default, fontSize)
 	
 	self.label:SetText(isGroup and string.upper(text) or text)
 	AM:Debug("Set text to " .. tostring(text) .. " for widget of type = " .. tostring(self:IsFlaggedAsGroup() and "Group" or "Task") .. " " .. tostring(self:IsFlaggedAsGroup()), "AMInlineGroup")
