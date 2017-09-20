@@ -57,6 +57,8 @@ local defaultStyle = {
 		test1 = "#828296", -- blue-ish grey
 		test2 = "#55B408", -- "Legion-like" green (but brighter)
 		Window = { backdrop = "#1A1A1A", border = "#9398A1", alpha = 0.9}, -- Identical style for all top-level windows
+		InlineElement = { backdrop = "#000000", border = "#7186C7", alpha = .9, borderAlpha = .3 },
+		HighlightedInlineElement = { backdrop = "#000000", border = "#E8B230", alpha = .9, borderAlpha = 1 },
 		test4 = "#666666", -- grey (IT button bg)
 		test5 = "#4D4D4D", -- dark grey (IT scrollbar bg)
 		test6 = "#404040", -- dark grey (IT active button bg)

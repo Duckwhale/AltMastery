@@ -63,9 +63,16 @@ end
 --- Color differently to indicate that some action is possible
 local function Label_OnEnter(self)
 
+	local activeStyle = AM.GUI:GetActiveStyle()
+
 	-- Set text colour to highlight
-	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.highlight, 255)
+	local r, g, b = AM.Utils.HexToRGB(activeStyle.fontColours.highlight, 255)
 	self:SetColor(r, g, b)
+	
+	-- Decrease inline element's transparency
+	AM.GUI:SetFrameColour(self.parent.border, AM.GUI:GetActiveStyle().frameColours.HighlightedInlineElement)
+	
+	-- TODO: Show tooltip indicating that the group can be shown/hidden or task objectives can be shown/hidden
 
 end
 
@@ -75,6 +82,11 @@ local function Label_OnLeave(self)
 	-- Set text colour to normal
 	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
 	self:SetColor(r, g, b)
+	
+	-- Reset inline element's transparency
+	AM.GUI:SetFrameColour(self.parent.border, AM.GUI:GetActiveStyle().frameColours.InlineElement)
+	
+	-- TODO: Hide tooltip
 	
 end
 
@@ -101,6 +113,10 @@ local function SetText(self, text)
 	self.label:SetText(isGroup and string.upper(text) or text)
 	AM:Debug("Set text to " .. tostring(text) .. " for widget of type = " .. tostring(self:IsFlaggedAsGroup() and "Group" or "Task") .. " " .. tostring(self:IsFlaggedAsGroup()), "AMInlineGroup")
 
+	-- Set text colour to normal
+	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
+	self.label:SetColor(r, g, b)
+	
 end
 	
 	
@@ -182,7 +198,8 @@ local function Constructor()
 	border:ClearAllPoints()
 	border:SetPoint("TOPLEFT", 0, -0)
 	border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
-	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.TaskEntry) -- TODO: Colour differently based on type
+	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.InlineElement) -- TODO: Colour differently based on type
+	container.border = border -- Backreference to access it more easily and change its colour
 	
 	-- Add Text
 	local iconSize = AM.db.profile.settings.display.iconSize
