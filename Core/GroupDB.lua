@@ -96,7 +96,7 @@ local validators = { -- TODO. DRY (lots of same properties as Task objects -> mo
 -- @return true if the Group is valid; false otherwise
 local function IsValidGroup(self, GroupObject)
 
-	if not type(GroupObject) == "table" then -- GroupObject isn't even a table...
+	if type(GroupObject) ~= "table" then -- GroupObject isn't even a table...
 
 		AM:Debug("Validation of GroupObject failed because the given object is not a table", "GroupDB")
 		return false
