@@ -115,7 +115,19 @@ local function AddTask(self, Task, group)
 		usedFrames[#usedFrames+1] = taskWidget
 		AM.TrackerPane.widget:AddChild(taskWidget)
 		numDisplayedTasks = numDisplayedTasks + 1
---		dump(Task)
+
+		-- Update completion for this Task after adding it
+		if not AM.Parser:IsValid(Task.Criteria) then -- Criteria is invalid and will not be evaluated
+			AM:Debug("Found invalid Criteria for Task " .. Task.name .. " - Completion will not be updated")
+			taskWidget:SetCompletion(nil) -- Reset to "default ?" icon
+			
+		else -- Check Criteria and set completion to true or false -> Will display the proper icon in any case
+			
+			AM:Debug("Checking completion for Task " .. Task.name .. " -> Criteria = " .. Task.Criteria)
+			local isTaskCompleted = AM.Parser:Evaluate(Task.Criteria)
+			taskWidget:SetCompletion(isTaskCompleted)
+			
+		end
 
 		if trackedTasks[Task.name] then -- Show objectives and their status for this Task
 		
