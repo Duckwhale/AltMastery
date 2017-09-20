@@ -106,7 +106,7 @@ local function Show(self)
 		TrackerPane:SetAutoAdjustHeight(false)
 	
 		AM.GUI:SetFrameColour(border, activeStyle.frameColours.TrackerPane)
-		border:SetBackdropColor(1,0,0,1)
+		border:SetBackdropColor(1,1,1,0) -- This will shrine through if there's a spacer > 0 between elements, so it should be transparent
 		border:SetBackdropBorderColor(0,1,0,1)
 		TrackerPane:SetTitle("Tracker Pane")
 	--	TrackerPane:SetFullHeight(true)

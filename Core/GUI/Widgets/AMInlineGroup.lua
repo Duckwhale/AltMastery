@@ -178,10 +178,10 @@ local function Constructor()
 	container.frame:SetAllPoints()
 	
 	local border = container.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
-	padding = 0
+	local spacer = 1 -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
 	border:ClearAllPoints()
-	border:SetPoint("TOPLEFT", padding, -padding)
-	border:SetPoint("BOTTOMRIGHT", -padding, padding)
+	border:SetPoint("TOPLEFT", 0, -0)
+	border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
 	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.TaskEntry) -- TODO: Colour differently based on type
 	
 	-- Add Text
