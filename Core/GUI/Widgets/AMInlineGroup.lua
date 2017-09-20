@@ -84,21 +84,8 @@ local function SetIcon(self, icon)
 	if not icon then return end
 	
 	self.label:SetImage(icon)
---	self.icon:SetImage(icon)
 	AM:Debug("Set icon to " .. tostring(icon), "AMInlineGroup")
 	
-end
-
--- Flag as group (for slightly different look & behaviour of the widget)
-local function FlagAsGroup(self, value)
-	self.isFlaggedAsGroup = value -- TODO: Userdata instead of this (so AceGUI can clean it properly)
-print(tostring(value), tostring(self.isFlaggedAsGroup))
-end
-
--- Returns whether or not the widget represents a group in the tracker
-local function IsFlaggedAsGroup(self)
-print(tostring(value), tostring(self.isFlaggedAsGroup))
-	return self.isFlaggedAsGroup
 end
 
 local function SetText(self, text)
@@ -124,12 +111,9 @@ local methods = {
 		self:SetTitle("")
 	end,
 
-	-- ["OnRelease"] = nil,
-
 	["SetTitle"] = function(self,title)
 		self.titletext:SetText(title)
 	end,
-
 
 	["LayoutFinished"] = function(self, width, height)
 		if self.noAutoHeight then return end
@@ -147,6 +131,8 @@ local methods = {
 	end,
 
 	["OnHeightSet"] = function(self, height)
+		
+		-- From AceGUI: Adjust height of the content frame
 		local content = self.content
 		local contentheight = height - 20
 		if contentheight < 0 then
@@ -162,6 +148,7 @@ local methods = {
 		content:ClearAllPoints()
 		content:SetPoint("TOPLEFT", 4, -padding)
 		content:SetPoint("BOTTOMRIGHT", -4, padding)
+	
 	end
 }
 
@@ -171,6 +158,7 @@ local function Constructor()
 	container:SetRelativeWidth(1)
 	container:SetLayout("AMRows")
 	
+	-- AceGUI functions
 	for method, func in pairs(methods) do
 		container[method] = func
 	end
@@ -184,46 +172,17 @@ local function Constructor()
 	local titletext = container.titletext
 	titletext:Hide() -- Pointless, as this isn't shown? But better be safe than sorry...
 	
-
-	
-	--container.frame:ClearAllPoints()
-	container:SetAutoAdjustHeight(false)
-	--local frame = container.content:GetParent()
-	--frame:ClearAllPoints()
-	--frame:SetPoint("TOPLEFT", AM.TrackerPane.widget.frame, 0, 0)
-	--frame:SetPoint("BOTTOMRIGHT", AM.TrackerPane.widget.frame, -1, 3)
-	
-
-	--container.frame:SetSize(100, 100)
-	local iconSize = 20
-	local padding = (container.frame:GetHeight() - iconSize)
-	print(padding)
-	--local content = container.content
-	container.content:ClearAllPoints()
-	-- container.content:SetAllPoints()
-	container.content:SetPoint("TOPLEFT", padding, -padding)
-	container.content:SetPoint("BOTTOMRIGHT", -padding, padding)
+	-- Adjust layout so that the child widgets an fit inside
+	container:SetAutoAdjustHeight(false) -- doing this manually is more complicated, but at least it doesn't glitch out all the time...
+	container.frame:ClearAllPoints()
+	container.frame:SetAllPoints()
 	
 	local border = container.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
 	padding = 0
 	border:ClearAllPoints()
 	border:SetPoint("TOPLEFT", padding, -padding)
 	border:SetPoint("BOTTOMRIGHT", -padding, padding)
-	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.TaskEntry)
-	
-	-- -- Add Icon
-	-- local icon = AceGUI:Create("Icon")
-	-- icon:SetImage("Interface\\Icons\\inv_misc_questionmark")
-	-- icon.image:SetPoint("TOP", 0, 0)
-	-- icon:SetCallback("OnClick", Icon_OnClick)
-	-- icon:SetImageSize(20, 20)
-	-- --icon:SetLabel("Label Text")
-	-- --icon:SetHeight(20)
-	-- icon:SetRelativeWidth(0.05)
-	-- container:AddChild(icon)
-	-- container.icon = icon
-	 container.SetIcon = SetIcon
-
+	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.TaskEntry) -- TODO: Colour differently based on type
 	
 	-- Add Text
 	local label = AceGUI:Create("InteractiveLabel")
@@ -237,14 +196,6 @@ local function Constructor()
 	container:AddChild(label)
 	container.label = label
 	label.parent = container -- Backreference so the label functions can access container methods and change its state
-
-label.frame:ClearAllPoints()
-label.frame:SetPoint("TOPLEFT", container.content, 2, -2)
-label.frame:SetPoint("BOTTOMRIGHT", container.content, -2, 2)
-
---print(label.label:GetWidth() .. " " .. label.image:GetWidth() .. " " .. label.frame:GetWidth() .. " " .. border:GetWidth() .. " " .. container.content:GetWidth() .. " " .. container.frame:GetWidth())
-print(label.label:GetHeight() .. " " .. label.image:GetHeight() .. " " .. label.frame:GetHeight() .. " " .. border:GetHeight() .. " " .. container.content:GetHeight() .. " " .. container.frame:GetHeight())
-
 	
 
 	-- Add Controls (TODO)
@@ -253,7 +204,7 @@ print(label.label:GetHeight() .. " " .. label.image:GetHeight() .. " " .. label.
 	
 	-- Add completion?
 	
-	-- Remove data before it is made available for recycling
+	-- Remove data before it is made available for recycling (TODO: More stuff was added later, and should likely be stored as userdata so AceGUI can scrub it?)
 	container.OnRelease = function(self)
 		self.icon = nil
 		self.label = nil
