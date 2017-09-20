@@ -184,8 +184,11 @@ local function AddGroup(self, Group)
 		
 		local Task = AM.db.global.tasks[taskID]
 		if not Task then -- Task does not exist -> Keep reference, but add INVALID_TASK instead
-			AM:Debug("Task was not found in TaskDB -> Replacing it with INVALID_TASK while keeping the entry for later", "TrackerPane")
-			-- TODO: Add it and test stuff
+			AM:Print(format("The referenced Task %s was not found. It will be replaced with an INVALID_TASK placeholder, but it won't be lost :)", taskID)) --TODO: L
+			Task = AM.TaskDB:GetTask("INVALID_TASK")
+			-- Save a note saying which task was replaced with it so the user isn't confused?
+			-- TODO: Hide by default (depends on settings)
+			
 		end
 		
 		self:AddTask(Task, groupWidget)
