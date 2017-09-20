@@ -45,7 +45,7 @@ local function Label_OnClick(self)
 	AM:Debug("Label clicked!", "AMInlineGroup")
 	
 	-- For Groups: Minimize the respective Group, set its text colour to indicate the fact, and hide all contained Tasks (as well as their objectives)
-	local isGroup = self:IsFlaggedAsGroup()
+	local isGroup = self.parent:IsFlaggedAsGroup()
 	if isGroup then
 	
 		AM:Debug("This label represents a Group - click to minimize or maximize it")
@@ -230,8 +230,10 @@ local function Constructor()
 	label:SetCallback("OnEnter", Label_OnEnter)
 	label:SetCallback("OnLeave", Label_OnLeave)
 	container:AddChild(label)
-	 container.label = label
 	 container.SetText = SetText
+	container.label = label
+	label.parent = container -- Backreference so the label functions can access container methods and change its state
+
 label.frame:ClearAllPoints()
 label.frame:SetPoint("TOPLEFT", container.content, 2, -2)
 label.frame:SetPoint("BOTTOMRIGHT", container.content, -2, 2)
