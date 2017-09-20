@@ -198,6 +198,11 @@ local function Constructor()
 	container.label = label
 	label.parent = container -- Backreference so the label functions can access container methods and change its state
 	
+	-- Align label text and icon vertically (centered) -> TODO: Does this need to change if the content's size (settings) changes?
+	local labelPadding = 2
+	label.frame:ClearAllPoints()
+	label.frame:SetPoint("TOPLEFT", container.content, labelPadding, -labelPadding)
+	label.frame:SetPoint("BOTTOMRIGHT", container.content, -labelPadding, labelPadding)
 
 	-- Add Controls (TODO)
 	
