@@ -100,6 +100,17 @@ local function SetIcon(self, icon)
 	
 end
 
+-- Set the completedIcon for this element
+local function SetCompletion(self, isCompleted)
+	
+	self.completionIcon:SetImage(AM.GUI:GetActiveStyle()[isCompleted and "iconReady" or "iconNotReady"])
+	-- if isCompleted == nil then -- Reset to default value
+	-- 	self.completionIcon:SetImage("Interface\\Icons\\inv_misc_questionmark")
+	-- end
+	self.completionIcon.frame:SetFrameStrata("HIGH")
+	
+end
+
 local function SetText(self, text)
 
 	text = text or ""
@@ -234,6 +245,7 @@ local function Constructor()
 	completionIcon:SetRelativeWidth(0.01) -- TODO: Also uses UIParent - why??
 	container:AddChild(completionIcon)
 	container.completionIcon = completionIcon -- Backreference
+	container.SetCompletion = SetCompletion
 	-- Align icon vertically (centered) -> TODO: Does this need to change if the content's size (settings) changes?
 	local iconX, iconY = 0, 0 -- TODO: Center vertically -> Set according to type (bigger offset for groups, smaller for objectives, to center it properly); IconX doesn't do anything?
 	completionIcon.frame:ClearAllPoints()
