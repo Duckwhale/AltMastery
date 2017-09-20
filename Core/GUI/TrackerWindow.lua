@@ -111,7 +111,6 @@ local function Show(self)
 	TrackerPane.content:SetPoint("BOTTOMRIGHT", -trackerPaneBorderSize, trackerPaneBorderSize)
 	
 	TrackerPane:SetAutoAdjustHeight(false)
-	TrackerPane:SetHeight(490) -- TODO: Calculate size based on number of displayed items (Groups/Tasks/Objectives) -> Use TrackerPane:GetNumDisplayedTasks, GetNumDisplayedGroups, GetNumTrackedTasks and border from settings
 	
 		AM.GUI:SetFrameColour(border, activeStyle.frameColours.TrackerPane)
 		border:SetBackdropColor(1,0,0,1)

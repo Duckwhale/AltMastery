@@ -106,6 +106,7 @@ local function AddTask(self, Task, group)
 	end
 	
 	local taskWidget = AceGUI:Create("AMInlineGroup")
+		taskWidget:SetHeight(AM.db.profile.settings.display.taskSize)
 		taskWidget:SetText(Task.name)
 		taskWidget:SetRelativeWidth(1)
 		taskWidget:SetIcon(Task.iconPath)
@@ -120,6 +121,7 @@ local function AddTask(self, Task, group)
 		
 			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Show objectives for it", "TrackerPane")
 			local objectivesWidget = AceGUI:Create("AMInlineGroup")
+			objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize)
 			objectivesWidget:SetRelativeWidth(1)
 			objectivesWidget:SetTitle("Objectives")
 			usedFrames[#usedFrames+1] = objectivesWidget -- TODO: Use(frame) as shortcut?
@@ -147,6 +149,8 @@ local function AddGroup(self, Group)
 	
 	-- Add the given Group and all its tasks (if it has any)
 	local groupWidget = AceGUI:Create("AMInlineGroup")
+	groupWidget:FlagAsGroup(true) -- Set internal flag to help differentiate between Tasks and Groups (both use the same widget type, as it's very similar)
+	groupWidget:SetHeight(AM.db.profile.settings.display.groupSize)
 	groupWidget:SetText(Group.name)
 	groupWidget:SetIcon(Group.iconPath)
 	groupWidget:SetRelativeWidth(1)
@@ -213,6 +217,10 @@ local function UpdateGroups(self)
 	-- TODO: self:AddGroup(activeGroup) - recursively... could just append nested groups?
 	self:AddGroup(activeGroup)
 
+	-- Update the size of each element
+	
+	self.widget:SetHeight(self:GetTrackerHeight()) -- TODO. Outside border is missing (and inside border is too big?)
+	
 	-- Update object vars with locally cached ones (TODO: Change structure to use TrackerPane directly, although that seems to break LDoc?)
 	self.usedFrames = usedFrames
 	self.minimizedGroups = minimizedGroups

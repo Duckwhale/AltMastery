@@ -55,13 +55,31 @@ local function SetIcon(self, icon)
 	
 end
 
+-- Flag as group (for slightly different look & behaviour of the widget)
+local function FlagAsGroup(self, value)
+	self.isFlaggedAsGroup = value -- TODO: Userdata instead of this (so AceGUI can clean it properly)
+print(tostring(value), tostring(self.isFlaggedAsGroup))
+end
+
+-- Returns whether or not the widget represents a group in the tracker
+local function IsFlaggedAsGroup(self)
+print(tostring(value), tostring(self.isFlaggedAsGroup))
+	return self.isFlaggedAsGroup
+end
+
 local function SetText(self, text)
 
 	text = text or ""
 	
-	self.label:SetText(text)
-	AM:Debug("Set text to " .. tostring(text), "AMInlineGroup")
-		
+	-- Set font and height of the text based on the type
+	local activeStyle = AM.GUI:GetActiveStyle()
+	local isGroup = self:IsFlaggedAsGroup() -- 4, 5
+	local fontSize = (isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small -- isGroupHeader has to be set by the Tracker when creating the widget (will default to Task otherwise)
+	self.label:SetFont(isGroup and activeStyle.fonts.test4 or activeStyle.fonts.test3, fontSize)
+	
+	self.label:SetText(isGroup and string.upper(text) or text)
+	AM:Debug("Set text to " .. tostring(text) .. " for widget of type = " .. tostring(self:IsFlaggedAsGroup() and "Group" or "Task") .. " " .. tostring(self:IsFlaggedAsGroup()), "AMInlineGroup")
+
 end
 	
 	
@@ -102,14 +120,20 @@ local methods = {
 		end
 		content:SetHeight(contentheight)
 		content.height = contentheight
+		
+		-- Custom: Set point to center it in the respective group (requires different handling for each type)
+		local iconSize = AM.db.profile.settings.display.iconSize
+		local elementSize = self:IsFlaggedAsGroup() and AM.db.profile.settings.display.groupSize or AM.db.profile.settings.display.taskSize
+		local padding = (elementSize - iconSize) / 2 - 2-- TODO: 1 px border comes from the border frame? Needs fixing or it may glitch if that size is changed; also, use actual group size (adjusted dynamically) to align for all types
+		content:ClearAllPoints()
+		content:SetPoint("TOPLEFT", 4, -padding)
+		content:SetPoint("BOTTOMRIGHT", -4, padding)
 	end
 }
 
 local function Constructor()
 	local container = AceGUI:Create("InlineGroup")
 	container.type = Type
-	--container.Add = TSM.AddGUIElement
-	--container:SetFullHeight(true)
 	container:SetRelativeWidth(1)
 	container:SetLayout("AMRows")
 	
