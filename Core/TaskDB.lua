@@ -224,7 +224,7 @@ end
 -- @return Reference to the TaskObject if it exists; nil otherwise
 local function GetTask(self, key)
 
-	if not type(key) == "number" or type(key) == "string" then
+	if not (type(key) == "number" or type(key) == "string") then
 		AM:Debug("GetTask failed with key = " .. tostring(key) .. " - invalid type", "TaskDB")
 	end
 	
