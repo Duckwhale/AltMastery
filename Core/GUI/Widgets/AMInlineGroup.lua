@@ -226,6 +226,20 @@ local function Constructor()
 	-- Add summary (optional)
 	
 	-- Add completion?
+	local completionIcon = AceGUI:Create("InteractiveLabel")
+	completionIcon:SetImage("Interface\\Icons\\inv_misc_questionmark")
+	completionIcon:SetImage(AM.GUI:GetActiveStyle().iconNotReady) -- Always default to "not completed", which will be updated by the Tracker
+	completionIcon:SetImageSize(iconSize, iconSize)
+	
+	completionIcon:SetRelativeWidth(0.01) -- TODO: Also uses UIParent - why??
+	container:AddChild(completionIcon)
+	container.completionIcon = completionIcon -- Backreference
+	-- Align icon vertically (centered) -> TODO: Does this need to change if the content's size (settings) changes?
+	local iconX, iconY = 0, 0 -- TODO: Center vertically -> Set according to type (bigger offset for groups, smaller for objectives, to center it properly); IconX doesn't do anything?
+	completionIcon.frame:ClearAllPoints()
+	completionIcon.frame:SetPoint("TOPLEFT", label.frame, "TOPRIGHT", -iconX, iconY)
+	completionIcon.frame:SetPoint("BOTTOMRIGHT", label.frame, "BOTTOMRIGHT", iconX, -iconY)
+
 	
 	-- Remove data before it is made available for recycling (TODO: More stuff was added later, and should likely be stored as userdata so AceGUI can scrub it?)
 	container.OnRelease = function(self)
