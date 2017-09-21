@@ -17,9 +17,9 @@ local addonName, AM = ...
 if not AM then return end
 
 
-local S
+local Criteria = {}
 
--- Evaluator functions
+-- Custom evaluator functions for criteria (strings) that will be added to the Parser's sandbox to check common criteria via the WOW API without revealing the underlying complexity (or lack therof :D)
 local function Quest(questID)
 	return IsQuestFlaggedCompleted(questID)
 end
@@ -44,7 +44,8 @@ local function Achievement(achievementID)
 	
 end
 
-S = {
+
+Criteria = {
 	
 	Quest = Quest,
 	Class = Class,
@@ -52,6 +53,6 @@ S = {
 
 }
 
-AM.Criteria = S
+AM.Criteria = Criteria
 
-return S
+return Criteria
