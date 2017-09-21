@@ -18,6 +18,7 @@ if not AM then return end
 
 -- TODO: Try different fonts to see which works best and use those for the default style (after key features are done)
 -- TODO: Recognize fonts from LibSharedMedia3-.0? (allow user to pick them for custom styles)
+-- TODO: Bar textures (also from LSM)
  
  
 -- Default style for the display (TODO: It's the only one, as others are NYI)
@@ -25,8 +26,40 @@ local defaultStyle = {
 	
 	fonts = {
 		
+		-- Default game fonts:
+			-- ARIALN - login screens, numbers, chat font
+			-- FRIZQT__ - the main WoW fonts
+			-- MORPHEUS - quest log
+			-- skurri - damage font
+
+		test10 = "Interface\\Addons\\AltMastery\\Media\\tork rg.ttf",
+			test11 = "Interface\\Addons\\AltMastery\\Media\\AndikaNewBasic-R.ttf",
+			test12 = "Interface\\Addons\\AltMastery\\Media\\Comfortaa-Regular.ttf",
+				test13 = "Interface\\Addons\\AltMastery\\Media\\Comfortaa-Bold.ttf",
+			test14 = "Interface\\Addons\\AltMastery\\Media\\AlteHaasGroteskRegular.ttf",
+			test15 = "Interface\\Addons\\AltMastery\\Media\\AlteHaasGroteskBold.ttf",
+			--groups = "Interface\\Addons\\AltMastery\\Media\\expressway rg.ttf",
+			groups = "Fonts\\ARIALN.TTF",
+			tasks = "Interface\\Addons\\AltMastery\\Media\\expressway rg.ttf",
+			objectives = "Interface\\Addons\\AltMastery\\Media\\expressway rg.ttf",
+			objectives = "Interface\\Addons\\AltMastery\\Media\\Comfortaa-Light.ttf", -- TODO: License
+		-- TODO. Licenses, only use relevant fonts, SharedMediaFonts	
+		headers = "Fonts\\FRIZQT__.TTF",  -- For group headers
+		default = "Fonts\\FRIZQT__.TTF", -- AKA GameFontNormal
+		numbers = "Fonts\\ARIALN.TTF", -- AKA GameFontSmall
 		text = "Interface\\Addons\\AltMastery\\Media\\Ubuntu-C.ttf", -- For most regular text
 		code = "Fonts\\ARIAL.TTF", -- For the criteria/code editor (TODO: Pick a different one)
+			inlineText = "Interface\\Addons\\AltMastery\\Media\\Lato-Regular.ttf", -- TODO: License?
+		test0 = "Interface\\Addons\\AltMastery\\Media\\accid___.ttf",
+		test1 = "Interface\\Addons\\AltMastery\\Media\\DroidSans-Bold.ttf",
+		test2 = "Interface\\Addons\\AltMastery\\Media\\frquad.ttf",
+		test3 = "Interface\\Addons\\AltMastery\\Media\\DejaVuSans.ttf",
+		test4 = "Interface\\Addons\\AltMastery\\Media\\DejaVuMonoSans.ttf",
+			test5 = "Interface\\Addons\\AltMastery\\Media\\LaoUI.ttf",
+			groups = "Interface\\Addons\\AltMastery\\Media\\corbel.ttf",
+		test7 = "Interface\\Addons\\AltMastery\\Media\\constan.ttf",
+		test8 = "Interface\\Addons\\AltMastery\\Media\\consola.ttf",
+		test9 = "Interface\\Addons\\AltMastery\\Media\\calibri.ttf",
 		
 	},
 	
