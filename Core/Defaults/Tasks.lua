@@ -159,6 +159,14 @@ local defaultTasks = {
 			},
 		},
 
+		DAILY_WORLDEVENT_CORENDIREBREW = {
+			name = "Coren Direbrew defeated",
+			description = "Defeat Coren Direbrew in the Grim Guzzler during the Brewfest world event",
+			notes = "BOE Maces",
+			iconPath = "inv_misc_head_dwarf_01",
+			Criteria = "WorldEvent(BREWFEST) AND true", -- TODO: Check LFGRewards for bonus
+			
+		},
 		
 		MONTHLY_WORLDEVENT_MOPTIMEWALKING = {
 			name = "Timewalking: Mists of Pandaria",
