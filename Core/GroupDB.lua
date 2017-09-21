@@ -156,8 +156,8 @@ local function SetActiveGroup(name)
 	
 end
 
-local function GetGroup()
-
+local function GetGroup(self, groupName)
+	return AM.db.global.groups[groupName] or AM.db.global.groups["EMPTY_GROUP"] -- TODO: Proper checks & tests
 end
 
 local function SetGroup()
