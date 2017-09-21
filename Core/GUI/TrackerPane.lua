@@ -196,10 +196,21 @@ local function AddGroup(self, Group)
 	end
 	
 	-- TODO: Test nested groups
-	for index, NestedGroup in ipairs(Group.nestedGroups) do -- Add frame for this group
+	for index, groupID in ipairs(Group.nestedGroups) do -- Add frame for this group
 		
-		-- TODO: Limit recursion to X levels (2 or 3 should suffice for most users...)
-		AM:Debug("Adding nested group " .. tostring(index) .. " = " .. tostring(NestedGroup.name) .. " to the TrackerPane")
+		AM:Debug("Adding nested Group " .. tostring(index) .. " to Group " .. tostring(Group.name) .. " -> Looking up " .. tostring(groupID) .. " in global GroupDB", "TrackerPane")
+		
+		local NestedGroup = AM.db.global.groups[group]
+		if not NestedGroup then -- Task does not exist -> Keep reference, but add EMPTY_GROUP instead
+			AM:Print(format("The referenced Group %s was not found. It will be replaced with an EMPTY_GROUP placeholder, but it won't be lost :)", groupID)) --TODO: L
+			NestedGroup = AM.GroupDB:GetGroup("EMPTY_GROUP")
+			-- Save a note saying which group was replaced with it so the user isn't confused?
+			-- TODO: Hide by default (depends on settings)
+			
+		end
+		
+		-- TODO: Limit recursion to X levels (2 or 3 should suffice for most users...) -> Also make sure you can't create cicular references (ALL_TASKS references SOME_GROUP, then SOME_GROUP references ALL_TASKS again... -> should be NP if recursion is limited, but I guess we could check the already-added groups to be sure)
+		AM:Debug("Adding nested group " .. tostring(index) .. " = " .. tostring(NestedGroup) .. " to the TrackerPane")
 		self:AddGroup(NestedGroup)
 		
 	end
