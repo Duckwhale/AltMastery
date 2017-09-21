@@ -163,7 +163,7 @@ local defaultTasks = {
 		MONTHLY_WORLDEVENT_MOPTIMEWALKING = {
 			name = "Timewalking: Mists of Pandaria",
 			description = "Complete the quest \"A Shrouded Path Through Time\" during the Mists of Pandaria Timewalking event",
-			notes = "500 Badges",
+			notes = "500 Timewarped Badges",
 			iconPath = "calendar_weekendmistsofpandariastart",
 			Criteria = "WorldEvent(TIMEWALKING_MOP) AND Quest(45799)"
 		}
