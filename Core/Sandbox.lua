@@ -32,7 +32,12 @@ if not AM then return end
 local Sandbox = {}
 
 -- TODO
+for key, func in pairs(AM.Criteria) do -- Add function to the sandbox
 
+	AM:Debug("Added Criteria " .. tostring(key) .. " to the Sandbox", "Sandbox")
+	Sandbox[key] = func
+
+end
 
 AM.Sandbox = Sandbox
 return Sandbox
