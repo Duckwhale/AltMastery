@@ -29,9 +29,64 @@ if not AM then return end
 -- * Provide the user with predefined constants for hard-to-remember values that may be used in the Criteria strings (e.g., dungeon/boss IDs which should be available in a more human-readable format)
 
 
-local Sandbox = {}
+-- setfenv(func, Sandbox) -> local env_getglobal
 
--- TODO
+local function accessBlocked()
+	AM:Print("Access blocked while evaluating a Criteria - some functions are restricted for security reasons") -- TODO: Reword, L
+end
+
+-- Redirect valid lookups to _G and block forbidden ones
+local restrictedEnvironment = setmetatable({}, { __index =
+  function(t, k)
+    if k == "_G" then -- Beep bop! Not allowed
+      return t
+    elseif k == "getglobal" then -- Is global lookup -> Allow access to the restricted environment only
+      return env_getglobal
+    elseif blockedFunctions[k] then -- Not allowed either
+      return accessBlocked
+    else
+      return _G[k]
+    end
+  end
+})
+
+local blockedFunctions = {
+  -- Lua functions that may allow breaking out of the environment
+  getfenv = true,
+  setfenv = true,
+  loadstring = true,
+  pcall = true,
+  -- blocked WoW API
+  SendMail = true,
+  SetTradeMoney = true,
+  AddTradeMoney = true,
+  PickupTradeMoney = true,
+  PickupPlayerMoney = true,
+  TradeFrame = true,
+  MailFrame = true,
+  EnumerateFrames = true,
+  RunScript = true,
+  AcceptTrade = true,
+  SetSendMailMoney = true,
+  EditMacro = true,
+  SlashCmdList = true,
+  DevTools_DumpCommand = true,
+  hash_SlashCmdList = true,
+  CreateMacro = true,
+  SetBindingMacro = true,
+}
+
+
+-- Alias for WOW's getglobal -> Look up stuff in the restricted (sandboxed) environment instead
+local function getglobal(k)
+  return restrictedEnvironment[k]
+end
+
+local Sandbox = {
+	getglobal = getglobal
+}
+
+
 for key, func in pairs(AM.Criteria) do -- Add function to the sandbox
 
 	AM:Debug("Added Criteria " .. tostring(key) .. " to the Sandbox", "Sandbox")
