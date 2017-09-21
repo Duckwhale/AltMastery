@@ -131,7 +131,7 @@ local function AddTask(self, Task, group)
 
 		if trackedTasks[Task.name] then -- Show objectives and their status for this Task
 		
-			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Show objectives for it", "TrackerPane")
+			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Showing objectives for it...", "TrackerPane")
 			local objectivesWidget = AceGUI:Create("AMInlineGroup")
 			objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize)
 			objectivesWidget:SetRelativeWidth(1)
