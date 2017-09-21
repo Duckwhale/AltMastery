@@ -65,9 +65,9 @@ local defaultStyle = {
 	
 	fontSizes = {
 	
-		small = 11,
-		medium = 11,
-		normal = 12,
+		small = 10,
+		medium = 12,
+		normal = 13,
 		large = 16,
 	
 	},
