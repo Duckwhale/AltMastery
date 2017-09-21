@@ -87,9 +87,14 @@ local defaultStyle = {
 		-- TODO: Hex2RGB from TAP/Utils (already tested)
 		test1 = "#828296", -- blue-ish grey
 		test2 = "#55B408", -- "Legion-like" green (but brighter)
-		Window = { backdrop = "#1A1A1A", border = "#9398A1", alpha = 0.9}, -- Identical style for all top-level windows
-		InlineElement = { backdrop = "#000000", border = "#7186C7", alpha = .9, borderAlpha = .3 },
-		HighlightedInlineElement = { backdrop = "#000000", border = "#E8B230", alpha = .9, borderAlpha = 1 },
+		InvisibleBorder = { backdrop = "#000000", border = nil, alpha = 0, borderAlpha = 0 },
+		Window = { backdrop = "#F1F4FC", border = "#7186C7", alpha = 0.05, borderAlpha = .3}, -- Identical style for all top-level windows
+		ContentPane = { backdrop = "F1F4FC", border = nil, alpha = .1 }, -- TODO
+		TrackerPane = { backdrop = "#F1F4FC", border = "#F1F4FC", alpha = 0, borderAlpha = 0},
+		GroupHeader = { backdrop = "#B2B2B2", border = "#060706", alpha = 1 },
+		InlineElement = { backdrop = "#566769", border = "#FFFFFF", alpha = .8, borderAlpha = 0 },
+		HighlightedInlineElement = { backdrop = "#566769", border = "#E8B230", alpha = .5, borderAlpha = 1 },
+		Divider = { backdrop = "#4D4D4D", alpha = 1, border = nil },
 		test4 = "#666666", -- grey (IT button bg)
 		test5 = "#4D4D4D", -- dark grey (IT scrollbar bg)
 		test6 = "#404040", -- dark grey (IT active button bg)
