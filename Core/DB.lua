@@ -109,7 +109,7 @@ local function Initialise()
 
 	-- Add prototype to default tasks (so that AceDB won't try to store it, causing localisation issues if users switch the client language and suddenly have their old locale's prototype task as an actual TaskDB entry because it is considered a non-default entry)
 	local prototypeTask = AM.TaskDB.PrototypeTask
-	defaultTasks[prototypeTask.name] = prototypeTask 
+	defaultTasks[prototypeTask.name] = prototypeTask
 	
 	local prototypeGroup = AM.GroupDB.PrototypeGroup
 	defaultGroups[prototypeGroup.name] = prototypeGroup

@@ -239,7 +239,7 @@ local function Constructor()
 	-- Add completion?
 	local completionIcon = AceGUI:Create("InteractiveLabel")
 	completionIcon:SetImage("Interface\\Icons\\inv_misc_questionmark")
-	completionIcon:SetImage(AM.GUI:GetActiveStyle().iconNotReady) -- Always default to "not completed", which will be updated by the Tracker
+	 -- Always default to "not completed", which will be updated by the Tracker
 	completionIcon:SetImageSize(iconSize, iconSize)
 	
 	completionIcon:SetRelativeWidth(0.01) -- TODO: Also uses UIParent - why??

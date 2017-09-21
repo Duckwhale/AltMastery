@@ -25,7 +25,6 @@ local defaultStyle = {
 	
 	fonts = {
 		
-		headers = "Fonts\\ARIAL.TTF",  -- For group headers
 		text = "Interface\\Addons\\AltMastery\\Media\\Ubuntu-C.ttf", -- For most regular text
 		code = "Fonts\\ARIAL.TTF", -- For the criteria/code editor (TODO: Pick a different one)
 		
@@ -44,7 +43,6 @@ local defaultStyle = {
 	
 		completed = "#00FF00", -- bright green - completed/confirmation
 		incomplete = "#FF2020", -- red - incomplete/invalid/error
-	
 		highlight = "#E8B230", -- regular display text
 		normal = "#FFFFFF",
 	},
