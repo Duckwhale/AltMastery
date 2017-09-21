@@ -27,6 +27,10 @@ Locales\Locales.xml
 ## Setup - needs to be loaded before other modules become usable ##
 Core\Setup.lua
 
+## Utility functions - load early so they can be used by other modules ##
+Core\Utils\Colours.lua
+Core\Utils\Validation.lua
+
 ## Core modules ##
 Core\Defaults\Groups.lua
 Core\Defaults\Settings.lua
@@ -42,7 +46,18 @@ Core\TaskDB.lua
 Core\Controllers\SlashCmdHandler.lua
 
 ## Graphical user interface
+#Core\GUI\Frames\AMTrackerGroup.lua
+Core\GUI\Frames\AMWindow.lua
+
+Core\GUI\Widgets\AMInlineGroup.lua
+
+Core\GUI\TrackerPane.lua
+Core\GUI\TrackerWindow.lua
+
 Core\GUI\Config.lua
+Core\GUI\DisplayStyles.lua
+Core\GUI\FrameFactory.lua
+Core\GUI\Layouts.lua
 
 ## Loader - needs to be called last ##
 AltMastery.lua

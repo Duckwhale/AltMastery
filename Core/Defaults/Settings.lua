@@ -19,7 +19,17 @@ if not AM then return end
 
 --- Table containing the default task entries
 local defaults = {
-
+	
+	display = {
+		
+		activeStyle = "Default",
+		groupSize = 40,
+		taskSize = 32,
+		objectiveSize = 24,
+		iconSize = 20,
+		
+	}
+	
 }
 
 

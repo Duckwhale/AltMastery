@@ -16,38 +16,35 @@
 local addonName, AM = ...
 if not AM then return end
 
--- Set up table structures for modules
-AM.Controllers = {}
-AM.DB = {}
-AM.GUI = { Styles = {} }
-AM.Utils = {}
 
-AM.GroupDB = {}
-AM.TaskDB = {}
-AM.Settings = {}
+--- Can't allow empty strings
+local function IsValidString(arg)
 
-AM.Criteria = {}
-AM.Parser = {}
-
-
--- Localization table
-AM.L = LibStub("AceLocale-3.0"):GetLocale("AltMastery", false)
-
-
--- Shared variables
-AM.versionString = GetAddOnMetadata("AltMastery", "Version")
---@debug@
-AM.versionString = "DEBUG"
---@end-debug@
-
--- Global functions
-function AM:Print(msg)
-	print(format("|c00CC5500" .. "%s: " .. "|c00E6CC80%s", addonName, msg))
+	if type(arg) == "string"
+	and arg ~= ""
+	then return true end
+	
+	return false
+		
 end
 
-function AM:Debug(msg, source)
-	source = source or ""
-	print(format("|c000072CA" .. "%s: " .. "|c00E6CC80%s", addonName .. (source ~= "" and "_" .. source or ""), msg)) -- Display source/module if any was given
+ --- Can't allow negative numbers
+local function IsInteger(arg)
+
+	if type(arg) == "number"
+	and arg > 0
+	then return true end
+	
+	return false
+
 end
+
+
+AM.Utils.Validation = {
+
+	IsValidString = IsValidString,
+	IsInteger = IsInteger,
+
+}
 
 return AM

@@ -22,26 +22,7 @@ local tostring, pairs, dump, time = tostring, pairs, dump, time -- Lua APIs
 
 
 -- Validator functions for standard data types (serve as shortcut)
--- TODO: Move to separate Validation module?
-local function IsValidString(arg) -- Can't allow empty strings
-
-	if type(arg) == "string"
-	and arg ~= ""
-	then return true end
-	
-	return false
-		
-end
-
-local function IsInteger(arg) -- Can't allow negative numbers
-
-	if type(arg) == "number"
-	and arg > 0
-	then return true end
-	
-	return false
-
-end
+local IsValidString, IsInteger = AM.Utils.Validation.IsValidString, AM.Utils.Validation.IsInteger
 
 --- Validator functions for TaskObjects
 -- @param arg The argument that is to be checked
@@ -57,7 +38,8 @@ local validators = {
 	Criteria = function(arg) return AM.Parser:IsValid(arg) end,
 	iconPath = function(arg) return IsValidString(arg) end,
 	isEnabled = function(arg) return (type(arg) == "boolean") end,
-		
+	isReadOnly = function(arg) return (type(arg) == "boolean") end,
+	
 	-- The tables need some more attention, though
 	Objectives = function(arg)
 	
@@ -67,11 +49,11 @@ local validators = {
 		
 			for k, v in ipairs(arg) do -- Check entries
 			
-				if not type(k) == "number" or not tonumber(k) > 0 -- Key needs to be an integer (custom Tasks always have integer keys)
-				or not AM.Parser:IsValid(arg[i]) -- Table entry is not a valid Criteria
+				if not type(k) == "number" or not tonumber(k) > 0 -- Key needs to be an integer (Objectives always have integer keys)
+				or not AM.Parser:IsValid(v) -- Table entry is not a valid Criteria
 				then -- Some entry is not valid -> The entire Objectives table is invalid
 					
-					AM.Debug("Failed validation of Objectives table for key = " .. i .. ", arg = " .. tostring(arg[i]), "TaskDB")
+					AM:Debug("Failed validation of Objectives table for key = " .. k .. ", arg = " .. tostring(v), "TaskDB")
 					return false
 				
 				end	
@@ -120,19 +102,23 @@ local function IsValidTask(self, TaskObject)
 	local prototype = self.PrototypeTask
 	for k, v in pairs(prototype) do -- Compare field layouts
 		
-		if not TaskObject[k] then -- TaskObject is missing a field
+		if not type(v) == "function" then -- This field needs to be validated (functions are always inherited and won't be present in the instanced object)
 		
-			AM:Debug("Validation of TaskObject failed for key = " .. tostring(k) .. " because the key didn't exist", "TaskDB")
-			return false
-		
-		end
-		
-		local ValidateField = validators(k)
-		local arg = TaskObject[k]
-		if not ValidateField(arg) then -- Field contains invalid data and must be rejected
-		
-			AM:Debug("Validation of TaskObject failed for key = " .. tostring(k) .. ", value = " .. tostring(arg), "TaskDB")
-			return false
+			if not TaskObject[k] then -- TaskObject is missing a field
+			
+				AM:Debug("Validation of TaskObject failed for key = " .. tostring(k) .. " because the key didn't exist", "TaskDB")
+				return false
+			
+			end
+			
+			local ValidateField = validators(k)
+			local arg = TaskObject[k]
+			if not ValidateField(arg) then -- Field contains invalid data and must be rejected
+			
+				AM:Debug("Validation of TaskObject failed for key = " .. tostring(k) .. ", value = " .. tostring(arg), "TaskDB")
+				return false
+			
+			end
 		
 		end
 		
@@ -238,7 +224,7 @@ end
 -- @return Reference to the TaskObject if it exists; nil otherwise
 local function GetTask(self, key)
 
-	if not type(key) == "number" or type(key) == "string" then
+	if not (type(key) == "number" or type(key) == "string") then
 		AM:Debug("GetTask failed with key = " .. tostring(key) .. " - invalid type", "TaskDB")
 	end
 	
@@ -310,8 +296,7 @@ local function GetNumTasks(self, countDefaults)
 
 end
 
---- Creates a new Task object with the given name and returns a reference to it
--- The name can be used as its key in the TaskDB later, although it's not mandatory to honour that convention
+--- Creates a new Task object and returns a reference to it
 -- @return A reference to the newly-created Task object
 local function CreateTask() -- TODO: Parameters could be used to automatically set those values, but I am too lazy right now
 
@@ -319,7 +304,13 @@ local function CreateTask() -- TODO: Parameters could be used to automatically s
 	local NewTaskObject = {}
 	
 	local prototype = AM.TaskDB.PrototypeTask
-	local mt = {__index = prototype } -- Simply look up any key that can't be found (right now, that means everything because the NewTaskObject is empty) in the prototypeTask table
+	local mt = {
+		__index = prototype, -- Simply look up any key that can't be found (right now, that means everything because the NewTaskObject is empty) in the prototypeTask table
+		__tostring = function(self) -- Serialise object for debug output and return a string representation
+			local strrep = self.name .. " = { icon = " .. self.iconPath .. ", description = " .. self.description .. ", notes = " .. self.notes .. ", isReadOnly = " .. tostring(self.isReadOnly) .. ", Criteria = " .. self.Criteria .. ", Objectives = <" .. #self.Objectives .. " Objectives> }"
+			return strrep
+		end,
+	}
 	setmetatable(NewTaskObject, mt)
 	
 	-- Overwrite some of the parts that only apply to default Tasks (as this creates a custom one, which behaves slightly differently)

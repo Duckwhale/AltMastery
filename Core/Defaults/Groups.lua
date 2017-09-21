@@ -22,7 +22,7 @@ if not AM then return end
 local PrototypeGroup = {
 	
 	-- Simple data types
-	name = "Empty Group", -- TODO: L
+	name = "EMPTY_GROUP", -- TODO: L
 	iconPath = "Interface\\Icons\\inv_misc_questionmark",
 	isEnabled = true,
 	dateAdded = time(),
@@ -113,19 +113,60 @@ local PrototypeGroup = {
 	end,
 	
 	-- Stubs - TODO: Fill out as necessary (and remove the rest later)
-	
-}
-
-
---- Table containing the default task entries
-local defaults = {
 
 }
 
 
---- Return the table containing default task entries
+--- Table containing the default Groups (as DIFF - only the entries that differ from the Prototype are included here)
+local defaultGroups = { -- TODO: Generate automatically from import table (only contains criteria, name etc. - not the duplicate stuff)
+	-- Add groups via GroupDB or manually? TODO - Needs to inherit the prototypes methods
+	ALL_THE_TASKS = {
+		name = "All Tasks",
+		iconPath = "inv_pant_mail_raidshamanmythic_q_01",
+		taskList = {
+			"LEGENDARY_SHADOWMOURNE",
+			"WEEKLY_LEGION_WQEVENT",
+			"DAILY_WOTLK_JEWELOFTHESEWERS",
+			"DAILY_TBC_HEROICMANATOMBS",
+			"DAILY_CATA_BARADINSWARDENS",
+			"DAILY_WOD_PETBATTLE_ERRIS",
+			"DAILY_WOD_GARRISONMISSIONS",
+			"DAILY_WOD_HERBGARDEN",
+			"UNLOCK_LEGION_KOSUMOTH",
+			"UNLOCK_LEGION_MEATBALL",
+			"DAILY_WORLDEVENT_CORENDIREBREW",
+			"DAILY_WORLDEVENT_BREWFESTQUESTS",
+			"MONTHLY_WORLDEVENT_MOPTIMEWALKING",
+			
+		},
+	}
+}
+
+
+--- Return the table containing default Group entries
 function GetDefaultGroups()
+	
+	local defaults = {}
+	
+	for key, entry in pairs(defaultGroups) do -- Create Group object and store it
+
+		-- Add values
+		local Group = AM.GroupDB:CreateGroup() 
+		
+		Group.name = entry.name
+		Group.iconPath = "Interface\\Icons\\" .. (entry.iconPath or "inv_misc_questionmark")
+		Group.isEnabled = true -- Default Groups are always enabled
+		Group.taskList = entry.taskList or {}
+		Group.nestedGroups = entry.nestedGroups or {}
+		Group.isReadOnly = true -- TODO: Is  this still necessary?
+		-- Store in table that will be added to AceDB defaults
+		AM:Debug("Loaded default Group with key = " .. tostring(key) .. ", tostring() = " .. tostring(Group), "GroupDB")
+		defaults[key] = Group
+		
+	end
+	
 	return defaults
+
 end
 
 
