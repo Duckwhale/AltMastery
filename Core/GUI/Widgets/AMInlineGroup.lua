@@ -119,13 +119,17 @@ local function SetText(self, text)
 	local activeStyle = AM.GUI:GetActiveStyle()
 	local isGroup = self:IsFlaggedAsGroup() -- 4, 5
 	local fontSize = (isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small -- isGroupHeader has to be set by the Tracker when creating the widget (will default to Task otherwise)
-	self.label:SetFont(isGroup and activeStyle.fonts.default or activeStyle.fonts.default, fontSize)
+	local fontStyle = isGroup and activeStyle.fonts.groups or activeStyle.fonts.tasks
+		self.label:SetFont(fontStyle, fontSize)
+	local x, y = self.label.label:GetShadowOffset()
+	local r, g, b = self.label.label:GetShadowColor()
+	AM:Debug("Setting font to " .. tostring(fontStyle) .. "  (was " .. tostring(self.label.label:GetFont()) .. " - shadow: " .. tostring(r .. ", " .. g ..", " .. b) .. " - " ..  tostring(x .. " " .. y) .. ")")
 	
 	self.label:SetText(isGroup and string.upper(text) or text)
 	AM:Debug("Set text to " .. tostring(text) .. " for widget of type = " .. tostring(self:IsFlaggedAsGroup() and "Group" or "Task") .. " " .. tostring(self:IsFlaggedAsGroup()), "AMInlineGroup")
 
 	-- Set text colour to normal
-	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
+	r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
 	self.label:SetColor(r, g, b)
 	
 end
