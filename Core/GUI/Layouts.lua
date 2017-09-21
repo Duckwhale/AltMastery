@@ -162,10 +162,10 @@ local ModifiedFlowLayout = function(content, children)
 		
 		--anchor the last row, if its full height needs a special case since  its height has just been changed by the anchor
 		if isfullheight then
-		print("height: " .. tostring(height)	)
+--print("height: " .. tostring(height)	)
 			rowstart:SetPoint("TOPLEFT", content, "TOPLEFT", 0, -height)
 		elseif rowstart then
-		print("HEIGHT: " .. (height + (rowoffset - rowstartoffset) + 3))
+--print("HEIGHT: " .. (height + (rowoffset - rowstartoffset) + 3))
 			rowstart:SetPoint("TOPLEFT", content, "TOPLEFT", 0, -(height + (rowoffset - rowstartoffset) + 3))
 		end
 		
@@ -211,7 +211,7 @@ local function CustomRowsLayout(content, children)
 		end
 		
 		height = height + (frame.height or frame:GetHeight() or 0)
-		print("HEIGHT: " .. height)
+--print("HEIGHT: " .. height)
 	end
 	if content.obj.LayoutFinished  then content.obj.LayoutFinished(content.obj, nil, height) end
 end
