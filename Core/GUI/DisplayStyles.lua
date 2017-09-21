@@ -138,6 +138,7 @@ end
 -- @colours A table containing the frame colours in hexadecimal #rrggbb representation (HTML style)
 local function SetFrameColour(self, frameObject, colours)
 
+	local HexToRGB = AM.Utils.HexToRGB
 	local backdrop = { HexToRGB(colours.backdrop, 255) }
 	tinsert(backdrop, colours.alpha)
 	
