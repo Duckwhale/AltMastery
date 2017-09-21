@@ -29,44 +29,44 @@ local GetAchievementInfo = GetAchievementInfo
 
 
 -- Valid terms that need to be substituted
-local operands = { "AND", "OR", "NOT" }
-local evaluators = {
+local operands = { "AND", "OR", "NOT" } -- TODO: Advanced bit operators? - XOR, ANY, NONE (SQL basically) etc.
+-- local evaluators = { -- TODO: Move to sandbox
 	
-	["Class"] = "AltMastery.Criteria.Class",
-	["Achievement"] = "AltMastery.Criteria.Achievement",
-	["Quest"] = "AltMastery.Criteria.Quest",
-	["WorldQuest"] = false,
-	["WorldQuestReward"] = false,
-	["Reputation"] = false,
-	["Item"] = false,
-	["Dungeon"] = false,
-	["Raid"] = false,
-	["RaidBoss"] = false,
-	["Follower"] = false,
-	["Profession"] = false,
-	["ProfessionRecipe"] = false,
-	["Mount"] = false,
-	["Pet"] = false,
-	["GarrisonBuilding"] = false,
-	["OrderHallTalent"] = false,
-	["Currency"] = false,
-	["Gold"] = false,
-	["Spec"] = false,
-	["Talent"] = false,
+	-- ["Class"] = "AltMastery.Criteria.Class",
+	-- ["Achievement"] = "AltMastery.Criteria.Achievement",
+	-- ["Quest"] = "AltMastery.Criteria.Quest",
+	-- ["WorldQuest"] = false,
+	-- ["WorldQuestReward"] = false,
+	-- ["Reputation"] = false,
+	-- ["Item"] = false,
+	-- ["Dungeon"] = false,
+	-- ["Raid"] = false,
+	-- ["RaidBoss"] = false,
+	-- ["Follower"] = false,
+	-- ["Profession"] = false,
+	-- ["ProfessionRecipe"] = false,
+	-- ["Mount"] = false,
+	-- ["Pet"] = false,
+	-- ["GarrisonBuilding"] = false,
+	-- ["OrderHallTalent"] = false,
+	-- ["Currency"] = false,
+	-- ["Gold"] = false,
+	-- ["Spec"] = false,
+	-- ["Talent"] = false,
 	
-}
+-- }
 
 -- Evaluates completion criteria given as an expression
 function Parser:Evaluate(expression)
 	
 	local backup = expression
 
-	-- Fix upper-case operands (Lua doesn't recognize those)
+	-- Fix upper-case operands (Lua doesn't recognize those, but they are much easier to read and therefore should be supported)
 	for i, o in pairs(operands) do -- Replace with lower case
 		expression = expression:gsub(" " .. o .. " ", " " .. string_lower(o) .. " ") -- The spaces are to avoid messing up words, such as "WarriOR"
 	end
 	
-	-- Find alias if one exists
+	-- Find alias if one exists (only applies to Objectives)
 	local alias = expression:match("%sAS%s(.+)$")
 	if alias ~= nil then -- Remove alias and save it for later
 	
@@ -76,21 +76,44 @@ function Parser:Evaluate(expression)
 	end
 	
 	-- Substitute functions with their return value (if an entry exists, i.e. they are valid shorthands)
-	for shorthand, functionName in pairs(evaluators) do
+	-- for shorthand, functionName in pairs(evaluators) do
 		
-		if type(functionName) == "string" and expression:match(shorthand .. "%(") then -- Use LUT to find the actual function that should be called
-			expression = expression:gsub(shorthand .. "%(", functionName .. "(")
-		end
+		-- if type(functionName) == "string" and expression:match(shorthand .. "%(") then -- Use LUT to find the actual function that should be called
+			-- expression = expression:gsub(shorthand .. "%(", functionName .. "(")
+		-- end
 		
-	end
+	-- end
 	
-	AM:Debug("Evaluate -> Expression \"" .. tostring(backup) .. "\" resulted in loadstring code \"" .. tostring(expression) .. "\"", "Parser")
-	local chunk = loadstring("local returnValue = " .. expression .. "; return returnValue")
+	-- Assemble string that can be loaded (TODO: ?? symbols in string are annoying)
+	local sandboxedExpression = [[
+		
+
+		
+		-- Evaluate critera using the Criteria functions made available in the sandbox and store its return value
+		local isCriteriaFulfilled = 
+		]]
+		
+		.. expression ..
+		
+		[[
+		
+		-- Will return the already-evaluated expression's return value as soon as the chunk is executed (i.e., NOT when calling loadstring, but after having a chance to verify its integrity)
+		return isCriteriaFulfilled
+		
+	]]
+	
+	-- TODO: Remove backup expression as it's no longer needed
+	
+	AM:Debug("Evaluate -> Expression \"" .. tostring(backup) .. "\" resulted in loadstring code \"" .. tostring(sandboxedExpression) .. "\"", "Parser")
+	--local chunk = loadstring("local returnValue = " .. expression .. "; return returnValue")
+	local chunk = loadstring(sandboxedExpression)
 	if chunk ~= nil then -- Is valid expression and can be executed
 
-		local callSucceeded, returnValue  = pcall(chunk)
-		AM:Debug("Evaluate -> Expression evaluated to: " .. tostring(returnValue) .. ", callSucceeded = " .. tostring(callSucceeded), "Parser")
-		return returnValue, alias
+		setfenv(chunk, AltMastery.Sandbox) -- All lookups will access the Sandbox instead of the global environment
+		local callSucceeded, isCriteriaFulfilled  = pcall(chunk)
+		AM:Debug("Evaluate -> Expression evaluated to: " .. tostring(isCriteriaFulfilled) .. ", callSucceeded = " .. tostring(callSucceeded), "Parser")
+		return isCriteriaFulfilled, alias
+		
 	else
 		AM:Debug("Evaluate -> Expression was invalid and will not be evaluated", "Parser")
 	end
