@@ -20,20 +20,12 @@ if not AM then return end
 local Parser = {}
 
 ---- Upvalues
--- Lua API
-local type = type
-local print = print
-local tostring = tostring
-local pairs = pairs
-local lower = string.lower
-local loadstring = loadstring
-local pcall = pcall
+local type, print, tostring, pairs, string_lower, loadstring, pcall = type, print, tostring, pairs, string.lower, loadstring, pcall -- Lua APIs
 
 -- WOW API
 local IsQuestFlaggedCompleted = IsQuestFlaggedCompleted
 local UnitClass = UnitClass
 local GetAchievementInfo = GetAchievementInfo
----- / Upvalues
 
 
 -- Valid terms that need to be substituted
@@ -71,7 +63,7 @@ function Parser:Evaluate(expression)
 
 	-- Fix upper-case operands (Lua doesn't recognize those)
 	for i, o in pairs(operands) do -- Replace with lower case
-		expression = expression:gsub(" " .. o .. " ", " " .. lower(o) .. " ") -- The spaces are to avoid messing up words, such as "WarriOR"
+		expression = expression:gsub(" " .. o .. " ", " " .. string_lower(o) .. " ") -- The spaces are to avoid messing up words, such as "WarriOR"
 	end
 	
 	-- Find alias if one exists
