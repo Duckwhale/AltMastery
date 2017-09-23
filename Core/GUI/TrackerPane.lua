@@ -68,15 +68,25 @@ local function GetTrackerHeight(self)
 end
 
 --- Release all the children into the widget pool (managed by AceGUI-3.0)
-local function ReleaseAllChildren(self)
+local function ReleaseWidgets(self)
 
 	AM:Debug("Releasing " .. tostring(#usedFrames) .. " children (into the widget pool, silly...)", "TrackerPane")
-	self.widget:ReleaseChildren()
+	self.widget:ReleaseChildren() --TODO: Is this enough?
 
 	for _, frame in ipairs(usedFrames) do -- Release them, as some of them might be unused (and can be recycled) -> TODO: What about those that are still used? Maybe don't release those? Not sure how much effort that takes,to check vs. the performance hit of simply re-using them for the same purpose, which should be negligible...
-		frame:ReleaseChildren() -- Do they have children? I think so, since they're all AceGUI widgets (TODO: Check and make sure? If they don't have any, it shouldn't cause any issues though)
-		frame:Release()
+		--frame:ReleaseChildren() -- Do they have children? I think so, since they're all AceGUI widgets (TODO: Check and make sure? If they don't have any, it shouldn't cause any issues though)
+	--	frame:Release() -- Also releases any children
 	end
+	
+	-- Wipe all state tables to get them back to their default display state (not expanded) without creating more garbage
+	wipe(usedFrames)
+	wipe(minimizedGroups)
+	wipe(trackedTasks)
+	
+	-- Reset counters
+	numDisplayedGroups = 0
+	numDisplayedTasks = 0
+	numDisplayedObjectives = 0
 	
 end
 
@@ -87,8 +97,8 @@ local function ClearGroups(self)
 	self:ReleaseAllChildren()
 	self.widget:SetTitle("Empty Tracker") -- TODO: The title should likely not be used, but formatting/removing it can wait until later
 
-	-- Reset displayed item counters
-	numDisplayedGroups, numDisplayedTasks, numDisplayedObjectives = 0, 0, 0
+	-- Release children to have a blank state
+	self:ReleaseWidgets()
 	
 end
 
@@ -228,7 +238,7 @@ local function UpdateGroups(self)
 	
 	-- TODO: Nested Groups -> Limit level of nesting to 2 or 3?
 	
-	self:ReleaseAllChildren()
+
 	
 	-- Actually add children via AddChild()?
 	
@@ -285,7 +295,7 @@ local TrackerPane = {
 	UpdateGroups = UpdateGroups,
 	ClearGroups = ClearGroups,
 	
-	ReleaseAllChildren = ReleaseAllChildren,
+	ReleaseWidgets = ReleaseWidgets,
 	
 	AddGroup = AddGroup,
 	AddTask = AddTask,
