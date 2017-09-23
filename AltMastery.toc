@@ -40,6 +40,7 @@ Core\Criteria.lua
 Core\DB.lua
 Core\GroupDB.lua
 Core\Parser.lua
+Core\Sandbox.lua
 Core\TaskDB.lua
 
 ## Controllers ##
