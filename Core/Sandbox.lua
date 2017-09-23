@@ -29,7 +29,10 @@ if not AM then return end
 -- * Provide the user with predefined constants for hard-to-remember values that may be used in the Criteria strings (e.g., dungeon/boss IDs which should be available in a more human-readable format)
 
 
--- setfenv(func, Sandbox) -> local env_getglobal
+-- TODO: Move elsewhere
+local constants = { -- Used t look up actual ID if an alias was used
+	COREN_DIREBREW = 287,
+}
 
 local function accessBlocked()
 	AM:Print("Access blocked while evaluating a Criteria - some functions are restricted for security reasons") -- TODO: Reword, L
@@ -86,6 +89,11 @@ local Sandbox = {
 	getglobal = getglobal
 }
 
+
+for const, value in pairs(constants) do -- Add constant to the sandbox
+	AM:Debug("Added constant " .. tostring(const) .. " = " .. tostring(value) .. " to the Sandbox", "Sandbox")
+	Sandbox[const] = value
+end
 
 for key, func in pairs(AM.Criteria) do -- Add function to the sandbox
 
