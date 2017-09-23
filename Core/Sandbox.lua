@@ -32,6 +32,10 @@ if not AM then return end
 -- TODO: Move elsewhere
 local constants = { -- Used t look up actual ID if an alias was used
 	COREN_DIREBREW = 287,
+	
+	-- Currency IDs
+	ORDER_RESOURCES = 1220,
+	
 }
 
 local function accessBlocked()
