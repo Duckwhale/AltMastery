@@ -174,7 +174,11 @@ local defaultTasks = {
 			description = "Complete the quest \"The Shrouded Coin\" during the Mists of Pandaria Timewalking event",
 			notes = "500 Timewarped Badges",
 			iconPath = "timelesscoin_yellow",
-			Criteria = "WorldEvent(TIMEWALKING_MOP) AND Quest(45799)" 
+			Criteria = "WorldEvent(TIMEWALKING_MOP) AND Quest(45799)",
+			Objectives = {
+				"InventoryItem(143776) AS Obtain a Shrouded Timewarped Coin",
+				"Quest(45799) AS Bring it to Mistweaver Xia on the Timeless Isle",
+			}
 		}
 		
 }
