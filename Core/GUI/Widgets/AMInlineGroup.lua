@@ -128,6 +128,12 @@ local methods = {
 	
 		-- Shorthands
 		local status = self.localstatus
+		
+		-- Update with current settings (also provides default values after the local status has been wiped)
+		status.iconSize = AM.db.profile.settings.display.iconSize	
+		status.text = status.text or "<ERROR>"
+		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
+				
 		local label, completionIcon, content = self.label, self.completionIcon, self.content
 		
 		-- Update label state
