@@ -94,7 +94,6 @@ end
 local function ClearGroups(self)
 
 	AM:Debug("Cleared all Groups to display an empty tracker", "TrackerPane")
-	self:ReleaseAllChildren()
 	self.widget:SetTitle("Empty Tracker") -- TODO: The title should likely not be used, but formatting/removing it can wait until later
 
 	-- Release children to have a blank state
