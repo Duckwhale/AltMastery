@@ -95,7 +95,7 @@ local function SetIcon(self, icon)
 
 	if not icon then return end
 	
-	self.label:SetImage(icon)
+	self.localstatus.image = icon
 	AM:Debug("Set icon to " .. tostring(icon), "AMInlineGroup")
 	
 end
@@ -103,39 +103,80 @@ end
 -- Set the completedIcon for this element
 local function SetCompletion(self, isCompleted)
 	
-	self.completionIcon:SetImage(AM.GUI:GetActiveStyle()[isCompleted and "iconReady" or "iconNotReady"])
+	self.localstatus.isCompleted = isCompleted
 	-- if isCompleted == nil then -- Reset to default value
 	-- 	self.completionIcon:SetImage("Interface\\Icons\\inv_misc_questionmark")
 	-- end
-	self.completionIcon.frame:SetFrameStrata("HIGH")
+	--self.completionIcon.frame:SetFrameStrata("HIGH") Not working anyway...
 	
 end
 
 local function SetText(self, text)
 
-	text = text or ""
-	
-	-- Set font and height of the text based on the type
-	local activeStyle = AM.GUI:GetActiveStyle()
-	local isGroup = self:IsFlaggedAsGroup() -- 4, 5
-	local fontSize = (isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small -- isGroupHeader has to be set by the Tracker when creating the widget (will default to Task otherwise)
-	local fontStyle = isGroup and activeStyle.fonts.groups or activeStyle.fonts.tasks
-		self.label:SetFont(fontStyle, fontSize)
-	local x, y = self.label.label:GetShadowOffset()
-	local r, g, b = self.label.label:GetShadowColor()
-	AM:Debug("Setting font to " .. tostring(fontStyle) .. "  (was " .. tostring(self.label.label:GetFont()) .. " - shadow: " .. tostring(r .. ", " .. g ..", " .. b) .. " - " ..  tostring(x .. " " .. y) .. ")")
-	
-	self.label:SetText(isGroup and string.upper(text) or text)
-	AM:Debug("Set text to " .. tostring(text) .. " for widget of type = " .. tostring(self:IsFlaggedAsGroup() and "Group" or "Task") .. " " .. tostring(self:IsFlaggedAsGroup()), "AMInlineGroup")
+	self.localstatus.text = text or self.localstatus.text
 
-	-- Set text colour to normal
-	r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
-	self.label:SetColor(r, g, b)
-	
+--	AM:Debug("Set text to " .. tostring(text) .. " for widget of type = " .. tostring(self:IsFlaggedAsGroup() and "Group" or "Task") .. " (isFlaggedAsGroup = " .. tostring(self:IsFlaggedAsGroup()) .. ")", "AMInlineGroup")
+
 end
 	
 	
 local methods = {
+
+	["ApplyStatus"] = function(self) -- Update the displayed widget with the current status
+		
+		-- TODO: Re-read settings to update stuff (size, style, ...)
+	
+		-- Shorthands
+		local status = self.localstatus
+		local label, completionIcon, content = self.label, self.completionIcon, self.content
+		
+		-- Update label state
+		label:SetText(status.text)
+		label:SetImage(status.image)
+		label:SetImageSize(status.iconSize, status.iconSize)
+		
+		-- Update completion icon
+		local iconPath = (status.isCompleted ~= nil) and AM.GUI:GetActiveStyle()[status.isCompleted and "iconReady" or "iconNotReady"] or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
+		completionIcon:SetImage(iconPath)
+		completionIcon:SetImageSize(status.iconSize, status.iconSize)
+		
+		
+		-- Type-specific settings may require some individualised attention
+		local isGroup = (status.type == "Group")
+		local isTask = (status.type == "Task")
+		local isObjective = (status.type == "Objective")
+		
+		-- Set text
+		label:SetText(isGroup and string.upper(status.text) or status.text)
+		
+		-- Set font and height of the text based on the type
+	local activeStyle = AM.GUI:GetActiveStyle()
+--	local isGroup = self:IsFlaggedAsGroup() -- 4, 5
+	local fontSize = (isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small -- isGroupHeader has to be set by the Tracker when creating the widget (will default to Task otherwise)
+	local fontStyle = isGroup and activeStyle.fonts.groups or activeStyle.fonts.tasks
+		label:SetFont(fontStyle, fontSize)
+
+		--	local x, y = label.label:GetShadowOffset()
+--	local r, g, b = label.label:GetShadowColor()
+--	AM:Debug("Setting font to " .. tostring(fontStyle) .. "  (was " .. tostring(label.label:GetFont()) .. " - shadow: " .. tostring(r .. ", " .. g ..", " .. b) .. " - " ..  tostring(x .. " " .. y) .. ")")
+
+	-- Set text colour to normal (based on active style)
+	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
+	label:SetColor(r, g, b)
+
+		-- TODO: Update stuff from settings
+		
+		-- Custom: Set point to center it in the respective group (requires different handling for each type)
+		local iconSize = AM.db.profile.settings.display.iconSize
+		local elementSize = isGroup and AM.db.profile.settings.display.groupSize or AM.db.profile.settings.display.taskSize
+		local padding = (elementSize - iconSize) / 2 - 2-- TODO: 1 px border comes from the border frame? Needs fixing or it may glitch if that size is changed; also, use actual group size (adjusted dynamically) to align for all types
+		content:ClearAllPoints()
+		content:SetPoint("TOPLEFT", 4, -padding)
+		content:SetPoint("BOTTOMRIGHT", -4, padding)
+	
+		
+	end,
+
 	["OnAcquire"] = function(self)
 		self:SetWidth(300)
 		self:SetHeight(32)
@@ -147,8 +188,8 @@ local methods = {
 	end,
 
 	["LayoutFinished"] = function(self, width, height)
-		if self.noAutoHeight then return end
-		self:SetHeight((height or 0) + 40)
+		-- if self.noAutoHeight then return end
+		-- self:SetHeight((height or 0) + 40)
 	end,
 
 	["OnWidthSet"] = function(self, width)
@@ -172,20 +213,13 @@ local methods = {
 		content:SetHeight(contentheight)
 		content.height = contentheight
 		
-		-- Custom: Set point to center it in the respective group (requires different handling for each type)
-		local iconSize = AM.db.profile.settings.display.iconSize
-		local elementSize = self:IsFlaggedAsGroup() and AM.db.profile.settings.display.groupSize or AM.db.profile.settings.display.taskSize
-		local padding = (elementSize - iconSize) / 2 - 2-- TODO: 1 px border comes from the border frame? Needs fixing or it may glitch if that size is changed; also, use actual group size (adjusted dynamically) to align for all types
-		content:ClearAllPoints()
-		content:SetPoint("TOPLEFT", 4, -padding)
-		content:SetPoint("BOTTOMRIGHT", -4, padding)
-	
 	end
 }
 
 local function Constructor()
 	local container = AceGUI:Create("InlineGroup")
 	container.type = Type
+	container.localstatus = {} -- Holds the status for this widget instance (need to be wiped on releasing it)
 	container:SetRelativeWidth(1)
 	container:SetLayout("AMRows")
 	
@@ -242,9 +276,9 @@ local function Constructor()
 	
 	-- Add completion?
 	local completionIcon = AceGUI:Create("InteractiveLabel")
-	completionIcon:SetImage("Interface\\Icons\\inv_misc_questionmark")
+	-- Implied: container.localstatus.isCompleted = nil -> Display "?" icon unless state was set
 	 -- Always default to "not completed", which will be updated by the Tracker
-	completionIcon:SetImageSize(iconSize, iconSize)
+	
 	
 	completionIcon:SetRelativeWidth(0.01) -- TODO: Also uses UIParent - why??
 	container:AddChild(completionIcon)

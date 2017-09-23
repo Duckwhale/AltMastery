@@ -110,6 +110,8 @@ local function AddTask(self, Task, group)
 		taskWidget:SetText(Task.name)
 		taskWidget:SetRelativeWidth(1)
 		taskWidget:SetIcon(Task.iconPath)
+		taskWidget:ApplyStatus()
+		
 		--taskWidget:SetFullHeight(true)
 		-- Set layout to List? Depends on the contents
 		usedFrames[#usedFrames+1] = taskWidget
@@ -136,6 +138,8 @@ local function AddTask(self, Task, group)
 			objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize)
 			objectivesWidget:SetRelativeWidth(1)
 			objectivesWidget:SetTitle("Objectives")
+			objectivesWidget:ApplyStatus()
+			
 			usedFrames[#usedFrames+1] = objectivesWidget -- TODO: Use(frame) as shortcut?
 			taskWidget:AddChild(objectivesWidget)
 			numDisplayedObjectives = numDisplayedObjectives + 1
@@ -166,6 +170,8 @@ local function AddGroup(self, Group)
 	groupWidget:SetText(Group.name)
 	groupWidget:SetIcon(Group.iconPath)
 	groupWidget:SetRelativeWidth(1)
+	groupWidget:ApplyStatus()
+	
 	numDisplayedGroups = numDisplayedGroups + 1
 	usedFrames[#usedFrames+1] = groupWidget
 	AM.TrackerPane.widget:AddChild(groupWidget)
