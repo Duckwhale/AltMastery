@@ -178,9 +178,7 @@ local methods = {
 	end,
 
 	["OnAcquire"] = function(self)
-		self:SetWidth(300)
-		self:SetHeight(32)
-		self:SetTitle("")
+		self:ApplyStatus()
 	end,
 
 	["SetTitle"] = function(self,title)
