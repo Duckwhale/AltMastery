@@ -119,6 +119,7 @@ local function AddTask(self, Task, group)
 		taskWidget:SetText(Task.name)
 		taskWidget:SetRelativeWidth(1)
 		taskWidget:SetIcon(Task.iconPath)
+		taskWidget:SetType("Task")
 		
 		--taskWidget:SetFullHeight(true)
 		-- Set layout to List? Depends on the contents
@@ -148,6 +149,7 @@ local function AddTask(self, Task, group)
 			objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize)
 			objectivesWidget:SetRelativeWidth(1)
 			objectivesWidget:SetTitle("Objectives")
+			objectivesWidget:SetType("Objective")
 			objectivesWidget:ApplyStatus()
 			
 			usedFrames[#usedFrames+1] = objectivesWidget -- TODO: Use(frame) as shortcut?
@@ -175,7 +177,7 @@ local function AddGroup(self, Group)
 	
 	-- Add the given Group and all its tasks (if it has any)
 	local groupWidget = AceGUI:Create("AMInlineGroup")
-	groupWidget:FlagAsGroup(true) -- Set internal flag to help differentiate between Tasks and Groups (both use the same widget type, as it's very similar)
+	groupWidget:SetType("Group")
 	groupWidget:SetHeight(AM.db.profile.settings.display.groupSize)
 	groupWidget:SetText(Group.name)
 	groupWidget:SetIcon(Group.iconPath)

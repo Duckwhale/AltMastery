@@ -21,19 +21,7 @@ local Type, Version = "AMInlineGroup", 1
 local AceGUI = LibStub("AceGUI-3.0")
 if not AceGUI or (AceGUI:GetWidgetVersion(Type) or 0) >= Version then return end
 
--- TODO: Use SetType or sth. instead of flags
 
--- Flag as group (for slightly different look & behaviour of the widget)
-local function FlagAsGroup(self, value)
-	self.isFlaggedAsGroup = value -- TODO: Userdata instead of this (so AceGUI can clean it properly)
---print(tostring(value), tostring(self.isFlaggedAsGroup))
-end
-
--- Returns whether or not the widget represents a group in the tracker
-local function IsFlaggedAsGroup(self)
---print(tostring(value), tostring(self.isFlaggedAsGroup))
-	return self.isFlaggedAsGroup
-end
 
 --- TODO: Allow changing of the icon? (or maybe just do this in the DB)
 local function Icon_OnClick(self)
@@ -228,7 +216,20 @@ local methods = {
 		content:SetHeight(contentheight)
 		content.height = contentheight
 		
-	end
+	end,
+	
+	
+	--- Set element type for this widget
+	-- Must be one of Group, Task, or Objective
+	["SetType"] = function(self, elementType)
+		self.localstatus.type = elementType
+	end,
+	
+	-- Returns the type for this widget
+	["GetType"] = function(self)
+		return self.localstatus.type
+	end,
+	
 }
 
 local function Constructor()
