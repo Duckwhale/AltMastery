@@ -120,7 +120,6 @@ local function AddTask(self, Task, group)
 		taskWidget:SetText(Task.name)
 		taskWidget:SetRelativeWidth(1)
 		taskWidget:SetIcon(Task.iconPath)
-		taskWidget:ApplyStatus()
 		
 		--taskWidget:SetFullHeight(true)
 		-- Set layout to List? Depends on the contents
@@ -140,6 +139,8 @@ local function AddTask(self, Task, group)
 			taskWidget:SetCompletion(isTaskCompleted)
 			
 		end
+		
+		taskWidget:ApplyStatus()
 
 		if trackedTasks[Task.name] then -- Show objectives and their status for this Task
 		
