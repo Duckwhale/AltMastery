@@ -164,7 +164,7 @@ local defaultTasks = {
 			description = "Defeat Coren Direbrew in the Grim Guzzler during the Brewfest world event",
 			notes = "BOE Maces",
 			iconPath = "inv_misc_head_dwarf_01",
-			Criteria = "WorldEvent(BREWFEST) AND true", -- TODO: Check LFGRewards for bonus
+			Criteria = "WorldEvent(BREWFEST) AND EventBoss(COREN_DIREBREW)",
 			
 		},
 		
