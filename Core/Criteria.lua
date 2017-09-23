@@ -44,6 +44,42 @@ local function Achievement(achievementID)
 	
 end
 
+--- Checks whether a given world event (or holiday) is currently active
+local function WorldEvent()
+	
+	return true
+	
+end
+
+
+--- Checks whether or not an item with the given ID is in the player's inventory
+local function InventoryItem(itemID)
+
+	 -- Temporary values that will be overwritten with the next item
+	local bagID, maxBagID, tempItemLink, tempItemID
+	
+	-- Set bag IDs to only scan inventory bags
+	for bag = BACKPACK_CONTAINER, NUM_BAG_SLOTS do -- Scan inventory to see if the item was found in it
+	
+		for slot = 1, GetContainerNumSlots(bag) do -- Compare items in the current bag the requested item
+	
+			tempItemLink = GetContainerItemLink(bag, slot)
+
+			if tempItemLink and tempItemLink:match("item:%d") then -- Is a valid item -> Check it
+			
+				tempItemID = GetItemInfoInstant(tempItemLink)
+				if tempItemID == itemID then -- Found item -> is in inventory
+					return true
+				end
+			
+			end
+
+		end
+		
+	end
+	
+end
+
 --- Checks whether or not a given event boss has been defeated (resets daily)
 local function EventBoss(dungeonID)
 
@@ -79,6 +115,7 @@ Criteria = {
 	Achievement = Achievement,
 
 	EventBoss = EventBoss,
+	InventoryItem = InventoryItem,
 	Currency = Currency,
 }
 
