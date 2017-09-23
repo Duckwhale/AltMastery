@@ -46,6 +46,11 @@ function Addon:OnInitialize()
 	self:RegisterChatCommand("altmastery", AM.Controllers.SlashCmdHandler)
 	self:RegisterChatCommand("am", AM.Controllers.SlashCmdHandler) -- Alias
 	
+	-- Register keybinds
+		BINDING_HEADER_ALTMASTERY = "AltMastery" -- TODO: L
+	_G["BINDING_NAME_ALTMASTERY_TRACKERTOGGLE"] = "Toggle Tracker Window"
+	_G["BINDING_NAME_ALTMASTERY_DBEDITORTOGGLE"] = "Toggle Database Editor"
+	
 end
 
 function Addon:OnEnable()

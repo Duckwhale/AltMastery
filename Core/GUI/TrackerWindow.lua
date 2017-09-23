@@ -134,10 +134,25 @@ local function Reset(self)
 
 end
 
+--- Show/hide the window (used for the "Show Tracker Window" keybind)
+local function Toggle(self)
+
+	if not (self.frame and self.frame:IsShown()) then
+		self:Show()
+	else
+		self.frame:Hide()
+		AM.TrackerPane:ReleaseWidgets()
+		-- Also release the TaskPane's contents so they can be recycled (if any changes occur with the next startup)
+	end
+
+end
+
+
 local TrackerWindow = {
 
 	Show = Show,
 	Reset = Reset,
+	Toggle = Toggle,
 	
 }
 

@@ -1,0 +1,9 @@
+	<Bindings>
+	
+	<Binding category="ADDONS" name="ALTMASTERY_TRACKERTOGGLE" header="ALTMASTERY">
+	
+		AltMastery.TrackerWindow:Toggle()
+		
+	</Binding>
+	
+</Bindings>
