@@ -179,6 +179,15 @@ local defaultTasks = {
 				"InventoryItem(143776) AS Obtain a Shrouded Timewarped Coin",
 				"Quest(45799) AS Bring it to Mistweaver Xia on the Timeless Isle",
 			}
+		},
+		
+		RESTOCK_LEGION_ORDERHALLRESOURCES = {
+			name = "5000 Order Resources",
+			description = "Obtain sufficient amounts of resources to send followers on missions in your Order Hall",
+			notes = "Gold missions (and sometimes others)",
+			iconPath = "inv_orderhall_orderresources",
+			Criteria = "Currency(ORDER_RESOURCES) >= 5000",
+			
 		}
 		
 }
