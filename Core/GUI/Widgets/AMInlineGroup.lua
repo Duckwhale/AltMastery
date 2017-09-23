@@ -178,7 +178,18 @@ local methods = {
 	end,
 
 	["OnAcquire"] = function(self)
+	
+		-- Apply current status to update the display
 		self:ApplyStatus()
+
+	end,
+	
+	-- Remove data before the widget is being recycled
+	["OnRelease"] = function(self)
+	
+	--dump(self.localstatus)
+		wipe(self.localstatus) -- OnAquire will restore the necessary defaults when recycling widgets
+		
 	end,
 
 	["SetTitle"] = function(self,title)
