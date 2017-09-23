@@ -203,7 +203,7 @@ local function GetDefaultTasks()
 		Task.Objectives = entry.Objectives or {}
 		
 		-- Store in table that will be added to AceDB defaults
-		AM:Debug("Loaded default Task with key = " .. tostring(key) .. ", tostring() = " .. tostring(Task) , "TaskDB")
+--		AM:Debug("Loaded default Task with key = " .. tostring(key) .. ", tostring() = " .. tostring(Task) , "TaskDB")
 		defaults[key] = Task
 		
 	end

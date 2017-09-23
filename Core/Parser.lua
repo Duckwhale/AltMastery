@@ -104,7 +104,7 @@ function Parser:Evaluate(expression)
 	
 	-- TODO: Remove backup expression as it's no longer needed
 	
-	AM:Debug("Evaluate -> Expression \"" .. tostring(backup) .. "\" resulted in loadstring code \"" .. tostring(sandboxedExpression) .. "\"", "Parser")
+--	AM:Debug("Evaluate -> Expression \"" .. tostring(backup) .. "\" resulted in loadstring code \"" .. tostring(sandboxedExpression) .. "\"", "Parser")
 	--local chunk = loadstring("local returnValue = " .. expression .. "; return returnValue")
 	local chunk = loadstring(sandboxedExpression)
 	if chunk ~= nil then -- Is valid expression and can be executed
