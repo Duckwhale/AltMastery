@@ -65,6 +65,13 @@ local function EventBoss(dungeonID)
 	
 end
 
+--- Returns the amount of currency owned by the player
+local function Currency(currencyID)
+	return select(2, GetCurrencyInfo(currencyID))
+end
+
+-- TODO: Check for valid values? Might be unnecessary, as errors will simply be evaluated to false
+
 Criteria = {
 	
 	Quest = Quest,
@@ -72,6 +79,7 @@ Criteria = {
 	Achievement = Achievement,
 
 	EventBoss = EventBoss,
+	Currency = Currency,
 }
 
 AM.Criteria = Criteria
