@@ -25,10 +25,70 @@ local addonName, AM = ...
 if not AM then return end
 
 
+-- Updates the GUI to display the most recent information
+local function Update()
+	
+	-- TODO: Don't just blindly update everything each time an event was detected -> Cache and combine similar criteria, then update when everything is ready
+	AM.TrackerPane:ReleaseWidgets()
+	AM.TrackerPane:UpdateGroups()
+	
+end
+
+--- TODO: Only recheck criteria that rely on the LFG system (keep a list in the global eventhandler and update whichever tasks need to be updated after an event was detected, but not the others? might be tricky if the widgets need to be shown/hidden)
+local function OnLFGUpdate(...)
+AM:Print("OnLFGUpdate triggered")
+args = { ... }
+dump(args)
+	-- If LFGRewards are available -> Update for WorldEvent criteria
+	if not true then return end
+	
+	Update()
+
+end
+
+local function OnBagUpdate()
+AM:Print("OnBagUpdate triggered")
+	Update()
+
+end
+
+local function OnPlayerBankSlotsChanged()
+AM:Print("OnPlayerBankSlotsChanged triggered")
+	Update()
+
+end
+
+-- List of event listeners that the addon uses and their respective handler functions
+local eventList = {
+
+-- TODO: Which LFG update event comes first, ideally right after defeating the event boss?
+-- NOPE	["LFG_UPDATE"] = OnLFGUpdate,
+		--["LFG_LIST_SEARCH_RESULT_UPDATED"] = OnLFGUpdate,
+		--["LFG_LOCK_INFO_RECEIVED"] = OnLFGUpdate, 
+		["LFG_UPDATE_RANDOM_INFO"] = OnLFGUpdate,
+--	["BAG_UPDATE_DELAYED"] = OnBagUpdate,
+	["PLAYERBANKSLOTS_CHANGED"] = OnPlayerBankSlotsChanged,
+	
+}
+
+-- Register listeners for all relevant events
+local function RegisterAllEvents()
+	
+	local Addon = LibStub("AceAddon-3.0"):GetAddon("AltMastery")
+	for key, eventHandler in pairs(eventList) do -- Register this handler for the respective event (via AceEvent-3.0)
+	
+		Addon:RegisterEvent(key, eventHandler)
+		AM:Debug("Registered for event = " .. key, "EventHandler")
+	
+	end
+	
+end
 
 
-local EventHandler = {
+AM.EventHandler = {
+
+	RegisterAllEvents = RegisterAllEvents
 
 }
 
-return EventHandler
+return AM.EventHandler

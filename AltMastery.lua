@@ -29,8 +29,7 @@ local FF = { -- "Feature flags" -> Disable incomplete features & "Proof of conce
 AM.FF = FF
 
 -- Libraries
-local Addon = LibStub("AceAddon-3.0"):NewAddon("AltMastery", "AceConsole-3.0")
-
+local Addon = LibStub("AceAddon-3.0"):NewAddon("AltMastery", "AceConsole-3.0", "AceEvent-3.0")
 
 -- Initialisation
 function Addon:OnInitialize()
@@ -64,5 +63,8 @@ function Addon:OnEnable()
 	
 	-- TODO: Database Editor
 	--AM.DatabaseEditor:Show()
+	
+	-- Register necessary events to update criteria automatically
+	AM.EventHandler:RegisterAllEvents()
 	
 end
