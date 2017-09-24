@@ -44,7 +44,7 @@ local function Label_OnClick(self)
 	
 		-- Click -> Track or untrack task
 		if status.canExpand then -- Has objectives that can be shown
-			AM.TrackerPane:ToggleObjectives(status.objectID) -- The ID refers to an object in the respective DB (TaskDB or GroupDB, respectively) -> Objectives don't have an ID, but they also can't expand, so that works
+			AM.TrackerPane:ToggleObjectives(self)
 		end
 		
 		-- Shift-click -> Hide? Evaluate criteria? Complete manually?

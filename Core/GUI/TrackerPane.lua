@@ -120,7 +120,8 @@ local function AddTask(self, Task, group)
 		taskWidget:SetRelativeWidth(1)
 		taskWidget:SetIcon(Task.iconPath)
 		taskWidget:SetType("Task")
-		taskWidget:SetObjectives(Task.Objectives, Task.objectID) -- Only useful for "Task" type elements
+		taskWidget:Setstatus("objectID", Task.objectID)
+		taskWidget:SetObjectives(Task.Objectives) -- Only useful for "Task" type elements
 		
 		--taskWidget:SetFullHeight(true)
 		-- Set layout to List? Depends on the contents
@@ -143,7 +144,7 @@ local function AddTask(self, Task, group)
 		
 		taskWidget:ApplyStatus()
 
-		if trackedTasks[Task.name] then -- Show objectives and their status for this Task
+		if trackedTasks[Task.objectID] then -- Show objectives and their status for this Task
 		
 			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Showing objectives for it...", "TrackerPane")
 			local objectivesWidget = AceGUI:Create("AMInlineGroup")
@@ -281,6 +282,37 @@ local function UpdateGroups(self)
 	
 end
 
+--- Show any Objectives for the given Task
+-- No changes if they were already shown
+local function ShowObjectives(self, taskWidget)
+
+	local Task = AM.db.global.tasks[taskWidget.localstatus.objectID]
+	if not Task then return end
+	
+	for i, Objective in ipairs(Task.Objectives) do -- Add Objective to the list
+		AddObjective(self, taskWidget, Objective)
+	end
+	
+		
+end
+
+--- Hide any Objectives for the given Task
+-- No changes if they were already hidden
+local function HideObjectives(self, taskWidget)
+
+end
+
+--- Show / hide any Objectives for the given Task
+local function ToggleObjectives(self, taskWidget)
+
+	if trackedTasks[taskWidget.localstatus.objectD] then -- Is already being tracked -> untrack it
+		HideObjectives(taskWidget)
+	else -- Track it and show Objectives
+		ShowObjectives(taskWidget)
+	end
+
+end
+
 local TrackerPane = {
 
 	usedFrames = usedFrames,
@@ -309,6 +341,7 @@ local TrackerPane = {
 	MoveGroup = MoveGroup,
 	ShowObjectives = ShowObjectives, -- TrackTask / UntrackTask?
 	HideObjectives = HideObjectives,
+	ToggleObjectives = ToggleObjectives,
 	-- Needs a table to keep currently used group frames etc in?
 }
 
