@@ -188,6 +188,17 @@ local defaultTasks = {
 			iconPath = "inv_orderhall_orderresources",
 			Criteria = "Currency(ORDER_RESOURCES) >= 5000",
 			
+		},
+		
+		DAILY_MOP_COOKINGSCHOOLBELL = {
+			name = "Cooking School Bell",
+			description = "Complete the quest \"A Token of Appreciation\" and recieve Nomi's gift",
+			notes = "Ironpaw Tokens",
+			iconPath = "inv_misc_bell_01",
+			Criteria = "Quest(31521) AND Quest(31337) AND InventoryItem(86425)", -- To be a Master, Token of Appreciation - TODO: not the most accurate criteria yet (reputation)
+			Objectives = {
+			-- TODO } --/run local _, fR, fM, fN, _, _, _, fT, nT = GetFriendshipReputation(1357) print(("Your current reputation with %s is %d/%d. The previous threshold was at %d and the next one is at %d."):format(fN, fR, fM, fT, nT)
+			}
 		}
 		
 }

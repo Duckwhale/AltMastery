@@ -139,6 +139,7 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			"MONTHLY_WORLDEVENT_MOPTIMEWALKING",
 			
 			"RESTOCK_LEGION_ORDERHALLRESOURCES",
+			"DAILY_MOP_COOKINGSCHOOLBELL",
 		},
 	}
 }
