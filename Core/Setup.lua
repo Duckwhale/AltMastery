@@ -16,7 +16,7 @@
 local addonName, AM = ...
 if not AM then return end
 
--- Set up table structures for modules
+-- Set up table structures for modules (TODO: Which of these actually need to be defined here vs. in their respective modules?)
 AM.Controllers = {}
 AM.DB = {}
 AM.GUI = { Styles = {} }
@@ -25,9 +25,6 @@ AM.Utils = {}
 AM.GroupDB = {}
 AM.TaskDB = {}
 AM.Settings = {}
-
-AM.Criteria = {}
-AM.Parser = {}
 
 
 -- Localization table
