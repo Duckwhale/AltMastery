@@ -120,7 +120,7 @@ local function AddTask(self, Task, group)
 		taskWidget:SetRelativeWidth(1)
 		taskWidget:SetIcon(Task.iconPath)
 		taskWidget:SetType("Task")
-		taskWidget:SetObjectives(Task.Objectives) -- Only useful for "Task" type elements
+		taskWidget:SetObjectives(Task.Objectives, Task.objectID) -- Only useful for "Task" type elements
 		
 		--taskWidget:SetFullHeight(true)
 		-- Set layout to List? Depends on the contents

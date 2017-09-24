@@ -30,18 +30,25 @@ end
 
 -- Minimize group or track Task (TODO)?
 local function Label_OnClick(self)
-	AM:Debug("Label clicked!", "AMInlineGroup")
+	
+	local status = self.parent.localstatus
 	
 	-- For Groups: Minimize the respective Group, set its text colour to indicate the fact, and hide all contained Tasks (as well as their objectives)
-	local isGroup = self.parent.localstatus.type == "Group"
-	dump(self.parent.localstatus)
-	if isGroup then
+	if status.type == "Group" then -- Is a Group element -> Minimize/Expand (show/hide its Tasks) (TODO)
 	
-		AM:Debug("This label represents a Group - click to minimize or maximize it")
+--		AM:Debug("This label represents a Group - click to minimize or maximize it")
 	
-	else
+	else if status.type == "Task" then -- Is a Task element -> Show/hide Objectives (if it has any)
+
+		-- For Tasks: Hide objectivs if the task is tracked; otherwise, set the Task to tracked and show all objectives by expanding the window
 	
-		AM:Debug("This label represents a Task - click to show its objectives or hide them")
+		-- Click -> Track or untrack task
+		if status.canExpand then -- Has objectives that can be shown
+			AM.TrackerPane:ToggleObjectives(status.objectID) -- The ID refers to an object in the respective DB (TaskDB or GroupDB, respectively) -> Objectives don't have an ID, but they also can't expand, so that works
+		end
+		
+		-- Shift-click -> Hide? Evaluate criteria? Complete manually?
+		-- Implied else: -- Is Objective -> Can't be expanded anyway
 	
 	end
 	
