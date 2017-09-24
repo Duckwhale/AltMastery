@@ -33,7 +33,8 @@ local function Label_OnClick(self)
 	AM:Debug("Label clicked!", "AMInlineGroup")
 	
 	-- For Groups: Minimize the respective Group, set its text colour to indicate the fact, and hide all contained Tasks (as well as their objectives)
-	local isGroup = self.parent:IsFlaggedAsGroup()
+	local isGroup = self.parent.localstatus.type == "Group"
+	dump(self.parent.localstatus)
 	if isGroup then
 	
 		AM:Debug("This label represents a Group - click to minimize or maximize it")
