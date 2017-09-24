@@ -221,6 +221,7 @@ local function GetDefaultTasks()
 		Task.iconPath = "Interface\\Icons\\" .. (entry.iconPath or "inv_misc_questionmark")
 		Task.Criteria = entry.Criteria or ""
 		Task.Objectives = entry.Objectives or {}
+		Task.objectID = key
 		
 		-- Store in table that will be added to AceDB defaults
 --		AM:Debug("Loaded default Task with key = " .. tostring(key) .. ", tostring() = " .. tostring(Task) , "TaskDB")
