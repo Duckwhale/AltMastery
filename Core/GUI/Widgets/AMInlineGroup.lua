@@ -179,6 +179,13 @@ local methods = {
 	
 	end,
 	
+	-- Sets the local status table (can be called externally)
+	["SetStatus"] = function(self, key, value)
+	
+		self.localstatus[key] = value
+	
+	end,
+	
 	["SetObjectives"] = function(self, Objectives)
 	
 		local status = self.localstatus
