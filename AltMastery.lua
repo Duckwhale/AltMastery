@@ -67,4 +67,8 @@ function Addon:OnEnable()
 	-- Register necessary events to update criteria automatically
 	AM.EventHandler:RegisterAllEvents()
 	
+	
+	-- Force calendar update to have at least somewhat accurate data about world events
+	OpenCalendar() -- doesn't actually open the frame, but it does query the server
+	
 end
