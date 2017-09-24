@@ -134,7 +134,7 @@ local function AddTask(self, Task, group)
 			
 		else -- Check Criteria and set completion to true or false -> Will display the proper icon in any case
 			
-			AM:Debug("Checking completion for Task " .. Task.name .. " -> Criteria = " .. Task.Criteria)
+--			AM:Debug("Checking completion for Task " .. Task.name .. " -> Criteria = " .. Task.Criteria)
 			local isTaskCompleted = AM.Parser:Evaluate(Task.Criteria)
 			taskWidget:SetCompletion(isTaskCompleted)
 			
@@ -198,11 +198,11 @@ local function AddGroup(self, Group)
 	-- Add top level Tasks
 	for index, taskID in ipairs(Group.taskList) do -- Add Tasks to the Tracker
 		
-		AM:Debug("Adding Task " .. tostring(index) .. " to Group " .. tostring(Group.name) .. " -> Looking up " .. tostring(taskID) .. " in global TaskDB", "TrackerPane")
+--		AM:Debug("Adding Task " .. tostring(index) .. " to Group " .. tostring(Group.name) .. " -> Looking up " .. tostring(taskID) .. " in global TaskDB", "TrackerPane")
 		
 		local Task = AM.db.global.tasks[taskID]
 		if not Task then -- Task does not exist -> Keep reference, but add INVALID_TASK instead
-			AM:Print(format("The referenced Task %s was not found. It will be replaced with an INVALID_TASK placeholder, but it won't be lost :)", taskID)) --TODO: L
+--			AM:Print(format("The referenced Task %s was not found. It will be replaced with an INVALID_TASK placeholder, but it won't be lost :)", taskID)) --TODO: L
 			Task = AM.TaskDB:GetTask("INVALID_TASK")
 			-- Save a note saying which task was replaced with it so the user isn't confused?
 			-- TODO: Hide by default (depends on settings)
@@ -216,11 +216,11 @@ local function AddGroup(self, Group)
 	-- TODO: Test nested groups
 	for index, groupID in ipairs(Group.nestedGroups) do -- Add frame for this group
 		
-		AM:Debug("Adding nested Group " .. tostring(index) .. " to Group " .. tostring(Group.name) .. " -> Looking up " .. tostring(groupID) .. " in global GroupDB", "TrackerPane")
+--		AM:Debug("Adding nested Group " .. tostring(index) .. " to Group " .. tostring(Group.name) .. " -> Looking up " .. tostring(groupID) .. " in global GroupDB", "TrackerPane")
 		
 		local NestedGroup = AM.db.global.groups[group]
 		if not NestedGroup then -- Task does not exist -> Keep reference, but add EMPTY_GROUP instead
-			AM:Print(format("The referenced Group %s was not found. It will be replaced with an EMPTY_GROUP placeholder, but it won't be lost :)", groupID)) --TODO: L
+--			AM:Print(format("The referenced Group %s was not found. It will be replaced with an EMPTY_GROUP placeholder, but it won't be lost :)", groupID)) --TODO: L
 			NestedGroup = AM.GroupDB:GetGroup("EMPTY_GROUP")
 			-- Save a note saying which group was replaced with it so the user isn't confused?
 			-- TODO: Hide by default (depends on settings)
@@ -228,7 +228,7 @@ local function AddGroup(self, Group)
 		end
 		
 		-- TODO: Limit recursion to X levels (2 or 3 should suffice for most users...) -> Also make sure you can't create cicular references (ALL_TASKS references SOME_GROUP, then SOME_GROUP references ALL_TASKS again... -> should be NP if recursion is limited, but I guess we could check the already-added groups to be sure)
-		AM:Debug("Adding nested group " .. tostring(index) .. " = " .. tostring(NestedGroup) .. " to the TrackerPane")
+--		AM:Debug("Adding nested group " .. tostring(index) .. " = " .. tostring(NestedGroup) .. " to the TrackerPane")
 		self:AddGroup(NestedGroup)
 		
 	end

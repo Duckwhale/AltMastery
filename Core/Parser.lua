@@ -105,7 +105,7 @@ end
 -- Validates completion critera format given as an expression
 function Parser:IsValid(expression)
 
-	AM:Debug("IsValid -> Validating expression = " .. tostring(expression), "Parser")
+--	AM:Debug("IsValid -> Validating expression = " .. tostring(expression), "Parser")
 	local isValid
 	
 	-- Rule out wrong argument types

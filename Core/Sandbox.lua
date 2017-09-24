@@ -101,13 +101,13 @@ local Sandbox = {
 
 
 for const, value in pairs(constants) do -- Add constant to the sandbox
-	AM:Debug("Added constant " .. tostring(const) .. " = " .. tostring(value) .. " to the Sandbox", "Sandbox")
+--	AM:Debug("Added constant " .. tostring(const) .. " = " .. tostring(value) .. " to the Sandbox", "Sandbox")
 	Sandbox[const] = value
 end
 
 for key, func in pairs(AM.Criteria) do -- Add function to the sandbox
 
-	AM:Debug("Added Criteria " .. tostring(key) .. " to the Sandbox", "Sandbox")
+--	AM:Debug("Added Criteria " .. tostring(key) .. " to the Sandbox", "Sandbox")
 	Sandbox[key] = func
 
 end

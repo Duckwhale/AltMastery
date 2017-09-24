@@ -100,7 +100,7 @@ local function RegisterAllEvents()
 	for key, eventHandler in pairs(eventList) do -- Register this handler for the respective event (via AceEvent-3.0)
 	
 		Addon:RegisterEvent(key, eventHandler)
-		AM:Debug("Registered for event = " .. key, "EventHandler")
+--		AM:Debug("Registered for event = " .. key, "EventHandler")
 	
 	end
 	
