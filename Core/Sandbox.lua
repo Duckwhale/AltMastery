@@ -31,6 +31,12 @@ if not AM then return end
 
 -- TODO: Move elsewhere
 local constants = { -- Used t look up actual ID if an alias was used
+	
+	-- Holidays (texture IDs)
+	BREWFEST = 235441,
+	TIMEWALKING_MOP = 1530589,
+	
+	-- Dungeon IDs
 	COREN_DIREBREW = 287,
 	
 	-- Currency IDs
