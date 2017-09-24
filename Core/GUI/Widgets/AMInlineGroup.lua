@@ -122,6 +122,7 @@ local methods = {
 		status.iconSize = AM.db.profile.settings.display.iconSize	
 		status.text = status.text or "<ERROR>"
 		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
+		status.canExpand = false -- Only (non-empty) Groups and Tasks may expand, but not Objectives
 				
 		local label, completionIcon, content = self.label, self.completionIcon, self.content
 		
@@ -169,7 +170,21 @@ local methods = {
 		content:SetPoint("TOPLEFT", 4, -padding)
 		content:SetPoint("BOTTOMRIGHT", -4, padding)
 	
-		
+	end,
+	
+	["SetObjectives"] = function(self, Objectives)
+	
+		local status = self.localstatus
+	
+		if Objectives ~= nil then -- Has objectives that can be displayed
+			status.canExpand = true
+			
+			status.Objectives = Objectives
+			
+		else -- This element can never expand (until updated, obviously)
+			status.canExpand = false
+		end
+	
 	end,
 
 	["OnAcquire"] = function(self)
