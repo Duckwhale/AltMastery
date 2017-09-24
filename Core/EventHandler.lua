@@ -36,9 +36,9 @@ end
 
 --- TODO: Only recheck criteria that rely on the LFG system (keep a list in the global eventhandler and update whichever tasks need to be updated after an event was detected, but not the others? might be tricky if the widgets need to be shown/hidden)
 local function OnLFGUpdate(...)
-AM:Print("OnLFGUpdate triggered")
-args = { ... }
-dump(args)
+--AM:Debug("OnLFGUpdate triggered", "EventHandler")
+--local args = { ... }
+--dump(args)
 	-- If LFGRewards are available -> Update for WorldEvent criteria
 	if not true then return end
 	
@@ -46,14 +46,34 @@ dump(args)
 
 end
 
-local function OnBagUpdate()
-AM:Print("OnBagUpdate triggered")
+local function OnBagUpdate(...)
+-- AM:Debug("OnBagUpdate triggered", "EventHandler")
+--local args = { ... }
+--dump(args)
 	Update()
 
 end
 
-local function OnPlayerBankSlotsChanged()
-AM:Print("OnPlayerBankSlotsChanged triggered")
+local function OnPlayerBankSlotsChanged(...)
+--AM:Debug("OnPlayerBankSlotsChanged triggered", "EventHandler")
+--local args = { ... }
+--dump(args)
+	Update()
+
+end
+
+local function OnCurrencyUpdate(...)
+--AM:Debug("OnCurrencyUpdate triggered", "EventHandler")
+--local args = { ... }
+--dump(args)
+	Update()
+
+end
+
+local function OnCalendarUpdate(...)
+--AM:Debug("OnCalendarUpdate triggered", "EventHandler")
+--local args = { ... }
+--dump(args)
 	Update()
 
 end
@@ -61,13 +81,15 @@ end
 -- List of event listeners that the addon uses and their respective handler functions
 local eventList = {
 
--- TODO: Which LFG update event comes first, ideally right after defeating the event boss?
--- NOPE	["LFG_UPDATE"] = OnLFGUpdate,
-		--["LFG_LIST_SEARCH_RESULT_UPDATED"] = OnLFGUpdate,
-		--["LFG_LOCK_INFO_RECEIVED"] = OnLFGUpdate, 
-		["LFG_UPDATE_RANDOM_INFO"] = OnLFGUpdate,
---	["BAG_UPDATE_DELAYED"] = OnBagUpdate,
+	-- TODO: Which LFG update event comes first, ideally right after defeating the event boss? -> The current one seems to work best
+	--["LFG_LIST_SEARCH_RESULT_UPDATED"] = OnLFGUpdate,
+	--["LFG_LOCK_INFO_RECEIVED"] = OnLFGUpdate, 
+	["LFG_UPDATE_RANDOM_INFO"] = OnLFGUpdate,
+	["BAG_UPDATE_DELAYED"] = OnBagUpdate,
 	["PLAYERBANKSLOTS_CHANGED"] = OnPlayerBankSlotsChanged,
+	["CHAT_MSG_CURRENCY"] = OnCurrencyUpdate,
+	["CURRENCY_DISPLAY_UPDATE"] = OnCurrencyUpdate,
+	["CALENDAR_UPDATE_EVENT_LIST"] = OnCalendarUpdate,
 	
 }
 
