@@ -45,9 +45,23 @@ local function Achievement(achievementID)
 end
 
 --- Checks whether a given world event (or holiday) is currently active
-local function WorldEvent()
+local function WorldEvent(textureID)
 	
-	return true
+	-- Get day of the month for today
+	local day = select(3, CalendarGetDate())
+	local monthOffset = 0
+
+	for index = 1, CalendarGetNumDayEvents(monthOffset, day) do -- Check calendar events for today
+
+		local event = { CalendarGetHolidayInfo(monthOffset, day, index) }
+		local name, desc, texture, startTime, endTime = unpack(event)
+		
+		-- Compare texture IDs to find out whether the requested holiday is currently active (this is the only part that's identical across locales... :| Better hope there's no two events using the same icon (TODO))
+		if texture == textureID then return true end
+	
+	end
+	
+	-- Returns nil if not found -> Show "?" icon until updated, but also counts as false = not completed
 	
 end
 
@@ -114,6 +128,7 @@ Criteria = {
 	Class = Class,
 	Achievement = Achievement,
 
+	WorldEvent = WorldEvent,
 	EventBoss = EventBoss,
 	InventoryItem = InventoryItem,
 	Currency = Currency,

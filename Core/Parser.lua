@@ -55,7 +55,7 @@ local operands = { "AND", "OR", "NOT" } -- TODO: Advanced bit operators? - XOR, 
 -- }
 
 -- Evaluates completion criteria given as an expression
-function Parser:Evaluate(expression)
+function Parser:Evaluate(expression, silentMode)
 	
 	-- Fix upper-case operands (Lua doesn't recognize those, but they are much easier to read and therefore should be supported)
 	for i, o in pairs(operands) do -- Replace with lower case
@@ -91,7 +91,7 @@ function Parser:Evaluate(expression)
 
 		setfenv(chunk, AltMastery.Sandbox) -- All lookups will access the Sandbox instead of the global environment
 		local callSucceeded, isCriteriaFulfilled  = pcall(chunk)
-		AM:Debug("Evaluate -> Expression evaluated to: " .. tostring(isCriteriaFulfilled) .. ", callSucceeded = " .. tostring(callSucceeded), "Parser")
+	if not silentMode then 	AM:Debug("Evaluate -> Expression " .. tostring(expression) .. " evaluated to: " .. tostring(isCriteriaFulfilled) .. ", callSucceeded = " .. tostring(callSucceeded), "Parser") end
 		return isCriteriaFulfilled, alias
 		
 	else
@@ -105,15 +105,15 @@ end
 -- Validates completion critera format given as an expression
 function Parser:IsValid(expression)
 
-	AM:Debug("IsValid -> Validating expression = " .. tostring(expression), "Parser")
+--	AM:Debug("IsValid -> Validating expression = " .. tostring(expression), "Parser")
 	local isValid
 	
 	-- Rule out wrong argument types
 	if type(expression) ~= "string" then isValid = false -- Also rejects empty expressions = type is nil
 	else -- Check if the expression has valid syntax
 		
-		local r = Parser:Evaluate(expression)
-		AM:Debug("IsValid -> Expression \"" .. tostring(expression) .. "\" evaluated to " .. tostring(r), "Parser")
+		local r = Parser:Evaluate(expression, true)
+--		AM:Debug("IsValid -> Expression \"" .. tostring(expression) .. "\" evaluated to " .. tostring(r), "Parser")
 		-- If it was a valid expression, Lua should have been able to fully evaluate it, resulting in a simple boolean value
 		if type(r) == "boolean" then return true -- Even if it returns false, that means the expression was valid (TODO: Does it ALWAYS return nil if there are errors, or will it be an error message/string?)
 		else return false end

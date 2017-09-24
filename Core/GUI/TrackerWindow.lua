@@ -118,7 +118,7 @@ local function Show(self)
 		AM.TrackerPane.widget = TrackerPane
 		
 	end
-	
+	AM.TrackerPane:ReleaseWidgets() -- TODO: Combine this in Update() and call that instead?
 	
 	AM.TrackerPane:UpdateGroups() -- Update tracker to display all Tasks and nested Groups for the currently active Group
 	

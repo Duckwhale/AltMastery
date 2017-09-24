@@ -31,6 +31,12 @@ if not AM then return end
 
 -- TODO: Move elsewhere
 local constants = { -- Used t look up actual ID if an alias was used
+	
+	-- Holidays (texture IDs)
+	BREWFEST = 235441,
+	TIMEWALKING_MOP = 1530589,
+	
+	-- Dungeon IDs
 	COREN_DIREBREW = 287,
 	
 	-- Currency IDs
@@ -95,13 +101,13 @@ local Sandbox = {
 
 
 for const, value in pairs(constants) do -- Add constant to the sandbox
-	AM:Debug("Added constant " .. tostring(const) .. " = " .. tostring(value) .. " to the Sandbox", "Sandbox")
+--	AM:Debug("Added constant " .. tostring(const) .. " = " .. tostring(value) .. " to the Sandbox", "Sandbox")
 	Sandbox[const] = value
 end
 
 for key, func in pairs(AM.Criteria) do -- Add function to the sandbox
 
-	AM:Debug("Added Criteria " .. tostring(key) .. " to the Sandbox", "Sandbox")
+--	AM:Debug("Added Criteria " .. tostring(key) .. " to the Sandbox", "Sandbox")
 	Sandbox[key] = func
 
 end

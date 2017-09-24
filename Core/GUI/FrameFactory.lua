@@ -58,7 +58,7 @@ local function CreateMovableFrame(self, name, defaults, parent)
 	frame.Reposition = function(self) -- Restore position from saved vars
 	
 		self:ClearAllPoints()
-		AM:Debug("Restoring position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+--		AM:Debug("Restoring position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
 		self:SetPoint("BOTTOMLEFT", UIParent, cacheEntry.x, cacheEntry.y)
 		
 	end
@@ -69,7 +69,7 @@ local function CreateMovableFrame(self, name, defaults, parent)
 	
 		cacheEntry.x = self:GetLeft()
 		cacheEntry.y = self:GetBottom()
-		AM:Debug("Saving position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+--		AM:Debug("Saving position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
 		
 	end
 	

@@ -138,6 +138,8 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			"DAILY_WORLDEVENT_BREWFESTQUESTS",
 			"MONTHLY_WORLDEVENT_MOPTIMEWALKING",
 			
+			"RESTOCK_LEGION_ORDERHALLRESOURCES",
+			"DAILY_MOP_COOKINGSCHOOLBELL",
 		},
 	}
 }
@@ -160,7 +162,7 @@ function GetDefaultGroups()
 		Group.nestedGroups = entry.nestedGroups or {}
 		Group.isReadOnly = true -- TODO: Is  this still necessary?
 		-- Store in table that will be added to AceDB defaults
-		AM:Debug("Loaded default Group with key = " .. tostring(key) .. ", tostring() = " .. tostring(Group), "GroupDB")
+--		AM:Debug("Loaded default Group with key = " .. tostring(key) .. ", tostring() = " .. tostring(Group), "GroupDB")
 		defaults[key] = Group
 		
 	end
