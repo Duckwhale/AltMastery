@@ -46,6 +46,9 @@ function AM:Print(msg)
 end
 
 function AM:Debug(msg, source)
+	
+	if not AM.db.profile.settings.debug.isEnabled then return end
+	
 	source = source or ""
 	print(format("|c000072CA" .. "%s: " .. "|c00E6CC80%s", addonName .. (source ~= "" and "_" .. source or ""), msg)) -- Display source/module if any was given
 end

@@ -28,6 +28,10 @@ local defaults = {
 		objectiveSize = 24,
 		iconSize = 20,
 		
+	},
+	
+	debug = {
+		isEnabled = false,
 	}
 	
 }
