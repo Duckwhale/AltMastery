@@ -324,15 +324,35 @@ end
 -- No changes if they were already hidden
 local function HideObjectives(self, taskWidget)
 
+	local taskID = taskWidget.localstatus.objectID
+	local Task = AM.db.global.tasks[taskID]
+	if not Task then return end
+	
+	-- Hide Objectives
+	AM:Debug("Hiding Objectives for Task " .. Task.name)
+	
+	-- Update Tracker to have it reclaim the space they used to occupy
+	self:ReleaseWidgets()
+	self:UpdateGroups()
+	
 end
 
 --- Show / hide any Objectives for the given Task
 local function ToggleObjectives(self, taskWidget)
 
-	if trackedTasks[taskWidget.localstatus.objectD] then -- Is already being tracked -> untrack it
-		HideObjectives(taskWidget)
+	local taskID = taskWidget.localstatus.objectID
+	local isTaskTracked = trackedTasks[taskID]
+
+	if isTaskTracked then -- Is already being tracked -> untrack it
+	
+		trackedTasks[taskID] = false -- should be OK, no need to set nil here
+		self:HideObjectives(taskWidget)
+		
 	else -- Track it and show Objectives
-		ShowObjectives(taskWidget)
+		
+		trackedTasks[taskID] = true
+		self:ShowObjectives(taskWidget)
+		
 	end
 
 end
@@ -359,13 +379,13 @@ local TrackerPane = {
 	AddGroup = AddGroup,
 	AddTask = AddTask,
 	AddObjectives = AddObjectives,
+	ShowObjectives = ShowObjectives, -- TrackTask / UntrackTask?
+	HideObjectives = HideObjectives,
 	-- TODO
 	MinimizeGroup = MinimizeGroup,
 	MaximizeGroup = MaximizeGroup,
 	RemoveGroup = RemoveGroup,
 	MoveGroup = MoveGroup,
-	ShowObjectives = ShowObjectives, -- TrackTask / UntrackTask?
-	HideObjectives = HideObjectives,
 	ToggleObjectives = ToggleObjectives,
 	-- Needs a table to keep currently used group frames etc in?
 }
