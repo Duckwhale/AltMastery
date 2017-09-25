@@ -310,20 +310,17 @@ local function Constructor()
 	
 	-- Remove the ugly default UI border for good
 	local border = container.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
-	local spacer = 1 -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
+	local spacer = 2 -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
 	border:ClearAllPoints()
-	border:SetPoint("TOPLEFT", 0, -0)
+	border:SetPoint("TOPLEFT", 0, -spacer)
 	border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
 	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.InlineElement) -- TODO: Colour differently based on type (update also, via localstatus)
 	container.border = border -- Backreference to access it more easily and change its colour
 	
 	-- Add Text
-	local iconSize = AM.db.profile.settings.display.iconSize
 	local label = AceGUI:Create("InteractiveLabel")
-	label:SetText("<ERROR>")
-	label:SetImage("Interface\\Icons\\inv_misc_questionmark")
-	label:SetImageSize(iconSize, iconSize)
-	label:SetRelativeWidth(1) -- TODO: Reduce when controls are implemented
+
+	label:SetRelativeWidth(0.15) -- TODO: Reduce when controls are implemented; Why is it using UIParent as the container, when it was added to "container" (the widget frame)?
 	label:SetCallback("OnClick", Label_OnClick)
 	label:SetCallback("OnEnter", Label_OnEnter)
 	label:SetCallback("OnLeave", Label_OnLeave)
@@ -350,6 +347,15 @@ local function Constructor()
 	completionIcon:SetRelativeWidth(0.01) -- TODO: Also uses UIParent - why??
 	container:AddChild(completionIcon)
 	container.completionIcon = completionIcon -- Backreference
+
+	local CompletionIcon_OnEnter = function(self)
+		AM:Debug("OnEnter triggered for CompletionIcon!")
+	end
+--	completionIcon:SetScript("OnEnter", CompletionIcon_OnEnter)
+	completionIcon:SetHighlight()
+	completionIcon:SetCallback("OnEnter", CompletionIcon_OnEnter)
+	-- TODO:  OnEnter:Show info
+	
 	container.SetCompletion = SetCompletion
 	-- Align icon vertically (centered) -> TODO: Does this need to change if the content's size (settings) changes?
 	local iconX, iconY = 0, 0 -- TODO: Center vertically -> Set according to type (bigger offset for groups, smaller for objectives, to center it properly); IconX doesn't do anything?
