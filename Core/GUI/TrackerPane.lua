@@ -117,6 +117,7 @@ dump(Objectives)
 		local isObjectiveCompleted = false -- TODO
 		-- Hide icon (replace with number?)
 		local alias = "ALIAS" -- TODO
+		objectivesWidget:SetStatus("type", "Objective")
 		objectivesWidget:SetText(index .. ". " .. alias) -- Objectives are really just Criteria (strings), so this works
 		objectivesWidget:SetCompletion(isObjectiveCompleted)
 		objectivesWidget:ApplyStatus()

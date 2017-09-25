@@ -135,11 +135,6 @@ local methods = {
 				
 		local label, completionIcon, content = self.label, self.completionIcon, self.content
 		
-		-- Update label state
-		label:SetText(status.text)
-		label:SetImage(status.image)
-		label:SetImageSize(status.iconSize, status.iconSize)
-		
 		-- Update completion icon
 		local iconPath = (status.isCompleted ~= nil) and AM.GUI:GetActiveStyle()[status.isCompleted and "iconReady" or "iconNotReady"] or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
 		completionIcon:SetImage(iconPath)
@@ -150,6 +145,15 @@ local methods = {
 		local isGroup = (status.type == "Group")
 		local isTask = (status.type == "Task")
 		local isObjective = (status.type == "Objective")
+		
+		-- Update label state
+		label:SetText(status.text)
+		if isObjective then -- Clear image, as Objectives should only display text
+			label:SetImage()
+		else -- Add actual icon
+			label:SetImage(status.image)
+		end
+		label:SetImageSize(status.iconSize, status.iconSize)
 		
 		-- Set text
 		label:SetText(isGroup and string.upper(status.text) or status.text)
