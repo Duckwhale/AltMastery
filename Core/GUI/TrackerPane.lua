@@ -149,8 +149,15 @@ local function AddTask(self, Task, group)
 	
 	local taskWidget = AceGUI:Create("AMInlineGroup")
 		taskWidget:SetHeight(AM.db.profile.settings.display.taskSize)
-		taskWidget:SetText(Task.name)
+		
+		-- Display number of (completed) Objectives after the Task's name
 		--dump(getmetatable(Task))
+		local PrototypeTask = AM.TaskDB.PrototypeTask
+		local numObjectives = PrototypeTask.GetNumObjectives(Task) -- TODO: Ugly, but AceDB killed off the mt... fix in refactor-tracker
+		local numCompletedObjectives = PrototypeTask.GetNumCompletedObjectives(Task)
+		taskWidget:SetText(Task.name .. (numObjectives > 0 and " [" .. numCompletedObjectives .. "/" .. numObjectives .. "]" or "")) -- Only display them if the Task actually has some, though; TODO: Option to style, use format like (X) or [X] or - X
+		
+		-- Set widget properties
 		taskWidget:SetRelativeWidth(1)
 		taskWidget:SetIcon(Task.iconPath)
 		taskWidget:SetType("Task")
