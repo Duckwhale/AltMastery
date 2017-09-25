@@ -37,9 +37,9 @@ local function Label_OnClick(self)
 	if status.type == "Group" then -- Is a Group element -> Minimize/Expand (show/hide its Tasks) (TODO)
 	
 --		AM:Debug("This label represents a Group - click to minimize or maximize it")
-
-	else
 	
+	else
+
 		if status.type == "Task" then -- Is a Task element -> Show/hide Objectives (if it has any)
 
 			-- For Tasks: Hide objectives if the task is tracked; otherwise, set the Task to tracked and show all objectives by expanding the window
@@ -357,6 +357,7 @@ local function Constructor()
 	-- TODO:  OnEnter:Show info
 	
 	container.SetCompletion = SetCompletion
+	
 	-- Align icon vertically (centered) -> TODO: Does this need to change if the content's size (settings) changes?
 	local iconX, iconY = 0, 0 -- TODO: Center vertically -> Set according to type (bigger offset for groups, smaller for objectives, to center it properly); IconX doesn't do anything?
 	completionIcon.frame:ClearAllPoints()
