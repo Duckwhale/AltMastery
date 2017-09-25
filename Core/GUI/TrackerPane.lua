@@ -101,6 +101,34 @@ local function ClearGroups(self)
 	
 end
 
+
+--- Add all given Objectives to a given taskWidget
+--
+local function AddObjectives(self, taskWidget, Objectives)
+
+	for index, Objective in ipairs(Objectives or {}) do -- Add Objective to the task widget
+	
+		local objectivesWidget = AceGUI:Create("AMInlineGroup")
+		objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize)
+		objectivesWidget:SetRelativeWidth(1)
+		objectivesWidget:SetType("Objective")
+		
+		-- Calculate completion status
+		local isObjectiveCompleted = false -- TODO
+		-- Hide icon (replace with number?)
+		local alias = "ALIAS" -- TODO
+		objectivesWidget:SetText(index .. ". " .. alias) -- Objectives are really just Criteria (strings), so this works
+		objectivesWidget:SetCompletion(isObjectiveCompleted)
+		objectivesWidget:ApplyStatus()
+		
+		usedFrames[#usedFrames+1] = objectivesWidget -- TODO: Use(frame) as shortcut?
+		taskWidget:AddChild(objectivesWidget)
+		numDisplayedObjectives = numDisplayedObjectives + 1
+	
+	end		
+
+end
+
 --- Adds a given TaskObject to the given groupWidget
 -- @param self
 -- @param Task A valid TaskObject to be added
@@ -147,17 +175,9 @@ local function AddTask(self, Task, group)
 		if trackedTasks[Task.objectID] then -- Show objectives and their status for this Task
 		
 			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Showing objectives for it...", "TrackerPane")
-			local objectivesWidget = AceGUI:Create("AMInlineGroup")
-			objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize)
-			objectivesWidget:SetRelativeWidth(1)
-			objectivesWidget:SetTitle("Objectives")
-			objectivesWidget:SetType("Objective")
-			objectivesWidget:ApplyStatus()
-			
-			usedFrames[#usedFrames+1] = objectivesWidget -- TODO: Use(frame) as shortcut?
-			taskWidget:AddChild(objectivesWidget)
-			numDisplayedObjectives = numDisplayedObjectives + 1
-			
+	
+			self:AddObjectives(taskWidget, Task.Objectives)
+	
 		end
 
 end
@@ -288,12 +308,9 @@ local function ShowObjectives(self, taskWidget)
 
 	local Task = AM.db.global.tasks[taskWidget.localstatus.objectID]
 	if not Task then return end
+	AM:Debug("Showing Objectives for Task " .. Task.name)
+	self:AddObjectives(taskWidget, Task.Objectives)
 	
-	for i, Objective in ipairs(Task.Objectives) do -- Add Objective to the list
-		AddObjective(self, taskWidget, Objective)
-	end
-	
-		
 end
 
 --- Hide any Objectives for the given Task
@@ -334,6 +351,7 @@ local TrackerPane = {
 	
 	AddGroup = AddGroup,
 	AddTask = AddTask,
+	AddObjectives = AddObjectives,
 	-- TODO
 	MinimizeGroup = MinimizeGroup,
 	MaximizeGroup = MaximizeGroup,
