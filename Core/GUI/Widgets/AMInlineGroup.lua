@@ -38,21 +38,23 @@ local function Label_OnClick(self)
 	
 --		AM:Debug("This label represents a Group - click to minimize or maximize it")
 	
-	else if status.type == "Task" then -- Is a Task element -> Show/hide Objectives (if it has any)
-
-		-- For Tasks: Hide objectivs if the task is tracked; otherwise, set the Task to tracked and show all objectives by expanding the window
+	else
 	
-		-- Click -> Track or untrack task
-		if status.canExpand then -- Has objectives that can be shown
-			AM.TrackerPane:ToggleObjectives(self)
+		if status.type == "Task" then -- Is a Task element -> Show/hide Objectives (if it has any)
+
+			-- For Tasks: Hide objectives if the task is tracked; otherwise, set the Task to tracked and show all objectives by expanding the window
+		
+			-- Click -> Track or untrack task
+			if status.canExpand then -- Has objectives that can be shown
+				AM.TrackerPane:ToggleObjectives(self)
+			end
+			
+			-- Shift-click -> Hide? Evaluate criteria? Complete manually?
+			-- Implied else: -- Is Objective -> Can't be expanded anyway
+		
 		end
 		
-		-- Shift-click -> Hide? Evaluate criteria? Complete manually?
-		-- Implied else: -- Is Objective -> Can't be expanded anyway
-	
 	end
-	
-	-- For Tasks: Hide objectivs if the task is tracked; otherwise, set the Task to tracked and show all objectives by expanding the window
 	
 end
 
