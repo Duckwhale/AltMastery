@@ -92,8 +92,8 @@ local PrototypeTask = {
 		-- Is this actually needed?
 	end,
 	
-	GetNumObjectives = function()
-	
+	GetNumObjectives = function(self)
+		return #self.Objectives
 	end,
 	
 	IsObjectiveCompleted = function(objectiveNo)
