@@ -155,7 +155,8 @@ local function AddTask(self, Task, group)
 		local PrototypeTask = AM.TaskDB.PrototypeTask
 		local numObjectives = PrototypeTask.GetNumObjectives(Task) -- TODO: Ugly, but AceDB killed off the mt... fix in refactor-tracker
 		local numCompletedObjectives = PrototypeTask.GetNumCompletedObjectives(Task)
-		taskWidget:SetText(Task.name .. (numObjectives > 0 and " [" .. numCompletedObjectives .. "/" .. numObjectives .. "]" or "")) -- Only display them if the Task actually has some, though; TODO: Option to style, use format like (X) or [X] or - X
+		taskWidget:SetText(Task.name .. (numObjectives > 0 and not trackedTasks[Task.objectID] and " [" .. numCompletedObjectives .. "/" .. numObjectives .. "]" or "")) -- Only display them if the Task actually has some, though; Also hide if the task is being tracked (as the Objectives will be visible)
+		-- TODO: Option to style, use format like (X) or [X] or - X
 		
 		-- Set widget properties
 		taskWidget:SetRelativeWidth(1)
