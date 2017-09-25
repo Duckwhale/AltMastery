@@ -102,10 +102,10 @@ local function ClearGroups(self)
 end
 
 
---- Add all given Objectives to a given taskWidget
---
-local function AddObjectives(self, taskWidget, Objectives)
-
+--- Add all given Objectives to the Tracker (in their actual order, but decoupled from their parent Task)
+--local function AddObjectives(self, taskWidget, Objectives)
+local function AddObjectives(self, Objectives)
+dump(Objectives)
 	for index, Objective in ipairs(Objectives or {}) do -- Add Objective to the task widget
 	
 		local objectivesWidget = AceGUI:Create("AMInlineGroup")
@@ -122,7 +122,8 @@ local function AddObjectives(self, taskWidget, Objectives)
 		objectivesWidget:ApplyStatus()
 		
 		usedFrames[#usedFrames+1] = objectivesWidget -- TODO: Use(frame) as shortcut?
-		taskWidget:AddChild(objectivesWidget)
+		--taskWidget:AddChild(objectivesWidget) -- TODO: Decoupled because it's not really needed and makes resizing the Tracker more complicated?
+		self.widget:AddChild(objectivesWidget)
 		numDisplayedObjectives = numDisplayedObjectives + 1
 	
 	end		
@@ -176,7 +177,8 @@ local function AddTask(self, Task, group)
 		
 			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Showing objectives for it...", "TrackerPane")
 	
-			self:AddObjectives(taskWidget, Task.Objectives)
+			--self:AddObjectives(taskWidget, Task.Objectives)
+			self:AddObjectives(Task.Objectives) -- TODO: Not anchored to Task - might be problematic later?
 	
 		end
 
@@ -308,8 +310,13 @@ local function ShowObjectives(self, taskWidget)
 
 	local Task = AM.db.global.tasks[taskWidget.localstatus.objectID]
 	if not Task then return end
+	
+	-- Show Objectives
 	AM:Debug("Showing Objectives for Task " .. Task.name)
-	self:AddObjectives(taskWidget, Task.Objectives)
+	
+	-- Update Tracker to have it make room for them
+	self:ReleaseWidgets()
+	self:UpdateGroups()
 	
 end
 
