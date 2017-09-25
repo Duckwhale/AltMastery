@@ -117,7 +117,9 @@ local function AddObjectives(self, Objectives)
 		local isObjectiveCompleted = AM.Parser:Evaluate(Objective)
 		
 		-- Hide icon (replace with number?)
-		local alias = "ALIAS" -- TODO
+		local alias = string.match(Objective, ".*AS%s(.*)") -- Extract alias (if one exists)
+		alias = alias or Objective -- Use Criteria if no alias exists
+		
 		objectivesWidget:SetStatus("type", "Objective")
 		objectivesWidget:SetText(index .. ". " .. alias) -- Objectives are really just Criteria (strings), so this works
 		objectivesWidget:SetCompletion(isObjectiveCompleted)
