@@ -81,7 +81,7 @@ local PrototypeTask = {
 		else return 0 end
 	
 	end,
-	
+	-- TODO: Move API to different file, this should just have the definitions
 	-- Stubs - TODO: Fill out as necessary (and remove the rest later)
 	
 	-- Get/Set<Property>: NYI (TODO)
@@ -233,7 +233,7 @@ local function GetDefaultTasks()
 		Task.Criteria = entry.Criteria or ""
 		Task.Objectives = entry.Objectives or {}
 		Task.objectID = key
-		
+	-- AceDB overwrites them? Move Tasks API elsewhere, so it can still be used... --	if not getmetatable(Task) then error("NO MT") else dump(getmetatable(Task)); error("HAS MT") end
 		-- Store in table that will be added to AceDB defaults
 --		AM:Debug("Loaded default Task with key = " .. tostring(key) .. ", tostring() = " .. tostring(Task) , "TaskDB")
 		defaults[key] = Task

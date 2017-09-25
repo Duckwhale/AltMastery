@@ -99,6 +99,8 @@ local function IsValidTask(self, TaskObject)
 	end
 	
 	-- Compare to prototype Task and make sure a) all fields exists, and b) are of the proper format (run validator function for it)
+	-- TODO: Metatable to look up functions needs to be checked for also (?)
+--	if not getmetatable(TaskObject) then error("TaskObject has no metatable") end
 	local prototype = self.PrototypeTask
 	for k, v in pairs(prototype) do -- Compare field layouts
 		
