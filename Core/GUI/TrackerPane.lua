@@ -80,8 +80,8 @@ local function ReleaseWidgets(self)
 	
 	-- Wipe all state tables to get them back to their default display state (not expanded) without creating more garbage
 	wipe(usedFrames)
-	wipe(minimizedGroups)
-	wipe(trackedTasks)
+	-- wipe(minimizedGroups)
+	-- wipe(trackedTasks)
 	
 	-- Reset counters
 	numDisplayedGroups = 0
