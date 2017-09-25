@@ -155,7 +155,7 @@ local function AddTask(self, Task, group)
 		--taskWidget:SetFullHeight(true)
 		-- Set layout to List? Depends on the contents
 		usedFrames[#usedFrames+1] = taskWidget
-		AM.TrackerPane.widget:AddChild(taskWidget)
+		self.widget:AddChild(taskWidget)
 		numDisplayedTasks = numDisplayedTasks + 1
 
 		-- Update completion for this Task after adding it
