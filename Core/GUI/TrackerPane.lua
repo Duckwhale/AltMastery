@@ -22,7 +22,7 @@ local usedFrames = {}
 local minimizedGroups = {} -- Groups that are minimized -> Default is shown (for all Groups that don't have an entry here)
 local trackedTasks = {} -- Similar to the default Quest tracker, mark tasks to show their objectives (toggled by clicking on their name) -> Default is hide (for all Tasks that don't have an entry here)
 
--- Count how many items are displayed (to calculate the size of the tracker window and for automatically aligning the contents)
+-- Count how many items are displayed (to calculate the size of the tracker window and for automatically aligning the contents) -> TODO: Put into TrackerPane table, not local here
 local numDisplayedGroups = 0
 local numDisplayedTasks = 0
 local numDisplayedObjectives = 0
@@ -293,7 +293,7 @@ local function UpdateGroups(self)
 	self.widget.content:SetPoint("TOPLEFT", trackerPaneBorderSize, -trackerPaneBorderSize)
 	self.widget.content:SetPoint("BOTTOMRIGHT", -trackerPaneBorderSize, trackerPaneBorderSize)
 	
-	-- Update object vars with locally cached ones (TODO: Change structure to use TrackerPane directly, although that seems to break LDoc?)
+	-- Update object vars with locally cached ones (TODO: Change structure to use TrackerPane directly, although that seems to break LDoc?) -> Part of refactor-tracker branch
 	self.usedFrames = usedFrames
 	self.minimizedGroups = minimizedGroups
 	self.trackedTasks = trackedTasks
