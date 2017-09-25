@@ -105,7 +105,7 @@ end
 --- Add all given Objectives to the Tracker (in their actual order, but decoupled from their parent Task)
 --local function AddObjectives(self, taskWidget, Objectives)
 local function AddObjectives(self, Objectives)
-dump(Objectives)
+
 	for index, Objective in ipairs(Objectives or {}) do -- Add Objective to the task widget
 	
 		local objectivesWidget = AceGUI:Create("AMInlineGroup")
@@ -114,7 +114,8 @@ dump(Objectives)
 		objectivesWidget:SetType("Objective")
 		
 		-- Calculate completion status
-		local isObjectiveCompleted = false -- TODO
+		local isObjectiveCompleted = AM.Parser:Evaluate(Objective)
+		
 		-- Hide icon (replace with number?)
 		local alias = "ALIAS" -- TODO
 		objectivesWidget:SetStatus("type", "Objective")
