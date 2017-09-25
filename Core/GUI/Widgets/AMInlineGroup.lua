@@ -46,7 +46,7 @@ local function Label_OnClick(self)
 		
 			-- Click -> Track or untrack task
 			if status.canExpand then -- Has objectives that can be shown
-				AM.TrackerPane:ToggleObjectives(self)
+				AM.TrackerPane:ToggleObjectives(self.parent) -- Pass widget so that the Tracker can access it directly
 			end
 			
 			-- Shift-click -> Hide? Evaluate criteria? Complete manually?
