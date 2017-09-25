@@ -37,7 +37,7 @@ local function Label_OnClick(self)
 	if status.type == "Group" then -- Is a Group element -> Minimize/Expand (show/hide its Tasks) (TODO)
 	
 --		AM:Debug("This label represents a Group - click to minimize or maximize it")
-	
+
 	else
 	
 		if status.type == "Task" then -- Is a Task element -> Show/hide Objectives (if it has any)
@@ -94,7 +94,7 @@ local function SetIcon(self, icon)
 	if not icon then return end
 	
 	self.localstatus.image = icon
-	AM:Debug("Set icon to " .. tostring(icon), "AMInlineGroup")
+--	AM:Debug("Set icon to " .. tostring(icon), "AMInlineGroup")
 	
 end
 
@@ -121,7 +121,7 @@ end
 local methods = {
 
 	["ApplyStatus"] = function(self) -- Update the displayed widget with the current status
-		
+
 		-- TODO: Re-read settings to update stuff (size, style, ...)
 	
 		-- Shorthands
@@ -136,6 +136,7 @@ local methods = {
 		local label, completionIcon, content = self.label, self.completionIcon, self.content
 		
 		-- Update completion icon
+--print("status.isCompleted = " .. tostring(status.isCompleted))
 		local iconPath = (status.isCompleted ~= nil) and AM.GUI:GetActiveStyle()[status.isCompleted and "iconReady" or "iconNotReady"] or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
 		completionIcon:SetImage(iconPath)
 		completionIcon:SetImageSize(status.iconSize, status.iconSize)
@@ -223,7 +224,7 @@ local methods = {
 	end,
 
 	["SetTitle"] = function(self,title)
-		self.titletext:SetText(title)
+		--self.titletext:SetText(title)
 	end,
 
 	["LayoutFinished"] = function(self, width, height)
@@ -269,37 +270,51 @@ local methods = {
 }
 
 local function Constructor()
+
+	-- TODO: Store these properly (userdata or at least a properties table)
+	-- WidgetType (Task or Group or Objective?)
+	-- Update() function that updates the text, height, etc?
+	
+	-- Modify functions to alter all included widgets (icon, label, controls etc.)
+	-- SetHeight, OnMouseOver (depends on each widget? font will change colour, icon will glow?, tooltip could show etc.)
+
+	-- TODO: Clean up this mess
+	
+	-- Create basic AceGUI widget that serves as the container for all display elements
 	local container = AceGUI:Create("InlineGroup")
-	container.type = Type
+	container.type = Type -- TODO: Used for what?
 	container.localstatus = {} -- Holds the status for this widget instance (need to be wiped on releasing it)
 	container:SetRelativeWidth(1)
 	container:SetLayout("AMRows")
 	
+	-- Add methods (TODO: should they be cleared in OnRelease?)
 	-- AceGUI functions
 	for method, func in pairs(methods) do
 		container[method] = func
 	end
-	-- Custom AM functions
+	
+	-- Custom AM functions (TODO: Move to methods table?)
 	container.SetText = SetText
 	container.SetIcon = SetIcon
 	container.FlagAsGroup = FlagAsGroup
 	container.IsFlaggedAsGroup = IsFlaggedAsGroup
 	 
-	-- Remove the ugly border / unwanted frames
-	local titletext = container.titletext
+
+	local titletext = container.titletext -- TODO: Not used?
 	titletext:Hide() -- Pointless, as this isn't shown? But better be safe than sorry...
 	
-	-- Adjust layout so that the child widgets an fit inside
+	-- Adjust layout so that the child widgets can fit inside
 	container:SetAutoAdjustHeight(false) -- doing this manually is more complicated, but at least it doesn't glitch out all the time...
 	container.frame:ClearAllPoints()
 	container.frame:SetAllPoints()
 	
+	-- Remove the ugly default UI border for good
 	local border = container.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
 	local spacer = 1 -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
 	border:ClearAllPoints()
 	border:SetPoint("TOPLEFT", 0, -0)
 	border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
-	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.InlineElement) -- TODO: Colour differently based on type
+	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.InlineElement) -- TODO: Colour differently based on type (update also, via localstatus)
 	container.border = border -- Backreference to access it more easily and change its colour
 	
 	-- Add Text
@@ -341,17 +356,9 @@ local function Constructor()
 	completionIcon.frame:ClearAllPoints()
 	completionIcon.frame:SetPoint("TOPLEFT", label.frame, "TOPRIGHT", -iconX, iconY)
 	completionIcon.frame:SetPoint("BOTTOMRIGHT", label.frame, "BOTTOMRIGHT", iconX, -iconY)
-
-	
-	-- Remove data before it is made available for recycling (TODO: More stuff was added later, and should likely be stored as userdata so AceGUI can scrub it?)
-	container.OnRelease = function(self)
-		self.icon = nil
-		self.label = nil
-		self.SetText = nil
-		self.SetIcon = nil
-	end
 	
 	return AceGUI:RegisterAsContainer(container)
+	
 end
 
 AceGUI:RegisterWidgetType(Type, Constructor, Version)
