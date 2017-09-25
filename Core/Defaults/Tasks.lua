@@ -100,8 +100,19 @@ local PrototypeTask = {
 	
 	end,
 	
-	GetNumCompletedObjectives = function()
-	
+	GetNumCompletedObjectives = function(self)
+		
+		-- Count completed objectives and return that number
+		local count = 0
+		local Evaluate = AM.Parser.Evaluate
+			
+			for k, v in ipairs(self.Objectives) do -- Check completion status
+				local isCompleted = Evaluate(self, v)
+				if isCompleted then count = count + 1 end -- Update count of completed Objectives
+			end
+			
+		return count
+		
 	end,
 		
 	AddObjective = function(criterion)
