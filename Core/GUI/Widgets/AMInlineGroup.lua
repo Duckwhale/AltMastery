@@ -81,8 +81,9 @@ local function Label_OnLeave(self)
 	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
 	self:SetColor(r, g, b)
 	
-	-- Reset inline element's transparency
-	AM.GUI:SetFrameColour(self.parent.border, AM.GUI:GetActiveStyle().frameColours.InlineElement)
+	-- -- Reset inline element's transparency
+	-- AM.GUI:SetFrameColour(self.parent.border, AM.GUI:GetActiveStyle().frameColours.InlineElement)
+	self.parent:ApplyStatus() -- Reset colour as a side effect
 	
 	-- TODO: Hide tooltip
 	
@@ -160,19 +161,33 @@ local methods = {
 		label:SetText(isGroup and string.upper(status.text) or status.text)
 		
 		-- Set font and height of the text based on the type
-	local activeStyle = AM.GUI:GetActiveStyle()
---	local isGroup = self:IsFlaggedAsGroup() -- 4, 5
-	local fontSize = (isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small -- isGroupHeader has to be set by the Tracker when creating the widget (will default to Task otherwise)
-	local fontStyle = isGroup and activeStyle.fonts.groups or activeStyle.fonts.tasks
-		label:SetFont(fontStyle, fontSize)
+		local activeStyle = AM.GUI:GetActiveStyle()
+	--	local isGroup = self:IsFlaggedAsGroup() -- 4, 5
+		local fontSize = (isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small -- isGroupHeader has to be set by the Tracker when creating the widget (will default to Task otherwise)
+		local fontStyle = isGroup and activeStyle.fonts.groups or activeStyle.fonts.tasks
+			label:SetFont(fontStyle, fontSize)
 
-		--	local x, y = label.label:GetShadowOffset()
---	local r, g, b = label.label:GetShadowColor()
---	AM:Debug("Setting font to " .. tostring(fontStyle) .. "  (was " .. tostring(label.label:GetFont()) .. " - shadow: " .. tostring(r .. ", " .. g ..", " .. b) .. " - " ..  tostring(x .. " " .. y) .. ")")
+			--	local x, y = label.label:GetShadowOffset()
+	--	local r, g, b = label.label:GetShadowColor()
+	--	AM:Debug("Setting font to " .. tostring(fontStyle) .. "  (was " .. tostring(label.label:GetFont()) .. " - shadow: " .. tostring(r .. ", " .. g ..", " .. b) .. " - " ..  tostring(x .. " " .. y) .. ")")
 
-	-- Set text colour to normal (based on active style)
-	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
-	label:SetColor(r, g, b)
+		-- Set background and border according to the widget type
+		local border = self.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
+		local spacer = 2 -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
+		border:ClearAllPoints()
+		border:SetPoint("TOPLEFT", 0, -spacer)
+		border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
+		
+		-- Pick colours according to type
+		local activeStyle = AM.GUI:GetActiveStyle()
+		local frameColour = (isGroup and activeStyle.frameColours.InlineHeader) or (isTask and activeStyle.frameColours.InlineElement) or (isObjective and activeStyle.frameColours.ExpandedElement) or activeStyle.frameColours.ContentPane -- TODO: Rename&default instead of content pane
+		
+		AM.GUI:SetFrameColour(border, frameColour) -- TODO: Colour differently based on type (update also, via localstatus)
+		self.border = border -- Backreference to access it more easily and change its colour
+
+		-- Set text colour to normal (based on active style)
+		local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
+		label:SetColor(r, g, b)
 
 		-- TODO: Update stuff from settings
 		
@@ -307,15 +322,6 @@ local function Constructor()
 	container:SetAutoAdjustHeight(false) -- doing this manually is more complicated, but at least it doesn't glitch out all the time...
 	container.frame:ClearAllPoints()
 	container.frame:SetAllPoints()
-	
-	-- Remove the ugly default UI border for good
-	local border = container.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
-	local spacer = 2 -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
-	border:ClearAllPoints()
-	border:SetPoint("TOPLEFT", 0, -spacer)
-	border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
-	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.InlineElement) -- TODO: Colour differently based on type (update also, via localstatus)
-	container.border = border -- Backreference to access it more easily and change its colour
 	
 	-- Add Text
 	local label = AceGUI:Create("InteractiveLabel")
