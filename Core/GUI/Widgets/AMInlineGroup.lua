@@ -68,7 +68,14 @@ local function Label_OnEnter(self)
 	self:SetColor(r, g, b)
 	
 	-- Decrease inline element's transparency
-	AM.GUI:SetFrameColour(self.parent.border, AM.GUI:GetActiveStyle().frameColours.HighlightedInlineElement)
+	local frameColours = activeStyle.frameColours
+	local status = self.parent.localstatus
+	
+	local isGroup = status.type == "Group"
+	local isTask = status.type == "Task"
+	local isObjective = status.type == "Task"
+	
+	AM.GUI:SetFrameColour(self.parent.border, frameColours[(isGroup and "HighlightedInlineHeader") or (isTask and "HighlightedInlineElement") or "HighlightedExpandedElement"])
 	
 	-- TODO: Show tooltip indicating that the group can be shown/hidden or task objectives can be shown/hidden
 
