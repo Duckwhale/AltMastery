@@ -37,6 +37,11 @@ AM.versionString = GetAddOnMetadata("AltMastery", "Version")
 AM.versionString = "DEBUG"
 --@end-debug@
 
+
+-- Upvalues
+local print, format, date = print, string.format, date -- Lua APIs
+
+
 -- Global functions
 function AM:Print(msg)
 	print(format("|c00CC5500" .. "%s: " .. "|c00E6CC80%s", addonName, msg))
