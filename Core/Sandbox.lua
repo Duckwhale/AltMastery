@@ -34,7 +34,10 @@ local constants = { -- Used t look up actual ID if an alias was used
 	
 	-- Holidays (texture IDs)
 	BREWFEST = 235441,
-	TIMEWALKING_MOP = 1530589,
+	TIMEWALKING_MOP = { 
+		1530588, -- Event starts?
+		1530589, -- Event ends? 
+	},
 	
 	-- Dungeon IDs
 	COREN_DIREBREW = 287,
