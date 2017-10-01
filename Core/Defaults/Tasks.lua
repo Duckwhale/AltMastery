@@ -211,6 +211,22 @@ local defaultTasks = {
 			-- TODO } --/run local _, fR, fM, fN, _, _, _, fT, nT = GetFriendshipReputation(1357) print(("Your current reputation with %s is %d/%d. The previous threshold was at %d and the next one is at %d."):format(fN, fR, fM, fT, nT)
 			}
 		}
+		},
+		
+		WEEKLY_LEGION_BONUSROLLS = {
+			name = "Seal of Broken Fate",
+			description = "Receive up to 3 bonus roll items per week by turning in a currency of your choice",
+			notes = "Decrease in efficiency, so get one per week",
+			iconPath = "inv_misc_azsharacoin",
+			Criteria = "BonusRolls(LEGION) > 0", -- TODO: More options for efficiency -> 1 coin per week
+			Objectives = {
+				"BonusRolls(LEGION) == 1 AS First seal received",
+				"BonusRolls(LEGION) == 2 AS Second seal received",
+				"BonusRolls(LEGION) == 3 AS Third seal received",
+			},
+			
+		},
+		
 		
 }
 
