@@ -57,8 +57,18 @@ local function WorldEvent(textureID)
 		local name, desc, texture, startTime, endTime = unpack(event)
 		
 		-- Compare texture IDs to find out whether the requested holiday is currently active (this is the only part that's identical across locales... :| Better hope there's no two events using the same icon (TODO))
-		if texture == textureID then return true end
-	
+		if type(textureID) == "table" then -- There are several that have been used? Just check for all of them - not sure why it changed throughout the evend and which one is the right one now...
+			
+			for i, confirmedTexture in ipairs(textureID) do -- Check for matches
+				if texture == confirmedTexture then return true end
+			end
+			
+		else -- Just match the ID directly (still works for Brewfest at least... for now)
+		
+			if texture == textureID then return true end
+		
+		end
+		
 	end
 	
 	-- Returns nil if not found -> Show "?" icon until updated, but also counts as false = not completed
