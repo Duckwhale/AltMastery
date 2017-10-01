@@ -173,7 +173,7 @@ local function AddTask(self, Task, group)
 
 		-- Update completion for this Task after adding it
 		if not AM.Parser:IsValid(Task.Criteria) then -- Criteria is invalid and will not be evaluated
-			AM:Debug("Found invalid Criteria for Task " .. Task.name .. " - Completion will not be updated")
+--			AM:Debug("Found invalid Criteria for Task " .. Task.name .. " - Completion will not be updated")
 			taskWidget:SetCompletion(nil) -- Reset to "default ?" icon
 			
 		else -- Check Criteria and set completion to true or false -> Will display the proper icon in any case
@@ -185,10 +185,9 @@ local function AddTask(self, Task, group)
 		end
 		
 		taskWidget:ApplyStatus()
-
 		if trackedTasks[Task.objectID] then -- Show objectives and their status for this Task
 		
-			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Showing objectives for it...", "TrackerPane")
+--			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Showing objectives for it...", "TrackerPane")
 	
 			--self:AddObjectives(taskWidget, Task.Objectives)
 			self:AddObjectives(Task.Objectives) -- TODO: Not anchored to Task - might be problematic later?
