@@ -235,6 +235,15 @@ local defaultTasks = {
 			Criteria = "Quest(47015) OR Quest(47012) OR Quest(47016) OR Quest(47014)", -- TODO: Building has to be up (visibility?); only show legendary follower items? based on profession? prequests = http://www.wowhead.com/item=147451/armorcrafters-commendation#comments	http://www.wowhead.com/quest=46774 -> Quest is repeatable... needs caching to detect this properly -> new feature branch, as it could get complicated
 		},
 		
+		LEGION_UNDERBELLY_TESTSUBJECTS = {
+			name = "Fizzi Liverzapper",
+			description = "Complete the quest \"Experimental Potion: Test Subjects Needed\" and the Underbelly of Dalaran (Legion)",
+			notes = "150 Sightless Eyes",
+			iconPath = "achievement_reputation_kirintor_offensive",
+			Criteria = "Quest(43473) OR Quest(43474) OR Quest(43475) OR Quest(43476) OR Quest(43477) OR Quest(43478)", -- TODO. Req reputation?
+		},
+		
+		-- 48799 - Veiled Argunite "Fuel of a Doomed World" (Weekly -> Argus rares, invasions etc.)
 		
 }
 
