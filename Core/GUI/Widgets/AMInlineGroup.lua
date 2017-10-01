@@ -30,21 +30,31 @@ end
 
 -- Minimize group or track Task (TODO)?
 local function Label_OnClick(self)
-	AM:Debug("Label clicked!", "AMInlineGroup")
+	
+	local status = self.parent.localstatus
 	
 	-- For Groups: Minimize the respective Group, set its text colour to indicate the fact, and hide all contained Tasks (as well as their objectives)
-	local isGroup = self.parent:IsFlaggedAsGroup()
-	if isGroup then
+	if status.type == "Group" then -- Is a Group element -> Minimize/Expand (show/hide its Tasks) (TODO)
 	
-		AM:Debug("This label represents a Group - click to minimize or maximize it")
+--		AM:Debug("This label represents a Group - click to minimize or maximize it")
 	
 	else
-	
-		AM:Debug("This label represents a Task - click to show its objectives or hide them")
-	
+
+		if status.type == "Task" then -- Is a Task element -> Show/hide Objectives (if it has any)
+
+			-- For Tasks: Hide objectives if the task is tracked; otherwise, set the Task to tracked and show all objectives by expanding the window
+		
+			-- Click -> Track or untrack task
+			if status.canExpand then -- Has objectives that can be shown
+				AM.TrackerPane:ToggleObjectives(self.parent) -- Pass widget so that the Tracker can access it directly
+			end
+			
+			-- Shift-click -> Hide? Evaluate criteria? Complete manually?
+			-- Implied else: -- Is Objective -> Can't be expanded anyway
+		
+		end
+		
 	end
-	
-	-- For Tasks: Hide objectivs if the task is tracked; otherwise, set the Task to tracked and show all objectives by expanding the window
 	
 end
 
@@ -58,7 +68,14 @@ local function Label_OnEnter(self)
 	self:SetColor(r, g, b)
 	
 	-- Decrease inline element's transparency
-	AM.GUI:SetFrameColour(self.parent.border, AM.GUI:GetActiveStyle().frameColours.HighlightedInlineElement)
+	local frameColours = activeStyle.frameColours
+	local status = self.parent.localstatus
+	
+	local isGroup = status.type == "Group"
+	local isTask = status.type == "Task"
+	local isObjective = status.type == "Task"
+	
+	AM.GUI:SetFrameColour(self.parent.border, frameColours[(isGroup and "HighlightedInlineHeader") or (isTask and "HighlightedInlineElement") or "HighlightedExpandedElement"])
 	
 	-- TODO: Show tooltip indicating that the group can be shown/hidden or task objectives can be shown/hidden
 
@@ -71,8 +88,9 @@ local function Label_OnLeave(self)
 	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
 	self:SetColor(r, g, b)
 	
-	-- Reset inline element's transparency
-	AM.GUI:SetFrameColour(self.parent.border, AM.GUI:GetActiveStyle().frameColours.InlineElement)
+	-- -- Reset inline element's transparency
+	-- AM.GUI:SetFrameColour(self.parent.border, AM.GUI:GetActiveStyle().frameColours.InlineElement)
+	self.parent:ApplyStatus() -- Reset colour as a side effect
 	
 	-- TODO: Hide tooltip
 	
@@ -84,7 +102,7 @@ local function SetIcon(self, icon)
 	if not icon then return end
 	
 	self.localstatus.image = icon
-	AM:Debug("Set icon to " .. tostring(icon), "AMInlineGroup")
+--	AM:Debug("Set icon to " .. tostring(icon), "AMInlineGroup")
 	
 end
 
@@ -111,7 +129,7 @@ end
 local methods = {
 
 	["ApplyStatus"] = function(self) -- Update the displayed widget with the current status
-		
+
 		-- TODO: Re-read settings to update stuff (size, style, ...)
 	
 		-- Shorthands
@@ -121,15 +139,12 @@ local methods = {
 		status.iconSize = AM.db.profile.settings.display.iconSize	
 		status.text = status.text or "<ERROR>"
 		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
+		
 				
 		local label, completionIcon, content = self.label, self.completionIcon, self.content
 		
-		-- Update label state
-		label:SetText(status.text)
-		label:SetImage(status.image)
-		label:SetImageSize(status.iconSize, status.iconSize)
-		
 		-- Update completion icon
+--print("status.isCompleted = " .. tostring(status.isCompleted))
 		local iconPath = (status.isCompleted ~= nil) and AM.GUI:GetActiveStyle()[status.isCompleted and "iconReady" or "iconNotReady"] or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
 		completionIcon:SetImage(iconPath)
 		completionIcon:SetImageSize(status.iconSize, status.iconSize)
@@ -140,23 +155,46 @@ local methods = {
 		local isTask = (status.type == "Task")
 		local isObjective = (status.type == "Objective")
 		
+		-- Update label state
+		label:SetText(status.text)
+		if isObjective then -- Clear image, as Objectives should only display text
+			label:SetImage()
+		else -- Add actual icon
+			label:SetImage(status.image)
+		end
+		label:SetImageSize(status.iconSize, status.iconSize)
+		
 		-- Set text
 		label:SetText(isGroup and string.upper(status.text) or status.text)
 		
 		-- Set font and height of the text based on the type
-	local activeStyle = AM.GUI:GetActiveStyle()
---	local isGroup = self:IsFlaggedAsGroup() -- 4, 5
-	local fontSize = (isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small -- isGroupHeader has to be set by the Tracker when creating the widget (will default to Task otherwise)
-	local fontStyle = isGroup and activeStyle.fonts.groups or activeStyle.fonts.tasks
-		label:SetFont(fontStyle, fontSize)
+		local activeStyle = AM.GUI:GetActiveStyle()
+	--	local isGroup = self:IsFlaggedAsGroup() -- 4, 5
+		local fontSize = (isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small -- isGroupHeader has to be set by the Tracker when creating the widget (will default to Task otherwise)
+		local fontStyle = isGroup and activeStyle.fonts.groups or activeStyle.fonts.tasks
+			label:SetFont(fontStyle, fontSize)
 
-		--	local x, y = label.label:GetShadowOffset()
---	local r, g, b = label.label:GetShadowColor()
---	AM:Debug("Setting font to " .. tostring(fontStyle) .. "  (was " .. tostring(label.label:GetFont()) .. " - shadow: " .. tostring(r .. ", " .. g ..", " .. b) .. " - " ..  tostring(x .. " " .. y) .. ")")
+			--	local x, y = label.label:GetShadowOffset()
+	--	local r, g, b = label.label:GetShadowColor()
+	--	AM:Debug("Setting font to " .. tostring(fontStyle) .. "  (was " .. tostring(label.label:GetFont()) .. " - shadow: " .. tostring(r .. ", " .. g ..", " .. b) .. " - " ..  tostring(x .. " " .. y) .. ")")
 
-	-- Set text colour to normal (based on active style)
-	local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
-	label:SetColor(r, g, b)
+		-- Set background and border according to the widget type
+		local border = self.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
+		local spacer = 2 -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
+		border:ClearAllPoints()
+		border:SetPoint("TOPLEFT", 0, -spacer)
+		border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
+		
+		-- Pick colours according to type
+		local activeStyle = AM.GUI:GetActiveStyle()
+		local frameColour = (isGroup and activeStyle.frameColours.InlineHeader) or (isTask and activeStyle.frameColours.InlineElement) or (isObjective and activeStyle.frameColours.ExpandedElement) or activeStyle.frameColours.ContentPane -- TODO: Rename&default instead of content pane
+		
+		AM.GUI:SetFrameColour(border, frameColour) -- TODO: Colour differently based on type (update also, via localstatus)
+		self.border = border -- Backreference to access it more easily and change its colour
+
+		-- Set text colour to normal (based on active style)
+		local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
+		label:SetColor(r, g, b)
 
 		-- TODO: Update stuff from settings
 		
@@ -168,7 +206,28 @@ local methods = {
 		content:SetPoint("TOPLEFT", 4, -padding)
 		content:SetPoint("BOTTOMRIGHT", -4, padding)
 	
-		
+	end,
+	
+	-- Sets the local status table (can be called externally)
+	["SetStatus"] = function(self, key, value)
+	
+		self.localstatus[key] = value
+	
+	end,
+	
+	["SetObjectives"] = function(self, Objectives)
+	
+		local status = self.localstatus
+	
+		if type(Objectives) == "table" and #Objectives > 0 then -- Has objectives that can be displayed
+
+			status.canExpand = true
+			status.Objectives = Objectives -- TODO: Is this still needed?
+
+		else -- This element can never expand (until updated, obviously)
+			status.canExpand = false
+		end
+	
 	end,
 
 	["OnAcquire"] = function(self)
@@ -187,7 +246,7 @@ local methods = {
 	end,
 
 	["SetTitle"] = function(self,title)
-		self.titletext:SetText(title)
+		--self.titletext:SetText(title)
 	end,
 
 	["LayoutFinished"] = function(self, width, height)
@@ -233,46 +292,48 @@ local methods = {
 }
 
 local function Constructor()
+
+	-- TODO: Store these properly (userdata or at least a properties table)
+	-- WidgetType (Task or Group or Objective?)
+	-- Update() function that updates the text, height, etc?
+	
+	-- Modify functions to alter all included widgets (icon, label, controls etc.)
+	-- SetHeight, OnMouseOver (depends on each widget? font will change colour, icon will glow?, tooltip could show etc.)
+
+	-- TODO: Clean up this mess
+	
+	-- Create basic AceGUI widget that serves as the container for all display elements
 	local container = AceGUI:Create("InlineGroup")
-	container.type = Type
+	container.type = Type -- TODO: Used for what?
 	container.localstatus = {} -- Holds the status for this widget instance (need to be wiped on releasing it)
 	container:SetRelativeWidth(1)
 	container:SetLayout("AMRows")
 	
+	-- Add methods (TODO: should they be cleared in OnRelease?)
 	-- AceGUI functions
 	for method, func in pairs(methods) do
 		container[method] = func
 	end
-	-- Custom AM functions
+	
+	-- Custom AM functions (TODO: Move to methods table?)
 	container.SetText = SetText
 	container.SetIcon = SetIcon
 	container.FlagAsGroup = FlagAsGroup
 	container.IsFlaggedAsGroup = IsFlaggedAsGroup
 	 
-	-- Remove the ugly border / unwanted frames
-	local titletext = container.titletext
+
+	local titletext = container.titletext -- TODO: Not used?
 	titletext:Hide() -- Pointless, as this isn't shown? But better be safe than sorry...
 	
-	-- Adjust layout so that the child widgets an fit inside
+	-- Adjust layout so that the child widgets can fit inside
 	container:SetAutoAdjustHeight(false) -- doing this manually is more complicated, but at least it doesn't glitch out all the time...
 	container.frame:ClearAllPoints()
 	container.frame:SetAllPoints()
 	
-	local border = container.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
-	local spacer = 1 -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
-	border:ClearAllPoints()
-	border:SetPoint("TOPLEFT", 0, -0)
-	border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
-	AM.GUI:SetFrameColour(border, AM.GUI:GetActiveStyle().frameColours.InlineElement) -- TODO: Colour differently based on type
-	container.border = border -- Backreference to access it more easily and change its colour
-	
 	-- Add Text
-	local iconSize = AM.db.profile.settings.display.iconSize
 	local label = AceGUI:Create("InteractiveLabel")
-	label:SetText("<ERROR>")
-	label:SetImage("Interface\\Icons\\inv_misc_questionmark")
-	label:SetImageSize(iconSize, iconSize)
-	label:SetRelativeWidth(1) -- TODO: Reduce when controls are implemented
+
+	label:SetRelativeWidth(0.15) -- TODO: Reduce when controls are implemented; Why is it using UIParent as the container, when it was added to "container" (the widget frame)?
 	label:SetCallback("OnClick", Label_OnClick)
 	label:SetCallback("OnEnter", Label_OnEnter)
 	label:SetCallback("OnLeave", Label_OnLeave)
@@ -299,23 +360,25 @@ local function Constructor()
 	completionIcon:SetRelativeWidth(0.01) -- TODO: Also uses UIParent - why??
 	container:AddChild(completionIcon)
 	container.completionIcon = completionIcon -- Backreference
+
+	local CompletionIcon_OnEnter = function(self)
+		AM:Debug("OnEnter triggered for CompletionIcon!")
+	end
+--	completionIcon:SetScript("OnEnter", CompletionIcon_OnEnter)
+	completionIcon:SetHighlight()
+	completionIcon:SetCallback("OnEnter", CompletionIcon_OnEnter)
+	-- TODO:  OnEnter:Show info
+	
 	container.SetCompletion = SetCompletion
+	
 	-- Align icon vertically (centered) -> TODO: Does this need to change if the content's size (settings) changes?
 	local iconX, iconY = 0, 0 -- TODO: Center vertically -> Set according to type (bigger offset for groups, smaller for objectives, to center it properly); IconX doesn't do anything?
 	completionIcon.frame:ClearAllPoints()
 	completionIcon.frame:SetPoint("TOPLEFT", label.frame, "TOPRIGHT", -iconX, iconY)
 	completionIcon.frame:SetPoint("BOTTOMRIGHT", label.frame, "BOTTOMRIGHT", iconX, -iconY)
-
-	
-	-- Remove data before it is made available for recycling (TODO: More stuff was added later, and should likely be stored as userdata so AceGUI can scrub it?)
-	container.OnRelease = function(self)
-		self.icon = nil
-		self.label = nil
-		self.SetText = nil
-		self.SetIcon = nil
-	end
 	
 	return AceGUI:RegisterAsContainer(container)
+	
 end
 
 AceGUI:RegisterWidgetType(Type, Constructor, Version)

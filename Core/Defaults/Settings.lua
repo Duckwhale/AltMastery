@@ -28,6 +28,7 @@ local defaults = {
 		objectiveSize = 24,
 		iconSize = 20,
 		
+		highlightExpandedElements = true,
 	},
 	
 	debug = {

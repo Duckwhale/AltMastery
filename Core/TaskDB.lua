@@ -99,6 +99,8 @@ local function IsValidTask(self, TaskObject)
 	end
 	
 	-- Compare to prototype Task and make sure a) all fields exists, and b) are of the proper format (run validator function for it)
+	-- TODO: Metatable to look up functions needs to be checked for also (?)
+--	if not getmetatable(TaskObject) then error("TaskObject has no metatable") end
 	local prototype = self.PrototypeTask
 	for k, v in pairs(prototype) do -- Compare field layouts
 		
@@ -221,6 +223,8 @@ local function RemoveTask(self, key)
 end
 
 --- Returns a reference to a given Task from the TaskDB
+-- This is only used to look up Tasks by their name, as it requires iterating the entire DB
+--@param name The name (not key!) of a given Task
 -- @return Reference to the TaskObject if it exists; nil otherwise
 local function GetTask(self, key)
 
@@ -264,7 +268,7 @@ local function SetTask(self, key, TaskObject)
 		
 	end
 	
-	local taskAlreadyExists = self:GetTask(key) ~= nil
+	local taskAlreadyExists = AM.db.global.tasks[key] ~= nil
 	if taskAlreadyExists then	-- Overwrite ("update") existing Task
 		AM.db.global.tasks[key] = TaskObject
 	else -- Create new Task and add it to the DB

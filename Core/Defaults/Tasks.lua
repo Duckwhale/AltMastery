@@ -81,7 +81,7 @@ local PrototypeTask = {
 		else return 0 end
 	
 	end,
-	
+	-- TODO: Move API to different file, this should just have the definitions
 	-- Stubs - TODO: Fill out as necessary (and remove the rest later)
 	
 	-- Get/Set<Property>: NYI (TODO)
@@ -92,16 +92,27 @@ local PrototypeTask = {
 		-- Is this actually needed?
 	end,
 	
-	GetNumObjectives = function()
-	
+	GetNumObjectives = function(self)
+		return #self.Objectives
 	end,
 	
 	IsObjectiveCompleted = function(objectiveNo)
 	
 	end,
 	
-	GetNumCompletedObjectives = function()
-	
+	GetNumCompletedObjectives = function(self)
+		
+		-- Count completed objectives and return that number
+		local count = 0
+		local Evaluate = AM.Parser.Evaluate
+			
+			for k, v in ipairs(self.Objectives) do -- Check completion status
+				local isCompleted = Evaluate(self, v)
+				if isCompleted then count = count + 1 end -- Update count of completed Objectives
+			end
+			
+		return count
+		
 	end,
 		
 	AddObjective = function(criterion)
@@ -221,7 +232,8 @@ local function GetDefaultTasks()
 		Task.iconPath = "Interface\\Icons\\" .. (entry.iconPath or "inv_misc_questionmark")
 		Task.Criteria = entry.Criteria or ""
 		Task.Objectives = entry.Objectives or {}
-		
+		Task.objectID = key
+	-- AceDB overwrites them? Move Tasks API elsewhere, so it can still be used... --	if not getmetatable(Task) then error("NO MT") else dump(getmetatable(Task)); error("HAS MT") end
 		-- Store in table that will be added to AceDB defaults
 --		AM:Debug("Loaded default Task with key = " .. tostring(key) .. ", tostring() = " .. tostring(Task) , "TaskDB")
 		defaults[key] = Task

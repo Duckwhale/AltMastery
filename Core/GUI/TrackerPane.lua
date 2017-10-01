@@ -22,7 +22,7 @@ local usedFrames = {}
 local minimizedGroups = {} -- Groups that are minimized -> Default is shown (for all Groups that don't have an entry here)
 local trackedTasks = {} -- Similar to the default Quest tracker, mark tasks to show their objectives (toggled by clicking on their name) -> Default is hide (for all Tasks that don't have an entry here)
 
--- Count how many items are displayed (to calculate the size of the tracker window and for automatically aligning the contents)
+-- Count how many items are displayed (to calculate the size of the tracker window and for automatically aligning the contents) -> TODO: Put into TrackerPane table, not local here
 local numDisplayedGroups = 0
 local numDisplayedTasks = 0
 local numDisplayedObjectives = 0
@@ -80,8 +80,8 @@ local function ReleaseWidgets(self)
 	
 	-- Wipe all state tables to get them back to their default display state (not expanded) without creating more garbage
 	wipe(usedFrames)
-	wipe(minimizedGroups)
-	wipe(trackedTasks)
+	-- wipe(minimizedGroups)
+	-- wipe(trackedTasks)
 	
 	-- Reset counters
 	numDisplayedGroups = 0
@@ -101,6 +101,39 @@ local function ClearGroups(self)
 	
 end
 
+
+--- Add all given Objectives to the Tracker (in their actual order, but decoupled from their parent Task)
+--local function AddObjectives(self, taskWidget, Objectives)
+local function AddObjectives(self, Objectives)
+
+	for index, Objective in ipairs(Objectives or {}) do -- Add Objective to the task widget
+	
+		local objectivesWidget = AceGUI:Create("AMInlineGroup")
+		objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize)
+		objectivesWidget:SetRelativeWidth(1)
+		objectivesWidget:SetType("Objective")
+		
+		-- Calculate completion status
+		local isObjectiveCompleted = AM.Parser:Evaluate(Objective)
+		
+		-- Hide icon (replace with number?)
+		local alias = string.match(Objective, ".*AS%s(.*)") -- Extract alias (if one exists)
+		alias = alias or Objective -- Use Criteria if no alias exists
+		
+		objectivesWidget:SetStatus("type", "Objective")
+		objectivesWidget:SetText(index .. ". " .. alias) -- Objectives are really just Criteria (strings), so this works
+		objectivesWidget:SetCompletion(isObjectiveCompleted)
+		objectivesWidget:ApplyStatus()
+		
+		usedFrames[#usedFrames+1] = objectivesWidget -- TODO: Use(frame) as shortcut?
+		--taskWidget:AddChild(objectivesWidget) -- TODO: Decoupled because it's not really needed and makes resizing the Tracker more complicated?
+		self.widget:AddChild(objectivesWidget)
+		numDisplayedObjectives = numDisplayedObjectives + 1
+	
+	end		
+
+end
+
 --- Adds a given TaskObject to the given groupWidget
 -- @param self
 -- @param Task A valid TaskObject to be added
@@ -116,20 +149,31 @@ local function AddTask(self, Task, group)
 	
 	local taskWidget = AceGUI:Create("AMInlineGroup")
 		taskWidget:SetHeight(AM.db.profile.settings.display.taskSize)
-		taskWidget:SetText(Task.name)
+		
+		-- Display number of (completed) Objectives after the Task's name
+		--dump(getmetatable(Task))
+		local PrototypeTask = AM.TaskDB.PrototypeTask
+		local numObjectives = PrototypeTask.GetNumObjectives(Task) -- TODO: Ugly, but AceDB killed off the mt... fix in refactor-tracker
+		local numCompletedObjectives = PrototypeTask.GetNumCompletedObjectives(Task)
+		taskWidget:SetText(Task.name .. (numObjectives > 0 and not trackedTasks[Task.objectID] and " [" .. numCompletedObjectives .. "/" .. numObjectives .. "]" or "")) -- Only display them if the Task actually has some, though; Also hide if the task is being tracked (as the Objectives will be visible)
+		-- TODO: Option to style, use format like (X) or [X] or - X
+		
+		-- Set widget properties
 		taskWidget:SetRelativeWidth(1)
 		taskWidget:SetIcon(Task.iconPath)
 		taskWidget:SetType("Task")
+		taskWidget:SetStatus("objectID", Task.objectID)
+		taskWidget:SetObjectives(Task.Objectives) -- Only useful for "Task" type elements
 		
 		--taskWidget:SetFullHeight(true)
 		-- Set layout to List? Depends on the contents
 		usedFrames[#usedFrames+1] = taskWidget
-		AM.TrackerPane.widget:AddChild(taskWidget)
+		self.widget:AddChild(taskWidget)
 		numDisplayedTasks = numDisplayedTasks + 1
 
 		-- Update completion for this Task after adding it
 		if not AM.Parser:IsValid(Task.Criteria) then -- Criteria is invalid and will not be evaluated
-			AM:Debug("Found invalid Criteria for Task " .. Task.name .. " - Completion will not be updated")
+--			AM:Debug("Found invalid Criteria for Task " .. Task.name .. " - Completion will not be updated")
 			taskWidget:SetCompletion(nil) -- Reset to "default ?" icon
 			
 		else -- Check Criteria and set completion to true or false -> Will display the proper icon in any case
@@ -141,21 +185,13 @@ local function AddTask(self, Task, group)
 		end
 		
 		taskWidget:ApplyStatus()
-
-		if trackedTasks[Task.name] then -- Show objectives and their status for this Task
+		if trackedTasks[Task.objectID] then -- Show objectives and their status for this Task
 		
-			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Showing objectives for it...", "TrackerPane")
-			local objectivesWidget = AceGUI:Create("AMInlineGroup")
-			objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize)
-			objectivesWidget:SetRelativeWidth(1)
-			objectivesWidget:SetTitle("Objectives")
-			objectivesWidget:SetType("Objective")
-			objectivesWidget:ApplyStatus()
-			
-			usedFrames[#usedFrames+1] = objectivesWidget -- TODO: Use(frame) as shortcut?
-			taskWidget:AddChild(objectivesWidget)
-			numDisplayedObjectives = numDisplayedObjectives + 1
-			
+--			AM:Debug("Task " .. tostring(Task.name) .. " is being tracked -> Showing objectives for it...", "TrackerPane")
+	
+			--self:AddObjectives(taskWidget, Task.Objectives)
+			self:AddObjectives(Task.Objectives) -- TODO: Not anchored to Task - might be problematic later?
+	
 		end
 
 end
@@ -269,7 +305,7 @@ local function UpdateGroups(self)
 	self.widget.content:SetPoint("TOPLEFT", trackerPaneBorderSize, -trackerPaneBorderSize)
 	self.widget.content:SetPoint("BOTTOMRIGHT", -trackerPaneBorderSize, trackerPaneBorderSize)
 	
-	-- Update object vars with locally cached ones (TODO: Change structure to use TrackerPane directly, although that seems to break LDoc?)
+	-- Update object vars with locally cached ones (TODO: Change structure to use TrackerPane directly, although that seems to break LDoc?) -> Part of refactor-tracker branch
 	self.usedFrames = usedFrames
 	self.minimizedGroups = minimizedGroups
 	self.trackedTasks = trackedTasks
@@ -278,6 +314,59 @@ local function UpdateGroups(self)
 	self.numDisplayedObjectives = numDisplayedObjectives
 	AM:Debug("Updated display -> Total " .. self.numDisplayedGroups .. " Group(s), " .. self.numDisplayedTasks .. " Task(s), " .. self.numDisplayedObjectives .. " Objective(s)", "TrackerPane")
 	
+end
+
+--- Show any Objectives for the given Task
+-- No changes if they were already shown
+local function ShowObjectives(self, taskWidget)
+
+	local Task = AM.db.global.tasks[taskWidget.localstatus.objectID]
+	if not Task then return end
+	
+	-- Show Objectives
+	AM:Debug("Showing Objectives for Task " .. Task.name)
+	
+	-- Update Tracker to have it make room for them
+	self:ReleaseWidgets()
+	self:UpdateGroups()
+	
+end
+
+--- Hide any Objectives for the given Task
+-- No changes if they were already hidden
+local function HideObjectives(self, taskWidget)
+
+	local taskID = taskWidget.localstatus.objectID
+	local Task = AM.db.global.tasks[taskID]
+	if not Task then return end
+	
+	-- Hide Objectives
+	AM:Debug("Hiding Objectives for Task " .. Task.name)
+	
+	-- Update Tracker to have it reclaim the space they used to occupy
+	self:ReleaseWidgets()
+	self:UpdateGroups()
+	
+end
+
+--- Show / hide any Objectives for the given Task
+local function ToggleObjectives(self, taskWidget)
+
+	local taskID = taskWidget.localstatus.objectID
+	local isTaskTracked = trackedTasks[taskID]
+
+	if isTaskTracked then -- Is already being tracked -> untrack it
+	
+		trackedTasks[taskID] = false -- should be OK, no need to set nil here
+		self:HideObjectives(taskWidget)
+		
+	else -- Track it and show Objectives
+		
+		trackedTasks[taskID] = true
+		self:ShowObjectives(taskWidget)
+		
+	end
+
 end
 
 local TrackerPane = {
@@ -301,13 +390,15 @@ local TrackerPane = {
 	
 	AddGroup = AddGroup,
 	AddTask = AddTask,
+	AddObjectives = AddObjectives,
+	ShowObjectives = ShowObjectives, -- TrackTask / UntrackTask?
+	HideObjectives = HideObjectives,
 	-- TODO
 	MinimizeGroup = MinimizeGroup,
 	MaximizeGroup = MaximizeGroup,
 	RemoveGroup = RemoveGroup,
 	MoveGroup = MoveGroup,
-	ShowObjectives = ShowObjectives, -- TrackTask / UntrackTask?
-	HideObjectives = HideObjectives,
+	ToggleObjectives = ToggleObjectives,
 	-- Needs a table to keep currently used group frames etc in?
 }
 

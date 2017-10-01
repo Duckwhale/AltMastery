@@ -37,6 +37,11 @@ AM.versionString = GetAddOnMetadata("AltMastery", "Version")
 AM.versionString = "DEBUG"
 --@end-debug@
 
+
+-- Upvalues
+local print, format, date = print, string.format, date -- Lua APIs
+
+
 -- Global functions
 function AM:Print(msg)
 	print(format("|c00CC5500" .. "%s: " .. "|c00E6CC80%s", addonName, msg))
@@ -47,7 +52,7 @@ function AM:Debug(msg, source)
 	if not AM.db.profile.settings.debug.isEnabled then return end
 	
 	source = source or ""
-	print(format("|c000072CA" .. "%s: " .. "|c00E6CC80%s", addonName .. (source ~= "" and "_" .. source or ""), msg)) -- Display source/module if any was given
+	print(format(date("%H:%M:%S") .. " " .. "|c000072CA" .. "%s: " .. "|c00E6CC80%s", "AM" .. (source ~= "" and "_" .. source or ""), msg)) -- Display source/module if any was given
 end
 
 return AM
