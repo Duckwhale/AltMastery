@@ -210,7 +210,6 @@ local defaultTasks = {
 			Objectives = {
 			-- TODO } --/run local _, fR, fM, fN, _, _, _, fT, nT = GetFriendshipReputation(1357) print(("Your current reputation with %s is %d/%d. The previous threshold was at %d and the next one is at %d."):format(fN, fR, fM, fT, nT)
 			}
-		}
 		},
 		
 		WEEKLY_LEGION_BONUSROLLS = {
