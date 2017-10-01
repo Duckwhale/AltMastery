@@ -133,6 +133,45 @@ local function Currency(currencyID)
 	return select(2, GetCurrencyInfo(currencyID))
 end
 
+--- Returns the number of obtained bonus rolls for a given expansion
+local function BonusRolls(expansionID)
+
+-- TODO: Better to use name, currentAmount, texture, earnedThisWeek, weeklyMax, totalMax, isDiscovered, rarity = GetCurrencyInfo(id or "currencyLink" or "currencyString") for id = 1273 to get the actual max? (in case of nether disruptor etc)
+	-- local currencyIDs = {
+		-- [6] = 1273, -- Legion: Seal of Broken Fate
+	-- }
+	-- local count = select(4, GetCurrencyInfo(currencyIDs[expansionID]) or 0 -- TODO: Not very robust yet
+-- Edit: Doesn't seem to work for this currency (no max amount)... boo.
+
+
+	local bonusRollQuests = {
+		-- Legion: Seal of Broken Fate
+		[6] = {
+			[43895] = true, -- 1000 Gold
+			[43896] = true, -- 2000 Gold
+			[43897] = true, -- 4000 Gold
+			[43892] = true, -- 1000 OR
+			[43893] = true, -- 2000 OR
+			[43894] = true, -- 4000 OR
+			[43510] = true, -- Order Hall
+			[47851] = true, -- Mark of Honor x 5
+			[47864] = true, -- Mark of Honor x 10
+			[47865] = true, -- Mark of Honor x 20		
+		},
+	}
+	
+	--Count completed bonus roll quests for the week
+	local count = 0
+	for questID in pairs(bonusRollQuests[expansionID] or {}) do
+		if IsQuestFlaggedCompleted(questID) then
+			count = count + 1
+		end
+	end
+	
+	return count
+
+end
+
 -- TODO: Check for valid values? Might be unnecessary, as errors will simply be evaluated to false
 
 Criteria = {
@@ -145,6 +184,7 @@ Criteria = {
 	EventBoss = EventBoss,
 	InventoryItem = InventoryItem,
 	Currency = Currency,
+	BonusRolls = BonusRolls,
 }
 
 AM.Criteria = Criteria
