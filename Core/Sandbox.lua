@@ -45,6 +45,9 @@ local constants = { -- Used t look up actual ID if an alias was used
 	-- Currency IDs
 	ORDER_RESOURCES = 1220,
 	
+	-- Expansion IDs
+	LEGION = 6,
+	
 }
 
 local function accessBlocked()
