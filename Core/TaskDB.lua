@@ -266,7 +266,7 @@ local function SetTask(self, key, TaskObject)
 		
 	end
 	
-	local taskAlreadyExists = self:GetTask(key) ~= nil
+	local taskAlreadyExists = AM.db.global.tasks[key] ~= nil
 	if taskAlreadyExists then	-- Overwrite ("update") existing Task
 		AM.db.global.tasks[key] = TaskObject
 	else -- Create new Task and add it to the DB
