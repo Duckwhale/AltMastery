@@ -223,6 +223,8 @@ local function RemoveTask(self, key)
 end
 
 --- Returns a reference to a given Task from the TaskDB
+-- This is only used to look up Tasks by their name, as it requires iterating the entire DB
+--@param name The name (not key!) of a given Task
 -- @return Reference to the TaskObject if it exists; nil otherwise
 local function GetTask(self, key)
 
