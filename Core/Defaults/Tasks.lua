@@ -227,6 +227,14 @@ local defaultTasks = {
 			
 		},
 		
+		LIMITED_LEGIONFALL_NETHERDISRUPTOR = {
+			name = "Boon of the Nether Disruptor",
+			description = "Complete the quest \"Boon of the Nether Disruptor\" and obtain an Armorcrafter's Commendation",
+			notes = "Legendary Crafting Item",
+			iconPath = "inv_misc_scrollrolled04d",
+			Criteria = "Quest(47015) OR Quest(47012) OR Quest(47016) OR Quest(47014)", -- TODO: Building has to be up (visibility?); only show legendary follower items? based on profession? prequests = http://www.wowhead.com/item=147451/armorcrafters-commendation#comments	http://www.wowhead.com/quest=46774 -> Quest is repeatable... needs caching to detect this properly -> new feature branch, as it could get complicated
+		},
+		
 		
 }
 
