@@ -124,22 +124,25 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 		name = "All Tasks",
 		iconPath = "inv_pant_mail_raidshamanmythic_q_01",
 		taskList = {
-			"LEGENDARY_SHADOWMOURNE",
-			"WEEKLY_LEGION_WQEVENT",
-			"DAILY_WOTLK_JEWELOFTHESEWERS",
-			"DAILY_TBC_HEROICMANATOMBS",
-			"DAILY_CATA_BARADINSWARDENS",
-			"DAILY_WOD_PETBATTLE_ERRIS",
-			"DAILY_WOD_GARRISONMISSIONS",
-			"DAILY_WOD_HERBGARDEN",
-			"UNLOCK_LEGION_KOSUMOTH",
-			"UNLOCK_LEGION_MEATBALL",
-			"DAILY_WORLDEVENT_CORENDIREBREW",
-			"DAILY_WORLDEVENT_BREWFESTQUESTS",
-			"MONTHLY_WORLDEVENT_MOPTIMEWALKING",
-			
+-- TODO: Visibility			"LEGENDARY_SHADOWMOURNE",
+--	TODO: Buff(buffID) or PlayerBuff(id)?		"WEEKLY_LEGION_WQEVENT",
+--	TODO: RNG availablity		"DAILY_WOTLK_JEWELOFTHESEWERS",
+--	TODO: Dungeon OR Reputation depending on condition		"DAILY_TBC_HEROICMANATOMBS",
+-- TODO: Alternating sets of dailies			"DAILY_CATA_BARADINSWARDENS",
+--			"DAILY_WOD_PETBATTLE_ERRIS",
+--	TODO: EVENT garrison table		"DAILY_WOD_GARRISONMISSIONS",
+--	TODO. Zone/Entered		"DAILY_WOD_HERBGARDEN",
+-- TODO: Objectives(*)			"UNLOCK_LEGION_KOSUMOTH",
+--	TODO: Hide after completed		"UNLOCK_LEGION_MEATBALL",
+			"DAILY_WORLDEVENT_CORENDIREBREW", -- TODO: Keybind -> toggle to update (rebuild frames? check memory usage to see if framepool works?)
+--			"DAILY_WORLDEVENT_BREWFESTQUESTS",
+			"MONTHLY_WORLDEVENT_MOPTIMEWALKING", -- TODO: Objectives, InventoryItem, InventoryAmount ( to restock AH items?)
+-- TODO: Order Hall Autocomplete tracking	"DAILY_LEGION_WQAUTOCOMPLETE", --			
 			"RESTOCK_LEGION_ORDERHALLRESOURCES",
 			"DAILY_MOP_COOKINGSCHOOLBELL",
+			"WEEKLY_LEGION_BONUSROLLS",
+			-- "LIMITED_LEGIONFALL_NETHERDISRUPTOR", -> needs questcache
+			"LEGION_UNDERBELLY_TESTSUBJECTS",
 		},
 	}
 }
