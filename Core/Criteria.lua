@@ -102,6 +102,9 @@ local function InventoryItem(itemID)
 		
 	end
 	
+	-- If everything has been scanned, clearly the item is not in the player's inventory
+	return false
+	
 end
 
 --- Checks whether or not a given event boss has been defeated (resets daily)
