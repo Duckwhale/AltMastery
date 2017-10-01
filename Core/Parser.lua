@@ -66,7 +66,7 @@ function Parser:Evaluate(expression, silentMode)
 	local alias = expression:match("%sAS%s(.+)$")
 	if alias ~= nil then -- Remove alias and save it for later
 	
-		AM:Debug("Evaluate -> Found alias: \"" .. alias .. "\"", "Parser")
+--		AM:Debug("Evaluate -> Found alias: \"" .. alias .. "\"", "Parser")
 		expression = expression:gsub(" AS " .. alias, "")
 		
 	end
@@ -91,11 +91,11 @@ function Parser:Evaluate(expression, silentMode)
 
 		setfenv(chunk, AltMastery.Sandbox) -- All lookups will access the Sandbox instead of the global environment
 		local callSucceeded, isCriteriaFulfilled  = pcall(chunk)
-	if not silentMode then 	AM:Debug("Evaluate -> Expression " .. tostring(expression) .. " evaluated to: " .. tostring(isCriteriaFulfilled) .. ", callSucceeded = " .. tostring(callSucceeded), "Parser") end
+--	if not silentMode then 	AM:Debug("Evaluate -> Expression " .. tostring(expression) .. " evaluated to: " .. tostring(isCriteriaFulfilled) .. ", callSucceeded = " .. tostring(callSucceeded), "Parser") end
 		return isCriteriaFulfilled, alias
 		
 	else
-		AM:Debug("Evaluate -> Expression was invalid and will not be evaluated", "Parser")
+--		AM:Debug("Evaluate -> Expression was invalid and will not be evaluated", "Parser")
 	end
 	
 	-- Invalid expressions will simply return nil
