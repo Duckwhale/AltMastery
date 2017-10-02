@@ -242,6 +242,18 @@ local defaultTasks = {
 			Criteria = "Quest(43473) OR Quest(43474) OR Quest(43475) OR Quest(43476) OR Quest(43477) OR Quest(43478)", -- TODO. Req reputation?
 		},
 		
+		DAILY_DARKMOONFAIRE_PETBATTLES = {
+			name = "Darkmoon Faire: Pet Battles",
+			description = "Defeat both pet tamers at the Darkmoon Faire",
+			notes = "Pets from the reward bag",
+			iconPath = "inv_misc_bag_31", -- "inv_misc_bag_felclothbag",
+			Criteria = "WorldEvent(DARKMOON_FAIRE) AND Quest(32175) AND Quest(36471)",
+			Objectives = {
+				"Quest(32175) AS Darkmoon Pet Battle!",
+				"Quest(36471) AS A New Darkmoon Challenger!",
+			},
+		},
+		
 		-- 48799 - Veiled Argunite "Fuel of a Doomed World" (Weekly -> Argus rares, invasions etc.)
 		
 }
