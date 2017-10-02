@@ -321,6 +321,9 @@ local defaultTasks = {
 				"Quest(29509) AS Cooking: Putting the Crunch in the Frog",
 				"Quest(29512) AS First Aid: Putting the Carnies Back Together Again",
 				"Quest(29513) AS Fishing: Spoilin' for Salty Sea Dogs",
+				"Quest(29514) AS Herbalism: Herbs for Healing",
+				"Quest(29518) AS Mining: Rearm, Reuse, Recycle",
+				"Quest(29519) AS Skinning: Tan My Hide",
 			},
 		},
 		
