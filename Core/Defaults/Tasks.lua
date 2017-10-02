@@ -131,7 +131,7 @@ local PrototypeTask = {
 
 }
 
-
+-- TODO: Better naming scheme for consistency
 --- Table containing the default Tasks (as DIFF - only the entries that differ from the Prototype are included here)
 local defaultTasks = {
 
@@ -143,7 +143,6 @@ local defaultTasks = {
 			iconPath = "inv_axe_113",
 			Criteria = "(Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT)) AND NOT Achievement(4623)",
 			Objectives = {
-			
 				"Quest(24545) AS The Sacred and the Corrupt", -- TODO: Localise steps/quest names?
 				"Quest(24743) AS Shadow's Edge",
 				"Quest(24547) AS A Feast of Souls",
@@ -247,7 +246,7 @@ local defaultTasks = {
 			description = "Defeat both pet tamers at the Darkmoon Faire",
 			notes = "Pets from the reward bag",
 			iconPath = "inv_misc_bag_31", -- "inv_misc_bag_felclothbag",
-			Criteria = "WorldEvent(DARKMOON_FAIRE) AND Quest(32175) AND Quest(36471)",
+			Criteria = "WorldEvent(DARKMOON_FAIRE) AND Objectives(\"DAILY_DARKMOONFAIRE_PETBATTLES\")",
 			Objectives = {
 				"Quest(32175) AS Darkmoon Pet Battle!",
 				"Quest(36471) AS A New Darkmoon Challenger!",
@@ -259,7 +258,7 @@ local defaultTasks = {
 			description = "Complete all the daily quests available at the Darkmoon Faire",
 			notes = "Game Prizes and tickets",
 			iconPath = "inv_misc_gift_04",
-			Criteria = "WorldEvent(DARKMOON_FAIRE)", -- TODO: Completed when all objectives are done
+			Criteria = "WorldEvent(DARKMOON_FAIRE) AND Objectives(\"DAILY_DARKMOONFAIRE_QUESTS\")", -- TODO: Completed when all objectives are done
 			Objectives = {
 				"Quest(36481) AS Firebird's Challenge",
 				"Quest(29438) AS He Shoots, He Scores!",
@@ -277,7 +276,7 @@ local defaultTasks = {
 			description = "Turn in ALL the items at the Darkmoon Faire",
 			notes = "Tickets",
 			iconPath = "inv_misc_ticket_darkmoon_01",
-			Criteria = "WorldEvent(DARKMOON_FAIRE)", -- TODO: Completed when all / at least one objective(s) is done?
+			Criteria = "WorldEvent(DARKMOON_FAIRE) AND Objectives(\"MONTHLY_DARKMOONFAIRE_TURNINS\")", -- TODO: Completed when at least one objective(s) is done?
 			Objectives = {
 				"Quest(29451) OR InventoryItem(71715) AS A Treatise on Strategy",
 				"Quest(29456) OR InventoryItem(71951) AS Banner of the Fallen",
