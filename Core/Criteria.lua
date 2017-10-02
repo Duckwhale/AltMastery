@@ -179,16 +179,27 @@ local function Profession(iconID)
 
 	local prof1, prof2, archaeology, fishing, cooking, firstAid = GetProfessions()
 	
-	if not iconID or not (prof1 or prof2) then return false end -- Can't possibly have the profession
+	local profs = {
+		prof1 = prof1,
+		prof2 = prof2,
+		archaeology = archaeology,
+		fishing = fishing,
+		cooking = cooking,
+		firstAid = firstAid,
+	}
 	
-	-- Check the player's professions for a match
-	local name, icon, skillLevel, maxSkillLevel, numAbilities, spelloffset, skillLine, skillModifier, specializationIndex, specializationOffset = GetProfessionInfo(prof1 or 0)
-	
-	if iconID == icon then return true end -- First profession matched
-	
-	name, icon, skillLevel, maxSkillLevel, numAbilities, spelloffset, skillLine, skillModifier, specializationIndex, specializationOffset = GetProfessionInfo(prof2 or 0)
-	
-	if iconID == icon then return true end -- Second profession matched
+	for key, profession in pairs(profs) do -- Check if the profession matches)
+		
+		local icon = select(2, GetProfessionInfo(profession))
+		if not iconID or not icon then return false end -- Can't possibly have the profession
+		
+		if (iconID == icon) then -- Player has the requested profession
+			return true
+		end
+		
+		-- ... keep looking
+		
+	end
 	
 	return false -- No match
 		
