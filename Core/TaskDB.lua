@@ -311,7 +311,7 @@ local function CreateTask() -- TODO: Parameters could be used to automatically s
 	local mt = {
 		__index = prototype, -- Simply look up any key that can't be found (right now, that means everything because the NewTaskObject is empty) in the prototypeTask table
 		__tostring = function(self) -- Serialise object for debug output and return a string representation
-			local strrep = self.name .. " = { icon = " .. self.iconPath .. ", description = " .. self.description .. ", notes = " .. self.notes .. ", isReadOnly = " .. tostring(self.isReadOnly) .. ", Criteria = " .. self.Criteria .. ", Objectives = <" .. #self.Objectives .. " Objectives> }"
+			local strrep = self.name .. " = { icon = " .. self.iconPath .. ", description = " .. self.description .. ", notes = " .. self.notes .. ", isReadOnly = " .. tostring(self.isReadOnly) .. ", Criteria = " .. self.Criteria .. ", Filter = " .. self.Filter .. ", Objectives = <" .. #self.Objectives .. " Objectives> }"
 			return strrep
 		end,
 	}

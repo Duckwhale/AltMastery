@@ -35,6 +35,7 @@ local PrototypeTask = {
 	Criteria = "false", -- Will never be "completed"
 	iconPath = "Interface\\Icons\\inv_misc_questionmark",
 	isEnabled = true, -- This Task will be available in any list that references it
+	Filter = "false", -- Task should always be included
 	
 	-- Complex data types
 	Completions = {}, -- It will never be completed, thusly there is no completions data
@@ -350,6 +351,7 @@ local function GetDefaultTasks()
 		Task.Criteria = entry.Criteria or ""
 		Task.Objectives = entry.Objectives or {}
 		Task.objectID = key
+		Task.Filter = entry.Filter or "false"
 	-- AceDB overwrites them? Move Tasks API elsewhere, so it can still be used... --	if not getmetatable(Task) then error("NO MT") else dump(getmetatable(Task)); error("HAS MT") end
 		-- Store in table that will be added to AceDB defaults
 --		AM:Debug("Loaded default Task with key = " .. tostring(key) .. ", tostring() = " .. tostring(Task) , "TaskDB")
