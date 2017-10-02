@@ -233,9 +233,15 @@ local function NumObjectives(taskID)
 	
 end
 
---- Returns the player's level
-local function Level()
-	return UnitLevel("player")
+--- Returns whether or not the player has reached the given level, or the player's level if none has been given
+local function Level(filterLevel)
+	
+	local level = UnitLevel("player")
+	
+	if type(filterLevel) == "number" then return (filterLevel == level)
+	else return level
+	end
+	
 end
 
 Criteria = {
