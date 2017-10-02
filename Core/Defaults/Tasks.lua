@@ -254,6 +254,77 @@ local defaultTasks = {
 			},
 		},
 		
+		DAILY_DARKMOONFAIRE_QUESTS = {
+			name = "Darkmoon Faire: Daily Quests",
+			description = "Complete all the daily quests available at the Darkmoon Faire",
+			notes = "Game Prizes and tickets",
+			iconPath = "inv_misc_gift_04",
+			Criteria = "WorldEvent(DARKMOON_FAIRE)", -- TODO: Completed when all objectives are done
+			Objectives = {
+				"Quest(36481) AS Firebird's Challenge",
+				"Quest(29438) AS He Shoots, He Scores!",
+				"Quest(29463) AS It's Hammer Time",
+				"Quest(29455) AS Target: Turtle",
+				"Quest(29436) AS The Humanoid Cannonball",
+				"Quest(37910) AS The Real Race",				
+				"Quest(37911) AS The Real Big Race",
+				"Quest(29434) AS Tonk Commander",
+			},
+		},
+		
+		MONTHLY_DARKMOONFAIRE_TURNINS = {
+			name = "Darkmoon Faire: Turnins",
+			description = "Turn in ALL the items at the Darkmoon Faire",
+			notes = "Tickets",
+			iconPath = "inv_misc_ticket_darkmoon_01",
+			Criteria = "WorldEvent(DARKMOON_FAIRE)", -- TODO: Completed when all / at least one objective(s) is done?
+			Objectives = {
+				"Quest(29451) OR InventoryItem(71715) AS Obtain A Treatise on Strategy",
+				"Quest(29456) OR InventoryItem(71951) AS Obtain Banner of the Fallen",
+				"Quest(29457) OR InventoryItem(71952) AS Obtain Captured Insignia",
+				"Quest(29458) OR InventoryItem(71953) AS Obtain Fallen Adventurer's Journal",
+				"Quest(29443) OR InventoryItem(71635) AS Obtain Imbued Crystal",
+				"Quest(29444) OR InventoryItem(71636) AS Obtain Monstrous Egg",
+				"Quest(29445) OR InventoryItem(71637) AS Obtain Mysterious Grimoire",
+				"Quest(29446) OR InventoryItem(71638) AS Obtain Ornate Weapon",
+				"Quest(29464) OR InventoryItem(71716) AS Obtain Soothsayer's Runes",
+				"Quest(29451) AS The Master Strategist",
+				"Quest(29456) AS A Captured Banner",	
+				"Quest(29457) AS The Enemy's Insignia",	
+				"Quest(29458) AS The Captured Journal",
+				"Quest(29443) AS A Curious Crystal",	
+				"Quest(29444) AS An Exotic Egg",				
+				"Quest(29445) AS An Intriguing Grimoire",			
+				"Quest(29446) AS A Wondrous Weapon",	
+				"Quest(29464) AS Tools of Divination",
+				"Quest(29433) AS Test Your Strength",
+				"Quest(33354) AS Den Mother's Demise",
+				"Quest(38934) AS Silas' Secret Stash", -- One-time only
+			},
+		},
+		
+		MONTHLY_DARKMOONFAIRE_PROFESSIONQUESTS = {
+			name = "Darkmoon Faire: Profession Quests",
+			description = "Complete all Darkmoon Faire quests for your character's learned professions",
+			notes = "Tickets and free skill ups",
+			iconPath = "inv_misc_ticket_darkmoon_01",
+			Criteria = "WorldEvent(DARKMOON_FAIRE)", -- TODO: Completed when the profession quests for the actual professions are done?
+			Objectives = {
+				"Quest(29506) AS Alchemy: A Fizzy Fusion",
+				"Quest(29508) AS Blacksmithing: Baby Needs Two Pairs of Shoes",
+				"Quest(29510) AS Enchanting: Putting Trash to Good Use",
+				"Quest(29511) AS Engineering: Talking Tonks",
+				"Quest(29515) AS Inscription: Writing the Future",
+				"Quest(29516) AS Jewelcrafting: Keeping the Faire Sparkling",
+				"Quest(29517) AS Leatherworking: Eyes on the Prizes",
+				"Quest(29520) AS Tailoring: Banners, Banners Everywhere!",
+				-- "Quest(29507) AS Archaeology: Fun for the Little Ones",
+				"Quest(29509) AS Cooking: Putting the Crunch in the Frog",
+				"Quest(29512) AS First Aid: Putting the Carnies Back Together Again",
+				"Quest(29513) AS Fishing: Spoilin' for Salty Sea Dogs",
+			},
+		},
+		
 		-- 48799 - Veiled Argunite "Fuel of a Doomed World" (Weekly -> Argus rares, invasions etc.)
 		
 }
