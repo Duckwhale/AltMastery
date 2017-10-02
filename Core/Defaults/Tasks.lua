@@ -222,7 +222,7 @@ local defaultTasks = {
 			notes = "Gold missions (and sometimes others)",
 			iconPath = "inv_orderhall_orderresources",
 			Criteria = "Currency(ORDER_RESOURCES) >= 5000",
-			
+			Filter = "Level() < 110",
 		},
 		
 		DAILY_MOP_COOKINGSCHOOLBELL = {
@@ -243,6 +243,7 @@ local defaultTasks = {
 			notes = "Decrease in efficiency, so get one per week",
 			iconPath = "inv_misc_azsharacoin",
 			Criteria = "BonusRolls(LEGION) > 0", -- TODO: More options for efficiency -> 1 coin per week
+			Filter = "Level() < 110",
 			Objectives = {
 				"BonusRolls(LEGION) == 1 AS First seal received",
 				"BonusRolls(LEGION) == 2 AS Second seal received",
@@ -257,6 +258,7 @@ local defaultTasks = {
 			notes = "Legendary Crafting Item",
 			iconPath = "inv_misc_scrollrolled04d",
 			Criteria = "Quest(47015) OR Quest(47012) OR Quest(47016) OR Quest(47014)", -- TODO: Building has to be up (visibility?); only show legendary follower items? based on profession? prequests = http://www.wowhead.com/item=147451/armorcrafters-commendation#comments	http://www.wowhead.com/quest=46774 -> Quest is repeatable... needs caching to detect this properly -> new feature branch, as it could get complicated
+			Filter = "Level() < 110",
 		},
 		
 		LEGION_UNDERBELLY_TESTSUBJECTS = {
@@ -265,6 +267,7 @@ local defaultTasks = {
 			notes = "150 Sightless Eyes",
 			iconPath = "achievement_reputation_kirintor_offensive",
 			Criteria = "Quest(43473) OR Quest(43474) OR Quest(43475) OR Quest(43476) OR Quest(43477) OR Quest(43478)", -- TODO. Req reputation?
+			Filter = "Level() < 110",
 		},
 		
 		DAILY_DARKMOONFAIRE_PETBATTLES = {
