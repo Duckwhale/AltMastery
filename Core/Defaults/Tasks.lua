@@ -143,7 +143,7 @@ local defaultTasks = {
 --			ResetType = "ONE_TIME", -- TODO
 			iconPath = "inv_axe_113",
 			Criteria = "Achievement(4623)",
-			Filter = "not (Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT))",
+			Filter = " NOT (Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT)) OR Level() < 80",
 			Objectives = {
 				"Quest(24545) AS The Sacred and the Corrupt", -- TODO: Localise steps/quest names?
 				"Quest(24743) AS Shadow's Edge",
