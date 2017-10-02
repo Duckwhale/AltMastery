@@ -245,7 +245,12 @@ local function AddGroup(self, Group)
 			
 		end
 		
-		self:AddTask(Task, groupWidget)
+		local isTaskFiltered = AM.Parser:Evaluate(Task.Filter)
+		if isTaskFiltered then -- Don't add Task to the active Group (as it isn't useful for the currently logged in character)
+			AM:Debug("Hiding Task " .. Task.name .. " because it is filtered", "Tracker")
+		else
+			self:AddTask(Task, groupWidget)
+		end
 		
 	end
 	
