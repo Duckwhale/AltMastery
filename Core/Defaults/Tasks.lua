@@ -131,10 +131,10 @@ local PrototypeTask = {
 
 }
 
--- TODO: Better naming scheme for consistency
+
 --- Table containing the default Tasks (as DIFF - only the entries that differ from the Prototype are included here)
 local defaultTasks = {
-
+-- TODO: Better naming scheme for consistency
 		LEGENDARY_SHADOWMOURNE = {
 			name = "Unlock Shadowmourne",
 			description = "Retrieve Shadowmourne from the depths of Icecrown Citadel",
@@ -276,7 +276,7 @@ local defaultTasks = {
 			description = "Turn in ALL the items at the Darkmoon Faire",
 			notes = "Tickets",
 			iconPath = "inv_misc_ticket_darkmoon_01",
-			Criteria = "WorldEvent(DARKMOON_FAIRE) AND Objectives(\"MONTHLY_DARKMOONFAIRE_TURNINS\")", -- TODO: Completed when at least one objective(s) is done?
+			Criteria = "WorldEvent(DARKMOON_FAIRE) AND NumObjectives(\"MONTHLY_DARKMOONFAIRE_TURNINS\") > 9", -- At least a few of the cheaper turnin items should be used, otherwise it's hardly worth going there
 			Objectives = {
 				"Quest(29451) OR InventoryItem(71715) AS A Treatise on Strategy",
 				"Quest(29456) OR InventoryItem(71951) AS Banner of the Fallen",
