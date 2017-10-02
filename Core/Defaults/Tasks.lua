@@ -307,7 +307,7 @@ local defaultTasks = {
 			description = "Complete all Darkmoon Faire quests for your character's learned professions",
 			notes = "Tickets and free skill ups",
 			iconPath = "inv_misc_ticket_darkmoon_01",
-			Criteria = "WorldEvent(DARKMOON_FAIRE)", -- TODO: Completed when the profession quests for the actual professions are done?
+			Criteria = "WorldEvent(DARKMOON_FAIRE) AND NumObjectives(\"MONTHLY_DARKMOONFAIRE_PROFESSIONQUESTS\") > 0", -- TODO: Completed when the profession quests for the actual professions are done?
 			Objectives = {
 				"Quest(29506) AS Alchemy: A Fizzy Fusion",
 				"Quest(29508) AS Blacksmithing: Baby Needs Two Pairs of Shoes",
