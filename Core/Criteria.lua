@@ -194,6 +194,21 @@ local function Profession(iconID)
 		
 end
 
+--- Returns whether all Objectives for a given Task are completed
+-- This is useful to automatically complete Tasks without having to repeat their individual Objective's criteria
+local function Objectives(taskID)
+
+	local Task = AM.TaskDB:GetTask(taskID)
+
+	if not Task or #Task.Objectives == 0 then return end -- Invalid Tasks or Tasks without Objectives can never return true
+
+	local numObjectives = #Task.Objectives
+	local numCompletedObjectives = AM.TaskDB.PrototypeTask.GetNumCompletedObjectives(Task)
+
+	return (numObjectives == numCompletedObjectives)
+
+end
+
 Criteria = {
 	
 	Quest = Quest,
@@ -205,6 +220,7 @@ Criteria = {
 	InventoryItem = InventoryItem,
 	Currency = Currency,
 	BonusRolls = BonusRolls,
+	Objectives = Objectives,
 }
 
 AM.Criteria = Criteria
