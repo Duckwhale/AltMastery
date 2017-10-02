@@ -134,14 +134,13 @@ local methods = {
 	
 		-- Shorthands
 		local status = self.localstatus
+		local activeStyle = AM.GUI:GetActiveStyle()
+		local label, completionIcon, content = self.label, self.completionIcon, self.content
 		
 		-- Update with current settings (also provides default values after the local status has been wiped)
 		status.iconSize = AM.db.profile.settings.display.iconSize	
 		status.text = status.text or "<ERROR>"
 		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
-		
-				
-		local label, completionIcon, content = self.label, self.completionIcon, self.content
 		
 		-- Update completion icon
 --print("status.isCompleted = " .. tostring(status.isCompleted))
@@ -168,7 +167,7 @@ local methods = {
 		label:SetText(isGroup and string.upper(status.text) or status.text)
 		
 		-- Set font and height of the text based on the type
-		local activeStyle = AM.GUI:GetActiveStyle()
+
 	--	local isGroup = self:IsFlaggedAsGroup() -- 4, 5
 		local fontSize = (isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small -- isGroupHeader has to be set by the Tracker when creating the widget (will default to Task otherwise)
 		local fontStyle = isGroup and activeStyle.fonts.groups or activeStyle.fonts.tasks
@@ -186,7 +185,6 @@ local methods = {
 		border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
 		
 		-- Pick colours according to type
-		local activeStyle = AM.GUI:GetActiveStyle()
 		local frameColour = (isGroup and activeStyle.frameColours.InlineHeader) or (isTask and activeStyle.frameColours.InlineElement) or (isObjective and activeStyle.frameColours.ExpandedElement) or activeStyle.frameColours.ContentPane -- TODO: Rename&default instead of content pane
 		
 		AM.GUI:SetFrameColour(border, frameColour) -- TODO: Colour differently based on type (update also, via localstatus)
