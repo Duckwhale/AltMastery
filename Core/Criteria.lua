@@ -174,12 +174,32 @@ end
 
 -- TODO: Check for valid values? Might be unnecessary, as errors will simply be evaluated to false
 
+--- Returns whether or not the player has a certain profession
+local function Profession(iconID)
+
+	local prof1, prof2, archaeology, fishing, cooking, firstAid = GetProfessions()
+	
+	if not iconID or not (prof1 or prof2) then return false end -- Can't possibly have the profession
+	
+	-- Check the player's professions for a match
+	local name, icon, skillLevel, maxSkillLevel, numAbilities, spelloffset, skillLine, skillModifier, specializationIndex, specializationOffset = GetProfessionInfo(prof1 or 0)
+	
+	if iconID == icon then return true end -- First profession matched
+	
+	name, icon, skillLevel, maxSkillLevel, numAbilities, spelloffset, skillLine, skillModifier, specializationIndex, specializationOffset = GetProfessionInfo(prof2 or 0)
+	
+	if iconID == icon then return true end -- Second profession matched
+	
+	return false -- No match
+		
+end
+
 Criteria = {
 	
 	Quest = Quest,
 	Class = Class,
 	Achievement = Achievement,
-
+	Profession = Profession,
 	WorldEvent = WorldEvent,
 	EventBoss = EventBoss,
 	InventoryItem = InventoryItem,
