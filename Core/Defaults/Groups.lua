@@ -144,6 +144,8 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			-- "LIMITED_LEGIONFALL_NETHERDISRUPTOR", -> needs questcache
 			"LEGION_UNDERBELLY_TESTSUBJECTS",
 			"DAILY_DARKMOONFAIRE_PETBATTLES",
+			"MONTHLY_DARKMOONFAIRE_TURNINS",
+			"MONTHLY_DARKMOONFAIRE_PROFESSIONQUESTS",
 		},
 	}
 }
