@@ -217,9 +217,8 @@ local function NumObjectives(taskID)
 
 	if not Task or #Task.Objectives == 0 then return end -- Invalid Tasks or Tasks without Objectives can never return true
 
-	local numObjectives = #Task.Objectives
-	
-	return numObjectives
+	local numCompletedObjectives = AM.TaskDB.PrototypeTask.GetNumCompletedObjectives(Task)
+	return numCompletedObjectives
 	
 end
 
