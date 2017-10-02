@@ -209,6 +209,20 @@ local function Objectives(taskID)
 
 end
 
+--- Returns the number of completed Objectives for the given Task
+-- This is useful to complete Tasks if any Objectives are completed
+local function NumObjectives(taskID)
+
+	local Task = AM.TaskDB:GetTask(taskID)
+
+	if not Task or #Task.Objectives == 0 then return end -- Invalid Tasks or Tasks without Objectives can never return true
+
+	local numObjectives = #Task.Objectives
+	
+	return numObjectives
+	
+end
+
 Criteria = {
 	
 	Quest = Quest,
@@ -221,6 +235,7 @@ Criteria = {
 	Currency = Currency,
 	BonusRolls = BonusRolls,
 	Objectives = Objectives,
+	NumObjectives = NumObjectives,
 }
 
 AM.Criteria = Criteria
