@@ -171,6 +171,28 @@ local defaultTasks = {
 			},
 		},
 
+		UNLOCK_LEGION_KOSUMOTH = {
+			name = "Kosumoth the Hungering",
+			description = "Unlock and defeat Kosumoth the Hungering",
+			notes = "Pet",
+			iconPath = "spell_priest_voidtendrils",
+			Criteria = "Objectives(\"UNLOCK_LEGION_KOSUMOTH\")", -- TODO: WQ and stuff -> 43798 ?
+			Filter = "Level() < 110",
+			Objectives = {
+				"Quest(43730) AS Activated First Orb",
+				"Quest(43731) AS Activated Second Orb",
+				"Quest(43732) AS Activated Third Orb",
+				"Quest(43733) AS Activated Fourth Orb",
+				"Quest(43734) AS Activated Fifth Orb",
+				"Quest(43735) AS Activated Sixth Orb",
+				"Quest(43736) AS Activated Seventh Orb",
+				"Quest(43737) AS Activated Eight Orb",
+				"Quest(43760) AS Activated Ninth Orb",
+				"Quest(43761) AS Activated Tenth Orb",
+				-- Defeated WQ boss (if it is up) -> TODO
+			},
+		},
+		
 		DAILY_WORLDEVENT_CORENDIREBREW = {
 			name = "Coren Direbrew defeated",
 			description = "Defeat Coren Direbrew in the Grim Guzzler during the Brewfest world event",
