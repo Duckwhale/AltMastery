@@ -107,6 +107,7 @@ local defaultStyle = {
 	
 	iconReady = "Interface\\RaidFrame\\ReadyCheck-Ready",
 	iconNotReady = "Interface\\RaidFrame\\ReadyCheck-NotReady",
+	iconWaiting = "Interface\\RaidFrame\\ReadyCheck-Waiting",
 	edgeSize = 2,
 
 }

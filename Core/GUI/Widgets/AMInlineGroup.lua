@@ -143,8 +143,7 @@ local methods = {
 		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
 		
 		-- Update completion icon
---print("status.isCompleted = " .. tostring(status.isCompleted))
-		local iconPath = (status.isCompleted ~= nil) and AM.GUI:GetActiveStyle()[status.isCompleted and "iconReady" or "iconNotReady"] or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
+		local iconPath = (status.isCompleted ~= nil) and activeStyle[status.isCompleted and "iconReady" or "iconNotReady"] or  activeStyle.iconWaiting -- TODO: settings / remove prefix to save some space
 		completionIcon:SetImage(iconPath)
 		completionIcon:SetImageSize(status.iconSize, status.iconSize)
 		
