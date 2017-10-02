@@ -233,10 +233,16 @@ local function NumObjectives(taskID)
 	
 end
 
+--- Returns the player's level
+local function Level()
+	return UnitLevel("player")
+end
+
 Criteria = {
 	
 	Quest = Quest,
 	Class = Class,
+	Level = Level,
 	Achievement = Achievement,
 	Profession = Profession,
 	WorldEvent = WorldEvent,
