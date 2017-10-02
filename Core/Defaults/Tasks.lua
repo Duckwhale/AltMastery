@@ -163,11 +163,11 @@ local defaultTasks = {
 			description = "Complete the weekly quest \"The World Awaits\" and claim your reward",
 			notes = "5000 Order Hall Resources",
 			iconPath = "achievement_reputation_08",
-			Criteria = "Buff(225788) AND Quest(44175)", -- "Sign of the Emissary" buff is only available when the event is active (TODO: This should be a criteria to show the Task in the default group, not for completion. But is that implemented yet?)
+			Criteria = "Objectives(\"WEEKLY_LEGION_WQEVENT\")",
+			Filter = " NOT Buff(225788) OR NOT Level(110)", -- "Sign of the Emissary" buff is only available when the event is active. This is much simpler and also more reliable than checking the calendar
 			Objectives = {
-				"Level(110) AS Level 100",
 				"Quest(43341) AS Uniting the Isles",
-				-- TODO: 20 WQs
+				"Quest(44175) AS The World Awaits",
 			},
 		},
 
