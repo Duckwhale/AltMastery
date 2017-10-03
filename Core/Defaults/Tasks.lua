@@ -358,6 +358,23 @@ local defaultTasks = {
 		
 		-- 48799 - Veiled Argunite "Fuel of a Doomed World" (Weekly -> Argus rares, invasions etc.)
 		
+		WEEKLY_LEGION_GREATERINVASIONPOINT = {
+			name = "Greater Invasion Points cleared",
+			description = "Defeat the Legion General by completing the Greater Invasion Point scenario available for the week",
+			notes = "Gear and Veiled Argunite",
+			iconPath = "inv_artifact_dimensionalrift",
+			Criteria = "NumObjectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT\") > 0",
+			Filter = "Level() < 110",
+			Objectives = {
+				"Quest(49165) AS Occularus defeated",
+				"Quest(49166) AS Inquisitor Meto defeated",
+				"Quest(49167) AS Mistress Alluradel defeated",
+				"Quest(49168) AS Pit Lord Vilemus defeated",
+				"Quest(49169) AS Matron Folnuna defeated",
+				"Quest(49171) AS Sotanathor defeated",
+			},
+		},
+
 }
 
 
