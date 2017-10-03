@@ -375,6 +375,14 @@ local defaultTasks = {
 			},
 		},
 
+		WEEKLY_LEGION_ARGUSTROOPS = {
+			name = "Krokuul Ridgestalker recruited",
+			description = "Complete the weekly quest \"Supplying Krokuun\" to recruit a Krokuul Ridgestalker",
+			iconPath = "achievement_reputation_ashtonguedeathsworn",
+			Criteria = "Quest(48910)",
+			Filter = "Level() < 110", -- TODO: Story progress?
+		},
+		
 }
 
 
