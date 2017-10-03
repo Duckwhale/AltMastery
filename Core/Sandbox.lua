@@ -32,6 +32,20 @@ if not AM then return end
 -- TODO: Move elsewhere
 local constants = { -- Used t look up actual ID if an alias was used
 	
+	-- Class IDs
+	WARRIOR = 1,
+	PALADIN = 2,
+	HUNTER = 3,
+	ROGUE = 4,
+	PRIEST = 5,
+	DEATHKNIGHT = 6,
+	SHAMAN = 7,
+	MAGE = 8,
+	WARLOCK = 9,
+	MONK = 10,
+	DRUID = 11,
+	DEMONHUNTER = 12,
+	
 	-- Holidays (texture IDs)
 	BREWFEST = 235441,
 	TIMEWALKING_MOP = { 

@@ -35,6 +35,7 @@ local PrototypeTask = {
 	Criteria = "false", -- Will never be "completed"
 	iconPath = "Interface\\Icons\\inv_misc_questionmark",
 	isEnabled = true, -- This Task will be available in any list that references it
+	Filter = "false", -- Task should always be included
 	
 	-- Complex data types
 	Completions = {}, -- It will never be completed, thusly there is no completions data
@@ -141,7 +142,8 @@ local defaultTasks = {
 --			Priority = "OPTIONAL", -- TODO: Localise priorities
 --			ResetType = "ONE_TIME", -- TODO
 			iconPath = "inv_axe_113",
-			Criteria = "(Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT)) AND NOT Achievement(4623)",
+			Criteria = "Achievement(4623)",
+			Filter = " NOT (Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT)) OR Level() < 80",
 			Objectives = {
 				"Quest(24545) AS The Sacred and the Corrupt", -- TODO: Localise steps/quest names?
 				"Quest(24743) AS Shadow's Edge",
@@ -161,14 +163,36 @@ local defaultTasks = {
 			description = "Complete the weekly quest \"The World Awaits\" and claim your reward",
 			notes = "5000 Order Hall Resources",
 			iconPath = "achievement_reputation_08",
-			Criteria = "Buff(225788) AND Quest(44175)", -- "Sign of the Emissary" buff is only available when the event is active (TODO: This should be a criteria to show the Task in the default group, not for completion. But is that implemented yet?)
+			Criteria = "Objectives(\"WEEKLY_LEGION_WQEVENT\")",
+			Filter = " NOT Buff(225788) OR NOT Level(110)", -- "Sign of the Emissary" buff is only available when the event is active. This is much simpler and also more reliable than checking the calendar
 			Objectives = {
-				"Level(110) AS Level 100",
 				"Quest(43341) AS Uniting the Isles",
-				-- TODO: 20 WQs
+				"Quest(44175) AS The World Awaits",
 			},
 		},
 
+		UNLOCK_LEGION_KOSUMOTH = {
+			name = "Kosumoth the Hungering",
+			description = "Unlock and defeat Kosumoth the Hungering",
+			notes = "Pet",
+			iconPath = "spell_priest_voidtendrils",
+			Criteria = "Objectives(\"UNLOCK_LEGION_KOSUMOTH\")", -- TODO: WQ and stuff -> 43798 ?
+			Filter = "Level() < 110",
+			Objectives = {
+				"Quest(43730) AS Activated First Orb",
+				"Quest(43731) AS Activated Second Orb",
+				"Quest(43732) AS Activated Third Orb",
+				"Quest(43733) AS Activated Fourth Orb",
+				"Quest(43734) AS Activated Fifth Orb",
+				"Quest(43735) AS Activated Sixth Orb",
+				"Quest(43736) AS Activated Seventh Orb",
+				"Quest(43737) AS Activated Eight Orb",
+				"Quest(43760) AS Activated Ninth Orb",
+				"Quest(43761) AS Activated Tenth Orb",
+				-- Defeated WQ boss (if it is up) -> TODO
+			},
+		},
+		
 		DAILY_WORLDEVENT_CORENDIREBREW = {
 			name = "Coren Direbrew defeated",
 			description = "Defeat Coren Direbrew in the Grim Guzzler during the Brewfest world event",
@@ -184,7 +208,8 @@ local defaultTasks = {
 			description = "Complete the quest \"The Shrouded Coin\" during the Mists of Pandaria Timewalking event",
 			notes = "500 Timewarped Badges",
 			iconPath = "timelesscoin_yellow",
-			Criteria = "WorldEvent(TIMEWALKING_MOP) AND Quest(45563)", -- 45799 = A shrouded path... gnah.
+			Criteria = "Quest(45563)", -- 45799 = A shrouded path... gnah.
+			Filter = " NOT WorldEvent(TIMEWALKING_MOP)",
 			Objectives = {
 				"InventoryItem(143776) OR Quest(45563) AS Obtain a Shrouded Timewarped Coin",
 				"Quest(45563) AS Bring it to Mistweaver Xia on the Timeless Isle",
@@ -197,7 +222,7 @@ local defaultTasks = {
 			notes = "Gold missions (and sometimes others)",
 			iconPath = "inv_orderhall_orderresources",
 			Criteria = "Currency(ORDER_RESOURCES) >= 5000",
-			
+			Filter = "Level() < 110",
 		},
 		
 		DAILY_MOP_COOKINGSCHOOLBELL = {
@@ -206,6 +231,7 @@ local defaultTasks = {
 			notes = "Ironpaw Tokens",
 			iconPath = "inv_misc_bell_01",
 			Criteria = "Quest(31521) AND Quest(31337) AND InventoryItem(86425)", -- To be a Master, Token of Appreciation - TODO: not the most accurate criteria yet (reputation)
+			Filter = "not Profession(COOKING)",
 			Objectives = {
 			-- TODO } --/run local _, fR, fM, fN, _, _, _, fT, nT = GetFriendshipReputation(1357) print(("Your current reputation with %s is %d/%d. The previous threshold was at %d and the next one is at %d."):format(fN, fR, fM, fT, nT)
 			}
@@ -217,6 +243,7 @@ local defaultTasks = {
 			notes = "Decrease in efficiency, so get one per week",
 			iconPath = "inv_misc_azsharacoin",
 			Criteria = "BonusRolls(LEGION) > 0", -- TODO: More options for efficiency -> 1 coin per week
+			Filter = "Level() < 110",
 			Objectives = {
 				"BonusRolls(LEGION) == 1 AS First seal received",
 				"BonusRolls(LEGION) == 2 AS Second seal received",
@@ -231,6 +258,7 @@ local defaultTasks = {
 			notes = "Legendary Crafting Item",
 			iconPath = "inv_misc_scrollrolled04d",
 			Criteria = "Quest(47015) OR Quest(47012) OR Quest(47016) OR Quest(47014)", -- TODO: Building has to be up (visibility?); only show legendary follower items? based on profession? prequests = http://www.wowhead.com/item=147451/armorcrafters-commendation#comments	http://www.wowhead.com/quest=46774 -> Quest is repeatable... needs caching to detect this properly -> new feature branch, as it could get complicated
+			Filter = "Level() < 110",
 		},
 		
 		LEGION_UNDERBELLY_TESTSUBJECTS = {
@@ -239,6 +267,7 @@ local defaultTasks = {
 			notes = "150 Sightless Eyes",
 			iconPath = "achievement_reputation_kirintor_offensive",
 			Criteria = "Quest(43473) OR Quest(43474) OR Quest(43475) OR Quest(43476) OR Quest(43477) OR Quest(43478)", -- TODO. Req reputation?
+			Filter = "Level() < 110",
 		},
 		
 		DAILY_DARKMOONFAIRE_PETBATTLES = {
@@ -350,6 +379,7 @@ local function GetDefaultTasks()
 		Task.Criteria = entry.Criteria or ""
 		Task.Objectives = entry.Objectives or {}
 		Task.objectID = key
+		Task.Filter = entry.Filter or "false"
 	-- AceDB overwrites them? Move Tasks API elsewhere, so it can still be used... --	if not getmetatable(Task) then error("NO MT") else dump(getmetatable(Task)); error("HAS MT") end
 		-- Store in table that will be added to AceDB defaults
 --		AM:Debug("Loaded default Task with key = " .. tostring(key) .. ", tostring() = " .. tostring(Task) , "TaskDB")
