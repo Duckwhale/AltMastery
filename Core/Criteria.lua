@@ -174,7 +174,7 @@ end
 
 -- TODO: Check for valid values? Might be unnecessary, as errors will simply be evaluated to false
 
---- Returns whether or not the player has a certain profession
+--- Returns the profession skill level if the player has the given profession, or 0 otherwise
 local function Profession(iconID)
 
 	local prof1, prof2, archaeology, fishing, cooking, firstAid = GetProfessions()
@@ -190,18 +190,18 @@ local function Profession(iconID)
 	
 	for key, profession in pairs(profs) do -- Check if the profession matches)
 		
-		local icon = select(2, GetProfessionInfo(profession))
+		local _, icon, skillLevel = GetProfessionInfo(profession)
 		if not iconID or not icon then return false end -- Can't possibly have the profession
 		
 		if (iconID == icon) then -- Player has the requested profession
-			return true
+			return skillLevel
 		end
 		
 		-- ... keep looking
 		
 	end
 	
-	return false -- No match
+	return 0 -- No match
 		
 end
 
