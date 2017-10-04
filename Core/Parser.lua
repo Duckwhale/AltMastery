@@ -73,7 +73,7 @@ function Parser:Evaluate(expression, silentMode)
 	
 	-- Assemble string that can be loaded (TODO: ?? symbols in string are annoying)
 	local sandboxedExpression = [[
-		-- Evaluate critera using the Criteria functions made available in the sandbox and store its return value
+		-- Evaluate criteria using the Criteria functions made available in the sandbox and store its return value
 		local isCriteriaFulfilled = 
 		]]
 		
