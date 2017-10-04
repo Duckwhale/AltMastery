@@ -27,7 +27,7 @@ local defaults = {
 		taskSize = 30,
 		objectiveSize = 24,
 		iconSize = 20,
-		
+		showCompleted = false,
 		highlightExpandedElements = true,
 	},
 	
