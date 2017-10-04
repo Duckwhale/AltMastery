@@ -176,7 +176,7 @@ local defaultTasks = {
 			description = "Unlock access to Kosumoth the Hungering",
 			notes = "Pet",
 			iconPath = "spell_priest_voidtendrils",
-			Criteria = "Objectives(\"UNLOCK_LEGION_KOSUMOTH\")", -- TODO: WQ and stuff -> 43798 ?
+			Criteria = "Objectives(\"UNLOCK_LEGION_KOSUMOTH\")",
 			Filter = "Level() < 110 OR WorldQuest(43798)", -- Hide if the WQ is up, as that means it has already been unlocked
 			Objectives = {
 				"Quest(43730) AS Activated First Orb",
@@ -189,7 +189,6 @@ local defaultTasks = {
 				"Quest(43737) AS Activated Eight Orb",
 				"Quest(43760) AS Activated Ninth Orb",
 				"Quest(43761) AS Activated Tenth Orb",
-				-- Defeated WQ boss (if it is up) -> TODO
 			},
 		},
 		
@@ -359,11 +358,11 @@ local defaultTasks = {
 		-- 48799 - Veiled Argunite "Fuel of a Doomed World" (Weekly -> Argus rares, invasions etc.)
 		
 		WEEKLY_LEGION_GREATERINVASIONPOINT = {
-			name = "Greater Invasion Points cleared",
+			name = "Greater Invasion Point cleared",
 			description = "Defeat the Legion General by completing the Greater Invasion Point scenario available for the week",
 			notes = "Gear and Veiled Argunite",
 			iconPath = "inv_artifact_dimensionalrift",
-			Criteria = "NumObjectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT\") > 0",
+			Criteria = "NumObjectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT\") > 0", -- TODO: "Quest(49165) OR Quest(49166) OR Quest(49167) OR Quest(49168) OR Quest(49169) OR Quest(49171)" once all bosses are tested
 			Filter = "Level() < 110",
 			Objectives = {
 				"Quest(49165) AS Occularus defeated",
