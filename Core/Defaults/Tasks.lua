@@ -395,6 +395,135 @@ local defaultTasks = {
 		},
 		
 		},
+  
+	WEEKLY_LEGION_WORLDBOSS_NITHOGG = {
+		name = "Nithogg defeated",
+		description = "Defeat the world boss in the Broken Isles",
+		notes = "Hidden Artifact Skins",
+		iconPath = "inv_misc_stormdragonpurple",
+		Criteria = "Quest(42270)",
+		Filter = "Level() < 110 OR NOT WorldQuest(42270)",
+	},
+
+	WEEKLY_LEGION_WORLDBOSS_SOULTAKERS = {
+		name = "The Soultakers defeated",
+		description = "Defeat the world boss in the Broken Isles",
+		notes = "Hidden Artifact Skins",
+		iconPath = "inv_offhand_1h_deathwingraid_d_01",
+		Criteria = "Quest(42269)",
+		Filter = "Level() < 110 OR NOT WorldQuest(42269)",
+	},
+
+	WEEKLY_LEGION_WORLDBOSS_SHARTHOS = {
+		name = "Shar'thos defeated",
+		description = "Defeat the world boss in the Broken Isles",
+		notes = "Hidden Artifact Skins",
+		iconPath = "achievement_emeraldnightmare_dragonsofnightmare",
+		Criteria = "Quest(42779)",
+		Filter = "Level() < 110 OR NOT WorldQuest(42779)",
+	},
+
+	WEEKLY_LEGION_WORLDBOSS_LEVANTUS = {
+		name = "Levantus defeated",
+		description = "Defeat the world boss in the Broken Isles",
+		notes = "Hidden Artifact Skins",
+		iconPath = "inv_mace_1h_artifactdoomhammer_d_06",
+		Criteria = "Quest(43192)",
+		Filter = "Level() < 110 OR NOT WorldQuest(43192)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_HUMONGRIS = {
+		name = "Humongris defeated",
+		description = "Defeat the world boss in the Broken Isles",
+		notes = "Recipe (Skinning)",
+		iconPath = "inv_scroll_05", -- spell_firefrost-orb
+		Criteria = "Quest(42819)",
+		Filter = "Level() < 110 OR NOT WorldQuest(42819)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_CALAMIR = {
+		name = "Calamir defeated",
+		description = "Defeat the world boss in the Broken Isles",
+		notes = "Recipe (Jewelcrafting)",
+		iconPath = "inv_recipe_70_-scroll3star",
+		Criteria = "Quest(43193)",
+		Filter = "Level() < 110 OR NOT WorldQuest(43193)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_DRUGON = {
+		name = "Drugon the Frostblood defeated",
+		description = "Defeat the world boss in the Broken Isles",
+		iconPath = "inv_ammo_snowball", -- "ability_fixated_state_blue", -- 
+		Criteria = "Quest(43448)", 
+		Filter = "Level() < 110 OR NOT WorldQuest(43448)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_FLOTSAM = {
+		name = "Flotsam defeated",
+		description = "Defeat the world boss in the Broken Isles",
+		notes = "Hidden Artifact Skins",
+		iconPath = "inv_mace_1h_artifactdoomhammer_d_06", -- "inv_crate_05",
+		Criteria = "Quest(43985)",
+		Filter = "Level() < 110 OR NOT WorldQuest(43985)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_WITHEREDJIM = {
+		name = "Withered J'im defeated",
+		description = "Defeat the world boss in the Broken Isles",
+		iconPath = "inv_datacrystal04",
+		Criteria = "Quest(44287)",
+		Filter = "Level() < 110 OR NOT WorldQuest(44287)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_BRUTALLUS = {
+		name = "Brutallus defeated",
+		description = "Defeat the Nether Disruptor world boss on the Broken Shore",
+		iconPath = "ability_warlock_demonicpower",
+		Criteria = "Quest(46947)",
+		Filter = "Level() < 110 OR NOT WorldQuest(46947)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_MALIFICUS = {
+		name = "Malificus defeated",
+		description = "Defeat the Nether Disruptor world boss on the Broken Shore",
+		iconPath = "ability_warlock_demonicpower",
+		Criteria = "Quest(46948)",
+		Filter = "Level() < 110 OR NOT WorldQuest(46948)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_SIVASH = {
+		name = "Si'vash defeated",
+		description = "Defeat the Nether Disruptor world boss on the Broken Shore",
+		iconPath = "ability_warlock_demonicpower",
+		Criteria = "Quest(46945)",
+		Filter = "Level() < 110 OR NOT WorldQuest(46945)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_APOCRON = {
+		name = "Apocron defeated",
+		description = "Defeat the Nether Disruptor world boss on the Broken Shore",
+		iconPath = "ability_warlock_demonicpower",
+		Criteria = "Quest(47061)",
+		Filter = "Level() < 110 OR NOT WorldQuest(47061)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_ANAMOUZ = {
+		name = "Ana-Mouz defeated",
+		description = "Defeat the world boss in Suramar",
+		iconPath = "spell_shadow_summonsuccubus",
+		Criteria = "Quest(43512)",
+		Filter = "Level() < 110 OR NOT WorldQuest(43512)",
+	},
+	
+	WEEKLY_LEGION_WORLDBOSS_NAZAK = {
+		name = "Na'zak the Fiend defeated",
+		description = "Defeat the world boss in Suramar",
+		notes = "Recipe (Alchemy)",
+		iconPath = "inv_recipe_70_-scroll3star",
+		Criteria = "Quest(43513)",
+		Filter = "Level() < 110 OR NOT WorldQuest(43513)",
+	},
+	
 		
 }
 
