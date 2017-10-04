@@ -231,7 +231,7 @@ local defaultTasks = {
 			notes = "Ironpaw Tokens",
 			iconPath = "inv_misc_bell_01",
 			Criteria = "Quest(31337) AND InventoryItem(86425)", -- A Token of Appreciation & Cooking School Bell
-			Filter = "Level() < 90 OR OR NOT Quest(31521) OR Profession(COOKING) < 450", -- To be a Master (required to buy the bell)
+			Filter = "Level() < 90 OR NOT Quest(31521) OR Profession(COOKING) < 450", -- To be a Master (required to buy the bell)
 			Objectives = {
 				-- TODO: Reputation steps & collect reward?
 			}
