@@ -244,6 +244,13 @@ local function Level(filterLevel)
 	
 end
 
+local function WorldQuest(questID)
+
+	if not C_TaskQuest or not C_TaskQuest.IsActive then return end
+	return C_TaskQuest.IsActive(questID)
+	
+end
+
 Criteria = {
 	
 	Quest = Quest,
@@ -258,6 +265,7 @@ Criteria = {
 	BonusRolls = BonusRolls,
 	Objectives = Objectives,
 	NumObjectives = NumObjectives,
+	WorldQuest = WorldQuest,
 }
 
 AM.Criteria = Criteria
