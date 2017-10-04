@@ -381,6 +381,19 @@ local defaultTasks = {
 			iconPath = "achievement_reputation_ashtonguedeathsworn",
 			Criteria = "Quest(48910)",
 			Filter = "Level() < 110", -- TODO: Story progress?
+		
+		DAILY_CATA_JEWELCRAFTING = {
+			name = "Nibbler! No!", -- TODO: There are other quests, but they aren't profitable (and it is still bugged so it's just this one quest over and over again)
+			description = "Complete the Cataclysm jewelcrafting daily quest",
+			iconPath = "inv_misc_uncutgemsuperior6" ,-- "inv_misc_token_argentdawn3", <- Illustrious token 
+			notes = "Chimaera's Eyes",
+			Criteria = "Quest(25105)",
+			Filter = "Profession(JEWELCRAFTING) < 450",
+			Objectives = {
+				--"InventoryItem(ZEPHYRITE) >= 3", -- TODO
+			},
+		},
+		
 		},
 		
 }
