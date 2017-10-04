@@ -251,6 +251,24 @@ local function WorldQuest(questID)
 	
 end
 
+local function Buff(spellID)
+	
+	if not type(spellID) == "number" then return end
+	
+	for i = 1, 40 do -- Check all buffs to see if the requested one is active
+		
+		local buffSpellID = select(11, UnitBuff("player", i))
+		if buffSpellID == spellID then -- Found it
+			return true
+		end
+		
+	end
+	
+	-- Didn't find it
+	return false
+	
+end
+
 Criteria = {
 	
 	Quest = Quest,
@@ -266,6 +284,7 @@ Criteria = {
 	Objectives = Objectives,
 	NumObjectives = NumObjectives,
 	WorldQuest = WorldQuest,
+	Buff = Buff,
 }
 
 AM.Criteria = Criteria
