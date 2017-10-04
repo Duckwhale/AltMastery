@@ -230,10 +230,10 @@ local defaultTasks = {
 			description = "Complete the quest \"A Token of Appreciation\" and recieve Nomi's gift",
 			notes = "Ironpaw Tokens",
 			iconPath = "inv_misc_bell_01",
-			Criteria = "Quest(31521) AND Quest(31337) AND InventoryItem(86425)", -- To be a Master, Token of Appreciation - TODO: not the most accurate criteria yet (reputation)
-			Filter = "Level() < 90 OR NOT Profession(COOKING)",
+			Criteria = "Quest(31337) AND InventoryItem(86425)", -- A Token of Appreciation & Cooking School Bell
+			Filter = "Level() < 90 OR OR NOT Quest(31521) OR Profession(COOKING) < 450", -- To be a Master (required to buy the bell)
 			Objectives = {
-			-- TODO } --/run local _, fR, fM, fN, _, _, _, fT, nT = GetFriendshipReputation(1357) print(("Your current reputation with %s is %d/%d. The previous threshold was at %d and the next one is at %d."):format(fN, fR, fM, fT, nT)
+				-- TODO: Reputation steps & collect reward?
 			}
 		},
 		
