@@ -172,12 +172,12 @@ local defaultTasks = {
 		},
 
 		UNLOCK_LEGION_KOSUMOTH = {
-			name = "Kosumoth the Hungering",
-			description = "Unlock and defeat Kosumoth the Hungering",
+			name = "Kosumoth the Hungering unlocked",
+			description = "Unlock access to Kosumoth the Hungering",
 			notes = "Pet",
 			iconPath = "spell_priest_voidtendrils",
 			Criteria = "Objectives(\"UNLOCK_LEGION_KOSUMOTH\")", -- TODO: WQ and stuff -> 43798 ?
-			Filter = "Level() < 110",
+			Filter = "Level() < 110 OR WorldQuest(43798)", -- Hide if the WQ is up, as that means it has already been unlocked
 			Objectives = {
 				"Quest(43730) AS Activated First Orb",
 				"Quest(43731) AS Activated Second Orb",
