@@ -86,19 +86,20 @@ function Parser:Evaluate(expression, silentMode)
 	]]
 	
 	-- Run expression as sandboxed chunk to let Lua evaluate it
-	local chunk = loadstring(sandboxedExpression)
+	local chunk, errorMsg = loadstring(sandboxedExpression)
 	if chunk ~= nil then -- Is valid expression and can be executed
 
 		setfenv(chunk, AltMastery.Sandbox) -- All lookups will access the Sandbox instead of the global environment
 		local callSucceeded, isCriteriaFulfilled  = pcall(chunk)
 --	if not silentMode then 	AM:Debug("Evaluate -> Expression " .. tostring(expression) .. " evaluated to: " .. tostring(isCriteriaFulfilled) .. ", callSucceeded = " .. tostring(callSucceeded), "Parser") end
-		return isCriteriaFulfilled, alias
+		return isCriteriaFulfilled, alias, errorMsg
 		
 	else
 --		AM:Debug("Evaluate -> Expression was invalid and will not be evaluated", "Parser")
 	end
 	
 	-- Invalid expressions will simply return nil
+	return nil, "", "Invalid expression"
 	
 end
 
