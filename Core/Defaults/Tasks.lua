@@ -164,7 +164,7 @@ local defaultTasks = {
 			notes = "5000 Order Hall Resources",
 			iconPath = "achievement_reputation_08",
 			Criteria = "Objectives(\"WEEKLY_LEGION_WQEVENT\")",
-			Filter = " NOT Buff(225788) OR NOT Level(110)", -- "Sign of the Emissary" buff is only available when the event is active. This is much simpler and also more reliable than checking the calendar
+			Filter = " NOT Buff(225788) OR Level() < 110", -- "Sign of the Emissary" buff is only available when the event is active. This is much simpler and also more reliable than checking the calendar
 			Objectives = {
 				"Quest(43341) AS Uniting the Isles",
 				"Quest(44175) AS The World Awaits",
