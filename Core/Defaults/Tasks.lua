@@ -198,8 +198,8 @@ local defaultTasks = {
 			description = "Defeat Coren Direbrew in the Grim Guzzler during the Brewfest world event",
 			notes = "BOE Maces",
 			iconPath = "inv_misc_head_dwarf_01",
-			Criteria = "WorldEvent(BREWFEST) AND EventBoss(COREN_DIREBREW)",
-			
+			Criteria = "EventBoss(COREN_DIREBREW)",
+			Filter = " NOT WorldEvent(BREWFEST)",
 		},
 		
 		-- TODO: Objectives: MinLevel (90?), ObtainItem(Shrouded Timewarped Coin), Turn in quest? -> Then use ObjectivesCompleted(NUM_OBJECTIVES/ALL?)
