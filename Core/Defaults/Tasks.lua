@@ -524,6 +524,47 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(43513)",
 	},
 	
+	
+	MILESTONE_LEGION_IMPROVINGONHISTORY = {
+		name = "Improving On History",
+		description = "Complete the (ridiculously long) quest line leading up to \"Balance of Power\" to unlock an alternative artifact tint",
+		notes = "NOT account-wide...",
+		iconPath = "achievement_dungeon_utgardepinnacle_25man",
+		Criteria = "Achievement(10459)", -- "Objectives(\"MILESTONE_LEGION_IMPROVINGONHISTORY\")",
+		Filter = "Level() < 110 OR Achievement(10459)",
+		Objectives = {
+			"Quest(43501) AS The Power Within (Defend Azurewing Repose)",
+			"Quest(43496) AS The Power Within",
+			"Quest(40668) AS The Heart of Zin-Azshari (Dungeon: Eye of Azshara)" , -- TODO: Check dungeon lockout
+			"Quest(43514) AS A Vainglorious Past (Reputation: Court of Farondis - Honored)", -- TODO: Check reputation also
+			"Quest(43517) AS Fallen Power (Dungeon: Darkheart Thicket)",
+			"Quest(43518) AS Tempering Darkness (Blood of Sargeras x 30)",
+			"Quest(43519) AS Lucid Strength",
+			"Quest(43581) AS The Wisdom of Patience", -- TODO: Obsolete?
+			"Quest(43520) AS In Nightmares (Raid: The Emerald Nightmare)",
+			"Quest(43521) AS Essence of Power (Raid: The Emerald Nightmare)", -- TODO: Progress
+			"Quest(43522) AS Essential Consumption",
+			"Quest(43523) AS Rapid Debt (in Suramar)",
+			"Quest(40673) AS Lost Knowledge (Reputation: The Nightfallen - Revered)", -- TODO: Order via ipairs
+			"Quest(43525) AS Borrowing Without Asking (Dungeon: Vault of the Wardens)",
+			"Quest(40675) AS Rite of the Captain (Dungeon: The Arcway)",
+			"Quest(43524) AS Literary Perfection (Dungeon: Court of Stars)",
+			"Quest(40678) AS Twisted Power (Azsuna)",
+			"Quest(43526) AS A True Test",
+			"Quest(40603) AS Seeking the Valkyra (Stormheim)",
+			"Quest(40608) AS The Mark",
+			"Quest(40613) AS Retrieving the Svalnguard (Dungeon: Maw of Souls)",
+			"Quest(40614) AS A Feast Fit for Odyn (Stormheim, Highmountain, Azsuna)",
+			"Quest(40672) AS Presentation is Key (Dungeon: Neltharion's Lair)",
+			"Quest(40615) AS Odyn's Blessing (Dungeon: Halls of Valor - Use Grand Feast of Valhallas before starting!)",
+			"Quest(43528) AS Planning the Assault", -- TODO: Obsolete?
+			"Quest(43531) AS Into the Nighthold (Raid: The Nighthold)",
+			"Quest(43530) AS The Nighthold: Delusions of Grandeur (Defeat Trilliax / Elisande)",
+			"Quest(43532) AS The Nighthold: Darkness Calls (Defeat Gul'dan)",
+			"Quest(43533) AS Balance of Power",
+		},
+	},
+	
 		
 }
 
