@@ -524,6 +524,41 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(43513)",
 	},
 	
+	DAILY_LEGION_WQ_SABUUL = {
+		name = "Sabuul defeated",
+		description = "Defeat Sabuul",
+		notes = "Fel-Spotted Egg",
+		iconPath = "inv_manaraymount_orange",
+		Criteria = "Quest(48712)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48732)", -- "Sabuul" = WQ
+	},
+	
+	DAILY_LEGION_WQ_VENOMTAILSKYFIN = {
+		name = "Venomtail Skyfin defeated",
+		description = "Defeat the Venomtail Skyfin", -- TODO: in <zone>?
+		notes = "Mount",
+		iconPath = "inv_manaraymount_blackfel",
+		Criteria = "Quest(48705)", -- Tracking Quest
+		Filter = "Level() < 110", -- Doesn't have a world quest, apparently
+	},
+	
+	DAILY_LEGION_WQ_NAROUA = {
+		name = "Naroua defeated",
+		description = "Defeat Naroua, King of the Forest",
+		notes = "Fel-Spotted Egg",
+		iconPath = "inv_manaraymount_redfel", -- inv_egg_02
+		Criteria = "Quest(48667)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48502)", -- "Naroua, King of the Forest" = WQ
+	},
+	
+	DAILY_LEGION_WQ_VARGA = {
+		name = "Varga defeated",
+		description = "Defeat Varga",
+		notes = "Fel-Spotted Egg",
+		iconPath = "inv_manaraymount_purple", -- inv_egg_02
+		Criteria = "Quest(48812)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48827)", -- "Varga" = WQ
+	},
 	
 	WEEKLY_LEGION_DUNGEONEVENT = {
 		name = "Legion Dungeon Event",
