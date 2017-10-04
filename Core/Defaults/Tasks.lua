@@ -525,6 +525,14 @@ local defaultTasks = {
 	},
 	
 	
+	WEEKLY_LEGION_DUNGEONEVENT = {
+		name = "Legion Dungeon Event",
+		description = "Complete the weekly quest \"Emissary of War\" and claim your reward",
+		iconPath = "inv_legionadventure",
+		Criteria = "Quest(44171)",
+		Filter = " NOT Buff(225787) OR Level() < 110", -- Buff is only available during the event
+	},
+	
 	MILESTONE_LEGION_IMPROVINGONHISTORY = {
 		name = "Improving On History",
 		description = "Complete the (ridiculously long) quest line leading up to \"Balance of Power\" to unlock an alternative artifact tint",
