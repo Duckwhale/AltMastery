@@ -66,8 +66,8 @@ function Parser:Evaluate(expression, silentMode)
 	local alias = expression:match("%sAS%s(.+)$")
 	if alias ~= nil then -- Remove alias and save it for later
 	
---		AM:Debug("Evaluate -> Found alias: \"" .. alias .. "\"", "Parser")
-		expression = expression:gsub(" AS " .. alias, "")
+		--AM:Debug("Evaluate -> Found alias: \"" .. alias .. "\"", "Parser")
+		expression = expression:match("(.*) AS ") -- Cut off the part that is interpreted as an alias
 		
 	end
 	
