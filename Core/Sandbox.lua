@@ -47,7 +47,10 @@ local constants = { -- Used t look up actual ID if an alias was used
 	DEMONHUNTER = 12,
 	
 	-- Holidays (texture IDs)
-	BREWFEST = 235441,
+	BREWFEST = {
+		235441, -- Starts
+		235440, -- Ends
+	},
 	TIMEWALKING_MOP = { 
 		1530588, -- Event starts?
 		1530589, -- Event ends? 
