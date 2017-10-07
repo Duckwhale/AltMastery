@@ -678,7 +678,7 @@ local defaultTasks = {
 			"Quest(43517) AS Fallen Power (Dungeon: Darkheart Thicket)",
 			"Quest(43518) AS Tempering Darkness (Blood of Sargeras x 30)",
 			"Quest(43519) AS Lucid Strength",
-			"Quest(43581) AS The Wisdom of Patience", -- TODO: Obsolete?
+		--	"Quest(43581) AS The Wisdom of Patience", -- TODO: Obsolete?
 			"Quest(43520) AS In Nightmares (Raid: The Emerald Nightmare)",
 			"Quest(43521) AS Essence of Power (Raid: The Emerald Nightmare)", -- TODO: Progress
 			"Quest(43522) AS Essential Consumption",
