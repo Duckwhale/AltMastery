@@ -392,6 +392,21 @@ local defaultTasks = {
 			Filter = "Level() < 100 OR NOT Objectives(\"UNLOCK_LEGION_KOSUMOTH\")", -- TODO: Filter if WQ reward is crap
 		},
 		
+		UNLOCK_LEGION_MEATBALL = {
+			name = "Meatball unlocked",
+			description = "Unlock the Order Hall follower that is secretly amazing",
+			iconPath = "spell_mage_arcaneorb",
+			Criteria = "Quest(45312)", -- TODO: Task to remind when item has max stacks?
+			Filter = "Level() < 110",
+			Objectives = { -- TODO: Mission completion
+			   "Quest(45111) AS Everyone Loves a Good Fight",
+			   "Quest(45162) AS We Brought the Hammer",
+			   "Quest(45163) AS Cleaning Up",
+			   "Quest(45304) AS Attacking the Darkness",
+			   "Quest(45312) AS You Beat the Ball of Meat",
+			},
+		},
+		
 		DAILY_CATA_JEWELCRAFTING = {
 			name = "Nibbler! No!", -- TODO: There are other quests, but they aren't profitable (and it is still bugged so it's just this one quest over and over again)
 			description = "Complete the Cataclysm jewelcrafting daily quest",
