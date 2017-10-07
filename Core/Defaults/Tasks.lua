@@ -916,6 +916,15 @@ local defaultTasks = {
 		Filter = "Level() < 102 OR NOT Class(WARLOCK)", -- TODO: Must have Order Hall talent? Hide if tint and pet is obtained?
 	},
 	
+	LEGION_DAILY_TWISTINGNETHER = {
+		name = "Twisting Nether",
+		description = "TODO",
+		notes = "Pet, Hidden Artifact Skin (Vengeance)",
+		iconPath = "inv_glaive_1h_artifactaldrochi_d_05",
+		Criteria = "Quest(44707)",
+		Filter = "Level() < 102 OR NOT Class(DEMONHUNTER)", -- TODO: Must have Order Hall talent? Hide if tint and pet is obtained?
+	},
+
 		
 }
 
