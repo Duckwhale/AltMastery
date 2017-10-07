@@ -379,7 +379,9 @@ local defaultTasks = {
 			description = "Complete the weekly quest \"Supplying Krokuun\" to recruit a Krokuul Ridgestalker",
 			iconPath = "achievement_reputation_ashtonguedeathsworn",
 			Criteria = "Quest(48910)",
-			Filter = "Level() < 110", -- TODO: Story progress?
+			Filter = "Level() < 110 OR NOT Quest(48442)", -- Needs to have completed the previous step (6 Champions at 900 IL)
+			-- TODO: Individual unlock steps (quests) for all other troups also
+		},
 		
 		DAILY_CATA_JEWELCRAFTING = {
 			name = "Nibbler! No!", -- TODO: There are other quests, but they aren't profitable (and it is still bugged so it's just this one quest over and over again)
