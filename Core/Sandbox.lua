@@ -66,6 +66,7 @@ local constants = { -- Used t look up actual ID if an alias was used
 	COREN_DIREBREW = 287,
 	
 	-- Currency IDs
+	MOGU_RUNE_OF_FATE = 752,
 	ORDER_RESOURCES = 1220,
 	
 	-- Expansion IDs
