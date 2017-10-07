@@ -235,7 +235,8 @@ local function GetTask(self, key)
 	local TaskObject = AM.db.global.tasks[key]
 	if not TaskObject then
 		AM:Debug("GetTask failed with key = " .. tostring(key) .. " - no entry exists in db", "TaskDB")
-	return end
+		return
+	end
 	
 	return TaskObject
 
