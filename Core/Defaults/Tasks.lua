@@ -880,6 +880,24 @@ local defaultTasks = {
 		Criteria = "Quest(40753)",
 		Filter = "Quest(31752) OR Quest(34774) OR Profession(ENGINEERING) < 600", -- Any of the other Blingtron quests, as only one can be completed per day
 	},
+
+	LEGION_MILESTONE_THEMOTHERLODE = {
+		name = "The Motherlode",
+		description = "TODO",
+		notes = "Unlocks Treasure Master Iks'reeged's cave",
+		iconPath = "inv_misc_key_11",
+		Criteria = "Quest(46666)",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Quest(46499) AS Spiders, huh?",
+			"Quest(46501) AS Grave Robbin'",
+			"Quest(46509) AS Tomb Raidering",
+			"Quest(46510) AS Ship Graveyard",
+			"Quest(46511) AS We're Treasure Hunters",
+			"Quest(46666) AS The Motherlode",
+		},
+	},
+	
 		
 }
 
