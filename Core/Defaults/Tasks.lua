@@ -790,6 +790,36 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_ATTUNEMENT_RETURNTOKARAZHAN = {
+		name = "Return to Karazhan Attunement",
+		description = "TODO",
+		iconPath = "achievement_raid_karazhan",
+		Criteria = "Objectives(\"MILESTONE_LEGION_ATTUNEMENT_RETURNTOKARAZHAN\")",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Quest(45422) AS Edict of the God-King",
+			"Quest(44886) AS Unwanted Evidence",
+			"Quest(44887) AS Uncovering Orders",
+			"Quest(44556) AS Return to Karazhan",
+			"Quest(44557) AS Finite Numbers",
+			"Quest(44683) AS Holding the Lines",
+			"Quest(44685) AS Reclaiming the Ramparts",
+			"Quest(44686) AS Thought Collection",
+			"Quest(44733) AS The Power of Corruption",
+			"Quest(44735) AS Return to Karazhan: In the Eye of the Beholder",
+			"Quest(44734) AS Fragments of the Past",
+			"Quest(45291) AS Return to Karazhan: Book Wyrms",
+			"Quest(45292) AS Return to Karazhan: Rebooting the Cleaner",
+			"Quest(45293) AS Return to Karazhan: New Shoes",
+			"Quest(45294) AS Return to Karazhan: High Stress Hiatus",
+			--- Attunement ends here? (TODO)
+			"Quest(45295) AS Return to Karazhan: Clearing Out the Cobwebs",
+			-- "Quest(aaaaa) AS bbbbbb",
+			-- "Quest(aaaaa) AS bbbbbb",
+			-- "Quest(aaaaa) AS bbbbbb",			
+		},
+	},
+	
 		
 }
 
