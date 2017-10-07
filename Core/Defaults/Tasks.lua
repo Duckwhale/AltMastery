@@ -859,6 +859,27 @@ local defaultTasks = {
 		},
 	},
 	
+	DAILY_ACCOUNT_BLINGTRON4000 = {
+		name = "Blingtron 4000",
+		description = "TODO",
+		iconPath = "inv_pet_lilsmoky", -- inv_misc_gift_03
+		Criteria = "Quest(31752)",
+		Filter = "Quest(34774) OR Quest(40753) OR Profession(ENGINEERING) < 600", -- Any of the other Blingtron quests, as only one can be completed per day
+	},
+	DAILY_ACCOUNT_BLINGTRON5000 = {
+		name = "Blingtron 5000",
+		description = "TODO",
+		iconPath = "inv_misc_blingtron", -- inv_misc_gift_05
+		Criteria = "Quest(34774)",
+		Filter = "Quest(31752) OR Quest(40753) OR Profession(ENGINEERING) < 600", -- Any of the other Blingtron quests, as only one can be completed per day
+	},
+	DAILY_ACCOUNT_BLINGTRON6000 = {
+		name = "Blingtron 6000",
+		description = "inv_engineering_reavesmodule",
+		iconPath = "inv_pet_lilsmoky", -- inv_misc_gift_05
+		Criteria = "Quest(40753)",
+		Filter = "Quest(31752) OR Quest(34774) OR Profession(ENGINEERING) < 600", -- Any of the other Blingtron quests, as only one can be completed per day
+	},
 		
 }
 
