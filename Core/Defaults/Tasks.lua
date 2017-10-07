@@ -820,6 +820,31 @@ local defaultTasks = {
 		},
 	},
 	
+	
+	DAILY_LEGION_EMISSARY1 = {
+		name = "First Emissary Cache",
+		description = "TODO",
+		iconPath = "inv_legion_cache_valajar",
+		Criteria = " NOT Emissary(1)",
+		Filter = "Level() < 110 OR NOT Quest(43341)", -- Uniting the Isles
+	},
+	
+	DAILY_LEGION_EMISSARY2 = {
+		name = "Second Emissary Cache ",
+		description = "TODO",
+		iconPath = "inv_legion_cache_armyofthelight",
+		Criteria = " NOT Emissary(2)",
+		Filter = "Level() < 110 OR NOT Quest(43341)", -- Uniting the Isles
+	},
+	
+	DAILY_LEGION_EMISSARY3 = {
+		name = "Third Emissary Cache",
+		description = "TODO",
+		iconPath = "inv_legion_cache_argussianreach",
+		Criteria = " NOT Emissary(3)",
+		Filter = "Level() < 110 OR NOT Quest(43341)", -- Uniting the Isles
+	},
+	
 		
 }
 
