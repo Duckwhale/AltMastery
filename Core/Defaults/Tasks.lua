@@ -880,6 +880,15 @@ local defaultTasks = {
 		Criteria = "Quest(40753)",
 		Filter = "Quest(31752) OR Quest(34774) OR Profession(ENGINEERING) < 600", -- Any of the other Blingtron quests, as only one can be completed per day
 	},
+	
+	LEGION_WQ_IKSREEGED = {
+		name = "Treasure Master Iks'reeged",
+		description = "TODO",
+		notes = "Pet, Toy, Nethershards, OR",
+		iconPath = "inv_misc_key_11",
+		Criteria = "Quest(45379)",
+		Filter = " NOT WorldQuest(45379) OR NOT Quest(46666)", -- Requires "The Motherlode" quest chain to be finished (which leads up to the cave)
+	},
 
 	LEGION_MILESTONE_THEMOTHERLODE = {
 		name = "The Motherlode",
