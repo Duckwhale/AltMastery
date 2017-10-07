@@ -63,7 +63,7 @@ local function Constructor()
 		x = (UIParent:GetWidth() - 350) / 2,
 		y = (UIParent:GetHeight() - 500) / 2,
 		width = 350,
-		height = 500,
+		height = 650,
 
 	}
 	
