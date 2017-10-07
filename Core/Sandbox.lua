@@ -52,7 +52,12 @@ local constants = { -- Used t look up actual ID if an alias was used
 		1530588, -- Event starts?
 		1530589, -- Event ends? 
 	},
-	DARKMOON_FAIRE = 235464,
+
+	DARKMOON_FAIRE = {
+		235464, -- Event starts?
+		235447, -- Event ends?
+		235446, -- Last day?
+	},
 	
 	-- Dungeon IDs
 	COREN_DIREBREW = 287,
