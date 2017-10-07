@@ -907,6 +907,15 @@ local defaultTasks = {
 		},
 	},
 	
+	LEGION_DAILY_RITUALOFDOOM = {
+		name = "Ritual of Doom",
+		description = "TODO",
+		notes = "Pet, Hidden Artifact Skin (Destruction)",
+		iconPath = "inv_staff_2h_artifactsargeras_d_05",
+		Criteria = "Quest(42481)",
+		Filter = "Level() < 102 OR NOT Class(WARLOCK)", -- TODO: Must have Order Hall talent? Hide if tint and pet is obtained?
+	},
+	
 		
 }
 
