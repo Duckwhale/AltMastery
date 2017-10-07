@@ -124,28 +124,127 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 		name = "All Tasks",
 		iconPath = "achievement_quests_completed_daily_07", -- achievement_quests_completed_daily_06 - achievement_quests_completed_daily_05 etc
 		taskList = {
--- TODO: Visibility			"LEGENDARY_SHADOWMOURNE",
---	TODO: Buff(buffID) or PlayerBuff(id)?		"WEEKLY_LEGION_WQEVENT",
+
 --	TODO: RNG availablity		"DAILY_WOTLK_JEWELOFTHESEWERS",
 --	TODO: Dungeon OR Reputation depending on condition		"DAILY_TBC_HEROICMANATOMBS",
 -- TODO: Alternating sets of dailies			"DAILY_CATA_BARADINSWARDENS",
 --			"DAILY_WOD_PETBATTLE_ERRIS",
 --	TODO: EVENT garrison table		"DAILY_WOD_GARRISONMISSIONS",
 --	TODO. Zone/Entered		"DAILY_WOD_HERBGARDEN",
--- TODO: Objectives(*)			"UNLOCK_LEGION_KOSUMOTH",
+-- TODO: Objectives(*)		
+	
+		"UNLOCK_LEGION_KOSUMOTH",
+		"WQ_LEGION_KOSUMOTH",
+		
 --	TODO: Hide after completed		"UNLOCK_LEGION_MEATBALL",
 			"DAILY_WORLDEVENT_CORENDIREBREW", -- TODO: Keybind -> toggle to update (rebuild frames? check memory usage to see if framepool works?)
 --			"DAILY_WORLDEVENT_BREWFESTQUESTS",
-			"MONTHLY_WORLDEVENT_MOPTIMEWALKING", -- TODO: Objectives, InventoryItem, InventoryAmount ( to restock AH items?)
+
+			"WEEKLY_LEGION_WQEVENT",
+			"WEEKLY_LEGION_DUNGEONEVENT",
+			
+			"MONTHLY_WORLDEVENT_MOPTIMEWALKING",
+			
+			-- TODO: Objectives, InventoryItem, InventoryAmount ( to restock AH items?)
 -- TODO: Order Hall Autocomplete tracking	"DAILY_LEGION_WQAUTOCOMPLETE", --			
-			"RESTOCK_LEGION_ORDERHALLRESOURCES",
+
 			"DAILY_MOP_COOKINGSCHOOLBELL",
+			
+			"RESTOCK_LEGION_ORDERHALLRESOURCES",
+			
 			"WEEKLY_LEGION_BONUSROLLS",
-			-- "LIMITED_LEGIONFALL_NETHERDISRUPTOR", -> needs questcache
+			"WEEKLY_LEGION_ARGUSTROOPS",
+			
+			-- "LIMITED_LEGIONFALL_NETHERDISRUPTOR",	-- TODO: -> needs questcache
 			"LEGION_UNDERBELLY_TESTSUBJECTS",
+			
 			"DAILY_DARKMOONFAIRE_PETBATTLES",
 			"MONTHLY_DARKMOONFAIRE_TURNINS",
 			"MONTHLY_DARKMOONFAIRE_PROFESSIONQUESTS",
+			
+			"UNLOCK_LEGION_MEATBALL",
+			
+			"DAILY_CATA_JEWELCRAFTING",
+			
+			"WEEKLY_MOP_WORLDBOSSES",
+
+			-- World bosses in the Broken Isles
+			"WEEKLY_LEGION_WORLDBOSS_NITHOGG",
+			"WEEKLY_LEGION_WORLDBOSS_SOULTAKERS",
+			"WEEKLY_LEGION_WORLDBOSS_SHARTHOS",
+			"WEEKLY_LEGION_WORLDBOSS_LEVANTUS",
+			"WEEKLY_LEGION_WORLDBOSS_HUMONGRIS",
+			"WEEKLY_LEGION_WORLDBOSS_CALAMIR",
+		--	"WEEKLY_LEGION_WORLDBOSS_DRUGON",
+			"WEEKLY_LEGION_WORLDBOSS_FLOTSAM",
+			"WEEKLY_LEGION_WORLDBOSS_WITHEREDJIM",
+			-- World bosses in Suramar
+			"WEEKLY_LEGION_WORLDBOSS_ANAMOUZ",
+			"WEEKLY_LEGION_WORLDBOSS_NAZAK",
+			
+			-- World bosses on the Broken Shore
+			"WEEKLY_LEGION_WORLDBOSS_BRUTALLUS",
+			"WEEKLY_LEGION_WORLDBOSS_MALIFICUS",
+			"WEEKLY_LEGION_WORLDBOSS_SIVASH",
+			"WEEKLY_LEGION_WORLDBOSS_APOCRON",
+			
+			-- World bosses on Argus (Greater Invasion Point bosses)
+			"WEEKLY_LEGION_GREATERINVASIONPOINT",
+			
+			-- World Quests
+			"LEGION_WQ_IKSREEGED",
+			"LEGION_WQ_FELWORT",
+--			"LEGION_WQ_FELHIDE",
+--			"LEGION_WQ_BRIMSTONE",
+--			"LEGION_WQ_BACON",
+			
+			-- Mount drops in Argus
+			"DAILY_LEGION_WQ_SABUUL",
+			"DAILY_LEGION_WQ_VARGA",
+			"DAILY_LEGION_WQ_NAROUA",
+			"DAILY_LEGION_WQ_VENOMTAILSKYFIN",
+--			"DAILY_LEGION_WQ_HOUNDMASTERKERRAX",
+			"DAILY_LEGION_WQ_WRANGLERKRAVOS",
+			"DAILY_LEGION_WQ_BLISTERMAW",
+			"DAILY_LEGION_WQ_VRAXTHUL",
+			"DAILY_LEGION_WQ_PUSCILLA",
+			"DAILY_LEGION_WQ_SKREEGTHEDEVOURER",
+			
+			"DAILY_LEGION_EMISSARY1",
+			"DAILY_LEGION_EMISSARY2",
+			"DAILY_LEGION_EMISSARY3",
+			
+			-- Profession quests (TODO: Rest)
+			"MILESTONE_LEGION_TAILORINGQUESTS",
+			"MILESTONE_LEGION_ENCHANTINGQUESTS",
+			
+			-- Legendary items
+			"LEGENDARY_SHADOWMOURNE",
+			
+			-- Attunement chains
+--			"MILESTONE_LEGION_ATTUNEMENT_RETURNTOKARAZHAN", --> TODO: Removed by Blizzard... sigh
+			
+			-- Quest chains
+			"LEGION_MILESTONE_THEMOTHERLODE",
+			
+			-- Pet Battle stuff
+			"DAILY_ACCOUNTWIDE_PETBATTLES",
+			-- dungeons
+			-- Barrens Q
+			-- new goblin dude
+			
+			"DAILY_ACCOUNT_BLINGTRON4000",
+			"DAILY_ACCOUNT_BLINGTRON5000",
+			"DAILY_ACCOUNT_BLINGTRON6000",
+			
+			-- Artifact tints
+			"LEGION_DAILY_RITUALOFDOOM",
+			"LEGION_DAILY_TWISTINGNETHER",
+			"MILESTONE_LEGION_IMPROVINGONHISTORY",
+			
+			-- Miscellaneous stuff
+			"WOTLK_MYSTERIOUSEGG",
+			
 		},
 	}
 }
