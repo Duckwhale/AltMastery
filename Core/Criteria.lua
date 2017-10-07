@@ -269,8 +269,46 @@ local function Buff(spellID)
 	
 end
 
+--- Returns whether or not there's an emissary cache that expires in exactly X days (at the daily reset, not actually 24h time)
+local function Emissary(days)
+   
+   days = (type(days) == "number" and days >= 1 and days <= 3) and days or 3
+   local format, math_floor = format, math.floor
+   
+   local BountyQuest = GetQuestBountyInfoForMapID(1014) -- Dalaran (Broken Isles) - all Legion WQs should be available from there
+   
+   for BountyIndex, BountyInfo in ipairs(BountyQuest) do -- Check unfinished emissaries
+      
+      local title = GetQuestLogTitle(GetQuestLogIndexByID(BountyInfo.questID))
+      
+      local timeleft = C_TaskQuest.GetQuestTimeLeftMinutes(BountyInfo.questID)
+      
+      local _, _, isFinish, questDone, questNeed = GetQuestObjectiveInfo(BountyInfo.questID, 1, false)
+      
+      if timeleft then
+         
+         local t = (days - 1) * 1440 * 60 + GetQuestResetTime()
+         --  print(t)
+         local mins = math_floor(t/60 + 0.5)
+
+         local h = format("%d", math_floor(t/3600)); -- hours remaining (int)
+         local m = format("%d", math_floor((t/60 - h*60))); -- minutes remaining (int)
+         local s = format("%d", math_floor(t - h*3600 - m*60));
+     
+         
+         if timeleft <= mins + 2 and timeleft >= mins - 2 then -- This emissary is available for less than the requested time -> is a valid result for this query
+            
+            return not isFinish -- If it isn't done, this returns true to indicate there is still one left
+         end
+      end
+      
+   end
+   return false -- Assumes the query was valid and there was no emissary because it has been completed -> Not ideal; needs caching and then it can actually differentiate between completed = true and invalid = nil
+end
+
+
 Criteria = {
-	
+	Emissary = Emissary,
 	Quest = Quest,
 	Class = Class,
 	Level = Level,
