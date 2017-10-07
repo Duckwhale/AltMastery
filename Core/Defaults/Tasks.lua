@@ -754,6 +754,42 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_ENCHANTINGQUESTS = {
+		name = "Legion Enchanting Quests completed",
+		description = "TODO",
+		iconPath = "inv_enchanting_70_chaosshard",
+		Criteria = "Objectives(\"MILESTONE_LEGION_ENCHANTINGQUESTS\")",
+		Filter = "Level() < 100 OR NOT (Profession(ENCHANTING) > 0)",
+		Objectives = {
+			"Quest(39875) AS The Last Few",
+			"Quest(39876) AS Helping the Hunters",
+			"Quest(39877) AS In the Loop",
+			"Quest(40048) AS Strings of the Puppet Masters",
+			"Quest(39905) AS Ringing True",
+			"Quest(39878) AS Thunder Struck",
+			"Quest(39879) AS Strong Like the Earth",
+			"Quest(39880) AS Waste Not",
+			"Quest(39883) AS Cloaked in Tradition",
+			"Quest(39881) AS Fey Enchantments",
+			"Quest(39884) AS No Longer Worthy",
+			"Quest(39889) AS Led Astray",
+			"Quest(39882) AS Darkheart Thicket: The Glamour Has Faded",
+			"Quest(39903) AS An Enchanting Home",
+			"Quest(39904) AS Halls of Valor: Revenge of the Enchantress",
+			"Quest(39891) AS Cursed, But Convenient",
+			"Quest(40169) AS Crossroads Rendezvous",
+			"Quest(39916) AS Turnabout Betrayal",
+			"Quest(40130) AS Washed Clean",
+			"Quest(39918) AS The Absent Priestess",
+			"Quest(39910) AS The Druid's Debt",
+			"Quest(39906) AS Prepping For Battle",
+			"Quest(39914) AS Sentinel's Final Duty",
+			"Quest(39920) AS On Azure Wings",
+			"Quest(39921) AS Neltharion's Lair: Rod of Azure",
+			"Quest(39923) AS Down to the Core",
+		},
+	},
+	
 		
 }
 
