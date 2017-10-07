@@ -42,7 +42,7 @@ local PrototypeTask = {
 	Objectives = {}, -- No steps to completion that would have to be displayed/checked
 	
 	-- Functions
-	GetAlias = function(objectiveNo) -- Get alias for a given SubTask
+	GetAlias = function(self, objectiveNo) -- Get alias for a given SubTask
 	
 		if self.Objectives ~= nil -- Task has Objectives
 		and type(objectiveNo) == "number" -- Parameter has correct type
