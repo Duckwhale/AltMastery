@@ -122,7 +122,7 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 	-- Add groups via GroupDB or manually? TODO - Needs to inherit the prototypes methods
 	ALL_THE_TASKS = {
 		name = "All Tasks",
-		iconPath = "inv_pant_mail_raidshamanmythic_q_01",
+		iconPath = "achievement_quests_completed_daily_07", -- achievement_quests_completed_daily_06 - achievement_quests_completed_daily_05 etc
 		taskList = {
 -- TODO: Visibility			"LEGENDARY_SHADOWMOURNE",
 --	TODO: Buff(buffID) or PlayerBuff(id)?		"WEEKLY_LEGION_WQEVENT",
