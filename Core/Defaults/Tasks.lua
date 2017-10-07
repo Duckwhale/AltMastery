@@ -925,6 +925,16 @@ local defaultTasks = {
 		Filter = "Level() < 102 OR NOT Class(DEMONHUNTER)", -- TODO: Must have Order Hall talent? Hide if tint and pet is obtained?
 	},
 
+	WOTLK_MYSTERIOUSEGG = {
+		name = "Mysterious Egg",
+		description = "TODO",
+		notes = "Mount, Pets",
+		iconPath = "inv_egg_02",
+		Criteria = "InventoryItem(39878)",
+		Filter = "Level() < 80 OR Profession(ENGINEERING) < 415", -- Engineering only (for now) - because without teleporting there, it's not really worthwhile after obtaining the mount? - Hide if mount is obtained? Reputation?
+	
+	},
+	
 		
 }
 
