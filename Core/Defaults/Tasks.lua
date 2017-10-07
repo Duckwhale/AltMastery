@@ -935,7 +935,38 @@ local defaultTasks = {
 	
 	},
 	
+	LEGION_WQ_FELWORT = {
+		name = "Felwort",
+		description = "TODO",
+		notes = "Felwort",
+		iconPath = "inv_herbalism_70_felwort",
+		Criteria = "(WorldQuest(41514) AND Quest(41514) OR true) AND (WorldQuest(41520) AND Quest(41520) OR true) AND (WorldQuest(41225) AND Quest(41225) OR true) AND (WorldQuest(41512) AND Quest(41512) OR true) AND (WorldQuest(41515) AND Quest(41515) OR true) AND (WorldQuest(41524) AND Quest(41524) OR true) AND (WorldQuest(41511) AND Quest(41511) OR true) AND (WorldQuest(41516) AND Quest(41516) OR true) AND (WorldQuest(41513) AND Quest(41513) OR true) AND (WorldQuest(41519) AND Quest(41519) OR true) AND (WorldQuest(41518) AND Quest(41518) OR true) AND (WorldQuest(41523) AND Quest(41523) OR true) AND (WorldQuest(41517) AND Quest(41517) OR true) AND (WorldQuest(41522) AND Quest(41522) OR true) AND (WorldQuest(41521) AND Quest(41521) OR true)",
+		Filter = "Level() < 110 OR Profession(HERBALISM) < 100 OR NOT (WorldQuest(41514) AND WorldQuest(41520) AND WorldQuest(41225) AND WorldQuest(41512) AND WorldQuest(41515) AND WorldQuest(41524) AND WorldQuest(41511) AND WorldQuest(41516) AND WorldQuest(41513) AND WorldQuest(41519) AND WorldQuest(41518) AND WorldQuest(41523) AND WorldQuest(41517) AND WorldQuest(41522) AND WorldQuest(41521))",
+		Objectives = {
 		
+			"Quest(41511) AS Highmountain",
+			"Quest(41512) AS Highmountain",
+			"Quest(41225) AS Highmountain",
+			
+			"Quest(41513) AS Azsuna",
+			"Quest(41514) AS Azsuna",
+			"Quest(41515) AS Azsuna",
+			
+			"Quest(41516) AS Val'sharah",
+			"Quest(41517) AS Val'sharah",
+			"Quest(41518) AS Val'sharah",
+			
+			"Quest(41519) AS Stormheim",			
+			"Quest(41520) AS Stormheim",
+			"Quest(41521) AS Stormheim",
+			
+			"Quest(41522) AS Suramar",
+			"Quest(41523) AS Suramar",
+			"Quest(41524) AS Suramar",
+			
+		},
+	},
+	
 }
 
 
