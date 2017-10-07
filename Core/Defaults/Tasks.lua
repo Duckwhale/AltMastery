@@ -419,6 +419,22 @@ local defaultTasks = {
 			},
 		},
 		
+		-- TODO: Filter if mount is already learned
+		WEEKLY_MOP_WORLDBOSSES = {
+			name = "Pandaria World Bosses",
+			description = "Defeat the world bosses all over Pandaria",
+			notes = "Mounts",
+			iconPath = "ability_hunter_pet_devilsaur", -- achievement_boss_thokthebloodthirsty
+			Criteria = "Objectives(\"WEEKLY_MOP_WORLDBOSSES\")",
+			Filter = "Level() < 90", -- TODO: Hide if all mounts already obtained
+			Objectives = {
+				"Currency(MOGU_RUNE_OF_FATE) >= 2 AS Sufficient bonus rolls obtained", -- TODO: 4
+				-- /run for k, v in pairs({ Galleon = 32098, Sha = 32099, Nalak = 32518, Oondasta = 32519}) do print(format("%s: %s", k, IsQuestFlaggedCompleted(v) and "\124cff00ff00Yes\124r" or "\124cffff0000No\124r")) end
+			--	"Quest(23098) AS Galleon defeated", -- Salyis' Warband
+			--	"Quest(32099) AS Sha of Anger defeated",
+				"Quest(32518) AS Nalak defeated",
+				"Quest(32519) AS Oondasta defeated",
+			},
 		},
   
 	WEEKLY_LEGION_WORLDBOSS_NITHOGG = {
