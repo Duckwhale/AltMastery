@@ -601,6 +601,60 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(48827)", -- "Varga" = WQ
 	},
 	
+	DAILY_LEGION_WQ_HOUNDMASTERKERRAX = {
+		name = "Houndmaster Kerrax",
+		description = "TODO",
+		notes = "Mount",
+		iconPath = "inv_argusfelstalkermount",
+		Criteria = "Quest(48821)", -- Tracking Quest
+		Filter = " NOT WorldQuest(48835)", -- World Quest
+	},
+	
+	DAILY_LEGION_WQ_WRANGLERKRAVOS = {
+		name = "Wrangler Kravos",
+		description = "TODO",
+		notes = "Mount",
+		iconPath = "inv_argustalbukmount_felpurple",
+		Criteria = "Quest(48695)", -- Tracking Quest
+		Filter = " NOT WorldQuest(48696)", -- World Quest
+	},
+
+	DAILY_LEGION_WQ_BLISTERMAW = {
+		name = "Blistermaw",
+		description = "TODO",
+		notes = "Mount",
+		iconPath = "inv_argusfelstalkermountred",
+		Criteria = "Quest(49183)", -- Tracking Quest
+		Filter = " NOT WorldQuest(47561)", -- World Quest
+	},
+	
+	DAILY_LEGION_WQ_VRAXTHUL = {
+		name = "Vrax'thul",
+		description = "TODO",
+		notes = "Mount",
+		iconPath = "inv_argusfelstalkermountblue",
+		Criteria = "Quest(48810)", -- Tracking Quest
+		Filter = " NOT WorldQuest(48465)", -- World Quest
+	},
+
+	DAILY_LEGION_WQ_PUSCILLA = {
+		name = "Puscilla",
+		description = "TODO",
+		notes = "Mount",
+		iconPath = "inv_argusfelstalkermountblue",
+		Criteria = "Quest(48809)", -- Tracking Quest
+		Filter = " NOT WorldQuest(48467)", -- World Quest
+	},
+	
+	DAILY_LEGION_WQ_SKREEGTHEDEVOURER = {
+		name = "Skreeg the Devourer",
+		description = "TODO",
+		notes = "Mount",
+		iconPath = "inv_argusfelstalkermountgrey",
+		Criteria = "Quest(48721)", -- Tracking Quest
+		Filter = " NOT WorldQuest(48740)", -- World Quest
+	},
+	
 	WEEKLY_LEGION_DUNGEONEVENT = {
 		name = "Legion Dungeon Event",
 		description = "Complete the weekly quest \"Emissary of War\" and claim your reward",
