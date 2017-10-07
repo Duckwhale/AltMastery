@@ -845,6 +845,20 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT Quest(43341)", -- Uniting the Isles
 	},
 	
+	DAILY_ACCOUNTWIDE_PETBATTLES = {
+		name = "Pet Battle EXP Quests",
+		description = "TODO",
+		iconPath = "inv_misc_bag_cenarionherbbag",
+		Criteria = "Objectives(\"DAILY_ACCOUNTWIDE_PETBATTLES\")",
+		Objectives = {
+			"Quest(31780) AS Old MacDonald (Westfall)",
+			"Quest(31781) AS Lindsay (Redridge Mountains)",
+			"Quest(31819) AS Dagra the Fierce (Northern Barrens)",
+			"Quest(31850) AS Eric Davidson (Duskwood)",
+			"Quest(31851) AS Bill Buckler (The Cape of Stranglethorn)",
+		},
+	},
+	
 		
 }
 
