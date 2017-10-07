@@ -336,7 +336,7 @@ local function ShowObjectives(self, taskWidget)
 	
 	-- Show Objectives
 	AM:Debug("Showing Objectives for Task " .. Task.name)
-	
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON, "Master") -- TODO: Settings to disable sound
 	-- Update Tracker to have it make room for them
 	self:ReleaseWidgets()
 	self:UpdateGroups()
@@ -353,7 +353,7 @@ local function HideObjectives(self, taskWidget)
 	
 	-- Hide Objectives
 	AM:Debug("Hiding Objectives for Task " .. Task.name)
-	
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF, "Master") -- TODO: Settings to disable sound
 	-- Update Tracker to have it reclaim the space they used to occupy
 	self:ReleaseWidgets()
 	self:UpdateGroups()
