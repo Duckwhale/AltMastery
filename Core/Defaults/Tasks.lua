@@ -383,6 +383,15 @@ local defaultTasks = {
 			-- TODO: Individual unlock steps (quests) for all other troups also
 		},
 		
+		WQ_LEGION_KOSUMOTH = {
+			name = "Kosumoth the Hungering defeated",
+			description = "Complete the world quest \"Danger: Kosumoth the Hungering\" in the Eye of Azshara",
+			-- Only show if reward is pet? (TODO)
+			iconPath = "spell_priest_voidtendrils",
+			Criteria = "Quest(43798)",
+			Filter = "Level() < 100 OR NOT Objectives(\"UNLOCK_LEGION_KOSUMOTH\")", -- TODO: Filter if WQ reward is crap
+		},
+		
 		DAILY_CATA_JEWELCRAFTING = {
 			name = "Nibbler! No!", -- TODO: There are other quests, but they aren't profitable (and it is still bugged so it's just this one quest over and over again)
 			description = "Complete the Cataclysm jewelcrafting daily quest",
