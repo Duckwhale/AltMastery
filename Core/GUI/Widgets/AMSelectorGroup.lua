@@ -55,6 +55,7 @@ local methods = {
 		local fontStyle = activeStyle.fonts.groups
 		label:SetFont(fontStyle, fontSize)
 		label.label:SetJustifyH("CENTER")
+		local fontStringHeight = label.label:GetHeight() -- This depends on how long the text is, and on how many lines it will be displayed
 		
 		-- Resize the content to remove the 20px default padding that no one needs
 		local padding = settings.display.contentPadding + settings.groupSelector.padding -- The first part is to account for the already-existing padding ("border"), and the second to add some visible padding
@@ -66,7 +67,7 @@ local methods = {
 		-- label.label:SetPoint(point, relativeTo, relativePoint, xOfs - 2, yOfs)
 		
 		-- Set widget height (because AceGUI just can't get it right...)
-		local contentHeight = fontSize + 2 -- This is for the label text (1 px spacer for top and bottom)
+		local contentHeight = fontStringHeight + 2 -- This is for the label text (1 px spacer for top and bottom)
 		+ status.iconSize
 		+ 3 * padding -- This adds a border between the container and its content (TODO: Not the most exact calculation, thanks to AceGUI's somewhat arbitrary positioning?)
 		self:SetHeight(contentHeight)
