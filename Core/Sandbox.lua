@@ -72,6 +72,25 @@ local constants = { -- Used t look up actual ID if an alias was used
 	-- Expansion IDs
 	LEGION = 6,
 	
+	-- Professions (texture IDs)
+	ALCHEMY = 136240,
+	BLACKSMITHING = 136241,
+	ENCHANTING = 136244,
+	ENGINEERING = 136243,
+	INSCRIPTION = 237171,
+	JEWELCRAFTING = 134071,
+	LEATHERWORKING = 136247,
+	TAILORING = 136249,
+	
+	HERBALISM = 136246,
+	MINING = 134708,
+	SKINNING = 134366,
+	
+	FISHING = 136245,
+	COOKING = 133971,
+	FIRST_AID = 135966,
+	ARCHAEOLOGY = 441139,
+	
 }
 
 local function accessBlocked()
