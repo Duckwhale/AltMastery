@@ -37,6 +37,7 @@ local defaults = {
 	groupSelector = {
 		
 		iconSize = 40,
+		padding = 5,
 		
 	},
 	

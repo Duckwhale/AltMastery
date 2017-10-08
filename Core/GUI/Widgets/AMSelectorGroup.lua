@@ -32,27 +32,48 @@ local methods = {
 		-- Shorthands
 		local status = self.localstatus
 		local activeStyle = AM.GUI:GetActiveStyle()
-		local label, content = self.label, self.content
+		local label, icon, content = self.label, self.icon, self.content
 		local isActiveGroup = (self:GetType() == "ActiveGroup")
+		local settings = AM.db.profile.settings
 
+	
 		-- Update with current settings (also provides default values after the local status has been wiped)
-		status.iconSize = AM.db.profile.settings.groupSelector.iconSize
+		status.iconSize = settings.groupSelector.iconSize
 		status.text = status.text or "<ERROR>"
 		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
-
+		
+		-- Update icon
+		icon:SetImage(status.image)
+		icon:SetImageSize(status.iconSize, status.iconSize)
+		
 		-- Update label state
 		label:SetText(status.text)
-		label:SetImageSize(status.iconSize, status.iconSize)
 		-- Capitalize text (as the entries are always groups)
 		label:SetText(string.upper(status.text))
 		-- Set font and height based on the active style
 		local fontSize = activeStyle.fontSizes.small
 		local fontStyle = activeStyle.fonts.groups
 		label:SetFont(fontStyle, fontSize)
+		label.label:SetJustifyH("CENTER")
+		
+		-- Resize the content to remove the 20px default padding that no one needs
+		local padding = settings.display.contentPadding + settings.groupSelector.padding -- The first part is to account for the already-existing padding ("border"), and the second to add some visible padding
+		content:ClearAllPoints()
+		content:SetPoint("TOPLEFT", padding, -padding)
+		content:SetPoint("BOTTOMRIGHT", -padding, padding)
+--		label:SetWidth(content:GetWidth() - 2 * padding) -- Resize properly, as the relative width seems to always glitch out
+		-- local point, relativeTo, relativePoint, xOfs, yOfs = label.label:GetPoint()
+		-- label.label:SetPoint(point, relativeTo, relativePoint, xOfs - 2, yOfs)
+		
+		-- Set widget height (because AceGUI just can't get it right...)
+		local contentHeight = fontSize + 2 -- This is for the label text (1 px spacer for top and bottom)
+		+ status.iconSize
+		+ 3 * padding -- This adds a border between the container and its content (TODO: Not the most exact calculation, thanks to AceGUI's somewhat arbitrary positioning?)
+		self:SetHeight(contentHeight)
 		
 		-- Set background and border based on the active style
 		local border = self.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
-		local spacer = 2 -- This adds another border between the parent and its content frame? (TODO)
+		local spacer = 0 -- This adds another border between the parent and its content frame? (TODO)
 		border:ClearAllPoints()
 		border:SetPoint("TOPLEFT", 0, -spacer)
 		border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
@@ -227,7 +248,7 @@ local function Constructor()
 	
 	-- Add Text for the group name (TODO: Toggle via settings to display only the icon)
 	local label = AceGUI:Create("InteractiveLabel")
-	label:SetRelativeWidth(0.05) -- TODO: Reduce when controls are implemented; Why is it using UIParent as the container, when it was added to "container" (the widget frame)?
+	label:SetRelativeWidth(0.0525)
 	label:SetCallback("OnClick", container.Label_OnClick)
 	label:SetCallback("OnEnter", container.Label_OnEnter)
 	label:SetCallback("OnLeave", container.Label_OnLeave)
@@ -243,13 +264,14 @@ local function Constructor()
 
 	-- Add completion text and icon (TODO)
 	
-	-- local completionIcon = AceGUI:Create("InteractiveLabel")
+	local groupIcon = AceGUI:Create("Icon")
+	groupIcon:SetRelativeWidth(0.0525)
 	-- -- Implied: container.localstatus.isCompleted = nil -> Display "?" icon unless state was set
 	 -- -- Always default to "not completed", which will be updated by the Tracker
 	
-	-- completionIcon:SetRelativeWidth(0.01) -- TODO: Also uses UIParent - why??
-	-- container:AddChild(completionIcon)
-	-- container.completionIcon = completionIcon -- Backreference
+	--groupIcon:SetRelativeWidth(0.01) -- TODO: Also uses UIParent - why??
+	container:AddChild(groupIcon)
+	container.icon = groupIcon -- Backreference
 
 	-- local CompletionIcon_OnEnter = function(self)
 		-- AM:Debug("OnEnter triggered for CompletionIcon!")
