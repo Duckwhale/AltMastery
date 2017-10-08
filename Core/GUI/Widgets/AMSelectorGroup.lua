@@ -59,13 +59,12 @@ local methods = {
 		border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
 		
 		-- Pick colour according to the highlight status
-		local frameColour = 	(status.isActiveGroup and activeStyle.frameColours.HighlightedSelectorGroup) or activeStyle.frameColours.SelectorGroup
+		local frameColour = 	(isActiveGroup and activeStyle.frameColours.ActiveSelectorGroup) or (status.isHighlighted and not isActiveGroup and activeStyle.frameColours.HighlightedSelectorGroup) or activeStyle.frameColours.SelectorGroup
 		AM.GUI:SetFrameColour(border, frameColour)
 		self.border = border -- Backref to access it more easily and change its colour
 
 		-- Set text colour depending on the element's highlight status (based on active style)
-		
-		if status.isHighlighted then -- Set text colour to create a visual highlight effect (with the background colour)
+		if status.isHighlighted or isActiveGroup then -- Set text colour to create a visual highlight effect (with the background colour)
 			local r, g, b = AM.Utils.HexToRGB(activeStyle.fontColours.activeGroup, 255)
 		else
 			local r, g, b = AM.Utils.HexToRGB(activeStyle.fontColours.inactiveGroup, 255)
