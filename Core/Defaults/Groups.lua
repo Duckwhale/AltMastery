@@ -362,8 +362,6 @@ end
 defaultGroups.TASKS = TASKS
 defaultGroups.MILESTONES = MILESTONES
 
-gt123 = defaultGroups -- TODO
-
 --- Return the table containing default Group entries
 local function GetDefaultGroups()
 	
