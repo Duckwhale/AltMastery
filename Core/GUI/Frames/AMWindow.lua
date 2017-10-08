@@ -77,7 +77,7 @@ local function Constructor()
 	
 	-- Create content pane
 	local content = CreateFrame("Frame", name .. "Content", frame)	-- Empty frame that will be used to contain all children later
-	local padding = 5
+	local padding = AM.db.profile.settings.display.windowPadding
 	content:SetPoint("TOPLEFT", padding, -padding)
 	content:SetPoint("BOTTOMRIGHT", -padding, padding)
 	

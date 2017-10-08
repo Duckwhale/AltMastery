@@ -29,6 +29,8 @@ local defaults = {
 		iconSize = 20,
 		showCompleted = false,
 		highlightExpandedElements = true,
+		
+		windowPadding = 5, -- Border between the outer window border and its content pane
 	},
 	
 	debug = {
