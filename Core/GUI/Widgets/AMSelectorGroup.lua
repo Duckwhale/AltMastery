@@ -95,7 +95,7 @@ local methods = {
 	end,
 	
 	-- If the label is clicked, switch the Tracker to the selected Group and make it the active one for the current character
-	["Label_OnClick"] = function (self, ...)
+	["OnClick"] = function (self, ...)
 
 		local event, button = ...
 		local status = self.parent.localstatus
@@ -103,7 +103,7 @@ local methods = {
 	end,
 
 	-- Highlight to indicate that some action is possible and show a tooltip
-	["Label_OnEnter"] = function(self)
+	["OnEnter"] = function(self)
 
 	self.parent.localstatus.isHighlighted = true
 	self.parent:ApplyStatus()
@@ -129,7 +129,7 @@ local methods = {
 	end,
 
 	-- Reset highlight colour to the default value and also hide the tooltip
-	["Label_OnLeave"] = function	(self)
+	["OnLeave"] = function	(self)
 
 		self.parent.localstatus.isHighlighted = false
 		self.parent:ApplyStatus()
@@ -256,9 +256,6 @@ local function Constructor()
 	-- Add Text for the group name (TODO: Toggle via settings to display only the icon)
 	local label = AceGUI:Create("InteractiveLabel")
 	label:SetRelativeWidth(0.0525)
-	label:SetCallback("OnClick", container.Label_OnClick)
-	label:SetCallback("OnEnter", container.Label_OnEnter)
-	label:SetCallback("OnLeave", container.Label_OnLeave)
 	container:AddChild(label)
 	container.label = label
 	label.parent = container -- Backreference so the label functions can access container methods and change its state
@@ -280,6 +277,14 @@ local function Constructor()
 	container:AddChild(groupIcon)
 	container.icon = groupIcon -- Backreference
 
+	label:SetCallback("OnClick", container.OnClick)
+	label:SetCallback("OnEnter", container.OnEnter)
+	label:SetCallback("OnLeave", container.OnLeave)
+	
+	groupIcon:SetCallback("OnClick", container.OnClick)
+	groupIcon:SetCallback("OnEnter", container.OnEnter)
+	groupIcon:SetCallback("OnLeave", container.OnLeave)
+	
 	-- local CompletionIcon_OnEnter = function(self)
 		-- AM:Debug("OnEnter triggered for CompletionIcon!")
 	-- end
