@@ -34,7 +34,7 @@ local methods = {
 		local activeStyle = AM.GUI:GetActiveStyle()
 		local label, content = self.label, self.content
 		local isActiveGroup = (self:GetType() == "ActiveGroup")
-		
+
 		-- Update with current settings (also provides default values after the local status has been wiped)
 		status.iconSize = 40 -- TODO: AM.db.profile.settings.display.iconSize	
 		status.text = status.text or "<ERROR>"
@@ -105,7 +105,7 @@ local methods = {
 	end,
 
 	-- Reset highlight colour to the default value and also hide the tooltip
-	["Label_OnLeave"] = function (self)
+	["Label_OnLeave"] = function	(self)
 
 		-- -- Set text colour to normal
 		-- local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
@@ -170,25 +170,25 @@ local methods = {
 	end,
 
 	["OnWidthSet"] = function(self, width)
-		local content = self.content
-		local contentwidth = width - 20
-		if contentwidth < 0 then
-			contentwidth = 0
-		end
-		content:SetWidth(contentwidth)
-		content.width = contentwidth
+		-- local content = self.content
+		-- local contentwidth = width - 20
+		-- if contentwidth < 0 then
+			-- contentwidth = 0
+		-- end
+		-- content:SetWidth(contentwidth)
+		-- content.width = contentwidth
 	end,
 
 	["OnHeightSet"] = function(self, height)
-		
-		-- From AceGUI: Adjust height of the content frame
-		local content = self.content
-		local contentheight = height - 20
-		if contentheight < 0 then
-			contentheight = 0
-		end
-		content:SetHeight(contentheight)
-		content.height = contentheight
+-- AM:Print("OnHeightSet - " .. height)
+	-- -- From AceGUI: Adjust height of the content frame
+	-- local content = self.content
+	-- local contentheight = height - 1 -- TODO: 1px padding?
+	-- if contentheight < 0 then
+		-- contentheight = 0
+	-- end
+	-- content:SetHeight(contentheight)
+	-- content.height = contentheight
 		
 	end,
 	
