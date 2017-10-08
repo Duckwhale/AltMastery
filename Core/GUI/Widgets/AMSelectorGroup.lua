@@ -43,14 +43,13 @@ local methods = {
 		-- Update label state
 		label:SetText(status.text)
 		label:SetImageSize(status.iconSize, status.iconSize)
-		
-		-- Set text
+		-- Capitalize text (as the entries are always groups)
 		label:SetText(string.upper(status.text))
-		
 		-- Set font and height based on the active style
-		local fontSize = activeStyle.fontSizes.large
+		local fontSize = activeStyle.fontSizes.small
 		local fontStyle = activeStyle.fonts.groups
-
+		label:SetFont(fontStyle, fontSize)
+		
 		-- Set background and border based on the active style
 		local border = self.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
 		local spacer = 2 -- This adds another border between the parent and its content frame? (TODO)
