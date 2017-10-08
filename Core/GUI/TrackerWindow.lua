@@ -72,8 +72,9 @@ local function Show(self)
 		border = GroupSelectionPane.content:GetParent()
 		
 		border:ClearAllPoints()
-		border:SetPoint("TOPLEFT", 2, -20)
-		border:SetPoint("BOTTOMRIGHT", -2, 2)
+		local padding = AM.db.profile.settings.display.contentPadding
+		border:SetPoint("TOPLEFT", padding, -20) -- TODO: What's with the 20? I think it's for the title, but it's not really needed
+		border:SetPoint("BOTTOMRIGHT", -padding, padding)
 		GroupSelectionPane:SetAutoAdjustHeight(false)
 	
 		AM.GUI:SetFrameColour(border, activeStyle.frameColours.GroupSelectionPane)
@@ -119,8 +120,8 @@ local function Show(self)
 		border = TrackerPane.content:GetParent()
 		
 		border:ClearAllPoints()
-		border:SetPoint("TOPLEFT", 2, -20)
-		border:SetPoint("BOTTOMRIGHT", -2, 2)
+		border:SetPoint("TOPLEFT", padding, -20) -- TODO: -20?
+		border:SetPoint("BOTTOMRIGHT", -padding, padding)
 		TrackerPane:SetAutoAdjustHeight(false)
 	
 		AM.GUI:SetFrameColour(border, activeStyle.frameColours.TrackerPane)

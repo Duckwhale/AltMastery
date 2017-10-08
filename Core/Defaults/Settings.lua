@@ -31,6 +31,7 @@ local defaults = {
 		highlightExpandedElements = true,
 		
 		windowPadding = 5, -- Border between the outer window border and its content pane
+		contentPadding = 2, -- Border between a content pane and its child widgets
 	},
 	
 	debug = {
