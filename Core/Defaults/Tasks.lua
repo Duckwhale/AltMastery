@@ -359,8 +359,6 @@ local defaultTasks = {
 			},
 		},
 		
-		-- 48799 - Veiled Argunite "Fuel of a Doomed World" (Weekly -> Argus rares, invasions etc.)
-		
 		WEEKLY_LEGION_GREATERINVASIONPOINT = {
 			name = "Greater Invasion Point cleared",
 			description = "Defeat the Legion General by completing the Greater Invasion Point scenario available for the week",
@@ -894,7 +892,17 @@ local defaultTasks = {
 		Filter = " NOT WorldQuest(45379) OR NOT Quest(46666)", -- Requires "The Motherlode" quest chain to be finished (which leads up to the cave)
 	},
 
-	LEGION_MILESTONE_THEMOTHERLODE = {
+	LEGION_WEEKLY_FUELOFADOOMEDWORLD = {
+		name = "Fuel of a Doomed World",
+		description = "TODO",
+		notes = "Pristine Argunite",
+		iconPath = "inv_misc_lightcrystals",
+		Criteria = "Quest(48799)",
+		Filter = "Level() < 110 OR NOT Quest(48929)", -- Sizing up the Opposition (= completed 1. chapter of the Argus campaign)
+		
+	},
+	
+	MILESTONE_LEGION_THEMOTHERLODE = {
 		name = "The Motherlode",
 		description = "TODO",
 		notes = "Unlocks Treasure Master Iks'reeged's cave",
