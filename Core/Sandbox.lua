@@ -91,6 +91,11 @@ local constants = { -- Used t look up actual ID if an alias was used
 	FIRST_AID = 135966,
 	ARCHAEOLOGY = 441139,
 	
+	-- Factions
+	ALLIANCE = "Alliance",
+	HORDE = "Horde",
+	NEUTRAL = "Neutral", -- For low-level Pandaren
+	
 }
 
 local function accessBlocked()
