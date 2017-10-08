@@ -100,6 +100,10 @@ local methods = {
 		local event, button = ...
 		local status = self.parent.localstatus
 		
+		if button == "LeftButton" then -- Switch Tracker to the selected Group
+			AM.GroupSelector:SelectGroup(status.groupID)
+		end
+		
 	end,
 
 	-- Highlight to indicate that some action is possible and show a tooltip
