@@ -45,7 +45,7 @@ local methods = {
 		label:SetImageSize(status.iconSize, status.iconSize)
 		
 		-- Set text
-		label:SetText(isGroup and string.upper(status.text) or status.text)
+		label:SetText(string.upper(status.text))
 		
 		-- Set font and height based on the active style
 		local fontSize = activeStyle.fontSizes.large
