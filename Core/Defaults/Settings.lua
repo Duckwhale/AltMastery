@@ -34,6 +34,12 @@ local defaults = {
 		contentPadding = 2, -- Border between a content pane and its child widgets
 	},
 	
+	groupSelector = {
+		
+		iconSize = 40,
+		
+	},
+	
 	debug = {
 		isEnabled = false,
 	}

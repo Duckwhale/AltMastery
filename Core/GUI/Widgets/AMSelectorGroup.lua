@@ -36,7 +36,7 @@ local methods = {
 		local isActiveGroup = (self:GetType() == "ActiveGroup")
 
 		-- Update with current settings (also provides default values after the local status has been wiped)
-		status.iconSize = 40 -- TODO: AM.db.profile.settings.display.iconSize	
+		status.iconSize = AM.db.profile.settings.groupSelector.iconSize
 		status.text = status.text or "<ERROR>"
 		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
 
