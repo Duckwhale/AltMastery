@@ -306,8 +306,19 @@ local function Emissary(days)
    return false -- Assumes the query was valid and there was no emissary because it has been completed -> Not ideal; needs caching and then it can actually differentiate between completed = true and invalid = nil
 end
 
+local function Faction(factionName)
+
+	if factionName then -- Is valid faction
+	
+		local playerFaction = UnitFactionGroup("player")
+		return (playerFaction == factionName)
+		
+	end
+
+end
 
 Criteria = {
+	Faction = Faction,
 	Emissary = Emissary,
 	Quest = Quest,
 	Class = Class,
