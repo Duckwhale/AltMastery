@@ -90,7 +90,8 @@ local defaultStyle = {
 		InvisibleBorder = { backdrop = "#000000", border = nil, alpha = 0, borderAlpha = 0 },
 		Window = { backdrop = "#F1F4FC", border = "#7186C7", alpha = 0.05, borderAlpha = .3}, -- Identical style for all top-level windows
 		ContentPane = { backdrop = "F1F4FC", border = nil, alpha = .1 }, -- TODO
-		TrackerPane = { backdrop = "#F1F4FC", border = "#F1F4FC", alpha = 0, borderAlpha = 0},
+		TrackerPane = { backdrop = "#F1F4FC", border = "#AAB6D3", alpha = 1, borderAlpha = 1},
+		GroupSelectionPane = { backdrop = "#F1F4FC", border = "#AAB6D3", alpha = 1, borderAlpha = 1},
 		InlineHeader = { backdrop = "#F1F4FC", border = "#FFFFFF", alpha = .3, borderAlpha = 0 },
 		InlineElement = { backdrop = "#566769", border = "#FFFFFF", alpha = .8, borderAlpha = 0 },
 		ExpandedElement = { backdrop = "#7186C7", border = "#FFFFFF", alpha = .5, borderAlpha = 0 },

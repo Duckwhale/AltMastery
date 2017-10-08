@@ -67,6 +67,29 @@ local function Show(self)
 		self.frame:AddChild(RightPane)
 		RightPane:SetFullHeight(true)
 		
+		-- Add container for the group selection icons
+		local GroupSelectionPane = AceGUI:Create("InlineGroup") -- TODO: Use same type as content panes?
+		border = GroupSelectionPane.content:GetParent()
+		
+		border:ClearAllPoints()
+		border:SetPoint("TOPLEFT", 2, -20)
+		border:SetPoint("BOTTOMRIGHT", -2, 2)
+		GroupSelectionPane:SetAutoAdjustHeight(false)
+	
+		AM.GUI:SetFrameColour(border, activeStyle.frameColours.GroupSelectionPane)
+		border:SetBackdropColor(0,0,1,0) -- This will shrine through if there's a spacer > 0 between elements, so it should be transparent (TODO via settings?)
+		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.GroupSelectionPane.border, 255)
+		border:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.GroupSelectionPane.borderAlpha) -- This should be updated dynamically (TODO)
+		GroupSelectionPane:SetTitle("GroupSelectionPane")
+	--	GroupSelectionPane:SetFullHeight(true)
+		GroupSelectionPane:SetRelativeWidth(1)
+		GroupSelectionPane:SetLayout("List")
+		RightPane:AddChild(GroupSelectionPane)
+-- TODO: API
+AM.GroupSelectionPane = {}		
+		-- Save the widget so that it can be used with the TrackerPane API
+		AM.GroupSelectionPane.widget = GroupSelectionPane
+		
 		-- Group control panel (displays currently active group and allows changing it via dropdown) (or maybe find directly via Filters? TODO...)
 		-- local activeStyle = AM.GUI:GetActiveStyle()
 		-- local colours = activeStyle.frameColours.GroupControlPanel
