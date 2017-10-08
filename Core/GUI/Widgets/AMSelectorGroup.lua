@@ -79,15 +79,16 @@ local methods = {
 		border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
 		
 		-- Pick colour according to the highlight status
-		local frameColour = 	(isActiveGroup and activeStyle.frameColours.ActiveSelectorGroup) or (status.isHighlighted and not isActiveGroup and activeStyle.frameColours.HighlightedSelectorGroup) or activeStyle.frameColours.SelectorGroup
+		local frameColour = 	(isActiveGroup and not status.isHighlighted and activeStyle.frameColours.ActiveSelectorGroup) or (status.isHighlighted and activeStyle.frameColours.HighlightedSelectorGroup) or activeStyle.frameColours.SelectorGroup
 		AM.GUI:SetFrameColour(border, frameColour)
 		self.border = border -- Backref to access it more easily and change its colour
 
 		-- Set text colour depending on the element's highlight status (based on active style)
+		local r, g, b
 		if status.isHighlighted or isActiveGroup then -- Set text colour to create a visual highlight effect (with the background colour)
-			local r, g, b = AM.Utils.HexToRGB(activeStyle.fontColours.activeGroup, 255)
+			r, g, b = AM.Utils.HexToRGB(activeStyle.fontColours.activeGroup, 255)
 		else
-			local r, g, b = AM.Utils.HexToRGB(activeStyle.fontColours.inactiveGroup, 255)
+			r, g, b = AM.Utils.HexToRGB(activeStyle.fontColours.inactiveGroup, 255)
 		end
 		label:SetColor(r, g, b)
 
@@ -103,6 +104,9 @@ local methods = {
 
 	-- Highlight to indicate that some action is possible and show a tooltip
 	["Label_OnEnter"] = function(self)
+
+	self.parent.localstatus.isHighlighted = true
+	self.parent:ApplyStatus()
 
 	-- local activeStyle = AM.GUI:GetActiveStyle()
 
@@ -127,6 +131,9 @@ local methods = {
 	-- Reset highlight colour to the default value and also hide the tooltip
 	["Label_OnLeave"] = function	(self)
 
+		self.parent.localstatus.isHighlighted = false
+		self.parent:ApplyStatus()
+		
 		-- -- Set text colour to normal
 		-- local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
 		-- self:SetColor(r, g, b)
