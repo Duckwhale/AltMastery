@@ -60,7 +60,7 @@ end
 --- Adds an entry for the given Group to the selector
 -- @param Group The group object (must be valid)
 -- Only adds the top level group, not any children it may contain
-function GS:AddGroup(Group, isHighlighted)
+function GS:AddGroup(Group, isActiveGroup)
 
 	if not AM.GroupDB:IsValidGroup(Group) then -- Can't add this Group because it's invalid
 		AM:Debug("Attempted to add an invalid Group -> Aborted", MODULE)
@@ -74,7 +74,7 @@ function GS:AddGroup(Group, isHighlighted)
 	
 	-- Add the given Group
 	local groupWidget = AceGUI:Create("AMSelectorGroup")
-	groupWidget:SetType(isHighlighted and "ActiveGroup" or "InactiveGroup")
+	groupWidget:SetType(isActiveGroup and "ActiveGroup" or "InactiveGroup")
 	groupWidget:SetHeight(50) -- TODO: AM.db.profile.settings.display.groupSize)
 	groupWidget:SetText(Group.name)
 	groupWidget:SetIcon(Group.iconPath)
