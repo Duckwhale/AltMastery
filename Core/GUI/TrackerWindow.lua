@@ -73,15 +73,15 @@ local function Show(self)
 		
 		border:ClearAllPoints()
 		local padding = AM.db.profile.settings.display.contentPadding
-		border:SetPoint("TOPLEFT", padding, -20) -- TODO: What's with the 20? I think it's for the title, but it's not really needed
+		border:SetPoint("TOPLEFT", padding, -34) -- TODO: What's with the offset? I think it's for the title, but why can't it just work normally?
 		border:SetPoint("BOTTOMRIGHT", -padding, padding)
-		GroupSelectionPane:SetAutoAdjustHeight(false)
+--		GroupSelectionPane:SetAutoAdjustHeight(false)
 	
 		AM.GUI:SetFrameColour(border, activeStyle.frameColours.GroupSelectionPane)
 		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.GroupSelectionPane.border, 255)
 		border:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.GroupSelectionPane.borderAlpha) -- This should be updated dynamically (TODO)
 		GroupSelectionPane:SetTitle("GroupSelectionPane")
-		GroupSelectionPane:SetFullHeight(true)
+--		GroupSelectionPane:SetFullHeight(true)
 		GroupSelectionPane:SetRelativeWidth(1)
 		GroupSelectionPane:SetLayout("List")
 		RightPane:AddChild(GroupSelectionPane)
