@@ -274,7 +274,8 @@ local defaultTasks = {
 			description = "Defeat both pet tamers at the Darkmoon Faire",
 			notes = "Pets from the reward bag",
 			iconPath = "inv_misc_bag_31", -- "inv_misc_bag_felclothbag",
-			Criteria = "WorldEvent(DARKMOON_FAIRE) AND Objectives(\"DAILY_DARKMOONFAIRE_PETBATTLES\")",
+			Criteria = "Objectives(\"DAILY_DARKMOONFAIRE_PETBATTLES\")",
+			Filter = "not WorldEvent(DARKMOON_FAIRE)",
 			Objectives = {
 				"Quest(32175) AS Darkmoon Pet Battle!",
 				"Quest(36471) AS A New Darkmoon Challenger!",
@@ -286,7 +287,8 @@ local defaultTasks = {
 			description = "Complete all the daily quests available at the Darkmoon Faire",
 			notes = "Game Prizes and tickets",
 			iconPath = "inv_misc_gift_04",
-			Criteria = "WorldEvent(DARKMOON_FAIRE) AND Objectives(\"DAILY_DARKMOONFAIRE_QUESTS\")", -- TODO: Completed when all objectives are done
+			Criteria = "Objectives(\"DAILY_DARKMOONFAIRE_QUESTS\")", -- TODO: Completed when all objectives are done
+			Filter = "not WorldEvent(DARKMOON_FAIRE)",
 			Objectives = {
 				"Quest(36481) AS Firebird's Challenge",
 				"Quest(29438) AS He Shoots, He Scores!",
@@ -304,7 +306,8 @@ local defaultTasks = {
 			description = "Turn in ALL the items at the Darkmoon Faire",
 			notes = "Tickets",
 			iconPath = "inv_misc_ticket_darkmoon_01",
-			Criteria = "WorldEvent(DARKMOON_FAIRE) AND NumObjectives(\"MONTHLY_DARKMOONFAIRE_TURNINS\") > 9", -- At least a few of the cheaper turnin items should be used, otherwise it's hardly worth going there
+			Criteria = "NumObjectives(\"MONTHLY_DARKMOONFAIRE_TURNINS\") > 9", -- At least a few of the cheaper turnin items should be used, otherwise it's hardly worth going there
+			Filter = "not WorldEvent(DARKMOON_FAIRE)",
 			Objectives = {
 				"Quest(29451) OR InventoryItem(71715) AS A Treatise on Strategy",
 				"Quest(29456) OR InventoryItem(71951) AS Banner of the Fallen",
@@ -335,7 +338,8 @@ local defaultTasks = {
 			description = "Complete all Darkmoon Faire quests for your character's learned professions",
 			notes = "Tickets and free skill ups",
 			iconPath = "inv_misc_ticket_darkmoon_01",
-			Criteria = "WorldEvent(DARKMOON_FAIRE) AND NumObjectives(\"MONTHLY_DARKMOONFAIRE_PROFESSIONQUESTS\") > 0", -- TODO: Completed when the profession quests for the actual professions are done?
+			Criteria = "NumObjectives(\"MONTHLY_DARKMOONFAIRE_PROFESSIONQUESTS\") > 0", -- TODO: Completed when the profession quests for the actual professions are done?
+			Filter = "not WorldEvent(DARKMOON_FAIRE)",
 			Objectives = {
 				"Quest(29506) AS Alchemy: A Fizzy Fusion",
 				"Quest(29508) AS Blacksmithing: Baby Needs Two Pairs of Shoes",
