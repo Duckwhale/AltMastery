@@ -292,7 +292,31 @@ function GetDefaultGroups()
 
 end
 
+-- Order groups for display (instead of mere iteration)
+local function GetOrderedDefaultGroups()
+	
+	local defaults = GetDefaultGroups()
+	
+	-- Build table of keys
+	local keys = {}
+	for key, value in pairs(defaults) do 
+		keys[#keys+1] = key
+	end
+	
+	table.sort(keys)
+	
+	local orderedDefaults = {}
+	for key, value in ipairs(keys) do -- Add the groups in alphabetical order (value is actually the group's key/ID)
+		orderedDefaults[key] = defaults[value]
+		orderedDefaults[key]["key"] = key -- Store key so it is still available (temporarily)
+	end
+		
+	return orderedDefaults
+	
+end
 
+
+AM.GroupDB.GetOrderedDefaultGroups = GetOrderedDefaultGroups
 AM.GroupDB.GetDefaultGroups = GetDefaultGroups
 AM.GroupDB.PrototypeGroup = PrototypeGroup
 
