@@ -39,7 +39,7 @@ function GS:GetHeight()
 	-- Calculate total height
 	local height = 0
 	
-	height = numDisplayedGroups * 50 -- TODO: Settings for height
+	height = self.numDisplayedGroups * 50 -- TODO: Settings for height
 	
 	-- Border, spacer, etc? (TODO)
 	
@@ -50,7 +50,7 @@ end
 --- Release all the children into the widget pool (managed by AceGUI-3.0)
 function GS:ReleaseWidgets()
 
-	AM:Debug("Releasing " .. tostring(#usedFrames) .. " children (into the widget pool, silly...)", MODULE)
+	AM:Debug("Releasing " .. tostring(#self.usedFrames) .. " children (into the widget pool, silly...)", MODULE)
 	self.widget:ReleaseChildren()
 
 	wipe(usedFrames)
@@ -81,8 +81,8 @@ function GS:AddGroup(Group, isHighlighted)
 	groupWidget:SetRelativeWidth(1)
 	groupWidget:ApplyStatus()
 	
-	self.numDisplayedGroups = numDisplayedGroups + 1
-	self.usedFrames[#usedFrames+1] = groupWidget
+	self.numDisplayedGroups = self.numDisplayedGroups + 1
+	self.usedFrames[#self.usedFrames+1] = groupWidget
 	self.widget:AddChild(groupWidget)
 	
 end
