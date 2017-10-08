@@ -98,6 +98,9 @@ local defaultStyle = {
 		HighlightedInlineHeader = { backdrop = "#F1F4FC", border = "#E8B230", alpha = .5, borderAlpha = 1 },
 		HighlightedInlineElement = { backdrop = "#566769", border = "#E8B230", alpha = 1, borderAlpha = 1 },
 		HighlightedExpandedElement = { backdrop = "#7186C7", border = "#E8B230", alpha = .7, borderAlpha = 1 },
+		SelectorGroup = { backdrop = "#0D0E0A", border = "#FFFFFF", alpha = .15, borderAlpha = .3 },
+		HighlightedSelectorGroup = { backdrop = "#191A16", border = "#E8B230", alpha = 0.325, borderAlpha = 1 },
+		ActiveSelectorGroup = { backdrop = "#20211D", border = "#AAB6D3", alpha = 0.5, borderAlpha = 1 },
 		Divider = { backdrop = "#4D4D4D", alpha = 1, border = nil },
 		test4 = "#666666", -- grey (IT button bg)
 		test5 = "#4D4D4D", -- dark grey (IT scrollbar bg)
