@@ -95,34 +95,6 @@ local function Show(self)
 		RightPane:AddChild(GroupSelectionPane)
 		AM.GroupSelector.widget = GroupSelectionPane -- Save the newly-created widget so that it can be used by the GroupSelector API
 		
-		-- Group control panel (displays currently active group and allows changing it via dropdown) (or maybe find directly via Filters? TODO...)
-		-- local activeStyle = AM.GUI:GetActiveStyle()
-		-- local colours = activeStyle.frameColours.GroupControlPanel
-	
-		-- local gcp = {
-			
-			-- type = "Frame",
-			-- --hidden = true,
-			-- --strata = "FULLSCREEN_DIALOG",
-			-- size = {350, 50},
-			-- --points = {{"BOTTOMRIGHT", -100, 100}},
-			-- --scripts = {"OnMouseDown", "OnMouseUp"},
-			-- --children = { }
-		
-		-- }
-		-- local GroupControlPanel = AceGUI:Create("InlineGroup")
-		-- GroupControlPanel:SetTitle("Active Group")
-		-- GroupControlPanel:SetRelativeWidth(0.8)
-		-- LeftPane:AddChild(GroupControlPanel)
-		-- local ActiveGroupLabel = AceGUI:Create("Label")
-		-- ActiveGroupLabel:SetRelativeWidth(0.8)
-		-- ActiveGroupLabel:SetText("ActiveGroupLabel")
-		-- local ActiveGroupSelector = AceGUI:Create("Dropdown") -- TODO: LibDD
-		-- ActiveGroupSelector:SetLabel("ActiveGroupSelector Label text")
-		-- ActiveGroupSelector:SetRelativeWidth(0.8)
-		-- GroupControlPanel:AddChild(ActiveGroupLabel)
-		-- GroupControlPanel:AddChild(ActiveGroupSelector)
-		
 		-- Add container for the tracked groups and tasks
 		local TrackerPane = AceGUI:Create("InlineGroup") -- TODO: Use same type as content panes?
 		border = TrackerPane.content:GetParent()
@@ -133,7 +105,6 @@ local function Show(self)
 		TrackerPane:SetAutoAdjustHeight(false)
 	
 		AM.GUI:SetFrameColour(border, activeStyle.frameColours.TrackerPane)
-		border:SetBackdropColor(1,0,0,0) -- This will shrine through if there's a spacer > 0 between elements, so it should be transparent (TODO via settings?)
 		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.TrackerPane.border, 255)
 		border:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.TrackerPane.borderAlpha) -- This should be updated dynamically (TODO)
 	--	TrackerPane:SetTitle("Tasks")
