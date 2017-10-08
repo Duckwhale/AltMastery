@@ -88,7 +88,7 @@ function GS:AddGroup(Group, isHighlighted)
 end
 
 -- Update the GroupSelector
-function GS:UpdateGroups()
+function GS:Update()
 	
 	-- Add all Groups (TODO: Only all those that are top level groups)
 	local groups = AM.db.global.groups

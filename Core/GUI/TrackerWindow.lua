@@ -84,10 +84,7 @@ local function Show(self)
 		GroupSelectionPane:SetRelativeWidth(1)
 		GroupSelectionPane:SetLayout("List")
 		RightPane:AddChild(GroupSelectionPane)
--- TODO: API
-AM.GroupSelectionPane = {}		
-		-- Save the widget so that it can be used with the TrackerPane API
-		AM.GroupSelectionPane.widget = GroupSelectionPane
+		AM.GroupSelector.widget = GroupSelectionPane -- Save the newly-created widget so that it can be used by the GroupSelector API
 		
 		-- Group control panel (displays currently active group and allows changing it via dropdown) (or maybe find directly via Filters? TODO...)
 		-- local activeStyle = AM.GUI:GetActiveStyle()
@@ -140,6 +137,9 @@ AM.GroupSelectionPane = {}
 		AM.TrackerPane.widget = TrackerPane
 		
 	end
+	-- TODO: Global GUI:Update() function
+	AM.GroupSelector:Update()
+
 	AM.TrackerPane:ReleaseWidgets() -- TODO: Combine this in Update() and call that instead?
 	
 	AM.TrackerPane:UpdateGroups() -- Update tracker to display all Tasks and nested Groups for the currently active Group
