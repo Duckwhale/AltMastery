@@ -308,7 +308,7 @@ local function GetOrderedDefaultGroups()
 	local orderedDefaults = {}
 	for key, value in ipairs(keys) do -- Add the groups in alphabetical order (value is actually the group's key/ID)
 		orderedDefaults[key] = defaults[value]
-		orderedDefaults[key]["key"] = key -- Store key so it is still available (temporarily)
+		orderedDefaults[key]["key"] = value -- Store key so it is still available (temporarily)
 	end
 		
 	return orderedDefaults

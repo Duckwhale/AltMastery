@@ -103,7 +103,7 @@ function GS:Update()
 	for key, group in ipairs(AM.GroupDB:GetOrderedDefaultGroups()) do
 		
 		-- Remove temporary index from table
-		local index = group.key
+		local key = group.key
 		group.key = nil
 		
 		self:AddGroup(group, (key == activeGroupKey))
