@@ -971,6 +971,17 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_LEGIONFALLCHAMPION = {
+		name = "Champions of Legionfall",
+		description = "Recruit your Legionfall campaign follower by completing the quest \"Champions of Legionfall\"",
+		notes = "6th Order Hall champion",
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Quest(47137)",
+		Filter = "Level() < 110", -- TODO: Broken Shore scenario, but account-wide only?
+		Objectives = { -- TODO? Might be unnecessary
+		},
+	},
+	
 }
 
 
