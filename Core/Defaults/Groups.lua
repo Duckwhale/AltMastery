@@ -228,7 +228,6 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			
 			-- Quest chains
 			"MILESTONE_LEGION_LEGIONFALLCHAMPION",
-			"MILESTONE_LEGION_THEMOTHERLODE",
 --			"MILESTONE_LEGION_BREACHINGTHETOMB",
 			"MILESTONE_LEGION_ARGUSTROOPS",
 			"MILESTONE_LEGION_ARGUSCAMPAIGN",
@@ -246,13 +245,24 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			-- Artifact tints
 			"LEGION_DAILY_RITUALOFDOOM",
 			"LEGION_DAILY_TWISTINGNETHER",
-			"MILESTONE_LEGION_IMPROVINGONHISTORY",
+
 			
 			-- Miscellaneous stuff
 			"WOTLK_MYSTERIOUSEGG",
 			
 		},
-	}
+	},
+
+	MILESTONES = {
+		name = "Milestones",
+		iconPath = "achievement_garrison_tier03_alliance",
+		taskList = {
+		
+			"MILESTONE_LEGION_IMPROVINGONHISTORY",
+			"MILESTONE_LEGION_THEMOTHERLODE",
+			
+		},
+	},
 }
 
 
