@@ -339,16 +339,16 @@ local strfind = string.find
 for index, taskName in pairs(defaultGroups.ALL_THE_TASKS["taskList"]) do -- Check each Task or Milestone and copy it to the list
 	
 	if strfind(taskName, "TASK") ~= nil then -- Add to generic Tasks list
-		TASKS["taskList"][#TASKS+1] = taskName
+		TASKS["taskList"][#TASKS.taskList+1] = taskName
 	end
 	
 	if strfind(taskName, "MILESTONE") ~= nil then	-- Add to generic Milestones list
-		MILESTONES["taskList"][#MILESTONES+1] = taskName
+		MILESTONES["taskList"][#MILESTONES.taskList+1] = taskName
 	end
 	
 	for expansionShort, group in pairs(expansions) do	-- Fill one list for each expansion
 		if strfind(taskName, expansionShort) ~= nil then
-			group["taskList"][#group+1] = taskName
+			group["taskList"][#group.taskList+1] = taskName
 		end
 	end
 	
