@@ -214,6 +214,8 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			"DAILY_LEGION_EMISSARY2",
 			"DAILY_LEGION_EMISSARY3",
 			
+			"LEGION_WEEKLY_FUELOFADOOMEDWORLD",
+			
 			-- Profession quests (TODO: Rest)
 			"MILESTONE_LEGION_TAILORINGQUESTS",
 			"MILESTONE_LEGION_ENCHANTINGQUESTS",
@@ -225,7 +227,11 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 --			"MILESTONE_LEGION_ATTUNEMENT_RETURNTOKARAZHAN", --> TODO: Removed by Blizzard... sigh
 			
 			-- Quest chains
-			"LEGION_MILESTONE_THEMOTHERLODE",
+			"MILESTONE_LEGION_LEGIONFALLCHAMPION",
+			"MILESTONE_LEGION_THEMOTHERLODE",
+--			"MILESTONE_LEGION_BREACHINGTHETOMB",
+			"MILESTONE_LEGION_ARGUSTROOPS",
+			"MILESTONE_LEGION_ARGUSCAMPAIGN",
 			
 			-- Pet Battle stuff
 			"DAILY_ACCOUNTWIDE_PETBATTLES",
