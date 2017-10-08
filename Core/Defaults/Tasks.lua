@@ -1012,6 +1012,143 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_ARGUSCAMPAIGN = { 
+		name = "Argus Campaign finished",
+		description = "TODO",
+		notes = "WQs, Profession Quests, Argus troops",
+		iconPath = "ability_demonhunter_specdps",
+		Criteria = "Objectives(\"MILESTONE_LEGION_ARGUSCAMPAIGN\")",
+		Filter = "Level() < 110",
+		Objectives = {
+		
+		-- 1. The Assault Begins
+		
+			-- Initial breadcrumb quests leading to the Vindicaar/Argus
+			"Faction(ALLIANCE) AND (Quest(47221) OR Quest(45506)) OR (Quest(47835) OR Quest(48507)) AS The Hand of Fate",
+			"Faction(ALLIANCE) AND Quest(47222) OR Quest(47867) AS Two If By Sea",
+			"Quest(47223) AS Light's Exodus",
+			"Quest(47224) AS The Vindicaar",
+			"Quest(48440) AS Into the Night", -- This is where "The Battle for Argus begins" (cinematic) plays
+			
+			-- Stepping foot on Argus and unlocking the first beacon (in Krokuun)
+			"Quest(46938) AS Alone in the Abyss",
+			"Quest(47589) AS Righteous Fury",
+			"Quest(46297) AS Overwhelming Power",
+			"Quest(48483) AS A Stranger's Plea",
+			"Quest(47627) AS Vengeance",
+			"Quest(47641) AS Signs of Resistance",
+			"Quest(46732) AS The Prophet's Gambit",
+			"Quest(46816) AS Rendezvous", -- Lightforged Beacon. Korkruul Hovel
+			
+			-- Krokuul and Vindicaar NPC introduction quests
+			"Quest(46839) AS From Darkness",
+			"Quest(46840) AS Prisoners No More",
+			"Quest(46841) AS Threat Reduction",
+			"Quest(46842) AS A Strike at the Heart",
+			"Quest(46843) AS Return to the Vindicaar",
+			"Quest(48500) AS A Moment of Respite",
+	
+			-- Salvaging the Genedar's remains to save the Prime Naaru
+			"Quest(47431) AS Gathering Light",
+			"Quest(40238) AS A Grim Equation",
+			"Quest(46213) AS Crystals Not Included",
+			"Quest(47541) AS The Best Prevention",
+			"Quest(47508) AS Fire At Will",
+			"Quest(47771) AS Locating the Longshot",
+			"Quest(47526) AS Bringing the Big Guns",
+			"Quest(47754) AS Lightly Roasted",
+			"Quest(47652) AS The Light Mother",
+			"Quest(47653) AS Light's Return",
+			"Quest(47743) AS The Child of Light and Shadow", -- This is where "Rejection of the Gift" (cinematic) plays
+			
+			-- Unlocking some Vindicaar features
+			"Quest(49143) AS Essence of the Light Mother",
+			"Quest(47287) AS The Vindicaar Matrix Core", -- Light's Judgment (Vindicaar upgrade)
+			"Quest(48559) AS An Offering of Light", -- Netherlight Crucible: First part (Light)
+			
+			-- Entering Antoran Wastes and unlocking more beacons
+			"Quest(48199) AS The Burning Heart", -- Krokuun & Antoran Wastes WQs
+			"Quest(48200) AS Securing a Foothold", -- Lightforged Beacon: Antoran Wastes
+			"Quest(48201) AS Reinforce Light's Purchase", -- Lightforged Beacon: Light's Purchase
+			"Quest(48202) AS Reinforce the Veiled Den", -- Lightforged Beacon: The Veiled Den
+			"Quest(48929) AS Sizing Up The Opposition",
+			-- 1. is now done
+			
+		-- 2. Dark Awakenings
+		
+			-- Back to Krokuun because Magni says so
+			"Quest(47889) AS The Speaker Calls",
+			"Quest(47890) AS Visions of Torment",
+			"Quest(47891) AS Dire News",
+			"Quest(47892) AS Storming the Citadel", -- Lightforged Beacon: Destiny Point
+			
+			-- Conquest of Nath'raxas Hold
+			"Quest(47986) AS Scars of the Past",
+			"Quest(47987) AS Preventive Measures",
+			"Quest(47988) AS Chaos Theory",
+			"Quest(47991) AS Dark Machinations",
+			"Quest(47990) AS A Touch of Fel",
+			"Quest(47989) AS Heralds of Apocalypse",
+			"Quest(47992) AS Dawn of Justice",
+			"Quest(47993) AS Lord of the Spire", -- Nath'raxas Hold WQs
+			"Quest(47994) AS Forming a Bond", -- Lightforged Warframe (Vindicaar upgrade)
+			
+			-- Onwards to Mac'aree to find the McGuffin
+			"Quest(48081) AS A Floating Ruin",
+			"Quest(46815) AS Mac'Aree, Jewel of Argus",
+			"Quest(46818) AS Defenseless and Afraid",
+			"Quest(46834) AS Khazaduum, First of His Name",
+			"Quest(47066) AS Consecrating Ground",
+			"Quest(46941) AS The Path Forward", -- Lightforged Beacon: Triumvirate's End
+			
+			-- To Archimonde's home, or something. Required to find the McGuffin
+			"Quest(47686) AS Not-So-Humble Beginnings",
+			"Quest(47882) AS Conservation of Magic",
+			"Quest(47688) AS Invasive Species",
+			"Quest(47883) AS The Longest Vigil",
+			"Quest(47689) AS Gatekeeper's Challenge: Tenacity",
+			"Quest(47685) AS Gatekeeper's Challenge: Cunning",
+			"Quest(47687) AS Gatekeeper's Challenge: Mastery",
+			"Quest(47690) AS The Defiler's Legacy",
+			"Quest(48107) AS The Sigil of Awakening", -- Mac'aree WQs, Shroud of Arcane Echoes (Vindicaar upgrade), Lightforged Beacon: Conservatory of the Arcane, 
+			-- 2. is now done
+		
+		-- 3. War of Light and Shadow
+		
+			-- Back to Mac'aree because, uh, THEY'RE HERE!
+			"Quest(48461) AS Where They Least Expect It",
+			"Quest(48344) AS We Have a Problem",
+			"Quest(47691) AS A Non-Prophet Organization",
+			"Quest(47854) AS Wrath of the High Exarch",
+			"Quest(47995) AS Overt Ops",
+			"Quest(47853) AS Flanking Maneuvers",
+			"Quest(48345) AS Talgath's Forces",
+			"Quest(47855) AS What Might Have Been",
+			"Quest(47856) AS Across the Universe",
+			"Quest(47416) AS Shadow of the Triumvirate", -- Kil'jaeden's Throne WQs, Lightforged Beacon: Prophet's Reflection
+			
+			-- Something about Alleria, Void Ethereals, and the Fallen Naaru in the Seat of the Triumvirate
+			"Quest(47238) AS The Seat of the Triumvirate",
+			"Quest(40761) AS Whispers from Oronaar",
+			"Quest(47101) AS Arkhaan's Prayers",
+			"Quest(47180) AS The Pulsing Madness",
+			"Quest(47100) AS Arkhaan's Pain",
+			"Quest(47183) AS Arkhaan's Plan",
+			"Quest(47184) AS Arkhaan's Peril",
+			"Quest(47203) AS Throwing Shade",
+			"Quest(47217) AS Sources of Darkness",
+			"Quest(47218) AS The Shadowguard Incursion",
+			"Quest(47219) AS A Vessel Made Ready",
+			"Quest(47220) AS A Beacon in the Dark", -- Lightforged Beacon: Shadowguard Incursion, Seat of the Triumvirate (dungeon) + WQs in there
+			-- 3. is now done
+			
+			-- Into the dungeon to - finally- get the McGuffin (and open up more WQs)
+			"Quest(48560) AS An Offering of Shadow", -- Netherlight Crucible: Second part (Shadow)
+			"Quest(47654) AS Seat of the Triumvirate: The Crest of Knowledge", -- Western Mac'aree WQs
+		
+		},
+	},
+	
 }
 
 
