@@ -92,15 +92,15 @@ function GS:Update()
 	
 	-- Add all Groups (TODO: Only all those that are top level groups)
 	local groups = AM.db.global.groups
-	local activeGroup, activeGroupName = AM.GroupDB:GetActiveGroup()
+	local activeGroup, activeGroupKey = AM.GroupDB:GetActiveGroup()
 	
 	-- Hightlight the active group while adding it
 	for key, group in pairs(groups) do -- Add these first, as they are the default groups
-		self:AddGroup(group, (group.name == activeGroupName))
+		self:AddGroup(group, (key == activeGroupKey))
 	end
 	
 	for index, group in ipairs(groups) do -- Add the user-defined groups afterwards (TODO: Setting to only show these? Maybe they don't want to use the default groups)
-		self:AddGroup(group, (group.name == activeGroupName))
+		self:AddGroup(group, (index == activeGroupKey))
 	end
 	
 	-- Update the size of the panel so that it may contain all elements (TODO: overflow handling/scrolling)
