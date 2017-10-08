@@ -101,16 +101,11 @@ function GS:Update()
 	-- end
 	
 	for key, group in ipairs(AM.GroupDB:GetOrderedDefaultGroups()) do
-		
-		-- Remove temporary index from table
-		local key = group.key
-		group.key = nil
-		
-		self:AddGroup(group, (key == activeGroupKey))
-		
+		self:AddGroup(group, (group.id == activeGroupKey))
 	end
 	
 	for index, group in ipairs(groups) do -- Add the user-defined groups afterwards (TODO: Setting to only show these? Maybe they don't want to use the default groups)
+		group.id = index
 		self:AddGroup(group, (index == activeGroupKey))
 	end
 	
