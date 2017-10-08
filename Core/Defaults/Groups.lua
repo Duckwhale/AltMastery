@@ -267,7 +267,7 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 
 
 --- Return the table containing default Group entries
-function GetDefaultGroups()
+local function GetDefaultGroups()
 	
 	local defaults = {}
 	
