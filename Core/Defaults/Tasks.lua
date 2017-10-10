@@ -1005,6 +1005,71 @@ local defaultTasks = {
 		},
 	},
 	
+	WQ_LEGION_BRIMSTONE = {
+		name = "World Quests: Brimstone",
+		description = "TODO",	
+		notes = "",
+		iconPath = "inv_misc_food_legion_baconuncooked",
+		Criteria = "Quest(aaaaaaaa) OR Quest(aaaaaaaa) OR  Quest(aaaaaaaa) OR Quest(aaaaaaaa) OR Quest(aaaaaaaa) OR Quest(aaaaaaaa) OR Quest(aaaaaaaa) OR Quest(aaaaaaaa) OR Quest(aaaaaaaa) OR Quest(4aaaaaaaa1519) OR Quest(aaaaaaaa) OR Quest(aaaaaaaa) OR Quest(aaaaaaaa) OR Quest(aaaaaaaa) OR Quest(aaaaaaaa)",
+		Filter = "Level() < 110 OR Profession(COOKING) < 100 OR NOT (WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa) OR WorldQuest(aaaaaaaa))",
+		Objectives = {
+		
+			"Quest(aaaaaaaa) AS Highmountain",
+			"Quest(aaaaaaaa) AS Highmountain",
+			"Quest(aaaaaaaa) AS Highmountain",
+			
+			"Quest(aaaaaaaa) AS Azsuna",
+			"Quest(aaaaaaaa) AS Azsuna",
+			"Quest(aaaaaaaa) AS Azsuna",
+			
+			"Quest(aaaaaaaa) AS Val'sharah",
+			"Quest(aaaaaaaa) AS Val'sharah",
+			"Quest(aaaaaaaa) AS Val'sharah",
+			
+			"Quest(aaaaaaaa) AS Stormheim",			
+			"Quest(aaaaaaaa) AS Stormheim",
+			"Quest(aaaaaaaa) AS Stormheim",
+			
+			"Quest(aaaaaaaa) AS Suramar",
+			"Quest(aaaaaaaa) AS Suramar",
+			"Quest(aaaaaaaa) AS Suramar",
+					
+		},
+	},
+	
+	
+	WQ_LEGION_FELHIDE = {
+		name = "World Quests: Felhide",
+		description = "TODO",
+		notes = "Felhide",
+		iconPath = "inv_misc_leatherfelhide",
+		Criteria = "Quest(41560) OR Quest(41561) OR  Quest(41239) OR Quest(41562) OR Quest(41563) OR Quest(41564) OR Quest(41565) OR Quest(41566) OR Quest(41567) OR Quest(41568) OR Quest(41569) OR Quest(41570) OR Quest(41571) OR Quest(41572) OR Quest(41573)",
+		Filter = "Level() < 110 OR Profession(SKINNING) < 100 OR NOT (WorldQuest(41560) OR WorldQuest(41561) OR WorldQuest(41239) OR WorldQuest(41562) OR WorldQuest(41563) OR WorldQuest(41564) OR WorldQuest(41565) OR WorldQuest(41566) OR WorldQuest(415657) OR WorldQuest(41568) OR WorldQuest(41569) OR WorldQuest(41570) OR WorldQuest(41571) OR WorldQuest(41572) OR WorldQuest(41573))",
+		Objectives = {
+		
+			"Quest(41560) AS Highmountain",
+			"Quest(41561) AS Highmountain",
+			"Quest(41239) AS Highmountain",
+			
+			"Quest(41562) AS Azsuna",
+			"Quest(41563) AS Azsuna",
+			"Quest(41564) AS Azsuna",
+			
+			"Quest(41565) AS Val'sharah",
+			"Quest(41566) AS Val'sharah",
+			"Quest(41567) AS Val'sharah",
+			
+			"Quest(41568) AS Stormheim",			
+			"Quest(41569) AS Stormheim",
+			"Quest(41570) AS Stormheim",
+			
+			"Quest(41571) AS Suramar",
+			"Quest(41572) AS Suramar",
+			"Quest(41573) AS Suramar",
+					
+		},
+	},
+	
 	
 	WQ_LEGION_FELWORT = {
 		name = "World Quests: Felwort",
