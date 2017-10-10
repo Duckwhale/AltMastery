@@ -136,7 +136,7 @@ local PrototypeTask = {
 --- Table containing the default Tasks (as DIFF - only the entries that differ from the Prototype are included here)
 local defaultTasks = {
 -- TODO: Better naming scheme for consistency
-		LEGENDARY_SHADOWMOURNE = {
+		MILESTONE_WOTLK_LEGENDARY_SHADOWMOURNE = {
 			name = "Unlock Shadowmourne",
 			description = "Retrieve Shadowmourne from the depths of Icecrown Citadel",
 --			Priority = "OPTIONAL", -- TODO: Localise priorities
