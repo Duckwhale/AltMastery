@@ -1114,6 +1114,13 @@ local defaultTasks = {
 		},
 	},
 	
+	DAILY_CLASSIC_STONECOLDTRIXXY = {
+		name = "Stone Cold Trixxy (Winterspring)",
+		description = "TODO",
+		Criteria = "Quest(31909)",
+		iconPath = "inv_misc_bag_cenarionherbbag",
+	},
+	
 	MILESTONE_LEGION_ARGUSTROOPS = {
 		name = "Argus Troops & Missions unlocked",
 		description = "TODO",
