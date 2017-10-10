@@ -132,6 +132,7 @@ local PrototypeTask = {
 
 }
 
+-- ### Reminder: Adhere to the format! ### TASKTYPE OR MILESTONE .. _ .. EXPANSIONSHORT OR CATEGORY .. _ .. NAME ###
 
 --- Table containing the default Tasks (as DIFF - only the entries that differ from the Prototype are included here)
 local defaultTasks = {
