@@ -116,6 +116,7 @@ local PrototypeGroup = {
 
 }
 
+-- ### Reminder: Adhere to the format! ###	TASKTYPE OR MILESTONE .. _ .. EXPANSIONSHORT OR CATEGORY .. _ .. NAME ###
 
 --- Table containing the default Groups (as DIFF - only the entries that differ from the Prototype are included here)
 local defaultGroups = { -- TODO: Generate automatically from import table (only contains criteria, name etc. - not the duplicate stuff)
@@ -257,10 +258,11 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 
 -- These lists will be generated from the default list
 -- For this to work, ALL default tasks (and milestones) must adhere to the naming scheme:
--- TASKTYPE OR MILESTONE .. _ .. EXPANSIONSHORT .. _ .. NAME
+-- TASKTYPE OR MILESTONE .. _ .. EXPANSIONSHORT OR CATEGORY .. _ .. NAME
 -- where EXPANSIONSHORT is one of
 -- CLASSIC, TBC; WOTLK, CATA, MOP, WOD; LEGION
 -- and TASKTYPE can be anything, such as DAILY, WEEKLY, WORLDEVENT, ...
+-- and CATEGORY can be anything, such as WORLDEVENT, PETBATTLE, PVP... (should make sense so it can be searched for later)
 local TASKS = {
 	name = "Tasks",
 	iconpath = "inv_misc_book_07",
