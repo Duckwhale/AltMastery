@@ -78,6 +78,21 @@ local function OnCalendarUpdate(...)
 
 end
 
+local function OnQuestTurnedIn(self, questID, experience, money)
+
+	AM:Print("OnQuestTurnedIn triggered with ID = " .. questID .. ", experience = " .. experience .. ", money = " .. money)--, "EventHandler")
+	-- Delayed update
+	local secs = 1
+	C_Timer.After(secs, function(self)
+		Update()
+		AM:Debug("Delayed Update() after " .. secs .. " seconds has occured", "EventHandler")
+	end)
+	
+	-- Apparently, updating immediately doesn't always return the proper value (is probably executed too soon)
+	--Update()
+	
+end
+
 -- List of event listeners that the addon uses and their respective handler functions
 local eventList = {
 
@@ -90,7 +105,7 @@ local eventList = {
 	["CHAT_MSG_CURRENCY"] = OnCurrencyUpdate,
 	["CURRENCY_DISPLAY_UPDATE"] = OnCurrencyUpdate,
 	["CALENDAR_UPDATE_EVENT_LIST"] = OnCalendarUpdate,
-	
+	["QUEST_TURNED_IN"] = OnQuestTurnedIn, -- TODO: Disable when not needed?
 }
 
 -- Register listeners for all relevant events
