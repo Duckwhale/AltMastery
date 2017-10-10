@@ -27,26 +27,6 @@ local GS = AM[MODULE]
 GS.usedFrames = {} -- Frames that are part of the widget pool (one for each group)
 GS.numDisplayedGroups = 0 -- Used to calculate the height of the actual content (and display the scrolling "..." icon if it overflows)
 
---- Calculate the total height of the GroupSelector pane, considering all the items that need to be displayed, and the style's display settings 
--- @param self 
--- @return The total height that is required for the TrackerPane to display all children properly
-function GS:GetHeight()
-	
-	-- Get value for all display items
-	
-	-- Get settings for each display item (TODO: They are not final)
-	
-	-- Calculate total height
-	local height = 0
-	
-	height = self.numDisplayedGroups * 50 -- TODO: Settings for height
-	
-	-- Border, spacer, etc? (TODO)
-	
-	return height
-
-end
-
 --- Release all the children into the widget pool (managed by AceGUI-3.0)
 function GS:ReleaseWidgets()
 
@@ -112,7 +92,6 @@ function GS:Update()
 	end
 	
 	-- Update the size of the panel so that it may contain all elements (TODO: overflow handling/scrolling)
-	self.widget:SetHeight(self:GetHeight())
 	local activeStyle = AM.GUI:GetActiveStyle()
 	local borderSize = activeStyle.edgeSize -- TODO: Needs more testing-> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible?
 	self.widget.content:ClearAllPoints()
