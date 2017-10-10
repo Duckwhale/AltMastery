@@ -101,8 +101,8 @@ local function Show(self)
 		
 		border:ClearAllPoints()
 		border:SetPoint("TOPLEFT", padding, -padding)
-		border:SetPoint("BOTTOMRIGHT", -padding, padding)
-		TrackerPane:SetAutoAdjustHeight(false)
+		border:SetPoint("BOTTOMRIGHT", -padding, 36)
+	--	TrackerPane:SetAutoAdjustHeight(false)
 	
 		AM.GUI:SetFrameColour(border, activeStyle.frameColours.TrackerPane)
 		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.TrackerPane.border, 255)
