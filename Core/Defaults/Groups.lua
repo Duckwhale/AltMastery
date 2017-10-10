@@ -283,7 +283,7 @@ local expansions = {
 	
 	TBC = {
 		name = "The Burning Crusade",
-		iconPath = "expansionicon_theburningcrusade",
+		iconPath = "expansionicon_burningcrusade",
 		taskList = {},
 	},
 	
