@@ -125,29 +125,7 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 		name = "All Tasks",
 		iconPath = "achievement_quests_completed_daily_07", -- achievement_quests_completed_daily_06 - achievement_quests_completed_daily_05 etc
 		taskList = {
-
---	TODO: RNG availablity		"DAILY_WOTLK_JEWELOFTHESEWERS",
---	TODO: Dungeon OR Reputation depending on condition		"DAILY_TBC_HEROICMANATOMBS",
--- TODO: Alternating sets of dailies			"DAILY_CATA_BARADINSWARDENS",
---			"DAILY_WOD_PETBATTLE_ERRIS",
---	TODO: EVENT garrison table		"DAILY_WOD_GARRISONMISSIONS",
---	TODO. Zone/Entered		"DAILY_WOD_HERBGARDEN",
-		"UNLOCK_LEGION_KOSUMOTH",
-		"WQ_LEGION_KOSUMOTH",
 		
---	TODO: Hide after completed		"UNLOCK_LEGION_MEATBALL",
-			"DAILY_WORLDEVENT_CORENDIREBREW", -- TODO: Keybind -> toggle to update (rebuild frames? check memory usage to see if framepool works?)
---			"DAILY_WORLDEVENT_BREWFESTQUESTS",
-
-			"WEEKLY_LEGION_WQEVENT",
-			"WEEKLY_LEGION_DUNGEONEVENT",
-			
-			"MONTHLY_WORLDEVENT_MOPTIMEWALKING",
-			
-			-- TODO: Objectives, InventoryItem, InventoryAmount ( to restock AH items?)
--- TODO: Order Hall Autocomplete tracking	"DAILY_LEGION_WQAUTOCOMPLETE", --			
-
-			"DAILY_MOP_COOKINGSCHOOLBELL",
 			----------------------------------------------
 			-- ## Tasks (by expansion) ## --
 			----------------------------------------------
@@ -267,9 +245,7 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			
 		},
 		
-		nestedGroups = { -- What if you recursively add ALL_THE_TASKS?
-			"NONEXISTENT_GROUP",
-		}
+	
 	},
 
 }
