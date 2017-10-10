@@ -247,9 +247,8 @@ local function AddGroup(self, Group)
 			
 		end
 		
-		local isTaskFiltered = AM.Parser:Evaluate(Task.Filter)
-		if isTaskFiltered then -- Don't add Task to the active Group (as it isn't useful for the currently logged in character)
-			AM:Debug("Hiding Task " .. Task.name .. " because it is filtered or completed", "Tracker")
+		if not AM.db.profile.settings.display.showFiltered and AM.Parser:Evaluate(Task.Filter) then -- Don't add Task to the active Group (as it isn't useful for the currently logged in character)
+			AM:Debug("Hiding Task " .. Task.name .. " because it is filtered", "Tracker")
 		else
 		
 			if not AM.db.profile.settings.display.showCompleted and AM.Parser:Evaluate(Task.Criteria) then -- Task is completed and should be hidden according to the settings
