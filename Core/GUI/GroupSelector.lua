@@ -62,7 +62,8 @@ function GS:AddGroup(Group, isActiveGroup)
 	groupWidget:ApplyStatus()
 	
 	self.numDisplayedGroups = self.numDisplayedGroups + 1
-	self.usedFrames[#self.usedFrames+1] = groupWidget
+	groupWidget:SetStatus("groupID", Group.id) -- Backref to it can be looked up again when actions on it demand it
+	self.usedFrames[#self.usedFrames+1] = groupWidget -- TODO: Is this necessary?
 	self.widget:AddChild(groupWidget)
 	
 end
