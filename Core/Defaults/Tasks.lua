@@ -974,7 +974,7 @@ local defaultTasks = {
 	},
 	
 	WQ_LEGION_BACON = {
-		name = "Cooking World Quest",
+		name = "World Quests: Bacon",
 		description = "TODO",	
 		notes = "Thick Slab of Bacon",
 		iconPath = "inv_misc_food_legion_baconuncooked",
