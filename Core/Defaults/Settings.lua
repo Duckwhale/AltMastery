@@ -19,7 +19,7 @@ if not AM then return end
 
 --- Table containing the default task entries
 local defaults = {
-	
+	-- TODO: Restructure this after the GUI is done
 	display = {
 		
 		activeStyle = "Default",
@@ -28,7 +28,19 @@ local defaults = {
 		objectiveSize = 24,
 		iconSize = 20,
 		showCompleted = false,
+		showDismissed = false,
+		showFiltered = false,
 		highlightExpandedElements = true,
+		
+		windowPadding = 5, -- Border between the outer window border and its content pane
+		contentPadding = 2, -- Border between a content pane and its child widgets
+	},
+	
+	groupSelector = {
+		
+		iconSize = 40,
+		padding = 5,
+		
 	},
 	
 	debug = {

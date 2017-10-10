@@ -151,8 +151,21 @@ local function GetActiveGroup()
 	return AM.db.global.groups[activeGroupName], activeGroupName -- Should always exist, as it will default to the EMPTY_GROUP if need be
 end
 
-local function SetActiveGroup(name)
+-- Sets the active group to a given group from the GroupDB
+-- @param self
+-- @param groupID A valid key (integer for user-defined groups, string for predefined ones) referencing an entry in the GroupDB
+-- @return true if the Group was set successfully; nil otherwise
+local function SetActiveGroup(self, groupID)
+	
 	-- TODO: Check if Group exists
+	local Group = AM.db.global.groups.groupID
+	if not Group then
+		AM:Debug("Attempted to set active group with invalid groupID " .. tostring(groupID), "GroupDB")
+		return
+	end
+	
+	AM.db.profile.settings.activeGroup = Group.name
+	return true
 	
 end
 

@@ -77,7 +77,9 @@ local defaultStyle = {
 		completed = "#00FF00", -- bright green - completed/confirmation
 		incomplete = "#FF2020", -- red - incomplete/invalid/error
 		highlight = "#E8B230", -- regular display text
-		normal = "#FFFFFF",
+		normal = "#F1F4FC",
+		inactiveGroup = "#868684",
+		activeGroup = "#FFFFFF",
 	},
 	
 	frameColours = {
@@ -90,13 +92,17 @@ local defaultStyle = {
 		InvisibleBorder = { backdrop = "#000000", border = nil, alpha = 0, borderAlpha = 0 },
 		Window = { backdrop = "#F1F4FC", border = "#7186C7", alpha = 0.05, borderAlpha = .3}, -- Identical style for all top-level windows
 		ContentPane = { backdrop = "F1F4FC", border = nil, alpha = .1 }, -- TODO
-		TrackerPane = { backdrop = "#F1F4FC", border = "#F1F4FC", alpha = 0, borderAlpha = 0},
+		TrackerPane = { backdrop = "#F1F4FC", border = "#AAB6D3", alpha = 0.05, borderAlpha = 0},
+		GroupSelectionPane = { backdrop = "#F1F4FC", border = "#AAB6D3", alpha = 0.05, borderAlpha = 0},
 		InlineHeader = { backdrop = "#F1F4FC", border = "#FFFFFF", alpha = .3, borderAlpha = 0 },
 		InlineElement = { backdrop = "#566769", border = "#FFFFFF", alpha = .8, borderAlpha = 0 },
 		ExpandedElement = { backdrop = "#7186C7", border = "#FFFFFF", alpha = .5, borderAlpha = 0 },
 		HighlightedInlineHeader = { backdrop = "#F1F4FC", border = "#E8B230", alpha = .5, borderAlpha = 1 },
 		HighlightedInlineElement = { backdrop = "#566769", border = "#E8B230", alpha = 1, borderAlpha = 1 },
 		HighlightedExpandedElement = { backdrop = "#7186C7", border = "#E8B230", alpha = .7, borderAlpha = 1 },
+		SelectorGroup = { backdrop = "#F1F4FC", border = "#FFFFFF", alpha = 0.1, borderAlpha = 0 },
+		HighlightedSelectorGroup = { backdrop = "#7186C7", border = "#E8B230", alpha = 0.05, borderAlpha = 1 },
+		ActiveSelectorGroup = { backdrop = "#7186C7", border = "#E8B230", alpha = 0.05, borderAlpha = 1 },
 		Divider = { backdrop = "#4D4D4D", alpha = 1, border = nil },
 		test4 = "#666666", -- grey (IT button bg)
 		test5 = "#4D4D4D", -- dark grey (IT scrollbar bg)

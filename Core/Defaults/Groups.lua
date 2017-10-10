@@ -116,6 +116,7 @@ local PrototypeGroup = {
 
 }
 
+-- ### Reminder: Adhere to the format! ###	TASKTYPE OR MILESTONE .. _ .. EXPANSIONSHORT OR CATEGORY .. _ .. NAME ###
 
 --- Table containing the default Groups (as DIFF - only the entries that differ from the Prototype are included here)
 local defaultGroups = { -- TODO: Generate automatically from import table (only contains criteria, name etc. - not the duplicate stuff)
@@ -124,143 +125,244 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 		name = "All Tasks",
 		iconPath = "achievement_quests_completed_daily_07", -- achievement_quests_completed_daily_06 - achievement_quests_completed_daily_05 etc
 		taskList = {
-
---	TODO: RNG availablity		"DAILY_WOTLK_JEWELOFTHESEWERS",
---	TODO: Dungeon OR Reputation depending on condition		"DAILY_TBC_HEROICMANATOMBS",
--- TODO: Alternating sets of dailies			"DAILY_CATA_BARADINSWARDENS",
---			"DAILY_WOD_PETBATTLE_ERRIS",
---	TODO: EVENT garrison table		"DAILY_WOD_GARRISONMISSIONS",
---	TODO. Zone/Entered		"DAILY_WOD_HERBGARDEN",
--- TODO: Objectives(*)		
-	
-		"UNLOCK_LEGION_KOSUMOTH",
-		"WQ_LEGION_KOSUMOTH",
 		
---	TODO: Hide after completed		"UNLOCK_LEGION_MEATBALL",
-			"DAILY_WORLDEVENT_CORENDIREBREW", -- TODO: Keybind -> toggle to update (rebuild frames? check memory usage to see if framepool works?)
---			"DAILY_WORLDEVENT_BREWFESTQUESTS",
-
+			----------------------------------------------
+			-- ## Tasks (by expansion) ## --
+			----------------------------------------------
+			
+			-- LEGION
+			---- Daily Quests
+			"DAILY_LEGION_EMISSARY1",
+			"DAILY_LEGION_EMISSARY2",
+			"DAILY_LEGION_EMISSARY3",
+			"DAILY_LEGION_ACCOUNTWIDE_BLINGTRON6000",
+			-- Artifact tints
+			"LEGION_DAILY_RITUALOFDOOM",
+			"LEGION_DAILY_TWISTINGNETHER",
+			---- Currencies
+			"RESTOCK_LEGION_ORDERHALLRESOURCES",
+			---- World Quests
+			"WQ_LEGION_TREASUREMASTER_IKSREEGED",
+			"WQ_LEGION_UNDERBELLY_TESTSUBJECTS",
+			---- Mount drops on Argus
+			"WQ_LEGION_SABUUL",
+			"WQ_LEGION_VARGA",
+			"WQ_LEGION_NAROUA",
+			"WQ_LEGION_VENOMTAILSKYFIN",
+			"WQ_LEGION_HOUNDMASTERKERRAX",
+			"WQ_LEGION_WRANGLERKRAVOS",
+			"WQ_LEGION_BLISTERMAW",
+			"WQ_LEGION_VRAXTHUL",
+			"WQ_LEGION_PUSCILLA",
+			"WQ_LEGION_SKREEGTHEDEVOURER",
+			"WQ_LEGION_BRIMSTONE",
+			"WQ_LEGION_FELHIDE",
+			"WQ_LEGION_FELWORT",
+			"WQ_LEGION_BACON",
+			"WQ_LEGION_KOSUMOTH",
+			---- Weekly Quests
 			"WEEKLY_LEGION_WQEVENT",
 			"WEEKLY_LEGION_DUNGEONEVENT",
-			
-			"MONTHLY_WORLDEVENT_MOPTIMEWALKING",
-			
-			-- TODO: Objectives, InventoryItem, InventoryAmount ( to restock AH items?)
--- TODO: Order Hall Autocomplete tracking	"DAILY_LEGION_WQAUTOCOMPLETE", --			
-
-			"DAILY_MOP_COOKINGSCHOOLBELL",
-			
-			"RESTOCK_LEGION_ORDERHALLRESOURCES",
-			
 			"WEEKLY_LEGION_BONUSROLLS",
 			"WEEKLY_LEGION_ARGUSTROOPS",
-			
-			-- "LIMITED_LEGIONFALL_NETHERDISRUPTOR",	-- TODO: -> needs questcache
-			"LEGION_UNDERBELLY_TESTSUBJECTS",
-			
-			"DAILY_DARKMOONFAIRE_PETBATTLES",
-			"MONTHLY_DARKMOONFAIRE_TURNINS",
-			"MONTHLY_DARKMOONFAIRE_PROFESSIONQUESTS",
-			
-			"UNLOCK_LEGION_MEATBALL",
-			
-			"DAILY_CATA_JEWELCRAFTING",
-			
-			"WEEKLY_MOP_WORLDBOSSES",
-
-			-- World bosses in the Broken Isles
+			"WEEKLY_LEGION_FUELOFADOOMEDWORLD",
+			---- World bosses in the Broken Isles
 			"WEEKLY_LEGION_WORLDBOSS_NITHOGG",
 			"WEEKLY_LEGION_WORLDBOSS_SOULTAKERS",
 			"WEEKLY_LEGION_WORLDBOSS_SHARTHOS",
 			"WEEKLY_LEGION_WORLDBOSS_LEVANTUS",
 			"WEEKLY_LEGION_WORLDBOSS_HUMONGRIS",
 			"WEEKLY_LEGION_WORLDBOSS_CALAMIR",
-		--	"WEEKLY_LEGION_WORLDBOSS_DRUGON",
+			"WEEKLY_LEGION_WORLDBOSS_DRUGON",
 			"WEEKLY_LEGION_WORLDBOSS_FLOTSAM",
 			"WEEKLY_LEGION_WORLDBOSS_WITHEREDJIM",
-			-- World bosses in Suramar
+			---- World bosses in Suramar
 			"WEEKLY_LEGION_WORLDBOSS_ANAMOUZ",
 			"WEEKLY_LEGION_WORLDBOSS_NAZAK",
-			
-			-- World bosses on the Broken Shore
+			---- World bosses on the Broken Shore
 			"WEEKLY_LEGION_WORLDBOSS_BRUTALLUS",
 			"WEEKLY_LEGION_WORLDBOSS_MALIFICUS",
 			"WEEKLY_LEGION_WORLDBOSS_SIVASH",
 			"WEEKLY_LEGION_WORLDBOSS_APOCRON",
-			
-			-- World bosses on Argus (Greater Invasion Point bosses)
+			---- World bosses on Argus (Greater Invasion Point bosses)
 			"WEEKLY_LEGION_GREATERINVASIONPOINT",
+
+			-- WOD
+			"DAILY_WOD_ACCOUNTWIDE_BLINGTRON4000",
 			
-			-- World Quests
-			"LEGION_WQ_IKSREEGED",
-			"LEGION_WQ_FELWORT",
---			"LEGION_WQ_FELHIDE",
---			"LEGION_WQ_BRIMSTONE",
---			"LEGION_WQ_BACON",
+			-- MOP
+			"DAILY_MOP_COOKINGSCHOOLBELL",
+			"DAILY_MOP_ACCOUNTWIDE_BLINGTRON5000",
+			"WEEKLY_MOP_WORLDBOSSES",
 			
-			-- Mount drops in Argus
-			"DAILY_LEGION_WQ_SABUUL",
-			"DAILY_LEGION_WQ_VARGA",
-			"DAILY_LEGION_WQ_NAROUA",
-			"DAILY_LEGION_WQ_VENOMTAILSKYFIN",
---			"DAILY_LEGION_WQ_HOUNDMASTERKERRAX",
-			"DAILY_LEGION_WQ_WRANGLERKRAVOS",
-			"DAILY_LEGION_WQ_BLISTERMAW",
-			"DAILY_LEGION_WQ_VRAXTHUL",
-			"DAILY_LEGION_WQ_PUSCILLA",
-			"DAILY_LEGION_WQ_SKREEGTHEDEVOURER",
+			-- CATA
+			"DAILY_CATA_JEWELCRAFTING",
+
+			-- WOTLK
+			"WOTLK_THEORACLES_MYSTERIOUSEGG",
+
+			-- TBC
+			"MONTHLY_TBC_MEMBERSHIPBENEFITS",
 			
-			"DAILY_LEGION_EMISSARY1",
-			"DAILY_LEGION_EMISSARY2",
-			"DAILY_LEGION_EMISSARY3",
+			-- CLASSIC
+			---- Pet Battle stuff
+			"DAILY_CLASSIC_ACCOUNTWIDE_PETBATTLES",
+			"DAILY_CLASSIC_ACCOUNTWIDE_CYRASFLIERS",
 			
-			"LEGION_WEEKLY_FUELOFADOOMEDWORLD",
+			----------------------------------------------
+			-- ## MISC (TODO: Find a better categorization for these?)
+			----------------------------------------------
 			
-			-- Profession quests (TODO: Rest)
-			"MILESTONE_LEGION_TAILORINGQUESTS",
-			"MILESTONE_LEGION_ENCHANTINGQUESTS",
+			"DAILY_WORLDEVENT_CORENDIREBREW",
+			"DAILY_WORLDEVENT_DARKMOONFAIRE_PETBATTLES",
+			"MONTHLY_WORLDEVENT_MOPTIMEWALKING",
+			"MONTHLY_WORLDEVENT_DARKMOONFAIRE_TURNINS",
+			"MONTHLY_WORLDEVENT_DARKMOONFAIRE_PROFESSIONQUESTS",
+
+			----------------------------------------------
+			-- ## Milestones (by expansion) ## --
+			----------------------------------------------
 			
-			-- Legendary items
-			"LEGENDARY_SHADOWMOURNE",
-			
-			-- Attunement chains
---			"MILESTONE_LEGION_ATTUNEMENT_RETURNTOKARAZHAN", --> TODO: Removed by Blizzard... sigh
-			
-			-- Quest chains
-			"MILESTONE_LEGION_LEGIONFALLCHAMPION",
+			-- LEGION
+			---- Unlocks
+			"MILESTONE_LEGION_UNLOCK_KOSUMOTH",
+			"MILESTONE_LEGION_UNLOCK_MEATBALL",
+			---- Quest chains
 			"MILESTONE_LEGION_THEMOTHERLODE",
---			"MILESTONE_LEGION_BREACHINGTHETOMB",
+			"MILESTONE_LEGION_LEGIONFALLCHAMPION",
 			"MILESTONE_LEGION_ARGUSTROOPS",
 			"MILESTONE_LEGION_ARGUSCAMPAIGN",
-			
-			-- Pet Battle stuff
-			"DAILY_ACCOUNTWIDE_PETBATTLES",
-			-- dungeons
-			-- Barrens Q
-			-- new goblin dude
-			
-			"DAILY_ACCOUNT_BLINGTRON4000",
-			"DAILY_ACCOUNT_BLINGTRON5000",
-			"DAILY_ACCOUNT_BLINGTRON6000",
-			
-			-- Artifact tints
-			"LEGION_DAILY_RITUALOFDOOM",
-			"LEGION_DAILY_TWISTINGNETHER",
 			"MILESTONE_LEGION_IMPROVINGONHISTORY",
+			---- Profession quests (TODO: Rest)
+			"MILESTONE_LEGION_TAILORINGQUESTS",
+			"MILESTONE_LEGION_ENCHANTINGQUESTS",	
 			
-			-- Miscellaneous stuff
-			"WOTLK_MYSTERIOUSEGG",
+			---- Legendary items
+			"MILESTONE_WOTLK_LEGENDARY_SHADOWMOURNE",
+			---- Attunements
+--			"MILESTONE_LEGION_ATTUNEMENT_RETURNTOKARAZHAN", --> TODO: Removed by Blizzard... sigh. I'll leave it, for now
+
 			
 		},
-	}
+		
+	
+	},
+
 }
 
+-- These lists will be generated from the default list
+-- For this to work, ALL default tasks (and milestones) must adhere to the naming scheme:
+-- TASKTYPE OR MILESTONE .. _ .. EXPANSIONSHORT OR CATEGORY .. _ .. NAME
+-- where EXPANSIONSHORT is one of
+-- CLASSIC, TBC; WOTLK, CATA, MOP, WOD; LEGION
+-- and TASKTYPE can be anything, such as DAILY, WEEKLY, WORLDEVENT, ...
+-- and CATEGORY can be anything, such as WORLDEVENT, PETBATTLE, PVP... (should make sense so it can be searched for later)
+local TASKS = {
+	name = "Tasks",
+	iconpath = "inv_misc_book_07",
+	taskList = {},
+}
+
+local MILESTONES = {
+	name = "Milestones",
+	iconPath = "achievement_zone_valeofeternalblossoms_loremaster", --"achievement_garrison_tier03_alliance",
+	taskList = {},
+}
+
+local expansions = {
+
+	CLASSIC = {
+		name = "Classic",
+		iconPath = "expansionicon_classic",
+		taskList = {},
+	},
+	
+	TBC = {
+		name = "The Burning Crusade",
+		iconPath = "expansionicon_burningcrusade",
+		taskList = {},
+	},
+	
+	WOTLK = {
+		name = "Wrath of the Lich King",
+		iconPath = "expansionicon_wrathofthelichking",
+		taskList = {},
+	},
+	
+	CATA = {
+		name = "Cataclysm",
+		iconPath = "expansionicon_cataclysm",
+		taskList = {},
+	},
+	
+	MOP = {
+		name = "Mists of Pandaria",
+		iconPath = "expansionicon_mistsofpandaria",	--inv_pandarenserpentmount		pandarenracial_innerpeace
+		taskList = {},
+	},
+	
+	WOD = {
+		name = "Warlords of Draenor",
+		iconPath = "inv_fellessergronnmount",
+		taskList = {},
+	},
+	
+	LEGION = {
+		name = "Legion",
+		iconPath = "inv_legionadventure",
+		taskList = {},
+	},
+
+}
+
+-- Manual order to make sure they are displayed properly
+local order = {
+	ALL_THE_TASKS = 1,
+	ALL_TASKS = 1, -- TODO?
+	MILESTONES = 2,
+	TASKS = 3,
+	LEGION = 4,
+	WOD = 5,
+	MOP = 6,
+	CATA = 7,
+	WOTLK = 8,
+	TBC = 9,
+	CLASSIC = 10,
+}
+
+-- Filter default group to categorize tasks
+local strfind = string.find
+for index, taskName in pairs(defaultGroups.ALL_THE_TASKS["taskList"]) do -- Check each Task or Milestone and copy it to the list
+	
+	if strfind(taskName, "TASK") ~= nil then -- Add to generic Tasks list
+		TASKS["taskList"][#TASKS.taskList+1] = taskName
+	end
+	
+	if strfind(taskName, "MILESTONE") ~= nil then	-- Add to generic Milestones list
+		MILESTONES["taskList"][#MILESTONES.taskList+1] = taskName
+	end
+	
+	for expansionShort, group in pairs(expansions) do	-- Fill one list for each expansion
+		if strfind(taskName, expansionShort) ~= nil then
+			group["taskList"][#group.taskList+1] = taskName
+		end
+	end
+	
+end
+
+-- Add the categorized tasks to their separate lists		
+for expansionShort, data in pairs(expansions) do -- Add the auto-generated default groups to the defaults list
+	defaultGroups[expansionShort] = data
+end
+
+defaultGroups.TASKS = TASKS
+defaultGroups.MILESTONES = MILESTONES
 
 --- Return the table containing default Group entries
-function GetDefaultGroups()
+local function GetDefaultGroups()
 	
 	local defaults = {}
-	
+
 	for key, entry in pairs(defaultGroups) do -- Create Group object and store it
 
 		-- Add values
@@ -275,14 +377,38 @@ function GetDefaultGroups()
 		-- Store in table that will be added to AceDB defaults
 --		AM:Debug("Loaded default Group with key = " .. tostring(key) .. ", tostring() = " .. tostring(Group), "GroupDB")
 		defaults[key] = Group
-		
+
 	end
-	
+
 	return defaults
 
 end
 
+-- Order groups for display (instead of mere iteration)
+local function GetOrderedDefaultGroups()
+	
+	local defaults = GetDefaultGroups()
+	
+	-- Build table of keys
+	local keys = {}
+	for key, value in pairs(defaults) do 
+		keys[order[key]] = key -- Reorders each group according to its entry in the order LUT -> ALL_TASKS = 1, MILESTONES = 2, TASKS = 3, ... and then the expansions
+	end
+	
+	--table.sort(keys)
+	
+	local orderedDefaults = {}
+	for key, value in ipairs(keys) do -- Add the groups in alphabetical order (value is actually the group's key/ID)
+		orderedDefaults[key] = defaults[value]
+		orderedDefaults[key]["id"] = value -- Store key so it is still available (temporarily)
+	end
+		
+	return orderedDefaults
+	
+end
 
+
+AM.GroupDB.GetOrderedDefaultGroups = GetOrderedDefaultGroups
 AM.GroupDB.GetDefaultGroups = GetDefaultGroups
 AM.GroupDB.PrototypeGroup = PrototypeGroup
 

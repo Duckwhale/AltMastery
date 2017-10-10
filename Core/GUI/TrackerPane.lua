@@ -49,10 +49,10 @@ local function GetTrackerHeight(self)
 	local height = 0
 	
 	-- Add the border for the tracker pane itself
-	height = height + 2 * borderSize + ((borderSize + 1) * (numDisplayedGroups + numDisplayedTasks + numDisplayedObjectives)) -- TODO: The 2nd part needs to be tested for different situations (later)
+	height = height + 2 * borderSize -- + ((numDisplayedGroups + numDisplayedTasks + numDisplayedObjectives)) -- TODO: The 2nd part needs to be tested for different situations (later)
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")	
 	-- For each maximized group, add its tasks and objectives
-	height = height + (numDisplayedGroups - #minimizedGroups) * groupEntrySize
+	height = height + numDisplayedGroups * groupEntrySize
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")		
 	-- For each task without objectives, simply add one entry
 	height = height + numDisplayedTasks * taskEntrySize
@@ -61,8 +61,10 @@ local function GetTrackerHeight(self)
 	height = height + numDisplayedObjectives * objectiveEntrySize
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")	
 	-- For each minimized group, simply add one entry
-	height = height + (#minimizedGroups) * groupEntrySize
+
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")		
+--AM:Debug("Tracker height: " .. height .. " - groups = " .. numDisplayedGroups .. " - tasks = " .. numDisplayedTasks .. " - obj = " .. numDisplayedObjectives, "TrackerPane")
+
 	return height
 
 end
@@ -245,9 +247,8 @@ local function AddGroup(self, Group)
 			
 		end
 		
-		local isTaskFiltered = AM.Parser:Evaluate(Task.Filter)
-		if isTaskFiltered then -- Don't add Task to the active Group (as it isn't useful for the currently logged in character)
-			AM:Debug("Hiding Task " .. Task.name .. " because it is filtered or completed", "Tracker")
+		if not AM.db.profile.settings.display.showFiltered and AM.Parser:Evaluate(Task.Filter) then -- Don't add Task to the active Group (as it isn't useful for the currently logged in character)
+			AM:Debug("Hiding Task " .. Task.name .. " because it is filtered", "Tracker")
 		else
 		
 			if not AM.db.profile.settings.display.showCompleted and AM.Parser:Evaluate(Task.Criteria) then -- Task is completed and should be hidden according to the settings
@@ -380,6 +381,14 @@ local function ToggleObjectives(self, taskWidget)
 
 end
 
+-- Temporary crutch before refactoring the GUI
+local function Update(self)
+
+	self:ReleaseWidgets()
+	self:UpdateGroups()
+	
+end
+
 local TrackerPane = {
 
 	usedFrames = usedFrames,
@@ -394,6 +403,7 @@ local TrackerPane = {
 	
 	Create = Create,
 
+	Update = Update,
 	UpdateGroups = UpdateGroups,
 	ClearGroups = ClearGroups,
 	

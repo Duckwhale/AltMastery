@@ -63,7 +63,7 @@ local function Constructor()
 		x = (UIParent:GetWidth() - 350) / 2,
 		y = (UIParent:GetHeight() - 500) / 2,
 		width = 350,
-		height = 650,
+		height = 695, -- TODO: Update dynamically?
 
 	}
 	
@@ -77,7 +77,7 @@ local function Constructor()
 	
 	-- Create content pane
 	local content = CreateFrame("Frame", name .. "Content", frame)	-- Empty frame that will be used to contain all children later
-	local padding = 5
+	local padding = AM.db.profile.settings.display.windowPadding
 	content:SetPoint("TOPLEFT", padding, -padding)
 	content:SetPoint("BOTTOMRIGHT", -padding, padding)
 	

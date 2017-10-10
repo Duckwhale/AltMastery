@@ -57,58 +57,57 @@ local function Show(self)
 		LeftPane:SetLayout("List")
 		local leftPaneBorder = LeftPane.content:GetParent()
 		AM.GUI:SetFrameColour(leftPaneBorder, contentPaneStyle)
-		LeftPane:SetFullHeight(true)
+		LeftPane:SetFullHeight(true) -- TODO: Pointless?
 		self.frame:AddChild(LeftPane)
 		
 		-- -- Add right (spacer) pane
 		local RightPane = AceGUI:Create("SimpleGroup")
-		RightPane:SetRelativeWidth(0.3)
+		RightPane:SetRelativeWidth(0.31)
 		local rightPaneBorder = RightPane.content:GetParent()
 		self.frame:AddChild(RightPane)
-		RightPane:SetFullHeight(true)
+		--RightPane:SetFullHeight(true) TODO???
 		
-		-- Group control panel (displays currently active group and allows changing it via dropdown) (or maybe find directly via Filters? TODO...)
-		-- local activeStyle = AM.GUI:GetActiveStyle()
-		-- local colours = activeStyle.frameColours.GroupControlPanel
+		-- Add container for the group selection icons
+		local GroupSelectionPane = AceGUI:Create("InlineGroup") -- TODO: Use same type as content panes?
+		border = GroupSelectionPane.content:GetParent()
+		
+		local titletext = GroupSelectionPane.titletext
+		titletext:SetPoint("TOPLEFT", 10, 0)
+		titletext:SetPoint("TOPRIGHT", -10, 0)
+		titletext:SetJustifyH("CENTER")
+		titletext:SetHeight(24)
+		--titletext:Hide() -- TODO: Needs to be implemented properly so it fits with the visual style of the rest
+	--	titletext:SetSize(activeStyle.fontSizes.normal)
+		
+		border:ClearAllPoints()
+		local padding = AM.db.profile.settings.display.contentPadding
+		border:SetPoint("TOPLEFT", padding, 0) -- TODO: What's with the offset? I think it's for the title, but why can't it just work normally?
+		border:SetPoint("BOTTOMRIGHT", -padding, 36)
+--		GroupSelectionPane:SetAutoAdjustHeight(false)
 	
-		-- local gcp = {
-			
-			-- type = "Frame",
-			-- --hidden = true,
-			-- --strata = "FULLSCREEN_DIALOG",
-			-- size = {350, 50},
-			-- --points = {{"BOTTOMRIGHT", -100, 100}},
-			-- --scripts = {"OnMouseDown", "OnMouseUp"},
-			-- --children = { }
-		
-		-- }
-		-- local GroupControlPanel = AceGUI:Create("InlineGroup")
-		-- GroupControlPanel:SetTitle("Active Group")
-		-- GroupControlPanel:SetRelativeWidth(0.8)
-		-- LeftPane:AddChild(GroupControlPanel)
-		-- local ActiveGroupLabel = AceGUI:Create("Label")
-		-- ActiveGroupLabel:SetRelativeWidth(0.8)
-		-- ActiveGroupLabel:SetText("ActiveGroupLabel")
-		-- local ActiveGroupSelector = AceGUI:Create("Dropdown") -- TODO: LibDD
-		-- ActiveGroupSelector:SetLabel("ActiveGroupSelector Label text")
-		-- ActiveGroupSelector:SetRelativeWidth(0.8)
-		-- GroupControlPanel:AddChild(ActiveGroupLabel)
-		-- GroupControlPanel:AddChild(ActiveGroupSelector)
+		AM.GUI:SetFrameColour(border, activeStyle.frameColours.GroupSelectionPane)
+		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.GroupSelectionPane.border, 255)
+		border:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.GroupSelectionPane.borderAlpha) -- This should be updated dynamically (TODO)
+--		GroupSelectionPane:SetTitle("GROUPS")
+--		GroupSelectionPane:SetFullHeight(true)
+		GroupSelectionPane:SetRelativeWidth(1)
+		GroupSelectionPane:SetLayout("List")
+		RightPane:AddChild(GroupSelectionPane)
+		AM.GroupSelector.widget = GroupSelectionPane -- Save the newly-created widget so that it can be used by the GroupSelector API
 		
 		-- Add container for the tracked groups and tasks
 		local TrackerPane = AceGUI:Create("InlineGroup") -- TODO: Use same type as content panes?
 		border = TrackerPane.content:GetParent()
 		
 		border:ClearAllPoints()
-		border:SetPoint("TOPLEFT", 2, -20)
-		border:SetPoint("BOTTOMRIGHT", -2, 2)
-		TrackerPane:SetAutoAdjustHeight(false)
+		border:SetPoint("TOPLEFT", padding, -padding)
+		border:SetPoint("BOTTOMRIGHT", -padding, 36)
+	--	TrackerPane:SetAutoAdjustHeight(false)
 	
 		AM.GUI:SetFrameColour(border, activeStyle.frameColours.TrackerPane)
-		border:SetBackdropColor(1,0,0,0) -- This will shrine through if there's a spacer > 0 between elements, so it should be transparent (TODO via settings?)
 		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.TrackerPane.border, 255)
 		border:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.TrackerPane.borderAlpha) -- This should be updated dynamically (TODO)
-		TrackerPane:SetTitle("Tracker Pane")
+	--	TrackerPane:SetTitle("Tasks")
 	--	TrackerPane:SetFullHeight(true)
 		TrackerPane:SetRelativeWidth(1)
 		TrackerPane:SetLayout("List")
@@ -118,6 +117,9 @@ local function Show(self)
 		AM.TrackerPane.widget = TrackerPane
 		
 	end
+	-- TODO: Global GUI:Update() function
+	AM.GroupSelector:Update()
+
 	AM.TrackerPane:ReleaseWidgets() -- TODO: Combine this in Update() and call that instead?
 	
 	AM.TrackerPane:UpdateGroups() -- Update tracker to display all Tasks and nested Groups for the currently active Group

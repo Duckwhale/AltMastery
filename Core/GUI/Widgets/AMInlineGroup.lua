@@ -142,17 +142,17 @@ local methods = {
 		status.text = status.text or "<ERROR>"
 		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
 		
-		-- Update completion icon
-		local iconPath = (status.isCompleted ~= nil) and activeStyle[status.isCompleted and "iconReady" or "iconNotReady"] or  activeStyle.iconWaiting -- TODO: settings / remove prefix to save some space
-		completionIcon:SetImage(iconPath)
-		completionIcon:SetImageSize(status.iconSize, status.iconSize)
-		
-		
 		-- Type-specific settings may require some individualised attention
 		local isGroup = (status.type == "Group")
 		local isTask = (status.type == "Task")
 		local isObjective = (status.type == "Objective")
-		
+
+		-- Update completion icon
+		local iconPath = (status.isCompleted ~= nil) and activeStyle[status.isCompleted and "iconReady" or "iconNotReady"] or  activeStyle.iconWaiting -- TODO: settings / remove prefix to save some space
+		completionIcon:SetImage(iconPath)
+		completionIcon:SetImageSize(status.iconSize, status.iconSize)
+		completionIcon.image:SetShown(not isGroup) -- Hide icon for groups
+				
 		-- Update label state
 		label:SetText(status.text)
 		if isObjective then -- Clear image, as Objectives should only display text

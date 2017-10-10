@@ -53,7 +53,9 @@ Core\Controllers\SlashCmdHandler.lua
 Core\GUI\Frames\AMWindow.lua
 
 Core\GUI\Widgets\AMInlineGroup.lua
+Core\GUI\Widgets\AMSelectorGroup.lua
 
+Core\GUI\GroupSelector.lua
 Core\GUI\TrackerPane.lua
 Core\GUI\TrackerWindow.lua
 
