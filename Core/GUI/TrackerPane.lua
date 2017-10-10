@@ -18,6 +18,9 @@ if not AM then return end
 
 local AceGUI = LibStub("AceGUI-3.0") -- TODO: meh
 
+local Tracker = {}
+local MODULE = "Tracker"
+
 local usedFrames = {}
 local minimizedGroups = {} -- Groups that are minimized -> Default is shown (for all Groups that don't have an entry here)
 local trackedTasks = {} -- Similar to the default Quest tracker, mark tasks to show their objectives (toggled by clicking on their name) -> Default is hide (for all Tasks that don't have an entry here)
@@ -26,6 +29,9 @@ local trackedTasks = {} -- Similar to the default Quest tracker, mark tasks to s
 local numDisplayedGroups = 0
 local numDisplayedTasks = 0
 local numDisplayedObjectives = 0
+
+-- List of all currently available elements (BEFORE considering the limited size, i.e. some elements may be hidden if there is overflow, or if they are completed/disabled/dismissed, etc.)
+Tracker.elementsList = {}
 
 
 --- Calculate the total height of the TrackerPane considering all the items that need to be displayed, and the style's display settings 
@@ -118,6 +124,10 @@ local function AddObjectives(self, Objectives)
 		-- Calculate completion status
 		local isObjectiveCompleted = AM.Parser:Evaluate(Objective)
 		
+		-- Add Objective to the list of available elements
+		Tracker.elementsList[#Tracker.elementsList+1] = { type = "Objective", widget = objectivesWidget, obj = Objective, isCompleted = isObjectiveCompleted }
+		
+		
 		-- Hide icon (replace with number?)
 		local alias = string.match(Objective, ".*AS%s(.*)") -- Extract alias (if one exists)
 		alias = alias or Objective -- Use Criteria if no alias exists
@@ -174,17 +184,17 @@ local function AddTask(self, Task, group)
 		numDisplayedTasks = numDisplayedTasks + 1
 
 		-- Update completion for this Task after adding it
+		local isTaskCompleted
 		if not AM.Parser:IsValid(Task.Criteria) then -- Criteria is invalid and will not be evaluated
 --			AM:Debug("Found invalid Criteria for Task " .. Task.name .. " - Completion will not be updated")
-			taskWidget:SetCompletion(nil) -- Reset to "default ?" icon
-			
 		else -- Check Criteria and set completion to true or false -> Will display the proper icon in any case
-			
 --			AM:Debug("Checking completion for Task " .. Task.name .. " -> Criteria = " .. Task.Criteria)
-			local isTaskCompleted = AM.Parser:Evaluate(Task.Criteria)
-			taskWidget:SetCompletion(isTaskCompleted)
-			
+			isTaskCompleted = AM.Parser:Evaluate(Task.Criteria)
 		end
+				taskWidget:SetCompletion(isTaskCompleted) -- nil = reset to default ? icon
+		
+		-- Add Task to the list of available elements
+		Tracker.elementsList[#Tracker.elementsList+1] = { type = "Task", widget = taskWidget, obj = Task, isCompleted = isTaskCompleted }
 		
 		taskWidget:ApplyStatus()
 		if trackedTasks[Task.objectID] then -- Show objectives and their status for this Task
@@ -225,6 +235,9 @@ local function AddGroup(self, Group)
 	numDisplayedGroups = numDisplayedGroups + 1
 	usedFrames[#usedFrames+1] = groupWidget
 	AM.TrackerPane.widget:AddChild(groupWidget)
+	
+	-- Add Group to the list of available elements
+	Tracker.elementsList[#Tracker.elementsList+1] = { type = "Group", widget = groupWidget, obj = Group }	
 	
 	if minimizedGroups[Group.name] then -- Don't show Tasks for this Group (TODO -> MinimizeGroup/Maximize Group are NYI)
 			
@@ -423,6 +436,7 @@ local TrackerPane = {
 	-- Needs a table to keep currently used group frames etc in?
 }
 
-AM.TrackerPane = TrackerPane
+AM.TrackerPane = TrackerPane -- TODO: Remove later
+AM.Tracker = Tracker
 
 return AM
