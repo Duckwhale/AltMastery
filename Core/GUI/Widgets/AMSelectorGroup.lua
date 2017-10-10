@@ -41,6 +41,7 @@ local methods = {
 		status.iconSize = settings.groupSelector.iconSize
 		status.text = status.text or "<ERROR>"
 		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
+--AM:Print(status.text .. " - " .. tostring(self:GetType()) .. " -" .. tostring(isActiveGroup) .. " - " .. status.image)		
 		
 		-- Update icon
 		icon:SetImage(status.image)
@@ -65,6 +66,7 @@ local methods = {
 --		label:SetWidth(content:GetWidth() - 2 * padding) -- Resize properly, as the relative width seems to always glitch out
 		-- local point, relativeTo, relativePoint, xOfs, yOfs = label.label:GetPoint()
 		-- label.label:SetPoint(point, relativeTo, relativePoint, xOfs - 2, yOfs)
+	-- AM:Print(tostring(point) .. " " .. tostring(relativeTo:GetName()) .. " " .. tostring(relativePoint) .. " " .. tostring(xOfs) .. " " .. tostring(yOfs))
 		
 		-- Set widget height (because AceGUI just can't get it right...)
 		local contentHeight = fontStringHeight -- Label text can vary in size
@@ -93,6 +95,8 @@ local methods = {
 		end
 		label:SetColor(r, g, b)
 
+--		AM:Print("content = " .. content:GetWidth() .. ", " .. content:GetHeight() .. " - border = " .. border:GetWidth() .. ", " .. border:GetHeight() .. " - label.frame = " .. label.frame:GetWidth() .. ", " .. label.frame:GetHeight() .. " - label.label = " .. label.label:GetWidth() .. ", " .. label.label:GetHeight())
+		
 	end,
 	
 	-- If the label is clicked, switch the Tracker to the selected Group and make it the active one for the current character
