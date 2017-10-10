@@ -1037,7 +1037,6 @@ local defaultTasks = {
 		},
 	},
 	
-	
 	WQ_LEGION_FELHIDE = {
 		name = "World Quests: Felhide",
 		description = "TODO",
@@ -1069,7 +1068,6 @@ local defaultTasks = {
 					
 		},
 	},
-	
 	
 	WQ_LEGION_FELWORT = {
 		name = "World Quests: Felwort",
