@@ -1011,8 +1011,8 @@ local defaultTasks = {
 		description = "TODO",
 		notes = "Felwort",
 		iconPath = "inv_herbalism_70_felwort",
-		Criteria = "(WorldQuest(41514) AND Quest(41514) OR true) AND (WorldQuest(41520) AND Quest(41520) OR true) AND (WorldQuest(41225) AND Quest(41225) OR true) AND (WorldQuest(41512) AND Quest(41512) OR true) AND (WorldQuest(41515) AND Quest(41515) OR true) AND (WorldQuest(41524) AND Quest(41524) OR true) AND (WorldQuest(41511) AND Quest(41511) OR true) AND (WorldQuest(41516) AND Quest(41516) OR true) AND (WorldQuest(41513) AND Quest(41513) OR true) AND (WorldQuest(41519) AND Quest(41519) OR true) AND (WorldQuest(41518) AND Quest(41518) OR true) AND (WorldQuest(41523) AND Quest(41523) OR true) AND (WorldQuest(41517) AND Quest(41517) OR true) AND (WorldQuest(41522) AND Quest(41522) OR true) AND (WorldQuest(41521) AND Quest(41521) OR true)",
-		Filter = "Level() < 110 OR Profession(HERBALISM) < 100 OR NOT (WorldQuest(41514) AND WorldQuest(41520) AND WorldQuest(41225) AND WorldQuest(41512) AND WorldQuest(41515) AND WorldQuest(41524) AND WorldQuest(41511) AND WorldQuest(41516) AND WorldQuest(41513) AND WorldQuest(41519) AND WorldQuest(41518) AND WorldQuest(41523) AND WorldQuest(41517) AND WorldQuest(41522) AND WorldQuest(41521))",
+		Criteria = "Quest(41514) OR Quest(41520) OR  Quest(41225) OR Quest(41512) OR Quest(41515) OR Quest(41524) OR Quest(41511) OR Quest(41516) OR Quest(41513) OR Quest(41519) OR Quest(41518) OR Quest(41523) OR Quest(41517) OR Quest(41522) OR Quest(41521)",
+		Filter = "Level() < 110 OR Profession(HERBALISM) < 100 OR NOT (WorldQuest(41514) OR WorldQuest(41520) OR WorldQuest(41225) OR WorldQuest(41512) OR WorldQuest(41515) OR WorldQuest(41524) OR WorldQuest(41511) OR WorldQuest(41516) OR WorldQuest(41513) OR WorldQuest(41519) OR WorldQuest(41518) OR WorldQuest(41523) OR WorldQuest(41517) OR WorldQuest(41522) OR WorldQuest(41521))",
 		Objectives = {
 		
 			"Quest(41511) AS Highmountain",
