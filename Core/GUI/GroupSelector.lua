@@ -119,4 +119,19 @@ function GS:Update()
 	
 end
 
+
+-- @param frameNo The number of the frame that was selected (used to identify it in the frame pool)
+function GS:SelectGroup(groupID)
+	
+	-- Set active Group
+	AM.db.profile.settings.activeGroup = groupID
+	AM.GroupDB:SetActiveGroup(groupID)
+	
+	-- TODO: GUI.Update()
+	-- Update Tracker and GroupSelector
+	self:Update()
+	AM.TrackerPane:Update()
+	
+end
+
 return GS
