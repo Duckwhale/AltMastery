@@ -917,6 +917,17 @@ local defaultTasks = {
 		},
 	},
 	
+	DAILY_CLASSIC_ACCOUNTWIDE_CYRASFLIERS = {
+		name = "Cyra's Flyers",
+		description = "TODO",
+		notes = "Pets",
+		iconPath = "ability_hunter_pet_vulture",
+		Criteria = "Quest(45083)",
+		Filter = "Level() < 25",
+	},
+	
+	
+	
 	MILESTONE_LEGION_THEMOTHERLODE = {
 		name = "The Motherlode",
 		description = "TODO",
