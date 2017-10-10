@@ -381,6 +381,14 @@ local function ToggleObjectives(self, taskWidget)
 
 end
 
+-- Temporary crutch before refactoring the GUI
+local function Update(self)
+
+	self:ReleaseWidgets()
+	self:UpdateGroups()
+	
+end
+
 local TrackerPane = {
 
 	usedFrames = usedFrames,
@@ -395,6 +403,7 @@ local TrackerPane = {
 	
 	Create = Create,
 
+	Update = Update,
 	UpdateGroups = UpdateGroups,
 	ClearGroups = ClearGroups,
 	
