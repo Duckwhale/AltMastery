@@ -171,12 +171,12 @@ local defaultTasks = {
 			},
 		},
 
-		UNLOCK_LEGION_KOSUMOTH = {
+		MILESTONE_LEGION_UNLOCK_KOSUMOTH = {
 			name = "Kosumoth the Hungering unlocked",
 			description = "Unlock access to Kosumoth the Hungering",
 			notes = "Pet",
 			iconPath = "spell_priest_voidtendrils",
-			Criteria = "Objectives(\"UNLOCK_LEGION_KOSUMOTH\")",
+			Criteria = "Objectives(\"MILESTONE_LEGION_UNLOCK_KOSUMOTH\")",
 			Filter = "Level() < 110 OR WorldQuest(43798)", -- Hide if the WQ is up, as that means it has already been unlocked
 			Objectives = {
 				"Quest(43730) AS Activated First Orb",
@@ -260,7 +260,7 @@ local defaultTasks = {
 			Filter = "Level() < 110",
 		},
 		
-		LEGION_UNDERBELLY_TESTSUBJECTS = {
+		WQ_LEGION_UNDERBELLY_TESTSUBJECTS = {
 			name = "Fizzi Liverzapper",
 			description = "Complete the quest \"Experimental Potion: Test Subjects Needed\" and the Underbelly of Dalaran (Legion)",
 			notes = "150 Sightless Eyes",
@@ -269,12 +269,12 @@ local defaultTasks = {
 			Filter = "Level() < 110", -- TODO: needs to be cached properly, as the WQ APi doesn't work here... -> OR NOT (WorldQuest(43473) OR WorldQuest(43474) OR WorldQuest(43475) OR WorldQuest(43476) OR WorldQuest(43477) OR WorldQuest(43478))",
 		},
 		
-		DAILY_DARKMOONFAIRE_PETBATTLES = {
+		DAILY_WORLDEVENT_DARKMOONFAIRE_PETBATTLES = {
 			name = "Darkmoon Faire: Pet Battles",
 			description = "Defeat both pet tamers at the Darkmoon Faire",
 			notes = "Pets from the reward bag",
 			iconPath = "inv_misc_bag_31", -- "inv_misc_bag_felclothbag",
-			Criteria = "Objectives(\"DAILY_DARKMOONFAIRE_PETBATTLES\")",
+			Criteria = "Objectives(\"DAILY_WORLDEVENT_DARKMOONFAIRE_PETBATTLES\")",
 			Filter = "not WorldEvent(DARKMOON_FAIRE)",
 			Objectives = {
 				"Quest(32175) AS Darkmoon Pet Battle!",
@@ -301,12 +301,12 @@ local defaultTasks = {
 			},
 		},
 		
-		MONTHLY_DARKMOONFAIRE_TURNINS = {
+		MONTHLY_WORLDEVENT_DARKMOONFAIRE_TURNINS = {
 			name = "Darkmoon Faire: Turnins",
 			description = "Turn in ALL the items at the Darkmoon Faire",
 			notes = "Tickets",
 			iconPath = "inv_misc_ticket_darkmoon_01",
-			Criteria = "NumObjectives(\"MONTHLY_DARKMOONFAIRE_TURNINS\") > 9", -- At least a few of the cheaper turnin items should be used, otherwise it's hardly worth going there
+			Criteria = "NumObjectives(\"MONTHLY_WORLDEVENT_DARKMOONFAIRE_TURNINS\") > 9", -- At least a few of the cheaper turnin items should be used, otherwise it's hardly worth going there
 			Filter = "not WorldEvent(DARKMOON_FAIRE)",
 			Objectives = {
 				"Quest(29451) OR InventoryItem(71715) AS A Treatise on Strategy",
@@ -333,12 +333,12 @@ local defaultTasks = {
 			},
 		},
 		
-		MONTHLY_DARKMOONFAIRE_PROFESSIONQUESTS = {
+		MONTHLY_WORLDEVENT_DARKMOONFAIRE_PROFESSIONQUESTS = {
 			name = "Darkmoon Faire: Profession Quests",
 			description = "Complete all Darkmoon Faire quests for your character's learned professions",
 			notes = "Tickets and free skill ups",
 			iconPath = "inv_misc_ticket_darkmoon_01",
-			Criteria = "NumObjectives(\"MONTHLY_DARKMOONFAIRE_PROFESSIONQUESTS\") > 0", -- TODO: Completed when the profession quests for the actual professions are done?
+			Criteria = "NumObjectives(\"MONTHLY_WORLDEVENT_DARKMOONFAIRE_PROFESSIONQUESTS\") > 0", -- TODO: Completed when the profession quests for the actual professions are done?
 			Filter = "not WorldEvent(DARKMOON_FAIRE)",
 			Objectives = {
 				"Quest(29506) AS Alchemy: A Fizzy Fusion",
@@ -394,7 +394,7 @@ local defaultTasks = {
 			Filter = "Level() < 100 OR NOT Objectives(\"UNLOCK_LEGION_KOSUMOTH\")", -- TODO: Filter if WQ reward is crap
 		},
 		
-		UNLOCK_LEGION_MEATBALL = {
+		MILESTONE_LEGION_UNLOCK_MEATBALL = {
 			name = "Meatball unlocked",
 			description = "Unlock the Order Hall follower that is secretly amazing",
 			iconPath = "spell_mage_arcaneorb",
@@ -567,7 +567,7 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(43513)",
 	},
 	
-	DAILY_LEGION_WQ_SABUUL = {
+	WQ_LEGION_SABUUL = {
 		name = "Sabuul defeated",
 		description = "Defeat Sabuul",
 		notes = "Fel-Spotted Egg",
@@ -576,7 +576,7 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(48732)", -- "Sabuul" = WQ
 	},
 	
-	DAILY_LEGION_WQ_VENOMTAILSKYFIN = {
+	WQ_LEGION_VENOMTAILSKYFIN = {
 		name = "Venomtail Skyfin defeated",
 		description = "Defeat the Venomtail Skyfin", -- TODO: in <zone>?
 		notes = "Mount",
@@ -585,7 +585,7 @@ local defaultTasks = {
 		Filter = "Level() < 110", -- Doesn't have a world quest, apparently
 	},
 	
-	DAILY_LEGION_WQ_NAROUA = {
+	WQ_LEGION_NAROUA = {
 		name = "Naroua defeated",
 		description = "Defeat Naroua, King of the Forest",
 		notes = "Fel-Spotted Egg",
@@ -594,7 +594,7 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(48502)", -- "Naroua, King of the Forest" = WQ
 	},
 	
-	DAILY_LEGION_WQ_VARGA = {
+	WQ_LEGION_VARGA = {
 		name = "Varga defeated",
 		description = "Defeat Varga",
 		notes = "Fel-Spotted Egg",
@@ -603,7 +603,7 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(48827)", -- "Varga" = WQ
 	},
 	
-	DAILY_LEGION_WQ_HOUNDMASTERKERRAX = {
+	WQ_LEGION_HOUNDMASTERKERRAX = {
 		name = "Houndmaster Kerrax",
 		description = "TODO",
 		notes = "Mount",
@@ -612,7 +612,7 @@ local defaultTasks = {
 		Filter = " NOT WorldQuest(48835)", -- World Quest
 	},
 	
-	DAILY_LEGION_WQ_WRANGLERKRAVOS = {
+	WQ_LEGION_WRANGLERKRAVOS = {
 		name = "Wrangler Kravos",
 		description = "TODO",
 		notes = "Mount",
@@ -621,7 +621,7 @@ local defaultTasks = {
 		Filter = " NOT WorldQuest(48696)", -- World Quest
 	},
 
-	DAILY_LEGION_WQ_BLISTERMAW = {
+	WQ_LEGION_BLISTERMAW = {
 		name = "Blistermaw",
 		description = "TODO",
 		notes = "Mount",
@@ -630,7 +630,7 @@ local defaultTasks = {
 		Filter = " NOT WorldQuest(47561)", -- World Quest
 	},
 	
-	DAILY_LEGION_WQ_VRAXTHUL = {
+	WQ_LEGION_VRAXTHUL = {
 		name = "Vrax'thul",
 		description = "TODO",
 		notes = "Mount",
@@ -639,7 +639,7 @@ local defaultTasks = {
 		Filter = " NOT WorldQuest(48465)", -- World Quest
 	},
 
-	DAILY_LEGION_WQ_PUSCILLA = {
+	WQ_LEGION_PUSCILLA = {
 		name = "Puscilla",
 		description = "TODO",
 		notes = "Mount",
@@ -648,7 +648,7 @@ local defaultTasks = {
 		Filter = " NOT WorldQuest(48467)", -- World Quest
 	},
 	
-	DAILY_LEGION_WQ_SKREEGTHEDEVOURER = {
+	WQ_LEGION_SKREEGTHEDEVOURER = {
 		name = "Skreeg the Devourer",
 		description = "TODO",
 		notes = "Mount",
@@ -847,11 +847,11 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT Quest(43341)", -- Uniting the Isles
 	},
 	
-	DAILY_ACCOUNTWIDE_PETBATTLES = {
+	DAILY_CLASSIC_ACCOUNTWIDE_PETBATTLES = {
 		name = "Pet Battle EXP Quests",
 		description = "TODO",
 		iconPath = "inv_misc_bag_cenarionherbbag",
-		Criteria = "Objectives(\"DAILY_ACCOUNTWIDE_PETBATTLES\")",
+		Criteria = "Objectives(\"DAILY_CLASSIC_ACCOUNTWIDE_PETBATTLES\")",
 		Objectives = {
 			"Quest(31780) AS Old MacDonald (Westfall)",
 			"Quest(31781) AS Lindsay (Redridge Mountains)",
@@ -861,21 +861,21 @@ local defaultTasks = {
 		},
 	},
 	
-	DAILY_ACCOUNT_BLINGTRON4000 = {
+	DAILY_WOD_ACCOUNTWIDE_BLINGTRON4000 = {
 		name = "Blingtron 4000",
 		description = "TODO",
 		iconPath = "inv_pet_lilsmoky", -- inv_misc_gift_03
 		Criteria = "Quest(31752)",
 		Filter = "Quest(34774) OR Quest(40753) OR Profession(ENGINEERING) < 600", -- Any of the other Blingtron quests, as only one can be completed per day
 	},
-	DAILY_ACCOUNT_BLINGTRON5000 = {
+	DAILY_MOP_ACCOUNTWIDE_BLINGTRON5000 = {
 		name = "Blingtron 5000",
 		description = "TODO",
 		iconPath = "inv_misc_blingtron", -- inv_misc_gift_05
 		Criteria = "Quest(34774)",
 		Filter = "Quest(31752) OR Quest(40753) OR Profession(ENGINEERING) < 600", -- Any of the other Blingtron quests, as only one can be completed per day
 	},
-	DAILY_ACCOUNT_BLINGTRON6000 = {
+	DAILY_LEGION_ACCOUNTWIDE_BLINGTRON6000 = {
 		name = "Blingtron 6000",
 		description = "inv_engineering_reavesmodule",
 		iconPath = "inv_pet_lilsmoky", -- inv_misc_gift_05
@@ -883,7 +883,7 @@ local defaultTasks = {
 		Filter = "Quest(31752) OR Quest(34774) OR Profession(ENGINEERING) < 600", -- Any of the other Blingtron quests, as only one can be completed per day
 	},
 	
-	LEGION_WQ_IKSREEGED = {
+	WQ_LEGION_TREASUREMASTER_IKSREEGED = {
 		name = "Treasure Master Iks'reeged",
 		description = "TODO",
 		notes = "Pet, Toy, Nethershards, OR",
@@ -892,7 +892,7 @@ local defaultTasks = {
 		Filter = " NOT WorldQuest(45379) OR NOT Quest(46666)", -- Requires "The Motherlode" quest chain to be finished (which leads up to the cave)
 	},
 
-	LEGION_WEEKLY_FUELOFADOOMEDWORLD = {
+	WEEKLY_LEGION_FUELOFADOOMEDWORLD = {
 		name = "Fuel of a Doomed World",
 		description = "TODO",
 		notes = "Pristine Argunite",
@@ -937,7 +937,7 @@ local defaultTasks = {
 		Filter = "Level() < 102 OR NOT Class(DEMONHUNTER)", -- TODO: Must have Order Hall talent? Hide if tint and pet is obtained?
 	},
 
-	WOTLK_MYSTERIOUSEGG = {
+	WOTLK_THEORACLES_MYSTERIOUSEGG = {
 		name = "Mysterious Egg",
 		description = "TODO",
 		notes = "Mount, Pets",
