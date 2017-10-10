@@ -90,6 +90,8 @@ end
 -- Update the GroupSelector
 function GS:Update()
 	
+	self.widget:ReleaseChildren()
+	
 	-- Add all Groups (TODO: Only all those that are top level groups)
 	local groups = AM.db.global.groups
 	local activeGroup, activeGroupKey = AM.GroupDB:GetActiveGroup()
