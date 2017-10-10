@@ -67,7 +67,7 @@ local methods = {
 		-- label.label:SetPoint(point, relativeTo, relativePoint, xOfs - 2, yOfs)
 		
 		-- Set widget height (because AceGUI just can't get it right...)
-		local contentHeight = fontStringHeight + 2 -- This is for the label text (1 px spacer for top and bottom)
+		local contentHeight = fontStringHeight -- Label text can vary in size
 		+ status.iconSize
 		+ 3 * padding -- This adds a border between the container and its content (TODO: Not the most exact calculation, thanks to AceGUI's somewhat arbitrary positioning?)
 		self:SetHeight(contentHeight)
@@ -260,7 +260,7 @@ local function Constructor()
 	
 	-- Add Text for the group name (TODO: Toggle via settings to display only the icon)
 	local label = AceGUI:Create("InteractiveLabel")
-	label:SetRelativeWidth(0.0525)
+	label:SetRelativeWidth(0.0535)
 	container:AddChild(label)
 	container.label = label
 	label.parent = container -- Backreference so the label functions can access container methods and change its state
@@ -274,7 +274,7 @@ local function Constructor()
 	-- Add completion text and icon (TODO)
 	
 	local groupIcon = AceGUI:Create("Icon")
-	groupIcon:SetRelativeWidth(0.0525)
+	groupIcon:SetRelativeWidth(0.0535)
 	-- -- Implied: container.localstatus.isCompleted = nil -> Display "?" icon unless state was set
 	 -- -- Always default to "not completed", which will be updated by the Tracker
 	
