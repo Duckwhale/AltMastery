@@ -49,10 +49,10 @@ local function GetTrackerHeight(self)
 	local height = 0
 	
 	-- Add the border for the tracker pane itself
-	height = height + 2 * borderSize + ((borderSize + 1) * (numDisplayedGroups + numDisplayedTasks + numDisplayedObjectives)) -- TODO: The 2nd part needs to be tested for different situations (later)
+	height = height + 2 * borderSize -- + ((numDisplayedGroups + numDisplayedTasks + numDisplayedObjectives)) -- TODO: The 2nd part needs to be tested for different situations (later)
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")	
 	-- For each maximized group, add its tasks and objectives
-	height = height + (numDisplayedGroups - #minimizedGroups) * groupEntrySize
+	height = height + numDisplayedGroups * groupEntrySize
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")		
 	-- For each task without objectives, simply add one entry
 	height = height + numDisplayedTasks * taskEntrySize
@@ -61,8 +61,10 @@ local function GetTrackerHeight(self)
 	height = height + numDisplayedObjectives * objectiveEntrySize
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")	
 	-- For each minimized group, simply add one entry
-	height = height + (#minimizedGroups) * groupEntrySize
+
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")		
+--AM:Debug("Tracker height: " .. height .. " - groups = " .. numDisplayedGroups .. " - tasks = " .. numDisplayedTasks .. " - obj = " .. numDisplayedObjectives, "TrackerPane")
+
 	return height
 
 end
