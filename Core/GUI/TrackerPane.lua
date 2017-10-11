@@ -39,6 +39,42 @@ function Tracker:GetFirstDisplayedElementIndex()
 end
 
 
+--- Returns the idnex of the last displayed element (taking into account scrolling)
+function Tracker:GetLastDisplayedElementIndex()
+
+	local contentHeight, availableHeight = AM.TrackerPane:GetTrackerHeight(), self:GetViewportHeight()
+--AM:Print("contentHeight = " .. contentHeight .. " - availableHeight = " .. availableHeight)	
+	if contentHeight <= availableHeight then -- Everything fits into the viewport
+		return #Tracker.elementsList -- Last element will do
+	else -- This is trickier -> Simulate adding all elements until the last one that fully fits into the viewport was found
+		
+		-- Upvalues
+		local display = AM.db.profile.settings.display
+		local edgeSize = AM.GUI:GetActiveStyle().edgeSize
+		
+		-- Loop variables
+		local usedHeight = 0
+		local numElements = 0 -- These are the elements that did fit
+		for index, entry in ipairs(Tracker.elementsList) do -- 
+			
+			local elementHeight = display[entry.type .. "Size"]  -- Should always be valid
+			elementHeight = elementHeight + 2 * edgeSize + 2 -- 2 px hardcoded spacer (TODO)
+			
+			if (usedHeight + elementHeight) > availableHeight then -- This element doesn't fit; use the last one instead
+				return numElements
+			end
+			
+			-- There is still room for this element, so it can be added
+			usedHeight = usedHeight + elementHeight
+			numElements = numElements + 1
+--AM:Print("usedHeight = " .. usedHeight .. " - elementHeight = " .. elementHeight .. " - numElements = " .. numElements)			
+		end
+--AM:Print("#Tracker.elementsList = " .. #Tracker.elementsList)		
+		-- TODO: Is a return numElements necessary? It should have returned the number of elements already because the content is clearly smaller than the viewport if all items fit inside. And yet, there were some bugs with this when the calculation of the content or viewport heights is wrong (as this function relies on them being accurate to work properly)
+	end
+
+end
+
 
 -- Calculate the available height in the displayed Tracker Frame
 function Tracker:GetViewportHeight()
