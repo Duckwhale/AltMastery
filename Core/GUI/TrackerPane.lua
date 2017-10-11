@@ -91,6 +91,54 @@ function Tracker:GetViewportHeight()
 	
 end
 
+local function CanScrollDown()
+	
+	-- Upvalues
+	local lastIndex = Tracker:GetLastDisplayedElement()
+	
+	-- If all elements are visible, no further scrolling should be possible
+	if lastIndex == #Tracker.elementsList then return false end
+	
+	-- If some elements are hidden (to the bottom; those that are on the top don't really matter here for obvious reasons...), the question becomes: Can the next possible element still be added without causing an overflow? This is the case if the viewport is large enough to contain the subset of elements between the indices
+	return (AM.TrackerPane:GetTrackerHeight(Tracker:GetFirstDisplayedElementIndex(), lastIndex) <= Tracker:GetViewportHeight())
+	
+end
+
+local function CanScrollUp()
+	-- Can always scroll back up, unless the first element is already at the op
+	return Tracker.scrollOffset ~= 0
+end
+
+--- Scrolls the list up or down (the exact number of elements depends on the granularity set)
+function Tracker:OnMouseWheel(value)
+	
+	AM:Print("OnMouseWheel with value = " .. value)
+	
+	-- Test if there are enough display elements to cause an overflow
+	--local numDisplayedElements = (AM.TrackerPane.numDisplayedGroups + AM.TrackerPane.numDisplayedTasks + AM.TrackerPane.numDisplayedObjectives)
+	
+	if value == -1 then -- MW scrolled up
+	
+		if not CanScrollUp() then -- Can't scroll up further
+			AM:Print("No need to scroll, because all elements should fit the viewport")
+		else -- Scroll up by X steps (TODO: It's always one, for now, but longer lists may benefit from a setting for the step size)
+			Tracker.scrollOffset = Tracker.scrollOffset - 1 -- Can't be negative as it starts with 0 and is always synchronised
+		end
+		
+	end
+	
+	if value == 1 then -- MW scrolled down
+	
+		if CanScrollDown() then -- The last element of the list is not yet displayed
+			Tracker.scrollOffset = Tracker.scrollOffset + 1
+		end
+	
+	end
+	
+	AM:Print("Updated scrollOffset = " .. Tracker.scrollOffset)
+	
+end
+
 --- Calculate the total height of the TrackerPane considering all the items that need to be displayed, and the style's display settings 
 -- @param self
 -- @param[opt] start
