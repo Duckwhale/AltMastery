@@ -89,8 +89,15 @@ end
 
 --- Calculate the total height of the TrackerPane considering all the items that need to be displayed, and the style's display settings 
 -- @param self
+-- @param[opt] start
+-- @param[opt] end
 -- @return The total height that is required for the TrackerPane to display all children properly
-local function GetTrackerHeight(self)
+local function GetTrackerHeight(self, startIndex, endIndex)
+	
+	local elements = Tracker.elementsList
+	
+	startIndex = startIndex or 1
+	endIndex = endIndex or #elements
 	
 	-- Get value for all display items
 	local activeStyle = AM.GUI:GetActiveStyle()
@@ -111,11 +118,11 @@ local function GetTrackerHeight(self)
 	height = height + 2 * borderSize
 	
 	local display = AM.db.profile.settings.display -- Upvalue
-	for index, entry in ipairs(Tracker.elementsList) do -- Add this element's height
-		
-		local elementHeight = display[entry.type .. "Size"]
-		height = height + elementHeight + 2 * borderSize + 2 -- 2 px spacer that is still hardcoded in the AMInlineGroup widget? (TODO)
-		
+	for index, entry in ipairs(elements) do -- Add this element's height
+		if index >= startIndex and index <= endIndex then -- Is within the requested bounds
+			local elementHeight = display[entry.type .. "Size"]
+			height = height + elementHeight + 2 * borderSize + 2 -- 2 px spacer that is still hardcoded in the AMInlineGroup widget? (TODO)
+		end
 	end
 	
 	return height
