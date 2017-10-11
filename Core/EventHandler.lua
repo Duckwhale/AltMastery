@@ -29,8 +29,9 @@ if not AM then return end
 local function Update()
 	
 	-- TODO: Don't just blindly update everything each time an event was detected -> Cache and combine similar criteria, then update when everything is ready
-	AM.TrackerPane:ReleaseWidgets()
-	AM.TrackerPane:UpdateGroups()
+	AM.TrackerPane:Update()
+	-- AM.TrackerPane:ReleaseWidgets()
+	-- AM.TrackerPane:UpdateGroups()
 	
 end
 
