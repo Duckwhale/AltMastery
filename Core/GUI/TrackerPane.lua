@@ -64,7 +64,7 @@ function Tracker:GetLastDisplayedElementIndex()
 				elementHeight = elementHeight + 2 * edgeSize + 2 -- 2 px hardcoded spacer (TODO)
 				
 				if (usedHeight + elementHeight) > availableHeight then -- This element doesn't fit; use the last one instead
-					return numElements
+					return numElements + Tracker.scrollOffset -- If the viewport only shows a subset of all elements, the offset is simply added to get the last index
 				end
 				
 				-- There is still room for this element, so it can be added
