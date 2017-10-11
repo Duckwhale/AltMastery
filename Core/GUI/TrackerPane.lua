@@ -120,7 +120,7 @@ function Tracker:OnMouseWheel(value)
 	if value == 1 then -- MW scrolled up
 	
 		if not CanScrollUp() then -- Can't scroll up further
-			AM:Print("No need to scroll, because all elements should fit the viewport")
+			AM:Print("No need to scroll, because the first elements is already visible")
 		else -- Scroll up by X steps (TODO: It's always one, for now, but longer lists may benefit from a setting for the step size)
 			Tracker.scrollOffset = Tracker.scrollOffset - 1 -- Can't be negative as it starts with 0 and is always synchronised
 		end
@@ -131,6 +131,8 @@ function Tracker:OnMouseWheel(value)
 	
 		if CanScrollDown() then -- The last element of the list is not yet displayed
 			Tracker.scrollOffset = Tracker.scrollOffset + 1
+		else
+			AM:Print("No need to scroll, because the last element is already visible")
 		end
 	
 	end
