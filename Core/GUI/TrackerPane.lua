@@ -32,10 +32,11 @@ local numDisplayedObjectives = 0
 
 -- List of all currently available elements (BEFORE considering the limited size, i.e. some elements may be hidden if there is overflow, or if they are completed/disabled/dismissed, etc.)
 Tracker.elementsList = {}
+Tracker.scrollOffset = 0
 
 --- Returns the index of the first displayed element (taking into account scrolling)
 function Tracker:GetFirstDisplayedElementIndex()
-	return 1
+	return 1 + scrollOffset
 end
 
 
@@ -57,17 +58,20 @@ function Tracker:GetLastDisplayedElementIndex()
 		local numElements = 0 -- These are the elements that did fit
 		for index, entry in ipairs(Tracker.elementsList) do -- 
 			
-			local elementHeight = display[entry.type .. "Size"]  -- Should always be valid
-			elementHeight = elementHeight + 2 * edgeSize + 2 -- 2 px hardcoded spacer (TODO)
+			if index >= scrollOffset then -- This element is not outside ouf the displayed area due to scrolling and must be considered
 			
-			if (usedHeight + elementHeight) > availableHeight then -- This element doesn't fit; use the last one instead
-				return numElements
-			end
-			
-			-- There is still room for this element, so it can be added
-			usedHeight = usedHeight + elementHeight
-			numElements = numElements + 1
+				local elementHeight = display[entry.type .. "Size"]  -- Should always be valid
+				elementHeight = elementHeight + 2 * edgeSize + 2 -- 2 px hardcoded spacer (TODO)
+				
+				if (usedHeight + elementHeight) > availableHeight then -- This element doesn't fit; use the last one instead
+					return numElements
+				end
+				
+				-- There is still room for this element, so it can be added
+				usedHeight = usedHeight + elementHeight
+				numElements = numElements + 1
 --AM:Print("usedHeight = " .. usedHeight .. " - elementHeight = " .. elementHeight .. " - numElements = " .. numElements)			
+			end
 		end
 --AM:Print("#Tracker.elementsList = " .. #Tracker.elementsList)		
 		-- TODO: Is a return numElements necessary? It should have returned the number of elements already because the content is clearly smaller than the viewport if all items fit inside. And yet, there were some bugs with this when the calculation of the content or viewport heights is wrong (as this function relies on them being accurate to work properly)
