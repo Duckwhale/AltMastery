@@ -542,6 +542,10 @@ local function HideObjectives(self, taskWidget)
 	-- Hide Objectives
 	AM:Debug("Hiding Objectives for Task " .. Task.name)
 	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF, "Master") -- TODO: Settings to disable sound
+	
+	-- Since the objectives being hidden means more space (which could be used for different elements), reset the simulated scroll bar to show as many as possible?
+	Tracker.scrollOffset = 0
+	
 	-- Update Tracker to have it reclaim the space they used to occupy
 	self:Update()
 	
