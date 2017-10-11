@@ -39,6 +39,18 @@ function Tracker:GetFirstDisplayedElementIndex()
 end
 
 
+
+-- Calculate the available height in the displayed Tracker Frame
+function Tracker:GetViewportHeight()
+
+	local trackerWindowHeight = 825 -- TODO: Replace hardcoded value (after the state-rework) - also leave some space for controls (checkbox/switches, ... scroll indicator, etc?)
+	return trackerWindowHeight - 2 * AM.GUI:GetActiveStyle().edgeSize  -- This is the space that can be used to display elements -- TODO: What about the outer borders?
+	
+	-- local contentHeight = AM.TrackerPane.GetTrackerHeight() -- TODO: Replace with self after refactoring
+	-- return contentHeight - 2 * AM.GUI:GetActiveStyle().edgeSize -- Anything but the outer border is currently part of the potential viewport
+	
+end
+
 --- Calculate the total height of the TrackerPane considering all the items that need to be displayed, and the style's display settings 
 -- @param self
 -- @return The total height that is required for the TrackerPane to display all children properly
