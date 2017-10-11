@@ -36,7 +36,7 @@ Tracker.scrollOffset = 0
 
 --- Returns the index of the first displayed element (taking into account scrolling)
 function Tracker:GetFirstDisplayedElementIndex()
-	return 1 + scrollOffset
+	return 1 + Tracker.scrollOffset
 end
 
 
@@ -58,7 +58,7 @@ function Tracker:GetLastDisplayedElementIndex()
 		local numElements = 0 -- These are the elements that did fit
 		for index, entry in ipairs(Tracker.elementsList) do -- 
 			
-			if index >= scrollOffset then -- This element is not outside ouf the displayed area due to scrolling and must be considered
+			if index >= Tracker.scrollOffset then -- This element is not outside ouf the displayed area due to scrolling and must be considered
 			
 				local elementHeight = display[entry.type .. "Size"]  -- Should always be valid
 				elementHeight = elementHeight + 2 * edgeSize + 2 -- 2 px hardcoded spacer (TODO)
