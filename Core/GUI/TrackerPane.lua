@@ -117,7 +117,7 @@ function Tracker:OnMouseWheel(value)
 	-- Test if there are enough display elements to cause an overflow
 	--local numDisplayedElements = (AM.TrackerPane.numDisplayedGroups + AM.TrackerPane.numDisplayedTasks + AM.TrackerPane.numDisplayedObjectives)
 	
-	if value == -1 then -- MW scrolled up
+	if value == 1 then -- MW scrolled up
 	
 		if not CanScrollUp() then -- Can't scroll up further
 			AM:Print("No need to scroll, because all elements should fit the viewport")
@@ -127,7 +127,7 @@ function Tracker:OnMouseWheel(value)
 		
 	end
 	
-	if value == 1 then -- MW scrolled down
+	if value == -1 then -- MW scrolled down
 	
 		if CanScrollDown() then -- The last element of the list is not yet displayed
 			Tracker.scrollOffset = Tracker.scrollOffset + 1
