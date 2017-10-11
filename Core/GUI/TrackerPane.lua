@@ -94,7 +94,7 @@ end
 local function CanScrollDown()
 	
 	-- Upvalues
-	local lastIndex = Tracker:GetLastDisplayedElement()
+	local lastIndex = Tracker:GetLastDisplayedElementIndex()
 	
 	-- If all elements are visible, no further scrolling should be possible
 	if lastIndex == #Tracker.elementsList then return false end
