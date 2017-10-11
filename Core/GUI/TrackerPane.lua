@@ -98,9 +98,10 @@ local function CanScrollDown()
 	
 	-- If all elements are visible, no further scrolling should be possible
 	if lastIndex == #Tracker.elementsList then return false end
-	
-	-- If some elements are hidden (to the bottom; those that are on the top don't really matter here for obvious reasons...), the question becomes: Can the next possible element still be added without causing an overflow? This is the case if the viewport is large enough to contain the subset of elements between the indices
-	return (AM.TrackerPane:GetTrackerHeight(Tracker:GetFirstDisplayedElementIndex(), lastIndex) <= Tracker:GetViewportHeight())
+
+	-- If some elements are hidden (to the bottom; those that are on the top don't really matter here for obvious reasons...), the question becomes: Can the next possible element still be added without causing an overflow? This is the case if the viewport is large enough to contain the subset of elements between the indices INCLUDING the next element
+AM:Print("Last index: " .. lastIndex .. ", #elements: " .. #Tracker.elementsList .. ", Content height: " .. AM.TrackerPane:GetTrackerHeight(Tracker:GetFirstDisplayedElementIndex(), lastIndex) .. " -  ViewportHeight: " .. Tracker:GetViewportHeight())	
+	return (AM.TrackerPane:GetTrackerHeight(Tracker:GetFirstDisplayedElementIndex(), lastIndex) > Tracker:GetViewportHeight())
 	
 end
 
