@@ -33,6 +33,11 @@ local numDisplayedObjectives = 0
 -- List of all currently available elements (BEFORE considering the limited size, i.e. some elements may be hidden if there is overflow, or if they are completed/disabled/dismissed, etc.)
 Tracker.elementsList = {}
 
+--- Returns the index of the first displayed element (taking into account scrolling)
+function Tracker:GetFirstDisplayedElementIndex()
+	return 1
+end
+
 
 --- Calculate the total height of the TrackerPane considering all the items that need to be displayed, and the style's display settings 
 -- @param self
