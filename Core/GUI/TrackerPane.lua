@@ -571,18 +571,46 @@ local function ToggleObjectives(self, taskWidget)
 
 end
 
+local lastRenderTime = 0
+local updateInterval = 50 -- Only update once every X ms
+
 -- Temporary crutch before refactoring the GUI
 local function Update(self)
+
+
+	-- Upvalues
+	local time = debugprofilestop
+
+local timeStart = time()
+
+	if timeStart < (lastRenderTime + updateInterval) then -- Don't update just yet
+		return
+		--AM:Print("Skipping update because the updateInterval has not yet passed - lastRenderTime = " .. lastRenderTime .. " - timeStart = " .. timeStart .. " - updateInterval = " .. updateInterval)
+	end
 
 	-- Reset list of elements, as they have to be freshly calculated after each update
 	wipe(Tracker.elementsList)
 
+--local timeWipe = time()
+
 	self:ReleaseWidgets()
+
+--local timeRelease = time()
+
 	self:UpdateGroups()
+
+--local timeUpdateGroups = time()
 
 --AM:Print("Update complete! #elementsList = " .. #Tracker.elementsList .. ", lastIndex = " .. tostring(Tracker:GetLastDisplayedElementIndex()) .. ", firstIndex = " .. tostring(Tracker:GetFirstDisplayedElementIndex()), MODULE)
 	
 	self:Render()
+	
+local timeRender = time()
+
+--AM:Print("Profiling results for " .. MODULE .. ".Update:")
+--AM:Print("Total = " .. (timeRender - timeStart) .. ", Wipe = " .. (timeWipe - timeStart) .. ", Release = " .. (timeRelease - timeWipe) .. ", UpdateGroups = " .. (timeUpdateGroups - timeRelease) .. ", Render = " .. (timeRender - timeUpdateGroups))
+	
+	lastRenderTime = timeRender
 	
 end
 
