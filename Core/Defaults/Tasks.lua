@@ -1278,6 +1278,31 @@ local defaultTasks = {
 		},
 	},
 	
+	WEEKLY_WOD_WORLDBOSS_GORGRONDGOLIATHS = {
+		name = "Goliaths of Grogrond defeated",
+		description = "Defeat Tarlna the Ageless or Drov the Ruiner in Gorgrond",
+		iconPath = "creatureportrait_fomorhand",
+		Criteria = "Quest(37460) OR Quest(37462)",
+		Filter = "Level() < 100",
+	},
+	
+	WEEKLY_WOD_WORLDBOSS_RUKHMAR = {
+		name = "Rukhmar defeated",
+		description = "TODO",
+		notes = "Mount",
+		iconPath = "inv_helm_suncrown_d_01",
+		Criteria = "Quest(37464)",
+		Filter = "Level() < 100",
+	},
+	
+	WEEKLY_WOD_WORLDBOSS_KAZZAK = {
+		name = "Supreme Lord Kazzak defeated",
+		description = "TODO",
+		iconPath = "warlock_summon_doomguard", -- spell_yorsahj_bloodboil_green
+		Criteria = "Quest(94015)",
+		Filter = "Level() < 100",
+	},
+	
 		-- TODO: Filter if mount is already learned
 	RESTOCK_MOP_MOGURUNES = {
 		name = "4 Mogu Runes of Fate",
