@@ -183,17 +183,17 @@ end
 
 		-- Set background and border according to the widget type
 		local border = self.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
-		local spacer = 2 -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
+		local spacer = activeStyle.edgeSize -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
 		border:ClearAllPoints()
 		border:SetPoint("TOPLEFT", 0, -spacer)
 		border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
-		
+
 		-- Pick colours according to type
 		local frameColour = (isGroup and activeStyle.frameColours.InlineHeader) or (isTask and activeStyle.frameColours.InlineElement) or (isObjective and activeStyle.frameColours.ExpandedElement) or activeStyle.frameColours.ContentPane -- TODO: Rename&default instead of content pane
 		
 		AM.GUI:SetFrameColour(border, frameColour) -- TODO: Colour differently based on type (update also, via localstatus)
 		self.border = border -- Backreference to access it more easily and change its colour
-
+--		border:SetBackdropColor(1, 0, 0, 1)
 		-- Set text colour to normal (based on active style)
 		local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
 		label:SetColor(r, g, b)
@@ -202,12 +202,31 @@ end
 		
 		-- Custom: Set point to center it in the respective group (requires different handling for each type)
 		local iconSize = AM.db.profile.settings.display.iconSize
-		local elementSize = isGroup and AM.db.profile.settings.display.groupSize or AM.db.profile.settings.display.taskSize
-		local padding = (elementSize - iconSize) / 2 - 2-- TODO: 1 px border comes from the border frame? Needs fixing or it may glitch if that size is changed; also, use actual group size (adjusted dynamically) to align for all types
+		local elementSize = (isGroup and AM.db.profile.settings.display.groupSize) or (isTask and AM.db.profile.settings.display.taskSize) or AM.db.profile.settings.display.objectiveSize
+		local offsetY = (abs(((isObjective and elementSize) or max(iconSize, elementSize)) - fontSize - spacer) / 2) -- To center, it needs to consider the font size as well as the element's size (1px is the inner padding)
+		local padding = (elementSize - ((isGroup or isTask) and iconSize or 0)) / 2 - 2-- TODO: 1 px border comes from the border frame? Needs fixing or it may glitch if that size is changed; also, use actual group size (adjusted dynamically) to align for all types
+		local fontStringHeight = label.label:GetStringHeight()
+		label.label:SetJustifyV("MIDDLE")
 		content:ClearAllPoints()
-		content:SetPoint("TOPLEFT", 4, -padding)
-		content:SetPoint("BOTTOMRIGHT", -4, padding)
-	
+		
+		local edgeSize = activeStyle.edgeSize
+	--	offsetY = (border:GetHeight() - (isObjective and fontStringHeight or iconSize)) / 2
+	--	local offsetY = abs((elementSize - spacer - edgeSize) - (isObjective and fontStringHeight or iconSize)) / 2 - 1
+		
+		local containerHeight = (elementSize - 2 * edgeSize) -- The first border is the invisible spacer between inline elements; the second one is the actual border texture that will only show when highlighted
+		local contentHeight = isObjective and fontStringHeight or max(iconSize, fontStringHeight) -- Whichever element is bigger will be used to get a consistent look - Objectives have no icon (though it may still be set?) so they'll just use the text.
+		local availableHeight = (containerHeight - contentHeight) -- This assumes that the content is smaller and fits inside it smoothly...
+--AM:Print(format("Text = %s, container = %.2f, content = %.2f, available = %.2f", self.localstatus.text, containerHeight, contentHeight, availableHeight))
+		local offsetY = availableHeight / 2
+		-- label:ClearAllPoints()
+		-- label:SetPoint("TOPLEFT", -4 - offsetY)
+		-- label:SetPoint("BOTTOMRIGHT", 4 + offsetY)
+		
+		content:SetPoint("TOPLEFT", 4, -offsetY)
+		content:SetPoint("BOTTOMRIGHT", -4, offsetY)
+		--content:SetAllPoints()
+		
+--AM:Print(format("%s = %s, %s = %d, %s = %.4f, %s = %.4f, %s = %.4f", "type", tostring(self.localstatus.text), "elementSize", elementSize, "fontStringHeight", fontStringHeight, "offsetY", offsetY, "borderHeight", border:GetHeight()))
 	end,
 	
 	-- Sets the local status table (can be called externally)
@@ -257,25 +276,25 @@ end
 	end,
 
 	["OnWidthSet"] = function(self, width)
-		local content = self.content
-		local contentwidth = width - 20
-		if contentwidth < 0 then
-			contentwidth = 0
-		end
-		content:SetWidth(contentwidth)
-		content.width = contentwidth
+		-- local content = self.content
+		-- local contentwidth = width - 20
+		-- if contentwidth < 0 then
+			-- contentwidth = 0
+		-- end
+		-- content:SetWidth(contentwidth)
+		-- content.width = contentwidth
 	end,
 
 	["OnHeightSet"] = function(self, height)
 		
 		-- From AceGUI: Adjust height of the content frame
-		local content = self.content
-		local contentheight = height - 20
-		if contentheight < 0 then
-			contentheight = 0
-		end
-		content:SetHeight(contentheight)
-		content.height = contentheight
+		-- local content = self.content
+		-- local contentheight = height - 20
+		-- if contentheight < 0 then
+			-- contentheight = 0
+		-- end
+		-- content:SetHeight(contentheight)
+		-- content.height = contentheight
 		
 	end,
 	
@@ -344,10 +363,10 @@ local function Constructor()
 	label.parent = container -- Backreference so the label functions can access container methods and change its state
 	
 	-- Align label text and icon vertically (centered) -> TODO: Does this need to change if the content's size (settings) changes?
-	local labelPadding = 2
-	label.frame:ClearAllPoints()
-	label.frame:SetPoint("TOPLEFT", container.content, labelPadding, -labelPadding)
-	label.frame:SetPoint("BOTTOMRIGHT", container.content, -labelPadding, labelPadding)
+	-- local labelPadding = 0
+	-- label.frame:ClearAllPoints()
+	-- label.frame:SetPoint("TOPLEFT", container.content, labelPadding, -labelPadding)
+	-- label.frame:SetPoint("BOTTOMRIGHT", container.content, -labelPadding, labelPadding)
 
 	-- Add Controls (TODO)
 	
