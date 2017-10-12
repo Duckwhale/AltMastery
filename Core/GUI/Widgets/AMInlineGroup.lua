@@ -147,6 +147,11 @@ local methods = {
 		local isTask = (status.type == "Task")
 		local isObjective = (status.type == "Objective")
 
+if not (isGroup or isTask or isObjective) then
+--AM:Print("Element with text " .. status.text .. " has no valid type!")
+return
+end
+		
 		-- Update completion icon
 		local iconPath = (status.isCompleted ~= nil) and activeStyle[status.isCompleted and "iconReady" or "iconNotReady"] or  activeStyle.iconWaiting -- TODO: settings / remove prefix to save some space
 		completionIcon:SetImage(iconPath)
@@ -230,7 +235,7 @@ local methods = {
 	["OnAcquire"] = function(self)
 	
 		-- Apply current status to update the display
-		self:ApplyStatus()
+		--self:ApplyStatus()
 
 	end,
 	
