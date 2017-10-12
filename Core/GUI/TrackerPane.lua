@@ -139,6 +139,7 @@ function Tracker:OnMouseWheel(value)
 	end
 	
 	AM:Print("Updated scrollOffset = " .. Tracker.scrollOffset)
+	AM.TrackerPane:Update()
 	
 end
 
