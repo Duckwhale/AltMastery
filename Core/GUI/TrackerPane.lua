@@ -100,7 +100,7 @@ local function CanScrollDown()
 	if lastIndex == #Tracker.elementsList then return false end
 
 	-- If some elements are hidden (to the bottom; those that are on the top don't really matter here for obvious reasons...), the question becomes: Can the next possible element still be added without causing an overflow? This is the case if the viewport is large enough to contain the subset of elements between the indices INCLUDING the next element
-AM:Print("Last index: " .. lastIndex .. ", #elements: " .. #Tracker.elementsList .. ", Content height: " .. AM.TrackerPane:GetTrackerHeight(Tracker:GetFirstDisplayedElementIndex(), lastIndex) .. " -  ViewportHeight: " .. Tracker:GetViewportHeight())	
+--AM:Print("Last index: " .. lastIndex .. ", #elements: " .. #Tracker.elementsList .. ", Content height: " .. AM.TrackerPane:GetTrackerHeight(Tracker:GetFirstDisplayedElementIndex(), lastIndex) .. " -  ViewportHeight: " .. Tracker:GetViewportHeight())	
 	return (AM.TrackerPane:GetTrackerHeight(Tracker:GetFirstDisplayedElementIndex(), #Tracker.elementsList) > Tracker:GetViewportHeight())
 	
 end
@@ -113,7 +113,7 @@ end
 --- Scrolls the list up or down (the exact number of elements depends on the granularity set)
 function Tracker:OnMouseWheel(value)
 	
-	AM:Print("OnMouseWheel with value = " .. value)
+--	AM:Print("OnMouseWheel with value = " .. value)
 	
 	-- Test if there are enough display elements to cause an overflow
 	--local numDisplayedElements = (AM.TrackerPane.numDisplayedGroups + AM.TrackerPane.numDisplayedTasks + AM.TrackerPane.numDisplayedObjectives)
@@ -121,7 +121,7 @@ function Tracker:OnMouseWheel(value)
 	if value == 1 then -- MW scrolled up
 	
 		if not CanScrollUp() then -- Can't scroll up further
-			AM:Print("No need to scroll, because the first elements is already visible")
+--			AM:Print("No need to scroll, because the first elements is already visible")
 		else -- Scroll up by X steps (TODO: It's always one, for now, but longer lists may benefit from a setting for the step size)
 			Tracker.scrollOffset = Tracker.scrollOffset - 1 -- Can't be negative as it starts with 0 and is always synchronised
 		end
@@ -133,12 +133,12 @@ function Tracker:OnMouseWheel(value)
 		if CanScrollDown() then -- The last element of the list is not yet displayed
 			Tracker.scrollOffset = Tracker.scrollOffset + 1
 		else
-			AM:Print("No need to scroll, because the last element is already visible")
+--			AM:Print("No need to scroll, because the last element is already visible")
 		end
 	
 	end
 	
-	AM:Print("Updated scrollOffset = " .. Tracker.scrollOffset)
+--	AM:Print("Updated scrollOffset = " .. Tracker.scrollOffset)
 	AM.TrackerPane:Update()
 	
 end
