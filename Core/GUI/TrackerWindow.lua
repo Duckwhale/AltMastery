@@ -120,9 +120,9 @@ local function Show(self)
 	-- TODO: Global GUI:Update() function
 	AM.GroupSelector:Update()
 
-	AM.TrackerPane:ReleaseWidgets() -- TODO: Combine this in Update() and call that instead?
-	
-	AM.TrackerPane:UpdateGroups() -- Update tracker to display all Tasks and nested Groups for the currently active Group
+	AM.TrackerPane:Update()
+--	AM.TrackerPane:ReleaseWidgets() -- TODO: Combine this in Update() and call that instead?
+	--AM.TrackerPane:UpdateGroups() -- Update tracker to display all Tasks and nested Groups for the currently active Group
 	
 	-- Show the frame
 	self.frame:Show()
