@@ -663,7 +663,8 @@ local defaultTasks = {
 		description = "Complete the weekly quest \"Emissary of War\" and claim your reward",
 		iconPath = "inv_legionadventure",
 		Criteria = "Quest(44171)",
-		Filter = " NOT Buff(225787) OR Level() < 110", -- Buff is only available during the event
+		Filter = " NOT Buff(SIGN_OF_THE_WARRIOR) OR Level() < 110", -- Buff is only available during the event
+	},
 	
 	WEEKLY_LEGION_PETBATTLEEVENT = {
 		name = "Legion Pet Battle Event",
