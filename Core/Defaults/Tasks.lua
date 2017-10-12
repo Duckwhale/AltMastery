@@ -1278,6 +1278,16 @@ local defaultTasks = {
 		},
 	},
 	
+		-- TODO: Filter if mount is already learned
+	RESTOCK_MOP_MOGURUNES = {
+		name = "4 Mogu Runes of Fate",
+		description = "TODO",
+		notes = "Bonus Rolls for the mount bosses",
+		iconPath = "archaeology_5_0_mogucoin", 
+		Criteria = "Currency(MOGU_RUNE_OF_FATE) >= 4",
+		Filter = "Level() < 90",
+	},
+
 	WEEKLY_MOP_WORLDBOSS_GALLEON = {
 		name = "Galleon defeated",
 		description = "TODO",
