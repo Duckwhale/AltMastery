@@ -1122,7 +1122,7 @@ local defaultTasks = {
 		},
 	},
 	
-	DAILY_CLASSIC_STONECOLDTRIXXY = {
+	DAILY_CLASSIC_ACCOUNTWIDE_STONECOLDTRIXXY = {
 		name = "Stone Cold Trixxy (Winterspring)",
 		description = "TODO",
 		Criteria = "Quest(31909)",
