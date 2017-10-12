@@ -1134,7 +1134,7 @@ local defaultTasks = {
 		description = "TODO",
 		iconPath = "ability_paladin_gaurdedbythelight",
 		Criteria = "Quest(48601)",
-		Filter = " NOT Level() < 110 OR NOT Quest(48199)", -- TODO: Also needs item level 900 champions?
+		Filter = "Level() < 110 OR NOT Quest(48199)", -- TODO: Also needs item level 900 champions?
 		Objectives = {
 		
 			"Quest(48460) AS The Wranglers",
