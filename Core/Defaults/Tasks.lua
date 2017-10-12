@@ -1144,7 +1144,7 @@ local defaultTasks = {
 			"Quest(48544) AS Woah, Nelly!", -- Petrified Forest WQs
 			"Quest(48441) AS Remnants of Darkfall Ridge", -- Krokuun Equipment
 			"Quest(48442) AS Nath'raxas Hold: Preparations", 
-			"Quest(Supplying Krokuun) AS 48910", -- Krokuul Ridgestalker
+			"Quest(48910) AS Supplying Krokuun", -- Krokuul Ridgestalker
 			"Quest(48443) AS Nath'raxas Hold: Rescue Mission", -- Krokuun Missions
 			"Quest(48445) AS The Ruins of Oronaar", -- Mac'aree Equipment
 			"Quest(48446) AS Relics of the Ancient Eredar",
