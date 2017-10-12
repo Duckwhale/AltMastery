@@ -96,6 +96,10 @@ local constants = { -- Used t look up actual ID if an alias was used
 	HORDE = "Horde",
 	NEUTRAL = "Neutral", -- For low-level Pandaren
 	
+	-- Buffs
+	SIGN_OF_THE_WARRIOR = 225787, -- Legion Dungeon Event
+	SIGN_OF_THE_CRITTER = 186406, -- Legion Pet Battle Event
+	
 }
 
 local function accessBlocked()
