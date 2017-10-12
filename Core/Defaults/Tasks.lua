@@ -368,7 +368,7 @@ local defaultTasks = {
 			Criteria = "NumObjectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT\") > 0", -- TODO: "Quest(49165) OR Quest(49166) OR Quest(49167) OR Quest(49168) OR Quest(49169) OR Quest(49171)" once all bosses are tested
 			Filter = "Level() < 110",
 			Objectives = {
-				"Quest(49165) AS Occularus defeated",
+				"Quest(49170) AS Occularus defeated", -- 49165 = ? 
 				"Quest(49166) AS Inquisitor Meto defeated",
 				"Quest(49167) AS Mistress Alluradel defeated",
 				"Quest(49168) AS Pit Lord Vilemus defeated",
