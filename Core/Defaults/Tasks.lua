@@ -489,7 +489,7 @@ local defaultTasks = {
 		name = "Calamir defeated",
 		description = "Defeat the world boss in the Broken Isles",
 		notes = "Recipe (Jewelcrafting)",
-		iconPath = "inv_recipe_70_-scroll3star",
+		iconPath = "inv_misc_stormdragonpurple",
 		Criteria = "Quest(43193)",
 		Filter = "Level() < 110 OR NOT WorldQuest(43193)",
 	},
