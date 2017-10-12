@@ -421,25 +421,7 @@ local defaultTasks = {
 				--"InventoryItem(ZEPHYRITE) >= 3", -- TODO
 			},
 		},
-		
-		-- TODO: Filter if mount is already learned
-		WEEKLY_MOP_WORLDBOSSES = {
-			name = "Pandaria World Bosses",
-			description = "Defeat the world bosses all over Pandaria",
-			notes = "Mounts",
-			iconPath = "ability_hunter_pet_devilsaur", -- achievement_boss_thokthebloodthirsty
-			Criteria = "Objectives(\"WEEKLY_MOP_WORLDBOSSES\")",
-			Filter = "Level() < 90", -- TODO: Hide if all mounts already obtained
-			Objectives = {
-				"Currency(MOGU_RUNE_OF_FATE) >= 2 AS Sufficient bonus rolls obtained", -- TODO: 4
-				-- /run for k, v in pairs({ Galleon = 32098, Sha = 32099, Nalak = 32518, Oondasta = 32519}) do print(format("%s: %s", k, IsQuestFlaggedCompleted(v) and "\124cff00ff00Yes\124r" or "\124cffff0000No\124r")) end
-			--	"Quest(23098) AS Galleon defeated", -- Salyis' Warband
-			--	"Quest(32099) AS Sha of Anger defeated",
-				"Quest(32518) AS Nalak defeated",
-				"Quest(32519) AS Oondasta defeated",
-			},
-		},
-  
+
 	WEEKLY_LEGION_WORLDBOSS_NITHOGG = {
 		name = "Nithogg defeated",
 		description = "Defeat the world boss in the Broken Isles",
@@ -1294,6 +1276,58 @@ local defaultTasks = {
 			"Quest(47654) AS Seat of the Triumvirate: The Crest of Knowledge", -- Western Mac'aree WQs
 		
 		},
+	},
+	
+	WEEKLY_MOP_WORLDBOSS_GALLEON = {
+		name = "Galleon defeated",
+		description = "TODO",
+		notes = "Mount",
+		iconPath = "inv_mushanbeastmount",
+		Criteria = "Quest(23098)",
+		Filter = "Level() < 90",
+	},
+	
+	WEEKLY_MOP_WORLDBOSS_SHAOFANGER = {
+		name = "Sha of Anger defeated",
+		description = "TODO",
+		notes = "Mount",
+		iconPath = "spell_misc_emotionangry", -- inv_pandarenserpentgodmount_black
+		Criteria = "Quest(32099)",
+		Filter = "Level() < 90",
+	},
+	
+	WEEKLY_MOP_WORLDBOSS_NALAK = {
+		name = "Nalak defeated",
+		description = " Defeat Nalak, the Storm Lord, on the Isle of Thunder", -- Achievement: 8028
+		notes = "Mount",
+		iconPath = "spell_holy_lightsgrace", -- inv_pandarenserpentmount_lightning_blue
+		Criteria = "Quest(32518)",
+		Filter = "Level() < 90", -- Needs Isle of Thunder intro quest to be completed?
+	},
+	
+	WEEKLY_MOP_WORLDBOSS_OONDASTA = {
+		name = "Oondasta defeated",
+		description = "TODO",
+		notes = "Mount",
+		iconPath = "ability_hunter_pet_devilsaur", -- ability_mount_triceratopsmount_blue -- achievement_boss_thokthebloodthirsty
+		Criteria = "Quest(32519)",
+		Filter = "Level() < 90",
+	},
+	
+	WEEKLY_MOP_WORLDBOSS_CELESTIALS = {
+		name = "The Four Celestials defeated",
+		description = "TODO",
+		iconPath = "inv_pa_celestialmallet",
+		Criteria = "Quest(33117)",
+		Filter = "Level() < 90",
+	},
+	
+	WEEKLY_MOP_WORLDBOSS_ORDOS = {
+		name = "Ordos defeated",
+		description = "Defeat Ordos, Fire-God of the Yaungol, atop the Timeless Isle", -- from achievement: 8533
+		iconPath = "inv_axe_1h_firelandsraid_d_02",
+		Criteria = "Quest(33118)",
+		Filter = "Level() < 90",
 	},
 	
 }
