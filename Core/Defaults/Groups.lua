@@ -163,6 +163,7 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			---- Weekly Quests
 			"WEEKLY_LEGION_WQEVENT",
 			"WEEKLY_LEGION_DUNGEONEVENT",
+			"WEEKLY_LEGION_PETBATTLEEVENT",
 			"WEEKLY_LEGION_BONUSROLLS",
 			"WEEKLY_LEGION_ARGUSTROOPS",
 			"WEEKLY_LEGION_FUELOFADOOMEDWORLD",
@@ -189,11 +190,20 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 
 			-- WOD
 			"DAILY_WOD_ACCOUNTWIDE_BLINGTRON4000",
+			"WEEKLY_WOD_WORLDBOSS_GORGRONDGOLIATHS",
+			"WEEKLY_WOD_WORLDBOSS_RUKHMAR",
+			"WEEKLY_WOD_WORLDBOSS_KAZZAK",
 			
 			-- MOP
 			"DAILY_MOP_COOKINGSCHOOLBELL",
 			"DAILY_MOP_ACCOUNTWIDE_BLINGTRON5000",
-			"WEEKLY_MOP_WORLDBOSSES",
+			"RESTOCK_MOP_MOGURUNES",
+			"WEEKLY_MOP_WORLDBOSS_GALLEON",
+			"WEEKLY_MOP_WORLDBOSS_SHAOFANGER",
+			"WEEKLY_MOP_WORLDBOSS_NALAK",
+			"WEEKLY_MOP_WORLDBOSS_OONDASTA",
+			"WEEKLY_MOP_WORLDBOSS_CELESTIALS",
+			"WEEKLY_MOP_WORLDBOSS_ORDOS",
 			
 			-- CATA
 			"DAILY_CATA_JEWELCRAFTING",
@@ -208,6 +218,7 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			---- Pet Battle stuff
 			"DAILY_CLASSIC_ACCOUNTWIDE_PETBATTLES",
 			"DAILY_CLASSIC_ACCOUNTWIDE_CYRASFLIERS",
+			"DAILY_CLASSIC_ACCOUNTWIDE_STONECOLDTRIXXY",
 			
 			----------------------------------------------
 			-- ## MISC (TODO: Find a better categorization for these?)
