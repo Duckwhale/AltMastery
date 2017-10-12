@@ -664,6 +664,14 @@ local defaultTasks = {
 		iconPath = "inv_legionadventure",
 		Criteria = "Quest(44171)",
 		Filter = " NOT Buff(225787) OR Level() < 110", -- Buff is only available during the event
+	
+	WEEKLY_LEGION_PETBATTLEEVENT = {
+		name = "Legion Pet Battle Event",
+		description = "Complete the weekly quest \"The Very Best\" and claim your reward",
+		notes = "Even though this quest is account-wide, logging into a character below the minimum level (98) will abandon it, causing you to lose any progress already made!",
+		iconPath = "icon_upgradestone_epic",
+		Criteria = "Quest(44174)",
+		Filter = " NOT Buff(SIGN_OF_THE_CRITTER) OR Level() < 98", -- Buff is only available during the event
 	},
 	
 	MILESTONE_LEGION_IMPROVINGONHISTORY = {
