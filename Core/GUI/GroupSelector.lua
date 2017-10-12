@@ -112,6 +112,7 @@ function GS:SelectGroup(groupID)
 	-- TODO: GUI.Update()
 	-- Update Tracker and GroupSelector
 	self:Update()
+	AM.Tracker.scrollOffset = 0 -- TODO: via API?
 	AM.TrackerPane:Update()
 	
 end
