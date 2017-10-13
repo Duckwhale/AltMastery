@@ -36,7 +36,10 @@ local defaults = {
 		windowPadding = 5, -- Border between the outer window border and its content pane
 		contentPadding = 2, -- Border between a content pane and its child widgets
 		
-		-- Display settings 2.0 - using absolute pixels + UI scale factors to avoid glitched AceGUI "relative width" nonsense
+
+	},
+	
+	GUI = {	-- Display settings 2.0 - using absolute pixels + UI scale factors to avoid glitched AceGUI "relative width" nonsense
 		scale = 1.0, -- Universal scale factor for the addon's GUI -- TODO: Setting via AceGUI to allow for counteracting the default UI's scale factor or just scale stuff in general, without glitching the GUI
 		borderWidth = 2, -- This is the border between windows and major GUI elements
 		
@@ -109,11 +112,9 @@ local defaults = {
 			width = 822,
 			height = 250, -- TODO: Will have to see once it is implemented
 		},
-		
 		-- TODO: Possibly a logo / some controls to the top here, e.g. with 822 (or 350) x 100 px
+	},	
 		
-	},
-	
 	groupSelector = {
 		
 		
