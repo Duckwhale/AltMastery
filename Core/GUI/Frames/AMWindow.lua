@@ -54,16 +54,19 @@ local methods = {
 -- @return A reference to the widget object
 local function Constructor()
 
+	-- Shorthands
 	local name = Type .. AceGUI:GetNextWidgetNum(Type)
-
+	local scaleFactor = AM.GUI:GetScaleFactor()
+	local settings = AM.db.profile.settings.GUI -- Only GUI settings are relevant here
+	
 	-- Default values for this class
 	local specs = {
 	
 		-- The default position is always centered (can be moved by the user afterwards)
-		x = (UIParent:GetWidth() - 350) / 2,
-		y = (UIParent:GetHeight() - 500) / 2,
-		width = 350,
-		height = 695, -- TODO: Update dynamically?
+		x = (UIParent:GetWidth() - settings.Tracker.width * scaleFactor * settings.scale) / 2,
+		y = (UIParent:GetHeight() - settings.Tracker.height * scaleFactor * settings.scale) / 2,
+		width = settings.Tracker.width * scaleFactor * settings.scale,
+		height = settings.Tracker.height * scaleFactor * settings.scale, -- TODO: Update dynamically?
 
 	}
 	
