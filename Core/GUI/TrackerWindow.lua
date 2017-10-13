@@ -33,14 +33,21 @@ local function Show(self)
 		local activeStyle = AM.GUI:GetActiveStyle()
 		local contentPaneStyle = activeStyle.frameColours.ContentPane
 	
-		-- Add left content pane
-		local LeftPane = AceGUI:Create("SimpleGroup")
-		LeftPane:SetRelativeWidth(0.7)
-		LeftPane:SetLayout("List")
-		local leftPaneBorder = LeftPane.content:GetParent()
-		AM.GUI:SetFrameColour(leftPaneBorder, contentPaneStyle)
-		LeftPane:SetFullHeight(true) -- TODO: Pointless?
-		self.frame:AddChild(LeftPane)
+	
+		-- Create the top-level window
+		self.frame = AceGUI:Create("AMWindow")
+		self.frame:SetLayout("AMRows")
+		
+		-- Add content pane (used to hold the Tracker Pane and its elements)
+		local ContentPane = AceGUI:Create("SimpleGroup")
+		ContentPane:SetRelativeWidth(1)
+		ContentPane:SetLayout("Fill")
+		local contentPaneBorder = ContentPane.content:GetParent()
+		contentPaneBorder:ClearAllPoints()
+		contentPaneBorder:SetAllPoints()
+		AM.GUI:SetFrameColour(contentPaneBorder, contentPaneStyle)
+		ContentPane:SetFullHeight(true) -- TODO: Pointless?
+		self.frame:AddChild(ContentPane)
 		
 		-- -- Add right (spacer) pane
 		local RightPane = AceGUI:Create("SimpleGroup")
