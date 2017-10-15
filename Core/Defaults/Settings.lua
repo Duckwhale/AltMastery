@@ -41,14 +41,15 @@ local defaults = {
 	
 	GUI = {	-- Display settings 2.0 - using absolute pixels + UI scale factors to avoid glitched AceGUI "relative width" nonsense
 		scale = 1.0, -- Universal scale factor for the addon's GUI -- TODO: Setting via AceGUI to allow for counteracting the default UI's scale factor or just scale stuff in general, without glitching the GUI
-		borderWidth = 2, -- This is the border between windows and major GUI elements
+		margin = 2, -- This is the border between windows and other (similar) major GUI elements
+		windowPadding = 4, -- The space between a window and its content pane (use Content.padding for the space between the content pane and its child elements)
 		
 		Tracker = { -- Tracker window: Shows the Tasks for the currently active Group
 			width = 350,
 			height = 500,
 			
 			-- TODO: Apply those and add settings in AceGUI
-			showCompletedTasks = true,
+			showCompletedTasks = false,
 			showFilteredTasks = false,
 			showDismissedTasks = false,
 			highlightExpandableElements = true,
@@ -56,25 +57,26 @@ local defaults = {
 			showNumObjectives = true,
 			showNumObjectivesWhenExpanded = true,
 			
+			defaultIcon = "Interface\\Icons\\inv_misc_questionmark",
+			
 			Content = { -- The settings for the inner pane that contains all the inline elements (Tasks, Groups, ...)
 				padding = 2, -- Space between the content and the elements inside
-				margin = 2, -- Space between the Tracker window and its content (outer padding) -> NOT for individual elements!
 				
 				Elements = { -- Settings for the individual inline elements
 					padding = 2, -- Space between the element's contents and its border
-					margin = { 0, 3}, -- Space between the element and the next one (due to the nature of the Tracker's layout, horizontal margins are applied between the element and the Tracker's content instead)
+					margins = { 0, 1}, -- Space between the element and the next one (due to the nature of the Tracker's layout, horizontal margins are applied between the element and the Tracker's content instead)
 					borderWidth = 2, -- The border that is shown (when elements are highlighted) around each invidivual element
 					
 					Tasks = {
 						fontSize = 12,
-						iconSize = 20,
+						iconSize = 18,
 						height = 30,
 						capitalizeText = false,
 					},
 					
 					Groups = {
 						fontSize = 16,
-						iconSize = 32,
+						iconSize = 24,
 						height = 38,
 						capitalizeText = true,
 					},
@@ -90,16 +92,17 @@ local defaults = {
 		},
 		
 		GroupSelector = { -- Group selector: Expandable sidepanel that allows selecting the active Group
-			width = 120,
-			height = 500,
+			width = 150,
+			height = 540,
+			useTextures = true, -- TODO: Not really looking too great yet
 			
 			Content = { -- Each individual Group's content should use this for consistent behaviour
 				padding = 2, -- This is the space between the Group item's border and its actual content (border/content in AceGUI) -> similar to CSS padding
-				margins = { 5, 2 }, -- This is the space between the Content and the Group item (border/parent in AceGUI) -> similar to CSS margin
+				margins = { 1, 3 }, -- This is the space between the Content and the Group item (border/parent in AceGUI) -> similar to CSS margin
 				borderWidth = 2, -- The border between content and Group item (border and parent in AceGUI) -> also border shown when elements are highlighted
-				nameSize = 14, -- Size of the Group's name
+				nameSize = 10, -- Size of the Group's name
 				progressSize = 12, -- TODO: Size of the progress report text
-				iconSize = 40, -- Size of the Group's icon
+				iconSize = 28, -- Size of the Group's icon
 			},
 		},
 		
