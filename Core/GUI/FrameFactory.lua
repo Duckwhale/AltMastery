@@ -52,13 +52,14 @@ local function CreateMovableFrame(self, name, defaults, parent)
 		cacheEntry = AM.db.global.layoutCache[name] -- And update the reference used (requires a reload for the change to effect otherwise)
 		AM:Debug("Resetting position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
 		self:SetPoint("BOTTOMLEFT", UIParent, cacheEntry.x, cacheEntry.y)
+		cacheEntry.isShown = true
 		
 	end
 	
 	frame.Reposition = function(self) -- Restore position from saved vars
 	
 		self:ClearAllPoints()
---		AM:Debug("Restoring position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+		AM:Debug("Restoring position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
 		self:SetPoint("BOTTOMLEFT", UIParent, cacheEntry.x, cacheEntry.y)
 		
 	end
@@ -67,15 +68,22 @@ local function CreateMovableFrame(self, name, defaults, parent)
 
 	frame.SaveCoords = function(self) -- Store position in saved vars
 	
-		cacheEntry.x = self:GetLeft()
-		cacheEntry.y = self:GetBottom()
---		AM:Debug("Saving position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+		cacheEntry.x = math.floor(self:GetLeft() + 0.5)
+		cacheEntry.y = math.floor(self:GetBottom() + 0.5)
+		cacheEntry.isShown = true
+		AM:Debug("Saving position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
 		
 	end
 	
+	frame:SetScript("OnHide", function(self)
+	
+		cacheEntry.isShown = false
+	
+	end)
+	
 	frame:SetScript("OnDragStart", frame.StartMoving)
 	frame:SetScript("OnDragStop", function(self) self:StopMovingOrSizing(); self:SaveCoords() end)
-
+	
 	return frame
 
 end
@@ -154,8 +162,41 @@ local function BuildFrame(self, frameSpecs)
 	
 end
 
+--- Calculate the multiplier used to scale frames, so that elements can calculate their dimensions properly
+local function GetScaleFactor(self)
+
+-- See https://wow.gamepedia.com/UI_Scale for details
+
+	local screenResolution = ({GetScreenResolutions()})[GetCurrentResolution()]
+	local screenWidth, screenHeight = strsplit("x", screenResolution)
+	local scale = 768/screenHeight -- This is the scale factor that will scale textures to the native resolution that the client uses internally
+	
+	local scaleFactor = (1/scale)
+	
+	-- local uiscale = UIParent:GetScale() --This is the scale factor the client applied to UIParent (and all of the addon's frames) - may be set by the user; Therefore it is not at all reliable and can cause glitches if set improperly
+	-- local scaleFactor = 1/scale -- This is the multiplier that needs to be applied to all calculations to guarantee a pixel-perfect rendering (if it is missing somewhere, that part will look glitched)
+	
+	
+	
+	-- Pixel-perfect: UI scale needs to be either automatically adjusted, or otherwise map 1:1 to the 768y internal viewport
+	--local isPixelPerfectScale = (math.floor(uiscale * 100000 + 0.5)  == math.floor(scale * 100000 + 0.5)) -- Removes floating point inaccuracies which can occur if the scale is too precise (>8 digits usually, but I'll take 5 only)
+	
+	-- local actualScaleFactor = scaleFactor -- If the UIScale is correct, this should provide a pixel-perfect look
+	-- if not isPixelPerfectScale then
+		-- AM:Print("Detected that the UIScale doesn't match the screen resolution! Display will likely glitch unless this is fixed")
+		-- AM:Print("UI Scale: " .. uiscale .. " - recommended = " .. scale .. " - scaling window by " .. scaleFactor .. " to make up for it (only works for this addon's frames)")
+		-- actualScaleFactor = 1 -- This will look glitched, but if the user wants a bigger interface than normally provided, they surely have other addons glitching and don't mind as much?
+	-- end
+	
+	return scaleFactor -- , scale, uiscale, screenWidth, screenHeight, isPixelPerfectScale
+	
+	--				/dump AltMastery.GUI:GetScaleFactor()
+
+end
+
 
 AM.GUI.BuildFrame = BuildFrame
 AM.GUI.CreateMovableFrame = CreateMovableFrame
+AM.GUI.GetScaleFactor = GetScaleFactor
 
 return AM
