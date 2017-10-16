@@ -26,67 +26,89 @@ if not AceGUI or (AceGUI:GetWidgetVersion(Type) or 0) >= Version then return end
 local methods = {
 
 	["ApplyStatus"] = function(self) -- Update the displayed widget with the current status
-
-		-- TODO: Re-read settings to update stuff (size, style, ...)
 	
+--		AM:Print("ApplyStatus triggered with groupID = " .. tostring(self.localstatus.groupID) .. " - content.width = " .. self.content:GetWidth())
+		
+		-- TODO: Re-read settings to update stuff (size, style, ...)
+
+		-- TODO
+		local numDisplayedGroups = 9 -- How many Groups should be displayed without scrolling
+		
 		-- Shorthands
 		local status = self.localstatus
 		local activeStyle = AM.GUI:GetActiveStyle()
 		local label, icon, content = self.label, self.icon, self.content
 		local isActiveGroup = (self:GetType() == "ActiveGroup")
-		local settings = AM.db.profile.settings
+		local settings = AM.db.profile.settings.GUI
+		local scaleFactor = AM.GUI:GetScaleFactor()
+		local fontSize = settings.GroupSelector.Content.nameSize -- activeStyle.fontSizes.small
+		local fontStyle = activeStyle.fonts.groups
+		local padding = settings.GroupSelector.Content.padding -- The first part is to account for the already-existing padding ("border"), and the second to add some visible padding
+		local borderWidth = settings.GroupSelector.Content.borderWidth * scaleFactor
+		local marginX, marginY = unpack(settings.GroupSelector.Content.margins) -- TODO: Different format should be allowed? CSS style, i.e. xy or x, y or x1,y1,x2,y2
+		local contentWidth = settings.GroupSelector.width - settings.GroupSelector.Content.padding * 2 - marginX * 2 - settings.GroupSelector.Content.borderWidth * 2 -- TODO: 2 = edgeSize from activeStyle -> needs to be dynamical and also moved to settings
+		local contentHeight = (settings.GroupSelector.height - settings.windowPadding * 2 - settings.GroupSelector.Content.padding * 2 - marginY * 2) / numDisplayedGroups
+--		+ (2 * numDisplayedGroups - 1) / (2 * numDisplayedGroups) * marginY / numDisplayedGroups -- The last part is to size elements properly when the final margin is removed (hacky solution and might look odd if the margin is bigger than the)
 
-	
+
+		-- Set height so that all elements fit into the pane (TODO: Scrolling/flexible number of elements)
+		self:SetHeight(contentHeight * scaleFactor)
+
+		local border = content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 	
 		-- Update with current settings (also provides default values after the local status has been wiped)
-		status.iconSize = settings.groupSelector.iconSize
+		local iconSize = settings.GroupSelector.Content.iconSize * scaleFactor
 		status.text = status.text or "<ERROR>"
 		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
 --AM:Print(status.text .. " - " .. tostring(self:GetType()) .. " -" .. tostring(isActiveGroup) .. " - " .. status.image)		
+		-- Resize the content to remove the 20px default padding that no one needs
+	
+	-- This adds a spacer between the parent and its content frame
+		local isLastElement = (status.groupID == "CLASSIC") -- TODO: Ugly hack, needs to be reworked obviously - remove margin from the last element, for now
+		local offY = 0
+--		if not isLastElement then
+		offY = marginY * scaleFactor
+		--end
+		
+		border:ClearAllPoints()
+		border:SetPoint("TOPLEFT", marginX * scaleFactor, -marginY * scaleFactor)
+		border:SetPoint("BOTTOMRIGHT", -marginX * scaleFactor, offY) -- TODO: Remove spacer after the last element, or does it even matter?
+		
+
+		content:ClearAllPoints();
+		content:SetPoint("TOPLEFT", padding * scaleFactor + borderWidth, -padding * scaleFactor - borderWidth)
+		content:SetPoint("BOTTOMRIGHT", -padding * scaleFactor - borderWidth, padding * scaleFactor + borderWidth)	
+
+		-- Pick colour according to the highlight status
+		local frameColour = 	(isActiveGroup and not status.isHighlighted and activeStyle.frameColours.ActiveSelectorGroup) or (status.isHighlighted and activeStyle.frameColours.HighlightedSelectorGroup) or activeStyle.frameColours.SelectorGroup
+		AM.GUI:SetFrameColour(border, frameColour)
+--border:SetBackdropColor(1, 0, 0, 1)
 		
 		-- Update icon
 		icon:SetImage(status.image)
-		icon:SetImageSize(status.iconSize, status.iconSize)
-		
+		icon:SetImageSize(iconSize, iconSize)
+		--icon:SetWidth(contentWidth * scaleFactor)
+--		icon:SetWidth(content:GetWidth())
+	icon.frame:SetPoint("LEFT", content, "LEFT")
+	icon.frame:SetPoint("RIGHT", content, "RIGHT")	
+	-- local children = icon.frame:GetRegions()
+	-- for i, region in ipairs(children) do -- Find the highlight and KILL IT WITH FIRE
+		-- if region:IsVisible() then AM:Print("Region " .. i .. " is visible") end
+		-- dump(region)
+	-- end
+
 		-- Update label state
 		label:SetText(status.text)
 		-- Capitalize text (as the entries are always groups)
 		label:SetText(string.upper(status.text))
 		-- Set font and height based on the active style
-		local fontSize = activeStyle.fontSizes.small
-		local fontStyle = activeStyle.fonts.groups
-		label:SetFont(fontStyle, fontSize)
+		label:SetFont(fontStyle, fontSize * scaleFactor)
 		label.label:SetJustifyH("CENTER")
-		local fontStringHeight = label.label:GetHeight() -- This depends on how long the text is, and on how many lines it will be displayed
-		
-		-- Resize the content to remove the 20px default padding that no one needs
-		local padding = settings.display.contentPadding + settings.groupSelector.padding -- The first part is to account for the already-existing padding ("border"), and the second to add some visible padding
-		content:ClearAllPoints()
-		content:SetPoint("TOPLEFT", padding, -padding)
-		content:SetPoint("BOTTOMRIGHT", -padding, padding)
---		label:SetWidth(content:GetWidth() - 2 * padding) -- Resize properly, as the relative width seems to always glitch out
-		-- local point, relativeTo, relativePoint, xOfs, yOfs = label.label:GetPoint()
-		-- label.label:SetPoint(point, relativeTo, relativePoint, xOfs - 2, yOfs)
-	-- AM:Print(tostring(point) .. " " .. tostring(relativeTo:GetName()) .. " " .. tostring(relativePoint) .. " " .. tostring(xOfs) .. " " .. tostring(yOfs))
-		
-		-- Set widget height (because AceGUI just can't get it right...)
-		local contentHeight = fontStringHeight -- Label text can vary in size
-		+ status.iconSize
-		+ 3 * padding -- This adds a border between the container and its content (TODO: Not the most exact calculation, thanks to AceGUI's somewhat arbitrary positioning?)
-		self:SetHeight(contentHeight)
-		
-		-- Set background and border based on the active style
-		local border = self.content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
-		local spacer = 0 -- This adds another border between the parent and its content frame? (TODO)
-		border:ClearAllPoints()
-		border:SetPoint("TOPLEFT", 0, -spacer)
-		border:SetPoint("BOTTOMRIGHT", -0, spacer) -- TODO: Remove spacer after the last element, or does it even matter?
-		
-		-- Pick colour according to the highlight status
-		local frameColour = 	(isActiveGroup and not status.isHighlighted and activeStyle.frameColours.ActiveSelectorGroup) or (status.isHighlighted and activeStyle.frameColours.HighlightedSelectorGroup) or activeStyle.frameColours.SelectorGroup
-		AM.GUI:SetFrameColour(border, frameColour)
-		self.border = border -- Backref to access it more easily and change its colour
+		label.label:SetJustifyV("MIDDLE")
+		label.label:SetPoint("TOP", content, "TOP")
+		label.label:SetPoint("LEFT", content, "LEFT")
+		label.label:SetPoint("RIGHT", content, "RIGHT")	
+		label.label:SetPoint("BOTTOM", icon.frame, "TOP", 0, -padding * scaleFactor)
 
-		-- Set text colour depending on the element's highlight status (based on active style)
 		local r, g, b
 		if status.isHighlighted or isActiveGroup then -- Set text colour to create a visual highlight effect (with the background colour)
 			r, g, b = AM.Utils.HexToRGB(activeStyle.fontColours.activeGroup, 255)
@@ -95,8 +117,31 @@ local methods = {
 		end
 		label:SetColor(r, g, b)
 
---		AM:Print("content = " .. content:GetWidth() .. ", " .. content:GetHeight() .. " - border = " .. border:GetWidth() .. ", " .. border:GetHeight() .. " - label.frame = " .. label.frame:GetWidth() .. ", " .. label.frame:GetHeight() .. " - label.label = " .. label.label:GetWidth() .. ", " .. label.label:GetHeight())
+	if settings.GroupSelector.useTextures then -- Apply textures (TODO: Experimental and needs style configurator or it will be too much work to find something that looks perfect)
+		-- Set textures
+		status.texture = status.texture or activeStyle.groupSelectorTexture
+		if not self.texture then -- Create new texture object
+			self.texture = border:CreateTexture()
+		end
+		self.texture:SetTexture(status.texture)
+		self.texture:SetPoint("TOPLEFT", borderWidth, - borderWidth)
+		self.texture:SetPoint("BOTTOMRIGHT", -borderWidth, borderWidth)
+		-- self.texture:SetAllPoints()
+		-- 7186C7
+		local style = activeStyle["frameColours"][(status.isHighlighted and "HighlightedSelectorGroup") or (isActiveGroup and "ActiveSelectorGroup") or "SelectorGroup"]
 		
+		local red, green, blue = AM.Utils.HexToRGB(style["backdrop"], 255)
+		local alpha = style["alpha"]
+	
+		self.texture:SetVertexColor(red, green, blue, alpha)
+		
+	end	
+		
+		
+		
+		
+--AM:Print(format("contentWidth = %d, borderWidth = %d, frameWidth = %d", content:GetWidth(), border:GetWidth(), self.frame:GetWidth()))		
+			
 	end,
 	
 	-- If the label is clicked, switch the Tracker to the selected Group and make it the active one for the current character
@@ -138,7 +183,7 @@ local methods = {
 	end,
 
 	-- Reset highlight colour to the default value and also hide the tooltip
-	["OnLeave"] = function	(self)
+	["OnLeave"] = function(self)
 
 		self.parent.localstatus.isHighlighted = false
 		self.parent:ApplyStatus()
@@ -183,9 +228,9 @@ local methods = {
 	end,
 
 	["OnAcquire"] = function(self)
-	
+--		AM:Print("OnAcquire triggered")
 		-- Apply current status to update the display
-		self:ApplyStatus()
+		-- self:ApplyStatus() -- No point, as the parent of self.frame is still UIParent = sizing is wrong
 
 	end,
 	
@@ -246,8 +291,8 @@ local function Constructor()
 	-- Create basic AceGUI widget that serves as the container for all display elements
 	local container = AceGUI:Create("InlineGroup")
 	container.localstatus = {} -- Holds the status for this widget instance (need to be wiped when releasing it)
-	container:SetRelativeWidth(1)
 	container:SetLayout("List")
+	container:SetFullWidth(true)
 	
 	-- Add methods (some of which are AceGUI functions)
 	for method, func in pairs(methods) do
@@ -258,13 +303,15 @@ local function Constructor()
 	-- titletext:Hide() -- Pointless, as this isn't shown? But better be safe than sorry...
 	
 	-- Adjust layout so that the child widgets can fit inside
-	container:SetAutoAdjustHeight(false) -- doing this manually is more complicated, but at least it doesn't glitch out all the time...
-	container.frame:ClearAllPoints()
-	container.frame:SetAllPoints()
+--	container:SetAutoAdjustHeight(true) -- doing this manually is more complicated, but at least it doesn't glitch out all the time...
+	 -- container.frame:ClearAllPoints()
+	 -- container.frame:SetAllPoints()
+	-- container.content = container.frame
 	
 	-- Add Text for the group name (TODO: Toggle via settings to display only the icon)
 	local label = AceGUI:Create("InteractiveLabel")
-	label:SetRelativeWidth(0.0535)
+--	label:SetFullWidth(true)
+	--	label:SetRelativeWidth(0.0535)
 	container:AddChild(label)
 	container.label = label
 	label.parent = container -- Backreference so the label functions can access container methods and change its state
@@ -278,7 +325,7 @@ local function Constructor()
 	-- Add completion text and icon (TODO)
 	
 	local groupIcon = AceGUI:Create("Icon")
-	groupIcon:SetRelativeWidth(0.0535)
+--	groupIcon:SetRelativeWidth(0.0535)
 	-- -- Implied: container.localstatus.isCompleted = nil -> Display "?" icon unless state was set
 	 -- -- Always default to "not completed", which will be updated by the Tracker
 	
@@ -309,7 +356,7 @@ local function Constructor()
 	-- completionIcon.frame:ClearAllPoints()
 	-- completionIcon.frame:SetPoint("TOPLEFT", label.frame, "TOPRIGHT", -iconX, iconY)
 	-- completionIcon.frame:SetPoint("BOTTOMRIGHT", label.frame, "BOTTOMRIGHT", iconX, -iconY)
-	
+
 	return AceGUI:RegisterAsContainer(container)
 	
 end

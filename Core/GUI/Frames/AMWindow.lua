@@ -63,8 +63,8 @@ local function Constructor()
 	local specs = {
 	
 		-- The default position is always centered (can be moved by the user afterwards)
-		x = (UIParent:GetWidth() - settings.Tracker.width * scaleFactor * settings.scale) / 2,
-		y = (UIParent:GetHeight() - settings.Tracker.height * scaleFactor * settings.scale) / 2,
+		x = math.floor((UIParent:GetWidth() - settings.Tracker.width * scaleFactor * settings.scale) / 2 + 0.5),
+		y = math.floor((UIParent:GetHeight() - settings.Tracker.height * scaleFactor * settings.scale) / 2 + 0.5),
 		width = settings.Tracker.width * scaleFactor * settings.scale,
 		height = settings.Tracker.height * scaleFactor * settings.scale, -- TODO: Update dynamically?
 
@@ -80,7 +80,7 @@ local function Constructor()
 	
 	-- Create content pane
 	local content = CreateFrame("Frame", name .. "Content", frame)	-- Empty frame that will be used to contain all children later
-	local padding = AM.db.profile.settings.display.windowPadding
+	local padding = AM.db.profile.settings.GUI.windowPadding * scaleFactor
 	content:SetPoint("TOPLEFT", padding, -padding)
 	content:SetPoint("BOTTOMRIGHT", -padding, padding)
 	

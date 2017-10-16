@@ -16,11 +16,51 @@
 local addonName, AM = ...
 if not AM then return end
 
+-- Upvalues
+local AceGUI = LibStub("AceGUI-3.0")
 
 --- TrackerWindow.lua
 -- The main display
 -- @section TrackerWindow.lua
 
+
+local function Update(self)
+--AM:Print("Tracker Window update started!")		
+	
+	-- Shorthands	
+	local settings = AM.db.profile.settings.GUI
+	local scaleFactor = AM.GUI:GetScaleFactor() -- Overwrite closure here so it updates when the UI scale changes (otherwise it snapshots the old local variable and it looks wrong)
+	local activeStyle = AM.GUI:GetActiveStyle()	
+		
+			local trackerPaneBorder = AM.TrackerPane.widget.content:GetParent()
+			local padding = settings.Tracker.Content.padding * scaleFactor
+			trackerPaneBorder:ClearAllPoints()
+			trackerPaneBorder:SetPoint("TOPLEFT", padding, -padding)
+			trackerPaneBorder:SetPoint("BOTTOMRIGHT", -padding, padding)
+			
+			local GroupSelectorContainer = AM.TrackerWindow.GroupSelectorContainer -- TODO: self
+			GroupSelectorContainer.frame:Show()
+			GroupSelectorContainer:ClearAllPoints()
+					local anchor = self.frame.frame
+			GroupSelectorContainer:SetPoint("LEFT", anchor, "RIGHT", settings.margin * scaleFactor, 0)
+			GroupSelectorContainer:SetPoint("TOPLEFT", anchor, "TOPRIGHT", settings.margin * scaleFactor, -(settings.Tracker.height - settings.GroupSelector.height) / 2 * scaleFactor)
+			GroupSelectorContainer:SetWidth(settings.GroupSelector.width * scaleFactor)
+			GroupSelectorContainer:SetHeight(settings.GroupSelector.height * scaleFactor)
+			
+			local GroupSelectorPane	= AM.GroupSelector.widget
+			groupSelectorBorder = GroupSelectorPane.content:GetParent()
+			groupSelectorBorder:ClearAllPoints()
+		-- local windowPadding = settings.windowPadding * scaleFactor -- Use window padding here, because the GroupSelectorContainer acts as a separate window
+		local windowPadding = 0
+		local _, marginY = unpack(settings.GroupSelector.Content.margins) -- This is because each individual element has two margins, top and bottom, resulting in twice the spacing, but the very first and last elements don't have that, so it needs to be added manually for a consistent appearance
+		groupSelectorBorder:SetPoint("TOPLEFT", windowPadding, -marginY * scaleFactor)  -- 0, 0 because the padding from the ContentPane is already enough
+		groupSelectorBorder:SetPoint("BOTTOMRIGHT", -windowPadding, marginY * scaleFactor) -- Apply padding to the right, as the window borders directly on it and there is no additional element right now
+		AM.GUI:SetFrameColour(groupSelectorBorder, activeStyle.frameColours.GroupSelectorPane)
+		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.GroupSelectorPane.border, 255)
+		groupSelectorBorder:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.GroupSelectorPane.borderAlpha) -- This should be updated dynamically (TODO)
+			
+
+end
 
 --- Show main window for the Tracker
 -- @param self ...
@@ -30,72 +70,113 @@ local function Show(self)
 	
 	if not self.frame then -- First call -> Create new instance via AceGUI and configure it
 	
+		-- Shorthands
+		local scaleFactor = AM.GUI:GetScaleFactor()
 		local activeStyle = AM.GUI:GetActiveStyle()
 		local contentPaneStyle = activeStyle.frameColours.ContentPane
-	
+		local settings = AM.db.profile.settings.GUI
 	
 		-- Create the top-level window
 		self.frame = AceGUI:Create("AMWindow")
 		self.frame:SetLayout("AMRows")
+		
+		-- self.frame.content:ClearAllPoints()
+		-- self.frame.content:SetAllPoints()
 		
 		-- Add content pane (used to hold the Tracker Pane and its elements)
 		local ContentPane = AceGUI:Create("SimpleGroup")
 		ContentPane:SetRelativeWidth(1)
 		ContentPane:SetLayout("Fill")
 		local contentPaneBorder = ContentPane.content:GetParent()
-		contentPaneBorder:ClearAllPoints()
-		contentPaneBorder:SetAllPoints()
-		AM.GUI:SetFrameColour(contentPaneBorder, contentPaneStyle)
-		ContentPane:SetFullHeight(true) -- TODO: Pointless?
+		-- ContentPane.frame:ClearAllPoints()
+		-- ContentPane.frame:SetPoint("TOPLEFT", self.frame.frame, "TOPLEFT", settings.borderWidth * scaleFactor, settings.borderWidth * scaleFactor)
+		-- ContentPane.frame:SetPoint("BOTTOMRIGHT", self.frame.frame, "BOTTOMRIGHT", 5 * settings.borderWidth * scaleFactor, settings.borderWidth * scaleFactor)
+		-- ContentPane.content:ClearAllPoints()
+		-- ContentPane.content:SetPoint("TOPLEFT", ContentPane.frame, "TOPLEFT", settings.borderWidth * scaleFactor, settings.borderWidth * scaleFactor)
+		-- ContentPane.content:SetPoint("BOTTOMRIGHT", ContentPane.frame, "BOTTOMRIGHT", 5 * settings.borderWidth * scaleFactor, settings.borderWidth * scaleFactor)
+		-- contentPaneBorder:ClearAllPoints()
+		-- contentPaneBorder:SetPoint("TOPLEFT", self.frame.frame, "TOPLEFT", settings.borderWidth * scaleFactor, settings.borderWidth * scaleFactor)
+		-- contentPaneBorder:SetPoint("BOTTOMRIGHT", self.frame.frame, "BOTTOMRIGHT", 5 * settings.borderWidth * scaleFactor, settings.borderWidth * scaleFactor)
+		AM.GUI:SetFrameColour(contentPaneBorder, contentPaneStyle) -- TODO. Update dynamically
+--		contentPaneBorder:SetBackdropColor(1, 0, 0, 1)
+--		ContentPane:SetFullHeight(true)
 		self.frame:AddChild(ContentPane)
 		
-		-- -- Add right (spacer) pane
-		local RightPane = AceGUI:Create("SimpleGroup")
-		RightPane:SetRelativeWidth(0.31)
-		local rightPaneBorder = RightPane.content:GetParent()
-		self.frame:AddChild(RightPane)
-		--RightPane:SetFullHeight(true) TODO???
+		-- Add Group Selector container (used to hold the Group Selector Pane and its elements) - While this is technically a child of the Tracker Window, it is merely anchored to it and otherwise acts as a "window" itself
+		local GroupSelectorContainer = AceGUI:Create("AMWindow")
+		self.GroupSelectorContainer = GroupSelectorContainer
+		GroupSelectorContainer.frame:SetMovable(false)
+		GroupSelectorContainer.frame:EnableMouse(false)
+--		GroupSelectorContainer.frame:RegisterForDrag(nil) -- TODO: When dragged, it should move its parent frame (and re-anchor itself)
+
 		
+		
+		GroupSelectorContainer:SetLayout("Fill")
+	-- TODO: DRY
+	-- GroupSelectorContainer:ClearAllPoints()
+	-- GroupSelectorContainer:SetPoint("LEFT", self.frame.frame, "RIGHT", settings.margin * scaleFactor, 0)
+	-- GroupSelectorContainer:SetWidth(settings.GroupSelector.width * scaleFactor)
+	-- GroupSelectorContainer:SetHeight(settings.GroupSelector.height * scaleFactor)
+		-- local groupSelectorContent = GroupSelectorContainer.content
+		-- groupSelectorContent:ClearAllPoints()
+		-- groupSelectorContent:SetAllPoints()
+		-- local groupSelectorBorder = groupSelectorContent:GetParent()
+		-- groupSelectorBorder:ClearAllPoints()
+		-- groupSelectorBorder:SetAllPoints()
+
+		-- Anchor visibility without re-parenting (as that seems to mess up the scaling somehow)
+		self.frame.frame:SetScript("OnHide", function(self) 
+			GroupSelectorContainer.frame:Hide()
+			GroupSelectorContainer.frame:SaveCoords() -- This is to avoid glitching when the UI scale changes, as frame.Reposition is still called AFTER showing it and correctly anchoring it to the Tracker window
+		end)
+		
+		self.frame.frame:SetScript("OnShow", function(self)
+			AM.TrackerWindow:Update()
+		end)
+
 		-- Add container for the group selection icons
-		local GroupSelectionPane = AceGUI:Create("InlineGroup") -- TODO: Use same type as content panes?
-		border = GroupSelectionPane.content:GetParent()
-		border:ClearAllPoints()
-		local padding = AM.db.profile.settings.display.contentPadding
-		border:SetPoint("TOPLEFT", padding, 0) -- TODO: What's with the offset? I think it's for the title, but why can't it just work normally?
-		border:SetPoint("BOTTOMRIGHT", -padding, 36)
-	
-		AM.GUI:SetFrameColour(border, activeStyle.frameColours.GroupSelectionPane)
-		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.GroupSelectionPane.border, 255)
-		border:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.GroupSelectionPane.borderAlpha) -- This should be updated dynamically (TODO)
-		GroupSelectionPane:SetRelativeWidth(1)
-		GroupSelectionPane:SetLayout("List")
-		RightPane:AddChild(GroupSelectionPane)
-		AM.GroupSelector.widget = GroupSelectionPane -- Save the newly-created widget so that it can be used by the GroupSelector API
+		local GroupSelectorPane = AceGUI:Create("InlineGroup") -- TODO: Use same type as content panes?
+		GroupSelectorPane:SetRelativeWidth(1)
+		GroupSelectorPane:SetLayout("List")
+		GroupSelectorContainer:AddChild(GroupSelectorPane)
+		AM.GroupSelector.widget = GroupSelectorPane -- Save the newly-created widget so that it can be used by the GroupSelector API
+		
+			
+--groupSelectorBorder:SetBackdropColor(1, 1, 0, 1)		
 		
 		-- Add container for the tracked groups and tasks
 		local TrackerPane = AceGUI:Create("InlineGroup") -- TODO: Use same type as content panes?
-		border = TrackerPane.content:GetParent()
+		local trackerPaneBorder = TrackerPane.content:GetParent()
+
+
 		
-		border:ClearAllPoints()
-		border:SetPoint("TOPLEFT", padding, -padding)
-		border:SetPoint("BOTTOMRIGHT", -padding, 36)
-	
-		AM.GUI:SetFrameColour(border, activeStyle.frameColours.TrackerPane)
+		--TODO: DRY
+			-- local padding = settings.Tracker.Content.padding * scaleFactor
+			-- trackerPaneBorder:ClearAllPoints()
+			-- trackerPaneBorder:SetPoint("TOPLEFT", padding, -padding)
+			-- trackerPaneBorder:SetPoint("BOTTOMRIGHT", -padding, padding)
+		
+		trackerPaneBorder:EnableMouseWheel(true)
+		trackerPaneBorder:SetScript("OnMouseWheel", AM.Tracker.OnMouseWheel)
+		
+		AM.GUI:SetFrameColour(trackerPaneBorder, activeStyle.frameColours.TrackerPane)
 		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.TrackerPane.border, 255)
-		border:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.TrackerPane.borderAlpha) -- This should be updated dynamically (TODO)
+		trackerPaneBorder:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.TrackerPane.borderAlpha) -- This should be updated dynamically (TODO)
+--trackerPaneBorder:SetBackdropColor(1,1,1,1)
 		TrackerPane:SetRelativeWidth(1)
 		TrackerPane:SetLayout("List")
-		LeftPane:AddChild(TrackerPane)
+		ContentPane:AddChild(TrackerPane)
 		
 		-- Save the widget so that it can be used with the TrackerPane API
 		AM.TrackerPane.widget = TrackerPane
 		
 	end
-
+	self.frame:Show()
+	self:Update()
 	-- TODO: Global GUI:Update() function
 	AM.GroupSelector:Update()
 	AM.TrackerPane:Update()
-	self.frame:Show()
+
 
 end
 
@@ -121,11 +202,10 @@ end
 
 
 local TrackerWindow = {
-
 	Show = Show,
 	Reset = Reset,
 	Toggle = Toggle,
-	
+	Update = Update,
 }
 
 AM.TrackerWindow = TrackerWindow

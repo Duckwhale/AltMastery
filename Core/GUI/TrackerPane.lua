@@ -43,6 +43,7 @@ end
 --- Returns the idnex of the last displayed element (taking into account scrolling)
 function Tracker:GetLastDisplayedElementIndex()
 
+	local scaleFactor = AM.GUI:GetScaleFactor()
 	local contentHeight, availableHeight = AM.TrackerPane:GetTrackerHeight(), self:GetViewportHeight()
 --AM:Print("contentHeight = " .. contentHeight .. " - availableHeight = " .. availableHeight)	
 	if contentHeight <= availableHeight then -- Everything fits into the viewport
@@ -51,7 +52,9 @@ function Tracker:GetLastDisplayedElementIndex()
 		
 		-- Upvalues
 		local display = AM.db.profile.settings.display
-		local edgeSize = AM.GUI:GetActiveStyle().edgeSize
+	--	local edgeSize = AM.db.profile.settings.GUI.Tracker.Content.Elements.borderWidth -- AM.GUI:GetActiveStyle().edgeSize
+	--	local padding =  AM.db.profile.settings.GUI.Tracker.Content.padding
+	--	local _, marginY =  unpack(AM.db.profile.settings.GUI.Tracker.Content.Elements.margins)
 		
 		-- Loop variables
 		local usedHeight = 0
@@ -61,19 +64,21 @@ function Tracker:GetLastDisplayedElementIndex()
 			if index >= Tracker.scrollOffset then -- This element is not outside ouf the displayed area due to scrolling and must be considered
 			
 				local elementHeight = display[entry.type .. "Size"]  -- Should always be valid
-				elementHeight = elementHeight + 2 * edgeSize + 2 -- 2 px hardcoded spacer (TODO)
-				
+				elementHeight = (elementHeight * scaleFactor) -- Needs to be scaled because GetTrackerHeight() and GetViewportHeight() also return scaled values
+
 				if (usedHeight + elementHeight) > availableHeight then -- This element doesn't fit; use the last one instead
+--				AM:Print("GetLastDisplayedElementIndex: Element " .. index .. " cannot be added because the viewport is full")
 					return numElements + Tracker.scrollOffset -- If the viewport only shows a subset of all elements, the offset is simply added to get the last index
 				end
-				
+--				AM:Print("GetLastDisplayedElementIndex: Adding element " .. index .. ", usedHeight = " .. usedHeight .. ", numElements = " .. numElements .. " - elementHeight = " .. elementHeight)				
 				-- There is still room for this element, so it can be added
 				usedHeight = usedHeight + elementHeight
 				numElements = numElements + 1
---AM:Print("usedHeight = " .. usedHeight .. " - elementHeight = " .. elementHeight .. " - numElements = " .. numElements)			
+--AM:Print("usedHeight = " .. usedHeight .. ", contentHeight =" .. contentHeight .. ", availableHeight = " .. availableHeight .. ", elementHeight = " .. elementHeight .. " - numElements = " .. numElements)			
 			end
+			
 		end
---AM:Print("#Tracker.elementsList = " .. #Tracker.elementsList)		
+AM:Print("No return value for GetLastDisplayedElementIndex!? This will not go over well... -> #Tracker.elementsList = " .. #Tracker.elementsList .. " - scrollOffset = " .. Tracker.scrollOffset .. ", contentHeight = " .. contentHeight .. ", availableHeight = " .. availableHeight .. ", numElements = " .. numElements)		
 		-- TODO: Is a return numElements necessary? It should have returned the number of elements already because the content is clearly smaller than the viewport if all items fit inside. And yet, there were some bugs with this when the calculation of the content or viewport heights is wrong (as this function relies on them being accurate to work properly)
 	end
 
@@ -82,10 +87,17 @@ end
 
 -- Calculate the available height in the displayed Tracker Frame
 function Tracker:GetViewportHeight()
-
-	local trackerWindowHeight = 825 -- TODO: Replace hardcoded value (after the state-rework) - also leave some space for controls (checkbox/switches, ... scroll indicator, etc?)
-	return trackerWindowHeight - 2 * AM.GUI:GetActiveStyle().edgeSize  -- This is the space that can be used to display elements -- TODO: What about the outer borders?
 	
+	local scaleFactor = AM.GUI:GetScaleFactor()
+	local trackerWindowHeight = AM.db.profile.settings.GUI.Tracker.height -- TODO: Replace hardcoded value (after the state-rework) - also leave some space for controls (checkbox/switches, ... scroll indicator, etc?) -> Where does the 830 come from, anyway?
+	local viewportHeight = (trackerWindowHeight - 2 * AM.db.profile.settings.GUI.windowPadding - 4 * AM.db.profile.settings.GUI.Tracker.Content.padding) -- This is the space that can be used to display elements -- TODO: What about the outer borders?
+	
+	-- TODO: Experimental
+--viewportHeight = AM.TrackerPane.widget.:GetHeight()	
+	
+--AM:Print("GetViewportHeight() = " .. viewportHeight)
+	
+	return  viewportHeight * scaleFactor
 	-- local contentHeight = AM.TrackerPane.GetTrackerHeight() -- TODO: Replace with self after refactoring
 	-- return contentHeight - 2 * AM.GUI:GetActiveStyle().edgeSize -- Anything but the outer border is currently part of the potential viewport
 	
@@ -157,7 +169,7 @@ local function GetTrackerHeight(self, startIndex, endIndex)
 	
 	-- Get value for all display items
 	local activeStyle = AM.GUI:GetActiveStyle()
-	local borderSize = activeStyle.edgeSize
+	local borderSize = AM.db.profile.settings.GUI.Tracker.Content.Elements.borderWidth	--activeStyle.edgeSize
 	
 	-- Get values for each display item (TODO: They are not final)
 	-- local groupSize = AM.db.profile.settings.display.groupSize
@@ -173,15 +185,19 @@ local function GetTrackerHeight(self, startIndex, endIndex)
 	-- Add the border for the tracker pane itself
 	height = height + 2 * borderSize
 	
-	local display = AM.db.profile.settings.display -- Upvalue
+	local display = AM.db.profile.settings.display -- Upvalue - TODO: Use new settings
 	for index, entry in ipairs(elements) do -- Add this element's height
 		if index >= startIndex and index <= endIndex then -- Is within the requested bounds
 			local elementHeight = display[entry.type .. "Size"]
-			height = height + elementHeight + 2 * borderSize + 2 -- 2 px spacer that is still hardcoded in the AMInlineGroup widget? (TODO)
+			height = height + elementHeight-- + 2 * borderSize + 2 -- 2 px spacer that is still hardcoded in the AMInlineGroup widget? (TODO)
 		end
 	end
 	
-	return height
+	-- TODO: Experimental
+	-- height = AM.TrackerPane.widget.content:GetHeight() - 2* AM.db.profile.settings.GUI.Tracker.Content.padding
+--AM:Print("TrackerHeight: " .. height * AM.GUI:GetScaleFactor())
+-- return height
+	return (height * AM.GUI:GetScaleFactor())
 
 	-- + ((numDisplayedGroups + numDisplayedTasks + numDisplayedObjectives)) -- TODO: The 2nd part needs to be tested for different situations (later)
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")	
@@ -211,8 +227,11 @@ local function Render(self)
 	-- Use dynamically calculated indices to allow scrolling
 	local firstIndex = Tracker:GetFirstDisplayedElementIndex()
 	local lastIndex = Tracker:GetLastDisplayedElementIndex()
---AM:Print("Adding elements from " .. firstIndex .. " to " .. lastIndex .. " to the Tracker Pane")
-	
+
+if not lastIndex then 
+	AM:Print("Adding elements from " .. tostring(firstIndex) .. " to " .. tostring(lastIndex) .. " to the Tracker Pane")
+end
+
 	for i = firstIndex, lastIndex  do -- Add entry -> Exact type depends on widget type
 		
 		local entry = Tracker.elementsList[i]
@@ -221,7 +240,10 @@ local function Render(self)
 		-- TODO: Dismissed
 		-- Filtered
 		-- Completed
-		
+	
+	-- Multiply dimensions for a pixel-perfect rendering
+	local scaleFactor = AM.GUI:GetScaleFactor()
+	
 		-- TODO: Clean  this up once it works
 		if elementType == "group" then -- TOOD
 		
@@ -230,23 +252,24 @@ local function Render(self)
 		-- Add the given Group and all its tasks (if it has any)
 			local groupWidget = AceGUI:Create("AMInlineGroup")
 			groupWidget:SetType("Group")
-			groupWidget:SetHeight(AM.db.profile.settings.display.groupSize)
+			groupWidget:SetStatus("scale", scaleFactor) -- TODO
+			groupWidget:SetHeight(AM.db.profile.settings.display.groupSize * scaleFactor)
 			groupWidget:SetText(Group.name)
 			groupWidget:SetIcon(Group.iconPath)
 			groupWidget:SetRelativeWidth(1)
-			groupWidget:ApplyStatus()
-			
+
 			numDisplayedGroups = numDisplayedGroups + 1
 			usedFrames[#usedFrames+1] = groupWidget
 			self.widget:AddChild(groupWidget)
 			entry.widget = groupWidget
+			groupWidget:ApplyStatus()
 	
 		elseif elementType == "task" then -- TODO
 			
 			local Task = entry.obj
 			
 			local taskWidget = AceGUI:Create("AMInlineGroup")
-			taskWidget:SetHeight(AM.db.profile.settings.display.taskSize)
+			taskWidget:SetHeight(AM.db.profile.settings.display.taskSize * scaleFactor)
 			
 			-- Display number of (completed) Objectives after the Task's name
 			--dump(getmetatable(Task))
@@ -260,6 +283,7 @@ local function Render(self)
 			taskWidget:SetRelativeWidth(1)
 			taskWidget:SetIcon(Task.iconPath)
 			taskWidget:SetType("Task")
+			taskWidget:SetStatus("scale", scaleFactor)
 			taskWidget:SetStatus("objectID", Task.objectID)
 			taskWidget:SetObjectives(Task.Objectives) -- Only useful for "Task" type elements
 			
@@ -277,10 +301,10 @@ local function Render(self)
 				isTaskCompleted = AM.Parser:Evaluate(Task.Criteria)
 			end
 			taskWidget:SetCompletion(isTaskCompleted) -- nil = reset to default ? icon
-			taskWidget:ApplyStatus()
 			
 			usedFrames[#usedFrames+1] = taskWidget
 			self.widget:AddChild(taskWidget)
+			taskWidget:ApplyStatus()
 			entry.widget = taskWidget
 			
 		elseif elementType == "objective" then -- TODO
@@ -289,7 +313,7 @@ local function Render(self)
 			local index = entry.index
 			
 			local objectivesWidget = AceGUI:Create("AMInlineGroup")
-			objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize)
+			objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize * scaleFactor)
 			objectivesWidget:SetRelativeWidth(1)
 			objectivesWidget:SetType("Objective")
 			
@@ -306,6 +330,7 @@ local function Render(self)
 			alias = alias or Objective -- Use Criteria if no alias exists
 			
 			objectivesWidget:SetStatus("type", "Objective")
+			objectivesWidget:SetStatus("scale", scaleFactor)
 			objectivesWidget:SetText(index .. ". " .. alias) -- Objectives are really just Criteria (strings), so this works
 			objectivesWidget:SetCompletion(isObjectiveCompleted)
 			objectivesWidget:ApplyStatus()
@@ -313,6 +338,7 @@ local function Render(self)
 			numDisplayedObjectives = numDisplayedObjectives + 1
 		
 		else -- Invalid type
+			AM:Debug("INVALID TYPE during Tracker:Render()!", MODULE)
 		end
 		
 	end
@@ -326,8 +352,8 @@ local function ReleaseWidgets(self)
 	self.widget:ReleaseChildren() --TODO: Is this enough?
 
 	for _, frame in ipairs(usedFrames) do -- Release them, as some of them might be unused (and can be recycled) -> TODO: What about those that are still used? Maybe don't release those? Not sure how much effort that takes,to check vs. the performance hit of simply re-using them for the same purpose, which should be negligible...
-		--frame:ReleaseChildren() -- Do they have children? I think so, since they're all AceGUI widgets (TODO: Check and make sure? If they don't have any, it shouldn't cause any issues though)
-	--	frame:Release() -- Also releases any children
+	--	frame:ReleaseChildren() -- Do they have children? I think so, since they're all AceGUI widgets (TODO: Check and make sure? If they don't have any, it shouldn't cause any issues though)
+	--frame:Release() -- Also releases any children
 	end
 	
 	-- Wipe all state tables to get them back to their default display state (not expanded) without creating more garbage
@@ -499,9 +525,10 @@ local function UpdateGroups(self)
 	self:AddGroup(activeGroup)
 
 	-- Update the size of each element
-	self.widget:SetHeight(self:GetTrackerHeight())
+	-- self.widget:SetHeight(self:GetTrackerHeight())
 	local activeStyle = AM.GUI:GetActiveStyle()
-	local trackerPaneBorderSize = activeStyle.edgeSize -- TODO: Needs more testing-> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible?
+	local trackerPaneBorderSize = AM.db.profile.settings.GUI.Tracker.Content.padding * AM.GUI:GetScaleFactor() 
+	--activeStyle.edgeSize * AM.GUI:GetScaleFactor() -- TODO: Replace with new settings. Needs more testing-> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible?
 	self.widget.content:ClearAllPoints()
 	self.widget.content:SetPoint("TOPLEFT", trackerPaneBorderSize, -trackerPaneBorderSize)
 	self.widget.content:SetPoint("BOTTOMRIGHT", -trackerPaneBorderSize, trackerPaneBorderSize)
