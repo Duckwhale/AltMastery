@@ -194,9 +194,27 @@ local function GetScaleFactor(self)
 
 end
 
+local function Scale(number)
+	
+	local scaleFactor = UIParent:GetEffectiveScale() --GetScaleFactor()
+	
+	local isNegative = number < 0
+	
+	-- TODO: must be even or it can glitch when centering elements?
+	number = math.floor(math.abs(number/scaleFactor) + 0.5)
+	if number%2 ~= 0 then
+		--AM:Print("Forcing number " .. number .. " to scale to an even value")
+		number = number + 1
+	end
+	
+	return isNegative and (number * -1) or number
+	
+end
+
 
 AM.GUI.BuildFrame = BuildFrame
 AM.GUI.CreateMovableFrame = CreateMovableFrame
 AM.GUI.GetScaleFactor = GetScaleFactor
+AM.GUI.Scale = Scale
 
 return AM

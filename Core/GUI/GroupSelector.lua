@@ -97,11 +97,11 @@ function GS:Update()
 	
 	-- Update the size of the panel so that it may contain all elements (TODO: overflow handling/scrolling)
 	local activeStyle = AM.GUI:GetActiveStyle()
-	local borderSize = activeStyle.edgeSize -- TODO: Needs more testing-> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible?
+	local borderSize = AM.GUI.Scale(activeStyle.edgeSize) -- TODO: Needs more testing-> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible? -- TODO: Use new settings
 	self.widget.content:ClearAllPoints()
-	local scaleFactor = AM.GUI:GetScaleFactor()
-	self.widget.content:SetPoint("TOPLEFT", borderSize * scaleFactor, -borderSize * scaleFactor)
-	self.widget.content:SetPoint("BOTTOMRIGHT", -borderSize * scaleFactor, borderSize * scaleFactor)
+	local Scale = AM.GUI.Scale
+	self.widget.content:SetPoint("TOPLEFT", borderSize, -borderSize)
+	self.widget.content:SetPoint("BOTTOMRIGHT", -borderSize, borderSize)
 	
 end
 

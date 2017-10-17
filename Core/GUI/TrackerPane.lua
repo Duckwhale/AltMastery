@@ -64,7 +64,7 @@ function Tracker:GetLastDisplayedElementIndex()
 			if index >= Tracker.scrollOffset then -- This element is not outside ouf the displayed area due to scrolling and must be considered
 			
 				local elementHeight = display[entry.type .. "Size"]  -- Should always be valid
-				elementHeight = (elementHeight * scaleFactor) -- Needs to be scaled because GetTrackerHeight() and GetViewportHeight() also return scaled values
+				elementHeight = AM.GUI.Scale(elementHeight) -- Needs to be scaled because GetTrackerHeight() and GetViewportHeight() also return scaled values
 
 				if (usedHeight + elementHeight) > availableHeight then -- This element doesn't fit; use the last one instead
 --				AM:Print("GetLastDisplayedElementIndex: Element " .. index .. " cannot be added because the viewport is full")
@@ -97,7 +97,7 @@ function Tracker:GetViewportHeight()
 	
 --AM:Print("GetViewportHeight() = " .. viewportHeight)
 	
-	return  viewportHeight * scaleFactor
+	return AM.GUI.Scale(viewportHeight)
 	-- local contentHeight = AM.TrackerPane.GetTrackerHeight() -- TODO: Replace with self after refactoring
 	-- return contentHeight - 2 * AM.GUI:GetActiveStyle().edgeSize -- Anything but the outer border is currently part of the potential viewport
 	
@@ -197,7 +197,7 @@ local function GetTrackerHeight(self, startIndex, endIndex)
 	-- height = AM.TrackerPane.widget.content:GetHeight() - 2* AM.db.profile.settings.GUI.Tracker.Content.padding
 --AM:Print("TrackerHeight: " .. height * AM.GUI:GetScaleFactor())
 -- return height
-	return (height * AM.GUI:GetScaleFactor())
+	return (AM.GUI.Scale(height))
 
 	-- + ((numDisplayedGroups + numDisplayedTasks + numDisplayedObjectives)) -- TODO: The 2nd part needs to be tested for different situations (later)
 --AM:Debug("Tracker height calculated: " .. height, "TrackerPane:GetTrackerHeight()")	
@@ -221,7 +221,7 @@ end
 
 -- Adds as many widgets to the Tracker content pane as possible, without having them overflow
 local function Render(self)
-
+	local Scale = AM.GUI.Scale
 	-- TODO: If no entries exist, show a notice? (Empty group header may still exist, unless the group headers are set to be hidden)
 
 	-- Use dynamically calculated indices to allow scrolling
@@ -252,8 +252,8 @@ end
 		-- Add the given Group and all its tasks (if it has any)
 			local groupWidget = AceGUI:Create("AMInlineGroup")
 			groupWidget:SetType("Group")
-			groupWidget:SetStatus("scale", scaleFactor) -- TODO
-			groupWidget:SetHeight(AM.db.profile.settings.display.groupSize * scaleFactor)
+	--		groupWidget:SetStatus("scale", scaleFactor) -- TODO
+			groupWidget:SetHeight(Scale(AM.db.profile.settings.display.groupSize))
 			groupWidget:SetText(Group.name)
 			groupWidget:SetIcon(Group.iconPath)
 			groupWidget:SetRelativeWidth(1)
@@ -269,7 +269,7 @@ end
 			local Task = entry.obj
 			
 			local taskWidget = AceGUI:Create("AMInlineGroup")
-			taskWidget:SetHeight(AM.db.profile.settings.display.taskSize * scaleFactor)
+			taskWidget:SetHeight(Scale(AM.db.profile.settings.display.taskSize))
 			
 			-- Display number of (completed) Objectives after the Task's name
 			--dump(getmetatable(Task))
@@ -313,7 +313,7 @@ end
 			local index = entry.index
 			
 			local objectivesWidget = AceGUI:Create("AMInlineGroup")
-			objectivesWidget:SetHeight(AM.db.profile.settings.display.objectiveSize * scaleFactor)
+			objectivesWidget:SetHeight(Scale(AM.db.profile.settings.display.objectiveSize))
 			objectivesWidget:SetRelativeWidth(1)
 			objectivesWidget:SetType("Objective")
 			
@@ -503,7 +503,7 @@ local function UpdateGroups(self)
 	
 	-- TODO: Nested Groups -> Limit level of nesting to 2 or 3?
 	
-
+	local Scale = AM.GUI.Scale
 	
 	-- Actually add children via AddChild()?
 	
@@ -527,7 +527,7 @@ local function UpdateGroups(self)
 	-- Update the size of each element
 	-- self.widget:SetHeight(self:GetTrackerHeight())
 	local activeStyle = AM.GUI:GetActiveStyle()
-	local trackerPaneBorderSize = AM.db.profile.settings.GUI.Tracker.Content.padding * AM.GUI:GetScaleFactor() 
+	local trackerPaneBorderSize = Scale(AM.db.profile.settings.GUI.Tracker.Content.padding)
 	--activeStyle.edgeSize * AM.GUI:GetScaleFactor() -- TODO: Replace with new settings. Needs more testing-> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible?
 	self.widget.content:ClearAllPoints()
 	self.widget.content:SetPoint("TOPLEFT", trackerPaneBorderSize, -trackerPaneBorderSize)

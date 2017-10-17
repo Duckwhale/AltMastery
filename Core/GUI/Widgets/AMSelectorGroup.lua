@@ -35,6 +35,7 @@ local methods = {
 		local numDisplayedGroups = 9 -- How many Groups should be displayed without scrolling
 		
 		-- Shorthands
+		local Scale = AM.GUI.Scale
 		local status = self.localstatus
 		local activeStyle = AM.GUI:GetActiveStyle()
 		local label, icon, content = self.label, self.icon, self.content
@@ -43,20 +44,21 @@ local methods = {
 		local scaleFactor = AM.GUI:GetScaleFactor()
 		local fontSize = settings.GroupSelector.Content.nameSize -- activeStyle.fontSizes.small
 		local fontStyle = activeStyle.fonts.groups
-		local padding = settings.GroupSelector.Content.padding -- The first part is to account for the already-existing padding ("border"), and the second to add some visible padding
-		local borderWidth = settings.GroupSelector.Content.borderWidth * scaleFactor
+		local padding = Scale(settings.GroupSelector.Content.padding) -- The first part is to account for the already-existing padding ("border"), and the second to add some visible padding
+		local borderWidth = Scale(settings.GroupSelector.Content.borderWidth)
 		local marginX, marginY = unpack(settings.GroupSelector.Content.margins) -- TODO: Different format should be allowed? CSS style, i.e. xy or x, y or x1,y1,x2,y2
+		marginX, marginY = Scale(marginX), Scale(marginY)
 		local contentWidth = settings.GroupSelector.width - settings.GroupSelector.Content.padding * 2 - marginX * 2 - settings.GroupSelector.Content.borderWidth * 2 -- TODO: 2 = edgeSize from activeStyle -> needs to be dynamical and also moved to settings
-		local contentHeight = (settings.GroupSelector.height - settings.windowPadding * 2 - settings.GroupSelector.Content.padding * 2 - marginY * 2) / numDisplayedGroups
+		local contentHeight = (Scale(settings.GroupSelector.height) - Scale(settings.windowPadding) * 2 - Scale(settings.GroupSelector.Content.padding) * 2 - marginY * 2) / numDisplayedGroups
 --		+ (2 * numDisplayedGroups - 1) / (2 * numDisplayedGroups) * marginY / numDisplayedGroups -- The last part is to size elements properly when the final margin is removed (hacky solution and might look odd if the margin is bigger than the)
 
 
 		-- Set height so that all elements fit into the pane (TODO: Scrolling/flexible number of elements)
-		self:SetHeight(contentHeight * scaleFactor)
+		self:SetHeight(contentHeight)
 
 		local border = content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 	
 		-- Update with current settings (also provides default values after the local status has been wiped)
-		local iconSize = settings.GroupSelector.Content.iconSize * scaleFactor
+		local iconSize = Scale(settings.GroupSelector.Content.iconSize)
 		status.text = status.text or "<ERROR>"
 		status.image = status.image or "Interface\\Icons\\inv_misc_questionmark" -- TODO: settings / remove prefix to save some space
 --AM:Print(status.text .. " - " .. tostring(self:GetType()) .. " -" .. tostring(isActiveGroup) .. " - " .. status.image)		
@@ -66,7 +68,7 @@ local methods = {
 		local isLastElement = (status.groupID == "CLASSIC") -- TODO: Ugly hack, needs to be reworked obviously - remove margin from the last element, for now
 		local offY = 0
 --		if not isLastElement then
-		offY = marginY * scaleFactor
+		offY = marginY
 		--end
 		
 		border:ClearAllPoints()
@@ -75,8 +77,8 @@ local methods = {
 		
 
 		content:ClearAllPoints();
-		content:SetPoint("TOPLEFT", padding * scaleFactor + borderWidth, -padding * scaleFactor - borderWidth)
-		content:SetPoint("BOTTOMRIGHT", -padding * scaleFactor - borderWidth, padding * scaleFactor + borderWidth)	
+		content:SetPoint("TOPLEFT", padding + borderWidth, -padding - borderWidth)
+		content:SetPoint("BOTTOMRIGHT", -padding - borderWidth, padding + borderWidth)	
 
 		-- Pick colour according to the highlight status
 		local frameColour = 	(isActiveGroup and not status.isHighlighted and activeStyle.frameColours.ActiveSelectorGroup) or (status.isHighlighted and activeStyle.frameColours.HighlightedSelectorGroup) or activeStyle.frameColours.SelectorGroup
@@ -101,13 +103,13 @@ local methods = {
 		-- Capitalize text (as the entries are always groups)
 		label:SetText(string.upper(status.text))
 		-- Set font and height based on the active style
-		label:SetFont(fontStyle, fontSize * scaleFactor)
+		label:SetFont(fontStyle, Scale(fontSize))
 		label.label:SetJustifyH("CENTER")
 		label.label:SetJustifyV("MIDDLE")
 		label.label:SetPoint("TOP", content, "TOP")
 		label.label:SetPoint("LEFT", content, "LEFT")
 		label.label:SetPoint("RIGHT", content, "RIGHT")	
-		label.label:SetPoint("BOTTOM", icon.frame, "TOP", 0, -padding * scaleFactor)
+		label.label:SetPoint("BOTTOM", icon.frame, "TOP", 0, -padding)
 
 		local r, g, b
 		if status.isHighlighted or isActiveGroup then -- Set text colour to create a visual highlight effect (with the background colour)

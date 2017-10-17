@@ -29,11 +29,12 @@ local function Update(self)
 	
 	-- Shorthands	
 	local settings = AM.db.profile.settings.GUI
+	local Scale = AM.GUI.Scale
 	local scaleFactor = AM.GUI:GetScaleFactor() -- Overwrite closure here so it updates when the UI scale changes (otherwise it snapshots the old local variable and it looks wrong)
 	local activeStyle = AM.GUI:GetActiveStyle()	
 		
 			local trackerPaneBorder = AM.TrackerPane.widget.content:GetParent()
-			local padding = settings.Tracker.Content.padding * scaleFactor
+			local padding = Scale(settings.Tracker.Content.padding)
 			trackerPaneBorder:ClearAllPoints()
 			trackerPaneBorder:SetPoint("TOPLEFT", padding, -padding)
 			trackerPaneBorder:SetPoint("BOTTOMRIGHT", -padding, padding)
@@ -42,10 +43,10 @@ local function Update(self)
 			GroupSelectorContainer.frame:Show()
 			GroupSelectorContainer:ClearAllPoints()
 					local anchor = self.frame.frame
-			GroupSelectorContainer:SetPoint("LEFT", anchor, "RIGHT", settings.margin * scaleFactor, 0)
-			GroupSelectorContainer:SetPoint("TOPLEFT", anchor, "TOPRIGHT", settings.margin * scaleFactor, -(settings.Tracker.height - settings.GroupSelector.height) / 2 * scaleFactor)
-			GroupSelectorContainer:SetWidth(settings.GroupSelector.width * scaleFactor)
-			GroupSelectorContainer:SetHeight(settings.GroupSelector.height * scaleFactor)
+			GroupSelectorContainer:SetPoint("LEFT", anchor, "RIGHT", Scale(settings.margin), 0)
+			GroupSelectorContainer:SetPoint("TOPLEFT", anchor, "TOPRIGHT", Scale(settings.margin), -1 * (Scale(settings.Tracker.height) - Scale(settings.GroupSelector.height)) / 2)
+			GroupSelectorContainer:SetWidth(Scale(settings.GroupSelector.width))
+			GroupSelectorContainer:SetHeight(Scale(settings.GroupSelector.height))
 			
 			local GroupSelectorPane	= AM.GroupSelector.widget
 			groupSelectorBorder = GroupSelectorPane.content:GetParent()
@@ -53,8 +54,8 @@ local function Update(self)
 		-- local windowPadding = settings.windowPadding * scaleFactor -- Use window padding here, because the GroupSelectorContainer acts as a separate window
 		local windowPadding = 0
 		local _, marginY = unpack(settings.GroupSelector.Content.margins) -- This is because each individual element has two margins, top and bottom, resulting in twice the spacing, but the very first and last elements don't have that, so it needs to be added manually for a consistent appearance
-		groupSelectorBorder:SetPoint("TOPLEFT", windowPadding, -marginY * scaleFactor)  -- 0, 0 because the padding from the ContentPane is already enough
-		groupSelectorBorder:SetPoint("BOTTOMRIGHT", -windowPadding, marginY * scaleFactor) -- Apply padding to the right, as the window borders directly on it and there is no additional element right now
+		groupSelectorBorder:SetPoint("TOPLEFT", windowPadding, -1 * Scale(marginY))  -- 0, 0 because the padding from the ContentPane is already enough
+		groupSelectorBorder:SetPoint("BOTTOMRIGHT", -windowPadding, Scale(marginY)) -- Apply padding to the right, as the window borders directly on it and there is no additional element right now
 		AM.GUI:SetFrameColour(groupSelectorBorder, activeStyle.frameColours.GroupSelectorPane)
 		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.GroupSelectorPane.border, 255)
 		groupSelectorBorder:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.GroupSelectorPane.borderAlpha) -- This should be updated dynamically (TODO)

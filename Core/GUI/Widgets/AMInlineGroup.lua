@@ -183,20 +183,21 @@ local methods = {
 	["ApplyStatus"] = function(self) -- Update the displayed widget with the current status
 
 		-- Shorthands
+		local Scale = AM.GUI.Scale
 		local status = self.localstatus
 		local activeStyle = AM.GUI:GetActiveStyle()
 		local label, completionIcon, content = self.label, self.completionIcon, self.content
 		local border = content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
 		local settings = AM.db.profile.settings.GUI.Tracker
 		local scaleFactor = status.scale or AM.GUI:GetScaleFactor()
-		local borderWidth = settings.Content.Elements.borderWidth * scaleFactor
+		local borderWidth = Scale(settings.Content.Elements.borderWidth)
 		local marginX, marginY = unpack(settings.Content.Elements.margins) -- This adds another border between the TrackerPane's content (which already has a border) and this widget's content
-		marginX, marginY = marginX * scaleFactor, marginY * scaleFactor
-		local padding = settings.Content.Elements.padding * scaleFactor
-		local inset =  padding + borderWidth
-		local elementSize = ((isGroup and AM.db.profile.settings.display.groupSize) or (isTask and AM.db.profile.settings.display.taskSize) or AM.db.profile.settings.display.objectiveSize) * scaleFactor	
-		
---local contentHeight = elementSize - 2 * marginY - 2 * borderWidth - 2 * padding 
+		marginX, marginY = Scale(marginX), Scale(marginY)
+		local padding = Scale(settings.Content.Elements.padding)
+		local inset =  (padding + borderWidth)
+		local elementSize = Scale(((isGroup and AM.db.profile.settings.display.groupSize) or (isTask and AM.db.profile.settings.display.taskSize) or AM.db.profile.settings.display.objectiveSize))	
+
+local contentHeight = elementSize - 2 * marginY - 2 * borderWidth - 2 * padding 
 		
 	-- Type-specific settings may require some individualised attention
 		local isGroup = (status.type == "Group")
@@ -213,9 +214,9 @@ local methods = {
 		status.image = status.image or settings.defaultIcon
 		
 		-- Actual status values
-		local iconSize = status.iconSize * scaleFactor
+		local iconSize = Scale(status.iconSize)
 		local iconPath = (status.isCompleted ~= nil) and activeStyle[status.isCompleted and "iconReady" or "iconNotReady"] or  activeStyle.iconWaiting
-		local fontSize = ((isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small) * scaleFactor
+		local fontSize = Scale((isGroup and activeStyle.fontSizes.large) or activeStyle.fontSizes.small)
 		local fontStyle = isGroup and activeStyle.fonts.groups or activeStyle.fonts.tasks
 		local isHighlighted = (status.isHighlighted ~= nil) and status.isHighlighted or false
 

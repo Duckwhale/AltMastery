@@ -56,17 +56,17 @@ local function Constructor()
 
 	-- Shorthands
 	local name = Type .. AceGUI:GetNextWidgetNum(Type)
-	local scaleFactor = AM.GUI:GetScaleFactor()
+	local Scale = AM.GUI.Scale
 	local settings = AM.db.profile.settings.GUI -- Only GUI settings are relevant here
 	
 	-- Default values for this class
 	local specs = {
 	
 		-- The default position is always centered (can be moved by the user afterwards)
-		x = math.floor((UIParent:GetWidth() - settings.Tracker.width * scaleFactor * settings.scale) / 2 + 0.5),
-		y = math.floor((UIParent:GetHeight() - settings.Tracker.height * scaleFactor * settings.scale) / 2 + 0.5),
-		width = settings.Tracker.width * scaleFactor * settings.scale,
-		height = settings.Tracker.height * scaleFactor * settings.scale, -- TODO: Update dynamically?
+		x = math.floor((UIParent:GetWidth() - Scale(settings.Tracker.width * settings.scale)) / 2 + 0.5),
+		y = math.floor((UIParent:GetHeight() - Scale(settings.Tracker.height * settings.scale)) / 2 + 0.5),
+		width = Scale(settings.Tracker.width * settings.scale),
+		height = Scale(settings.Tracker.height * settings.scale), -- TODO: Update dynamically?
 
 	}
 	
@@ -80,7 +80,7 @@ local function Constructor()
 	
 	-- Create content pane
 	local content = CreateFrame("Frame", name .. "Content", frame)	-- Empty frame that will be used to contain all children later
-	local padding = AM.db.profile.settings.GUI.windowPadding * scaleFactor
+	local padding = Scale(AM.db.profile.settings.GUI.windowPadding)
 	content:SetPoint("TOPLEFT", padding, -padding)
 	content:SetPoint("BOTTOMRIGHT", -padding, padding)
 	
