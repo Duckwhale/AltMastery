@@ -126,6 +126,16 @@ local constants = { -- Used t look up actual ID if an alias was used
 	THE_ASHEN_VERDICT = 1156,
 	EMPEROR_SHAOHAO = 1492,
 	
+	-- Contribution IDs (for the Broken Shore Buildings)
+	MAGE_TOWER = 1,
+	COMMAND_CENTER = 3,
+	NETHER_DISRUPTOR = 4,
+	
+	-- Contribution states
+	STATE_BUILDING = 1,
+	STATE_ACTIVE = 2,
+	STATE_DESTROYED = 3, -- Probably? (Untested)
+	
 	
 }
 
