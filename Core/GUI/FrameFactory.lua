@@ -211,10 +211,23 @@ local function Scale(number)
 	
 end
 
+--- Sets the anchor points of a frame to the nearest integer (to avoid glitches). May cause janky movement when dragged?
+-- TODO: Is this really necessary?
+local function FixPoints(f)
+
+		for i=1,f:GetNumPoints() do
+		
+		local point, relativeTo, relativePoint, xOfs, yOfs = f:GetPoint(i)
+	--	AM:Print(point, relativePoint, xOfs, yOfs)
+
+		end
+		
+end
 
 AM.GUI.BuildFrame = BuildFrame
 AM.GUI.CreateMovableFrame = CreateMovableFrame
 AM.GUI.GetScaleFactor = GetScaleFactor
 AM.GUI.Scale = Scale
+AM.GUI.FixPoints = FixPoints
 
 return AM
