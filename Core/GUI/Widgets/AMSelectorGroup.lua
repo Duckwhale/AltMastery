@@ -35,6 +35,7 @@ local methods = {
 		local numDisplayedGroups = 9 -- How many Groups should be displayed without scrolling
 		
 		-- Shorthands
+		local FixPoints = AM.GUI.FixPoints
 		local Scale = AM.GUI.Scale
 		local status = self.localstatus
 		local activeStyle = AM.GUI:GetActiveStyle()
@@ -51,7 +52,7 @@ local methods = {
 		local contentWidth = settings.GroupSelector.width - settings.GroupSelector.Content.padding * 2 - marginX * 2 - settings.GroupSelector.Content.borderWidth * 2 -- TODO: 2 = edgeSize from activeStyle -> needs to be dynamical and also moved to settings
 		local contentHeight = (Scale(settings.GroupSelector.height) - Scale(settings.windowPadding) * 2 - Scale(settings.GroupSelector.Content.padding) * 2 - marginY * 2) / numDisplayedGroups
 --		+ (2 * numDisplayedGroups - 1) / (2 * numDisplayedGroups) * marginY / numDisplayedGroups -- The last part is to size elements properly when the final margin is removed (hacky solution and might look odd if the margin is bigger than the)
-
+--AM:Print(contentHeight, Scale(settings.GroupSelector.height), Scale(marginY), Scale(settings.windowPadding), Scale(settings.GroupSelector.Content.padding))
 
 		-- Set height so that all elements fit into the pane (TODO: Scrolling/flexible number of elements)
 		self:SetHeight(contentHeight)
@@ -139,8 +140,7 @@ local methods = {
 		
 	end	
 		
-		
-		
+	
 		
 --AM:Print(format("contentWidth = %d, borderWidth = %d, frameWidth = %d", content:GetWidth(), border:GetWidth(), self.frame:GetWidth()))		
 			
