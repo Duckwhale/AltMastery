@@ -43,8 +43,8 @@ local print, format, date = print, string.format, date -- Lua APIs
 
 
 -- Global functions
-function AM:Print(msg)
-	print(format("|c00CC5500" .. "%s: " .. "|c00E6CC80%s", addonName, msg))
+function AM:Print(msg, ...)
+	print(format("|c00CC5500" .. "%s: " .. "|c00E6CC80%s", addonName, msg), ...)
 end
 
 function AM:Debug(msg, source)
