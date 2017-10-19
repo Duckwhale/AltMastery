@@ -183,6 +183,7 @@ local methods = {
 	["ApplyStatus"] = function(self) -- Update the displayed widget with the current status
 
 		-- Shorthands
+		local FixPoints = AM.GUI.FixPoints
 		local Scale = AM.GUI.Scale
 		local status = self.localstatus
 		local activeStyle = AM.GUI:GetActiveStyle()
@@ -198,6 +199,7 @@ local methods = {
 		local elementSize = Scale(((isGroup and AM.db.profile.settings.display.groupSize) or (isTask and AM.db.profile.settings.display.taskSize) or AM.db.profile.settings.display.objectiveSize))	
 
 local contentHeight = elementSize - 2 * marginY - 2 * borderWidth - 2 * padding 
+--AM:Print(contentHeight, elementSize, padding, borderWidth, inset)		
 		
 	-- Type-specific settings may require some individualised attention
 		local isGroup = (status.type == "Group")
@@ -241,7 +243,9 @@ local contentHeight = elementSize - 2 * marginY - 2 * borderWidth - 2 * padding
 		content:ClearAllPoints()
 		content:SetPoint("TOPLEFT", inset, -inset)
 		content:SetPoint("BOTTOMRIGHT", -inset, inset)
-		
+--		FixPoints(content)
+--		FixPoints(border)
+--AM:Print(border:GetWidth(), border:GetHeight(), content:GetWidth(), content:GetHeight())		
 		-- Update completion icon
 		completionIcon:SetImage(iconPath)
 		completionIcon:SetImageSize(iconSize, iconSize)
