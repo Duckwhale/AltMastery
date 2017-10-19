@@ -30,6 +30,7 @@ Core\Setup.lua
 
 ## Utility functions - load early so they can be used by other modules ##
 Core\Utils\Colours.lua
+Core\Utils\QuestChecker.lua
 Core\Utils\Validation.lua
 
 ## Core modules ##

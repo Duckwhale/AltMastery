@@ -44,11 +44,14 @@ function Addon:OnInitialize()
 	-- Register slash commands
 	self:RegisterChatCommand("altmastery", AM.Controllers.SlashCmdHandler)
 	self:RegisterChatCommand("am", AM.Controllers.SlashCmdHandler) -- Alias
+	self:RegisterChatCommand("amqc", AM.QC.ExecuteChatCommand) -- QuestChecker tool
 	
 	-- Register keybinds
 		BINDING_HEADER_ALTMASTERY = "AltMastery" -- TODO: L
 	_G["BINDING_NAME_ALTMASTERY_TRACKERTOGGLE"] = "Toggle Tracker Window"
 	_G["BINDING_NAME_ALTMASTERY_DBEDITORTOGGLE"] = "Toggle Database Editor"
+	-- TODO: Keybind for QC tool?
+	-- TODO: More nuanced slash args for /amqc start, stop, reset, print (use AceConsole msg arg)
 	
 end
 
