@@ -46,9 +46,9 @@ local event, button = ...
 			
 			if button == "RightButton" then -- Right-click: Dismiss Task (until next reload)
 			
-				AM:Print("Detected RightButton during OnClick handler")
+				--AM:Print("Detected RightButton during OnClick handler")
 				status.isDismissed = true
-			-- TODO	AM.TrackerPane:DismissTask(self.parent)
+				AM.TrackerPane:DismissTask(self.parent)
 				
 			else -- LeftButton implied (TODO: What about MID button?)
 					

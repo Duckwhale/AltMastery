@@ -464,15 +464,15 @@ local function AddGroup(self, Group)
 		
 		if not AM.db.profile.settings.display.showFiltered and AM.Parser:Evaluate(Task.Filter) then -- Don't add Task to the active Group (as it isn't useful for the currently logged in character)
 			AM:Debug("Hiding Task " .. Task.name .. " because it is filtered", "Tracker")
-		else
-		
-			if not AM.db.profile.settings.display.showCompleted and AM.Parser:Evaluate(Task.Criteria) then -- Task is completed and should be hidden according to the settings
+		elseif not AM.db.profile.settings.display.showCompleted and AM.Parser:Evaluate(Task.Criteria) then -- Task is completed and should be hidden according to the settings
 				AM:Debug("Hiding Task " .. Task.name .. " because it is completed", "Tracker")
-			else -- Show Task by adding it to the group
+		elseif not AM.db.profile.settings.display.showDismissed and self.dismissedTasks[taskID] then	 -- Task is dismissed and should be hidden for this session
+			AM:Debug("Hiding Task " .. Task.name .. " because it is dismissed", "Tracker")
+		else -- Show Task by adding it to the group
 				self:AddTask(Task, groupWidget)
-			end
-			
 		end
+			
+		
 		
 	end
 	
@@ -599,6 +599,22 @@ local function ToggleObjectives(self, taskWidget)
 
 end
 
+-- Hide Task for the session
+local function DismissTask(self, taskWidget)
+	
+	local taskID = taskWidget.localstatus.objectID
+	local Task = AM.db.global.tasks[taskID]
+	if not Task then return end
+	
+	-- Show Objectives
+	AM:Debug("Dismissed Task " .. Task.name)
+	self.dismissedTasks[taskID] = true
+	PlaySound(SOUNDKIT.IG_MAINMENU_CLOSE, "Master") -- TODO: Settings to disable sound
+	-- Update Tracker to have it make room for them
+	self:Update()
+	
+end
+
 local lastRenderTime = 0
 local updateInterval = 50 -- Only update once every X ms
 
@@ -647,7 +663,7 @@ local TrackerPane = {
 	usedFrames = usedFrames,
 	minimizedGroups = minimizedGroups, -- TODO: Not needed?
 	trackedTasks = trackedTasks, -- TODO: Not needed?
-
+	dismissedTasks = {},
 	numDisplayedGroups = numDisplayedGroups,
 	numDisplayedTasks = numDisplayedTasks,
 	numDisplayedObjectives = numDisplayedObjectives,
@@ -656,6 +672,8 @@ local TrackerPane = {
 	
 	Create = Create,
 
+	DismissTask = DismissTask,
+	
 	Update = Update,
 	UpdateGroups = UpdateGroups,
 	ClearGroups = ClearGroups,
