@@ -347,7 +347,65 @@ local function Reputation(factionID)
 	
 end
 
+
+-- Saved dungeon lockout exists for a given dungeon ID
+local function DungeonLockout(dungeonID)
+   
+   for index = 1, GetNumSavedInstances() do -- Check if instance matches the requested dungeon ID
+      
+      local instanceName, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(index)
+      
+      local dungeonName = GetLFGDungeonInfo(dungeonID)
+      
+      if instanceName:gmatch(dungeonName) and encounterProgress and locked then -- Is probably the same dungeon? There might be issues if the dungeons are named ambiguously? (TODO)
+     --    AM:Print("Found lockout for instance = " .. instanceName .. " (dungeonName = " .. dungeonName .. ") - Defeated bosses: " .. encounterProgress .. "/" .. numEncounters)
+         return true
+      end
+      
+   end
+   
+   -- Nothing saved -> Dungeon is not locked out
+   return false
+   
+end
+
+local function BossesKilled(instanceID)
+   
+   for index = 1, GetNumSavedInstances() do -- Check if instance matches the requested dungeon ID
+      
+      local instanceName, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(index)
+      
+      local dungeonorRaidName = GetLFGDungeonInfo(instanceID)
+      
+      if instanceName:gmatch(dungeonorRaidName) and encounterProgress and locked then -- Is probably the same dungeon? There might be issues if the dungeons are named ambiguously? (TODO)
+     --    AM:Print("Found lockout for instance = " .. instanceName .. " (dungeonorRaidName = " .. dungeonorRaidName .. ") - Defeated bosses: " .. encounterProgress .. "/" .. numEncounters)
+         return encounterProgress
+      end
+      
+   end
+   
+   -- Nothing saved -> Dungeon is not locked out
+   return 0
+   
+end
+
+	-- for index = 1, GetNumSavedInstances() do -- Check if instance matches the requested dungeon ID
+		
+		-- local name, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(index)
+		
+		-- if id == dungeonID then -- Instance matches; TODO: What about the difficulty?
+			-- return true
+		-- end	
+			
+	-- end
+	
+	-- -- Nothing saved -> Dungeon is not locked out
+	-- return false
+
+
 Criteria = {
+	BossesKilled = BossesKilled,
+	DungeonLockout = DungeonLockout,
 	ContributionState = ContributionState,
 	ContributionBuffs = ContributionBuffs,
 	Faction = Faction,
