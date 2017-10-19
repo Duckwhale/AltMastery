@@ -28,6 +28,7 @@ local math_floor, math_abs = math.floor, math.abs
 -- @param defaults
 -- @param parent
 -- @return A reference to the created Frame
+-- TODO: Mostly copied. Needs reviewing
 local function CreateMovableFrame(self, name, defaults, parent)
 	
 	-- TODO: Reset position if it is stored off-screen? (Not really possible with ClampedToScreen)
@@ -96,6 +97,7 @@ end
 --- Build complex frames according to the given specifications
 -- @param frameSpecs A table containing the specific information needed to build the particular widget
 -- @return A reference to the created widget object
+-- TODO: Mostly copied, needs to be reviewed
 local function BuildFrame(self, frameSpecs)
 
 	local defaults = { -- Default frame properties, to be applied in case no specification was given (TODO: Only matters for custom frame types created via AM.GUI:CreateX(...))
@@ -199,6 +201,9 @@ local function GetScaleFactor(self)
 
 end
 
+--- Scales a number according to the pixel-perfect scale (ideal UIScale) acounted by the actual UI scale (to scale according to the user's wishes) and rounds it to avoid glitches caused by mismatching pixels (internal <-> actual coordinates)
+-- Old: Fix scaling to map 1:1 to screen pixels (avoids graphics glitches that occur if they are floating point numbers)
+-- This causes the addon's frames to look MOSTLY correct (I think there are some issues with AceGUI's nested containers that can cause minor glitches?), as well as scale properly in relation to the user's settings
 local function Scale(number)
 	
 	local scaleFactor = UIParent:GetEffectiveScale() --GetScaleFactor()
