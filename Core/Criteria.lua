@@ -317,7 +317,29 @@ local function Faction(factionName)
 
 end
 
+-- Returns the contribution state for Broken Shore buildings (TODO: Filter by buff if all we want is the free follower token? Maybe for a separate Task, in addition to the legendary crafting material - also add task to use them?)
+local function ContributionState(contributionID)
+
+	-- IDs = 1, 3, 4 are set only (maybe they will add more in the future?)
+--	local contributionName = C_ContributionCollector.GetName(contributionID);
+	local state, stateAmount, timeOfNextStateChange = C_ContributionCollector.GetState(contributionID);
+	--local appearanceData = CONTRIBUTION_APPEARANCE_DATA[state];
+
+	return state
+	
+end
+
+-- Returns the reward spell (buff) currently active for the given contribution (Broken Shore building)
+local function ContributionBuff(contributionID)
+	
+	local _, rewardSpellID = C_ContributionCollector.GetBuffs(contributionID)
+	return rewardSpellID -- The first one doesn't really matter, as it's always the same (and it is a zone-wide buff, so it can't be tracked like other buffs)
+	
+end
+
 Criteria = {
+	ContributionState = ContributionState,
+	ContributionBuffs = ContributionBuffs,
 	Faction = Faction,
 	Emissary = Emissary,
 	Quest = Quest,
