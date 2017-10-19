@@ -146,6 +146,9 @@ local constants = { -- Used t look up actual ID if an alias was used
 	REVERED = 7,
 	EXALTED = 8,
 	
+	-- Instance IDs
+	MANA_TOMBS = 179,
+	BLACK_TEMPLE = 196,
 	
 }
 
