@@ -136,6 +136,16 @@ local constants = { -- Used t look up actual ID if an alias was used
 	STATE_ACTIVE = 2,
 	STATE_DESTROYED = 3, -- Probably? (Untested)
 	
+	-- Standing IDs (used for checking Reputations)
+	HATED = 1,
+	HOSTILE = 2,
+	UNFRIENDLY = 3,
+	NEUTRAL = 4,
+	FRIENDLY = 5,
+	HONORED = 6,
+	REVERED = 7,
+	EXALTED = 8,
+	
 	
 }
 
