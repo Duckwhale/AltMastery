@@ -16,6 +16,8 @@
 local addonName, AM = ...
 if not AM then return end
 
+-- Locals
+local MODULE = "FrameFactory"
 
 -- Upvalues
 local math_floor, math_abs = math.floor, math.abs
@@ -53,7 +55,7 @@ local function CreateMovableFrame(self, name, defaults, parent)
 		self:ClearAllPoints()
 		AM.db.global.layoutCache[name] = CopyTable(defaults) -- Reset layout cache for this frame
 		cacheEntry = AM.db.global.layoutCache[name] -- And update the reference used (requires a reload for the change to effect otherwise)
-		AM:Debug("Resetting position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+		AM:Debug("Resetting position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, MODULE)
 		self:SetPoint("BOTTOMLEFT", UIParent, cacheEntry.x, cacheEntry.y)
 		cacheEntry.isShown = true
 		
@@ -62,7 +64,7 @@ local function CreateMovableFrame(self, name, defaults, parent)
 	frame.Reposition = function(self) -- Restore position from saved vars
 	
 		self:ClearAllPoints()
-		AM:Debug("Restoring position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+		AM:Debug("Restoring position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, MODULE)
 		self:SetPoint("BOTTOMLEFT", UIParent, cacheEntry.x, cacheEntry.y)
 		
 	end
@@ -74,7 +76,7 @@ local function CreateMovableFrame(self, name, defaults, parent)
 		cacheEntry.x = math.floor(self:GetLeft() + 0.5)
 		cacheEntry.y = math.floor(self:GetBottom() + 0.5)
 		cacheEntry.isShown = true
-		AM:Debug("Saving position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+		AM:Debug("Saving position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, MODULE)
 		
 	end
 	
