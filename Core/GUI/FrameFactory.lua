@@ -16,6 +16,11 @@
 local addonName, AM = ...
 if not AM then return end
 
+-- Locals
+local MODULE = "FrameFactory"
+
+-- Upvalues
+local math_floor, math_abs = math.floor, math.abs
 
 --- Create a movable frame
 -- @param self
@@ -23,6 +28,7 @@ if not AM then return end
 -- @param defaults
 -- @param parent
 -- @return A reference to the created Frame
+-- TODO: Mostly copied. Needs reviewing
 local function CreateMovableFrame(self, name, defaults, parent)
 	
 	-- TODO: Reset position if it is stored off-screen? (Not really possible with ClampedToScreen)
@@ -50,15 +56,16 @@ local function CreateMovableFrame(self, name, defaults, parent)
 		self:ClearAllPoints()
 		AM.db.global.layoutCache[name] = CopyTable(defaults) -- Reset layout cache for this frame
 		cacheEntry = AM.db.global.layoutCache[name] -- And update the reference used (requires a reload for the change to effect otherwise)
-		AM:Debug("Resetting position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+		AM:Debug("Resetting position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, MODULE)
 		self:SetPoint("BOTTOMLEFT", UIParent, cacheEntry.x, cacheEntry.y)
+		cacheEntry.isShown = true
 		
 	end
 	
 	frame.Reposition = function(self) -- Restore position from saved vars
 	
 		self:ClearAllPoints()
---		AM:Debug("Restoring position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+		AM:Debug("Restoring position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, MODULE)
 		self:SetPoint("BOTTOMLEFT", UIParent, cacheEntry.x, cacheEntry.y)
 		
 	end
@@ -67,15 +74,22 @@ local function CreateMovableFrame(self, name, defaults, parent)
 
 	frame.SaveCoords = function(self) -- Store position in saved vars
 	
-		cacheEntry.x = self:GetLeft()
-		cacheEntry.y = self:GetBottom()
---		AM:Debug("Saving position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, "FrameFactory")
+		cacheEntry.x = math.floor(self:GetLeft() + 0.5)
+		cacheEntry.y = math.floor(self:GetBottom() + 0.5)
+		cacheEntry.isShown = true
+		AM:Debug("Saving position for frame = " .. self:GetName() .. "... x = " .. cacheEntry.x .. ", y = " .. cacheEntry.y, MODULE)
 		
 	end
 	
+	frame:SetScript("OnHide", function(self)
+	
+		cacheEntry.isShown = false
+	
+	end)
+	
 	frame:SetScript("OnDragStart", frame.StartMoving)
 	frame:SetScript("OnDragStop", function(self) self:StopMovingOrSizing(); self:SaveCoords() end)
-
+	
 	return frame
 
 end
@@ -83,6 +97,7 @@ end
 --- Build complex frames according to the given specifications
 -- @param frameSpecs A table containing the specific information needed to build the particular widget
 -- @return A reference to the created widget object
+-- TODO: Mostly copied, needs to be reviewed
 local function BuildFrame(self, frameSpecs)
 
 	local defaults = { -- Default frame properties, to be applied in case no specification was given (TODO: Only matters for custom frame types created via AM.GUI:CreateX(...))
@@ -154,8 +169,59 @@ local function BuildFrame(self, frameSpecs)
 	
 end
 
+--- Calculate the multiplier used to scale frames, so that elements can calculate their dimensions properly
+local function GetScaleFactor(self)
+
+-- See https://wow.gamepedia.com/UI_Scale for details
+
+	local screenResolution = ({GetScreenResolutions()})[GetCurrentResolution()]
+	local screenWidth, screenHeight = strsplit("x", screenResolution)
+	local scale = 768/screenHeight -- This is the scale factor that will scale textures to the native resolution that the client uses internally
+	
+	local scaleFactor = (1/scale) -- This is the multiplier that needs to be applied to all calculations to guarantee a pixel-perfect rendering (if it is missing somewhere, that part will look glitched)
+	
+	local uiscale = UIParent:GetScale() --This is the scale factor the client applied to UIParent (and all of the addon's frames) - may be set by the user; Therefore it is not at all reliable and can cause glitches if set improperly
+	-- local scaleFactor = 1/scale
+	
+	return scaleFactor/uiscale
+
+end
+
+--- Scales a number according to the pixel-perfect scale (ideal UIScale) acounted by the actual UI scale (to scale according to the user's wishes) and rounds it to avoid glitches caused by mismatching pixels (internal <-> actual coordinates)
+-- Old: Fix scaling to map 1:1 to screen pixels (avoids graphics glitches that occur if they are floating point numbers)
+-- This causes the addon's frames to look MOSTLY correct (I think there are some issues with AceGUI's nested containers that can cause minor glitches?), as well as scale properly in relation to the user's settings
+local function Scale(number)
+	
+	local scaleFactor = UIParent:GetEffectiveScale() --GetScaleFactor()
+	
+	local isNegative = number < 0
+	
+	number = math_floor(math_abs(number/scaleFactor) + 0.5)
+	if number%2 ~= 0 then -- Is not an even number and should be increased (to allow elements inside to be centered properly)
+		number = number + 1
+	end
+	
+	return isNegative and (number * -1) or number
+	
+end
+
+--- Sets the anchor points of a frame to the nearest integer (to avoid glitches). May cause janky movement when dragged?
+-- TODO: Is this really necessary?
+local function FixPoints(f)
+
+		for i=1,f:GetNumPoints() do
+		
+		local point, relativeTo, relativePoint, xOfs, yOfs = f:GetPoint(i)
+	--	AM:Print(point, relativePoint, xOfs, yOfs)
+
+		end
+		
+end
 
 AM.GUI.BuildFrame = BuildFrame
 AM.GUI.CreateMovableFrame = CreateMovableFrame
+AM.GUI.GetScaleFactor = GetScaleFactor
+AM.GUI.Scale = Scale
+AM.GUI.FixPoints = FixPoints
 
 return AM

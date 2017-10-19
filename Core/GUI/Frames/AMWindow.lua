@@ -54,16 +54,19 @@ local methods = {
 -- @return A reference to the widget object
 local function Constructor()
 
+	-- Shorthands
 	local name = Type .. AceGUI:GetNextWidgetNum(Type)
-
+	local Scale = AM.GUI.Scale
+	local settings = AM.db.profile.settings.GUI -- Only GUI settings are relevant here
+	
 	-- Default values for this class
 	local specs = {
 	
 		-- The default position is always centered (can be moved by the user afterwards)
-		x = (UIParent:GetWidth() - 350) / 2,
-		y = (UIParent:GetHeight() - 500) / 2,
-		width = 350,
-		height = 695, -- TODO: Update dynamically?
+		x = math.floor((UIParent:GetWidth() - Scale(settings.Tracker.width * settings.scale)) / 2 + 0.5),
+		y = math.floor((UIParent:GetHeight() - Scale(settings.Tracker.height * settings.scale)) / 2 + 0.5),
+		width = Scale(settings.Tracker.width * settings.scale),
+		height = Scale(settings.Tracker.height * settings.scale), -- TODO: Update dynamically?
 
 	}
 	
@@ -77,7 +80,7 @@ local function Constructor()
 	
 	-- Create content pane
 	local content = CreateFrame("Frame", name .. "Content", frame)	-- Empty frame that will be used to contain all children later
-	local padding = AM.db.profile.settings.display.windowPadding
+	local padding = Scale(AM.db.profile.settings.GUI.windowPadding)
 	content:SetPoint("TOPLEFT", padding, -padding)
 	content:SetPoint("BOTTOMRIGHT", -padding, padding)
 	

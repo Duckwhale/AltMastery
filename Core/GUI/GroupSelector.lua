@@ -55,16 +55,19 @@ function GS:AddGroup(Group, isActiveGroup)
 	-- Add the given Group
 	local groupWidget = AceGUI:Create("AMSelectorGroup")
 	groupWidget:SetType(isActiveGroup and "ActiveGroup" or "InactiveGroup")
-	groupWidget:SetHeight(50) -- TODO: AM.db.profile.settings.display.groupSize)
+--	groupWidget:SetHeight(50 * AM.GUI:GetScaleFactor()) -- TODO: AM.db.profile.settings.display.groupSize)
 	groupWidget:SetText(Group.name)
 	groupWidget:SetIcon(Group.iconPath)
+	self.widget:AddChild(groupWidget) -- Add this before applying changes so it uses the correct container as parent (That took me hours to find out.)
+	groupWidget:SetStatus("groupID", Group.id) -- Backref to it can be looked up again when actions on it demand it
+	groupWidget:ApplyStatus()
 	groupWidget:SetRelativeWidth(1)
+	groupWidget:ApplyStatus()
 	groupWidget:ApplyStatus()
 	
 	self.numDisplayedGroups = self.numDisplayedGroups + 1
-	groupWidget:SetStatus("groupID", Group.id) -- Backref to it can be looked up again when actions on it demand it
 	self.usedFrames[#self.usedFrames+1] = groupWidget -- TODO: Is this necessary?
-	self.widget:AddChild(groupWidget)
+
 	
 end
 
@@ -94,8 +97,9 @@ function GS:Update()
 	
 	-- Update the size of the panel so that it may contain all elements (TODO: overflow handling/scrolling)
 	local activeStyle = AM.GUI:GetActiveStyle()
-	local borderSize = activeStyle.edgeSize -- TODO: Needs more testing-> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible?
+	local borderSize = AM.GUI.Scale(activeStyle.edgeSize) -- TODO: Needs more testing-> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible? -- TODO: Use new settings
 	self.widget.content:ClearAllPoints()
+	local Scale = AM.GUI.Scale
 	self.widget.content:SetPoint("TOPLEFT", borderSize, -borderSize)
 	self.widget.content:SetPoint("BOTTOMRIGHT", -borderSize, borderSize)
 	
