@@ -72,8 +72,8 @@ local methods = {
 		--end
 		
 		border:ClearAllPoints()
-		border:SetPoint("TOPLEFT", marginX * scaleFactor, -marginY * scaleFactor)
-		border:SetPoint("BOTTOMRIGHT", -marginX * scaleFactor, offY) -- TODO: Remove spacer after the last element, or does it even matter?
+		border:SetPoint("TOPLEFT", marginX, -marginY)
+		border:SetPoint("BOTTOMRIGHT", -marginX, offY) -- TODO: Remove spacer after the last element, or does it even matter?
 		
 
 		content:ClearAllPoints();
