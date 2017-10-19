@@ -17,6 +17,9 @@ local addonName, AM = ...
 if not AM then return end
 
 
+-- Upvalues
+local math_floor, math_abs = math.floor, math.abs
+
 --- Create a movable frame
 -- @param self
 -- @param name
