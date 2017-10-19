@@ -337,6 +337,16 @@ local function ContributionBuff(contributionID)
 	
 end
 
+
+local function Reputation(factionID)
+	
+	local name, description, standingID, barMin, barMax, barValue, atWarWith, canToggleAtWar, isHeader,
+    isCollapsed, hasRep, isWatched, isChild, factionID, hasBonusRepGain, canBeLFGBonus = GetFactionInfoByID(factionID)
+	
+	return standingID
+	
+end
+
 Criteria = {
 	ContributionState = ContributionState,
 	ContributionBuffs = ContributionBuffs,
@@ -356,6 +366,7 @@ Criteria = {
 	NumObjectives = NumObjectives,
 	WorldQuest = WorldQuest,
 	Buff = Buff,
+	Reputation = Reputation,
 }
 
 AM.Criteria = Criteria
