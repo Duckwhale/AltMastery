@@ -121,6 +121,11 @@ local constants = { -- Used t look up actual ID if an alias was used
 	FATE_SMILES_UPON_YOU = 239968,
 	SEAL_YOUR_FATE = 239967,
 	
+	-- Faction IDs
+	THE_CONSORTIUM = 933,
+	THE_ASHEN_VERDICT = 1156,
+	EMPEROR_SHAOHAO = 1492,
+	
 	
 }
 
