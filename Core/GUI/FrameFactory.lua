@@ -178,26 +178,12 @@ local function GetScaleFactor(self)
 	local screenWidth, screenHeight = strsplit("x", screenResolution)
 	local scale = 768/screenHeight -- This is the scale factor that will scale textures to the native resolution that the client uses internally
 	
-	local scaleFactor = (1/scale)
+	local scaleFactor = (1/scale) -- This is the multiplier that needs to be applied to all calculations to guarantee a pixel-perfect rendering (if it is missing somewhere, that part will look glitched)
 	
-	-- local uiscale = UIParent:GetScale() --This is the scale factor the client applied to UIParent (and all of the addon's frames) - may be set by the user; Therefore it is not at all reliable and can cause glitches if set improperly
-	-- local scaleFactor = 1/scale -- This is the multiplier that needs to be applied to all calculations to guarantee a pixel-perfect rendering (if it is missing somewhere, that part will look glitched)
+	local uiscale = UIParent:GetScale() --This is the scale factor the client applied to UIParent (and all of the addon's frames) - may be set by the user; Therefore it is not at all reliable and can cause glitches if set improperly
+	-- local scaleFactor = 1/scale
 	
-	
-	
-	-- Pixel-perfect: UI scale needs to be either automatically adjusted, or otherwise map 1:1 to the 768y internal viewport
-	--local isPixelPerfectScale = (math.floor(uiscale * 100000 + 0.5)  == math.floor(scale * 100000 + 0.5)) -- Removes floating point inaccuracies which can occur if the scale is too precise (>8 digits usually, but I'll take 5 only)
-	
-	-- local actualScaleFactor = scaleFactor -- If the UIScale is correct, this should provide a pixel-perfect look
-	-- if not isPixelPerfectScale then
-		-- AM:Print("Detected that the UIScale doesn't match the screen resolution! Display will likely glitch unless this is fixed")
-		-- AM:Print("UI Scale: " .. uiscale .. " - recommended = " .. scale .. " - scaling window by " .. scaleFactor .. " to make up for it (only works for this addon's frames)")
-		-- actualScaleFactor = 1 -- This will look glitched, but if the user wants a bigger interface than normally provided, they surely have other addons glitching and don't mind as much?
-	-- end
-	
-	return scaleFactor -- , scale, uiscale, screenWidth, screenHeight, isPixelPerfectScale
-	
-	--				/dump AltMastery.GUI:GetScaleFactor()
+	return scaleFactor/uiscale
 
 end
 
@@ -210,10 +196,8 @@ local function Scale(number)
 	
 	local isNegative = number < 0
 	
-	-- TODO: must be even or it can glitch when centering elements?
-	number = math.floor(math.abs(number/scaleFactor) + 0.5)
-	if number%2 ~= 0 then
-		--AM:Print("Forcing number " .. number .. " to scale to an even value")
+	number = math_floor(math_abs(number/scaleFactor) + 0.5)
+	if number%2 ~= 0 then -- Is not an even number and should be increased (to allow elements inside to be centered properly)
 		number = number + 1
 	end
 	
