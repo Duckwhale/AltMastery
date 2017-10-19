@@ -51,6 +51,12 @@ local constants = { -- Used t look up actual ID if an alias was used
 		235441, -- Starts
 		235440, -- Ends
 	},
+	
+	HALLOWS_END = {
+		1129675, -- First day
+		235461, -- In progress
+	},
+	
 	TIMEWALKING_MOP = { 
 		1530588, -- Event starts?
 		1530589, -- Event ends? 
@@ -63,6 +69,7 @@ local constants = { -- Used t look up actual ID if an alias was used
 	},
 	
 	-- Dungeon IDs
+	HEADLESS_HORSEMAN = 285,
 	COREN_DIREBREW = 287,
 	
 	-- Currency IDs
