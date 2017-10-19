@@ -81,6 +81,9 @@ local constants = { -- Used t look up actual ID if an alias was used
 	-- Currency IDs
 	MOGU_RUNE_OF_FATE = 752,
 	ORDER_RESOURCES = 1220,
+	GARRISON_RESOURCES = 824,
+	LEGIONFALL_WAR_SUPPLIES = 1342,
+	TIMELESS_COIN = 777,
 	
 	-- Expansion IDs
 	LEGION = 6,
