@@ -1648,6 +1648,20 @@ local defaultTasks = {
 		Filter = "Level() < 98 OR NOT WorldEvent(HALLOWS_END)",
 	},
 	
+	MILESTONE_WOD_FOLLOWER_ABUGAR = {
+		name = "Abu'gar recruited",
+		notes = "Garrison Follower",
+		iconPath = "achievement_character_troll_male",
+		Criteria = "Objectives(\"MILESTONE_WOD_FOLLOWER_ABUGAR\")",
+		Filter = "Level() < 98",
+		Objectives = { -- For some reason, the treasure reset when the follower was obtained?
+			"InventoryItem(114243) OR Quest(36711) AS Abu'Gar's Finest Reel (North of Hallvalor)",
+			"InventoryItem(114242) OR Quest(36711) AS Abu'gar's Vitality (Telaar)",
+			"InventoryItem(114245) OR Quest(36711) AS Abu'Gar's Favorite Lure (Ancestral Grounds)",
+			"Quest(36711) AS Follower: Abu'gar (Stonecrag Gorge)",		
+		},
+	},
+	
 }
 
 
