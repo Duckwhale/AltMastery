@@ -1662,6 +1662,13 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_FELFOCUSER = {
+		name = "Repurposed Fel Focuser obtained",
+		iconPath = "inv_rod_enchantedfelsteel",
+		Criteria = "InventoryItem(147707)",
+		Filter = "Level() < 110",
+	},
+	
 }
 
 
