@@ -1511,6 +1511,19 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_UNLOCK_MOROES = {
+		name = "Moroes unlocked",
+		description = "TODO",
+		iconPath = "inv_misc_pocketwatch_02",
+		Criteria = "Objectives(\"MILESTONE_LEGION_UNLOCK_MOROES\")",
+		Filter = "Level() < 110",
+		Objectives = {
+			"InventoryItem(142246) OR Quest(44803) AS Broken Pocket Watch obtained",
+			"Quest(44803) AS Return to Karazhan: Master of the House",
+			"Quest(44865) AS Butler to the Great",
+		},
+	},
+	
 }
 
 
