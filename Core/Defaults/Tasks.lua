@@ -215,13 +215,13 @@ local defaultTasks = {
 		},
 		
 		-- TODO: Objectives: MinLevel (90?), ObtainItem(Shrouded Timewarped Coin), Turn in quest? -> Then use ObjectivesCompleted(NUM_OBJECTIVES/ALL?)
-		MONTHLY_WORLDEVENT_MOPTIMEWALKING = {
+		MONTHLY_WORLDEVENT_TIMEWALKING_MOP = {
 			name = "Timewalking: Mists of Pandaria",
 			description = "Complete the quest \"The Shrouded Coin\" during the Mists of Pandaria Timewalking event",
 			notes = "500 Timewarped Badges",
 			iconPath = "timelesscoin_yellow",
 			Criteria = "Quest(45563)", -- 45799 = A shrouded path... gnah.
-			Filter = " NOT WorldEvent(TIMEWALKING_MOP)",
+			Filter = "Level() < 91 OR NOT WorldEvent(TIMEWALKING_MOP)",
 			Objectives = {
 				"InventoryItem(143776) OR Quest(45563) AS Obtain a Shrouded Timewarped Coin",
 				"Quest(45563) AS Bring it to Mistweaver Xia on the Timeless Isle",
