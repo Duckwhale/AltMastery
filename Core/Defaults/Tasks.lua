@@ -1304,7 +1304,7 @@ local defaultTasks = {
 	},
 	
 	WEEKLY_WOD_WORLDBOSS_GORGRONDGOLIATHS = {
-		name = "Goliaths of Grogrond defeated",
+		name = "Goliaths of Gorgrond defeated",
 		description = "Defeat Tarlna the Ageless or Drov the Ruiner in Gorgrond",
 		iconPath = "creatureportrait_fomorhand",
 		Criteria = "Quest(37460) OR Quest(37462)",
