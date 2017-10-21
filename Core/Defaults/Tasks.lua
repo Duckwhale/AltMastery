@@ -1580,6 +1580,21 @@ local defaultTasks = {
 		
 	},
 	
+	DAILY_WOD_WORLDEVENT_HALLOWSENDQUESTS= {
+		name = "Hallow's End: Garrison Quests",
+		notes = "Pets, Toy",
+		iconPath = "inv_misc_bag_28_halloween",
+		Criteria = "Objectives(\"DAILY_WOD_WORLDEVENT_HALLOWSENDQUESTS\")",
+		Filter = "Level() < 100 OR NOT WorldEvent(HALLOWS_END)",
+		Objectives = {
+			"Quest(39716) AS Smashing Squashlings",
+			"Quest(39719) AS Mutiny on the Boneship",
+			"Quest(39720) AS Foul Fertilizer",
+			"Quest(39721) AS Culling the Crew",
+		},
+		
+	},
+	
 }
 
 
