@@ -1119,16 +1119,6 @@ local defaultTasks = {
 		},
 	},
 	
-	MILESTONE_LEGION_LEGIONFALLCHAMPION = {
-		name = "Champions of Legionfall",
-		description = "Recruit your Legionfall campaign follower by completing the quest \"Champions of Legionfall\"",
-		notes = "6th Order Hall champion",
-		iconPath = "achievement_garrisonfollower_rare",
-		Criteria = "Quest(47137)",
-		Filter = "Level() < 110", -- TODO: Broken Shore scenario, but account-wide only?
-		Objectives = { -- TODO? Might be unnecessary
-		},
-	},
 	
 	DAILY_CLASSIC_ACCOUNTWIDE_STONECOLDTRIXXY = {
 		name = "Stone Cold Trixxy (Winterspring)",
@@ -1669,6 +1659,376 @@ local defaultTasks = {
 		Filter = "Level() < 110",
 	},
 	
+	MILESTONE_LEGION_LFCHAMPIONS_WARRIOR_ALLIANCE = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_WARRIOR_ALLIANCE\")",
+		Filter = "Level() < 110 OR NOT Class(WARRIOR) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775) OR NOT Faction(ALLIANCE)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0)
+		Objectives = {
+		
+			"Quest(46173) AS Tactical Planning",
+			"Quest(44849) AS Recruitment Drive",
+			"Quest(44850) AS Arming the Army",
+			"Quest(45118) AS Helya's Horn",
+			"Quest(45834) AS Stolen Souls",
+			"Quest(45128) AS A Glorious Reunion",
+			"Quest(44889) AS Resource Management",
+			"Quest(45634) AS Kvaldir on Call",
+			"Quest(45648) AS Missing in Action: Lord Darius Crowley",
+			"Quest(45649) AS Mission: Search and Rescue",
+			"Quest(45650) AS Operation Felrage",
+			"Quest(46267) AS Return of the Battlelord",
+			"Quest(45876) AS Champion: Lord Darius Crowley",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+	
+	MILESTONE_LEGION_LFCHAMPIONS_WARRIOR_HORDE = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_WARRIOR_HORDE\")",
+		Filter = "Level() < 110 OR NOT Class(WARRIOR) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775) OR NOT Faction(HORDE)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0)
+		Objectives = {
+		
+			"Quest(46173) AS Tactical Planning",
+			"Quest(44849) AS Recruitment Drive",
+			"Quest(44850) AS Arming the Army",
+			"Quest(45118) AS Helya's Horn",
+			"Quest(45834) AS Stolen Souls",
+			"Quest(45128) AS A Glorious Reunion",
+			"Quest(44889) AS Resource Management",
+			"Quest(45634) AS Kvaldir on Call",
+			"Quest(45632) AS Missing in Action: Eitrigg",
+			"Quest(45647) AS Mission: Search and Rescue",
+			"Quest(45633) AS Operation Felrage",
+			"Quest(46267) AS Return of the Battlelord",
+			"Quest(45873) AS Champion: Eitrigg",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+	
+	MILESTONE_LEGION_LFCHAMPIONS_PRIEST = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_PRIEST\")",
+		Filter = "Level() < 110 OR NOT Class(PRIEST) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+		
+			"Quest(45343) AS A Curious Contagion",
+			"Quest(45344) AS Sampling the Source",
+			"Quest(45346) AS Shambling Specimens",
+			"Quest(45345) AS Mischievous Sprites",
+			"Quest(45347) AS Crafting a Cure",
+			"Quest(45348) AS Safekeeping",
+			"Quest(45349) AS To the Broken Shore",
+			"Quest(45350) AS Countering the Contagion",
+			"Quest(45342) AS Administering Aid",
+			"Quest(46145) AS Sterile Surroundings",
+			"Quest(46034) AS Champion: Aelthalyste",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+	
+	MILESTONE_LEGION_LFCHAMPIONS_ROGUE_ALLIANCE = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_ROGUE_ALLIANCE\")",
+		Filter = "Level() < 110 OR NOT Class(ROGUE) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775) OR NOT Faction(ALLIANCE)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0)
+		Objectives = {
+
+			"Quest(45833) AS The Pirate's Bay",
+			"Quest(45835) AS False Orders",
+			"Quest(44758) AS What's the Cache?",
+			"Quest(45073) AS Loot and Plunder!",
+			"Quest(45848) AS Fit For a Pirate",
+			"Quest(45836) AS Jorach's Calling",
+			"Quest(45571) AS A Bit of Espionage",
+			"Quest(45573) AS Rise Up",
+			"Quest(45628) AS This Time, Leave a Trail",
+			"Quest(46260) AS Meld Into the Shadows",
+			"Quest(46059) AS Champion: Tess Greymane",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+	
+	MILESTONE_LEGION_LFCHAMPIONS_ROGUE_HORDE = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_ROGUE_HORDE\")",
+		Filter = "Level() < 110 OR NOT Class(ROGUE) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775) OR NOT Faction(HORDE)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0)
+		Objectives = {
+
+			"Quest(46322) AS The Pirate's Bay",
+			"Quest(46324) AS False Orders",
+			"Quest(46323) AS What's the Cache?",
+			"Quest(45073) AS Loot and Plunder!",
+			"Quest(45848) AS Fit For a Pirate",
+			"Quest(46326) AS Jorach's Calling",
+			"Quest(45571) AS A Bit of Espionage",
+			"Quest(45576) AS Rise Up",
+			"Quest(45629) AS This Time, Leave a Trail",
+			"Quest(46827) AS Meld Into the Shadows",
+			"Quest(46058) AS Champion: Lilian Voss",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+	
+	MILESTONE_LEGION_LFCHAMPIONS_DEATHKNIGHT = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_DEATHKNIGHT\")",
+		Filter = "Level() < 110 OR NOT Class(DEATHKNIGHT) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+		
+			"Quest(45240) AS Making Preparations",
+			"Quest(45398) AS Harnessing Power",
+			"Quest(45399) AS Severing the Sveldrek",
+			"Quest(45331) AS Return to Acherus",
+			"Quest(44775) AS The Peak of Bones",
+			"Quest(44783) AS From Bones They Rise",
+			"Quest(46305) AS Thorim's Flame",
+			"Quest(44787) AS The Bonemother",
+			"Quest(45243) AS On Daumyr's Wings",
+			"Quest(45103) AS We Ride!",
+			"Quest(46050) AS Champion: Minerva Ravensorrow",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+		
+	MILESTONE_LEGION_LFCHAMPIONS_DEMONHUNTER = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_DEMONHUNTER\")",
+		Filter = "Level() < 110 OR NOT Class(DEMONHUNTER) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+		
+			"Quest(46159) AS An Urgent Message",
+			"Quest(45301) AS Taking Charge",
+			"Quest(45330) AS Scouting Party",
+			"Quest(45329) AS Operation: Portals",
+			"Quest(45339) AS Defense of the Fel Hammer",
+			"Quest(45385) AS We Must be Prepared!",
+			"Quest(45764) AS Restoring Equilibrium",
+			"Quest(46725) AS Power Outage",
+			"Quest(45798) AS War'zuul the Provoker",
+			"Quest(46266) AS Return of the Slayer",
+			"Quest(45391) AS Champion: Lady S'theno",
+			"Quest(47137) AS Champions of Legionfall",
+		},
+	},
+		
+	MILESTONE_LEGION_LFCHAMPIONS_DRUID = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_DRUID\")",
+		Filter = "Level() < 110 OR NOT Class(DRUID) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+
+			"Quest(44869) AS Talon Terror",
+			"Quest(44877) AS Attack on the Roost",
+			"Quest(45532) AS Mother's Orders",
+			"Quest(44888) AS Aviana's Grace",
+			"Quest(44921) AS Lone Wolf",
+			"Quest(45498) AS Let Sleeping Dogs Lie",
+			"Quest(45528) AS The Befouled Barrows",
+			"Quest(46924) AS The Wolf's Tale",
+			"Quest(45426) AS Nature's Advance",
+			"Quest(46674) AS The Preservation of Nature",
+			"Quest(46676) AS Nature's Touch",
+			"Quest(46675) AS To Track a Demon",
+			"Quest(46677) AS Prick of a Thistle",
+			"Quest(45425) AS Grovebound",
+			"Quest(46044) AS Champion: Thisalee Crow",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+		
+	MILESTONE_LEGION_LFCHAMPIONS_HUNTER = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_HUNTER\")",
+		Filter = "Level() < 110 OR NOT Class(HUNTER) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+
+			"Quest(45551) AS Devastating Effects",
+			"Quest(45552) AS Soothing Wounds",
+			"Quest(45553) AS The Nighthuntress Beckons",
+			"Quest(45554) AS Taking Control",
+			"Quest(45555) AS Felbound Beasts",
+			"Quest(45556) AS Ready to Strike",
+			"Quest(45557) AS Unnatural Consequences",
+			"Quest(46060) AS Salvation",
+			"Quest(46235) AS Secured Surroundings",
+			"Quest(46048) AS Champion: Nighthuntress Syrenne",		
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+
+	MILESTONE_LEGION_LFCHAMPIONS_MAGE = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_MAGE\")",
+		Filter = "Level() < 110 OR NOT Class(MAGE) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+
+			"Quest(45437) AS An Urgent Situation",
+			"Quest(44766) AS Backup Plan",
+			"Quest(46335) AS The Vault of the Tirisgarde",
+			"Quest(46338) AS A Creative Solution",
+			"Quest(45207) AS The Nightborne Apprentice",
+			"Quest(46705) AS Retaliation",
+			"Quest(46339) AS Keymaster Orlis",
+			"Quest(46345) AS Into the Hornet's Nest",
+			"Quest(44768) AS Nyell's Workshop",
+			"Quest(44770) AS Secrets of the Shal'dorei",
+			"Quest(46351) AS Keep it Secret, Keep it Safe",
+			"Quest(45251) AS Redundancy",
+			"Quest(45614) AS Lady Remor'za",
+			"Quest(45586) AS Shield Amplification",
+			"Quest(46000) AS Arming Dalaran",
+			"Quest(46290) AS Return of the Archmage",
+			"Quest(46043) AS Champion: Aethas Sunreaver",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+
+	MILESTONE_LEGION_LFCHAMPIONS_MONK = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_MONK\")",
+		Filter = "Level() < 110 OR NOT Class(MONK) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+
+			"Quest(45440) AS A Brewing Situation",
+			"Quest(45404) AS Panic at the Brewery",
+			"Quest(45459) AS Storming the Legion",
+			"Quest(45574) AS Fel Ingredients",
+			"Quest(45449) AS Alchemist Korlya",
+			"Quest(45545) AS Barrel Toss",
+			"Quest(46320) AS Hope For a Cure",
+			"Quest(45442) AS Not Felling Well",
+			"Quest(45771) AS A Time for Everything",
+			"Quest(45790) AS Champion: Almai",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+
+	MILESTONE_LEGION_LFCHAMPIONS_HUNTER = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_HUNTER\")",
+		Filter = "Level() < 110 OR NOT Class(HUNTER) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+
+			"Quest(45551) AS Devastating Effects",
+			"Quest(45552) AS Soothing Wounds",
+			"Quest(45553) AS The Nighthuntress Beckons",
+			"Quest(45554) AS Taking Control",
+			"Quest(45555) AS Felbound Beasts",
+			"Quest(45556) AS Ready to Strike",
+			"Quest(45557) AS Unnatural Consequences",
+			"Quest(46060) AS Salvation",
+			"Quest(46235) AS Secured Surroundings",
+			"Quest(46048) AS Champion: Nighthuntress Syrenne",		
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+	
+	MILESTONE_LEGION_LFCHAMPIONS_PALADIN = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_PALADIN\")",
+		Filter = "Level() < 110 OR NOT Class(PALADIN) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+
+			"Quest(45143) AS Judgment Awaits",
+			"Quest(45890) AS Ancestors and Enemies",
+			"Quest(46259) AS Darkbinder Dilemma",
+			"Quest(45145) AS Moonfang Family Relics",
+			"Quest(45146) AS Runic Reading",
+			"Quest(45147) AS Felstone Destruction",
+			"Quest(45148) AS Oath Breaker",
+			"Quest(45149) AS Ending the Crescent Curse",
+			"Quest(46045) AS Champion: Nerus Moonfang",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+	
+		
+	MILESTONE_LEGION_LFCHAMPIONS_SHAMAN = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_SHAMAN\")",
+		Filter = "Level() < 110 OR NOT Class(SHAMAN) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+
+			"Quest(45652) AS A \"Humble\" Request",
+			"Quest(45706) AS The Power of Thousands",
+			"Quest(45723) AS The Crone's Wrath",
+			"Quest(45725) AS Breaking Chains",
+			"Quest(45724) AS Snakes and Stones",
+			"Quest(44800) AS Against Magatha's Will",
+			"Quest(45763) AS Demonic Disruption",
+			"Quest(45971) AS Infernal Phenomena",
+			"Quest(45767) AS Elemental Cores",	
+			"Quest(45765) AS Brothers and Sisters",
+			"Quest(45883) AS The Firelord's Offense",
+			"Quest(45769) AS Conflagration",
+			"Quest(46258) AS The Calm After the Storm",
+			"Quest(46057) AS Champion: Magatha Grimtotem",
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+
+	MILESTONE_LEGION_LFCHAMPIONS_WARLOCK = {
+		name = "Champions of Legionfall",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_WARLOCK\")",
+		Filter = "Level() < 110 OR NOT Class(WARLOCK) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Objectives = {
+
+			"Quest(45021) AS Answers Unknown",
+			"Quest(45024) AS Cult Culling",
+			"Quest(45025) AS Stealing the Source of Power",
+			"Quest(45026) AS Expending Fel Energy",
+			"Quest(45794) AS Informing the Council",
+			"Quest(45027) AS To the Broken Shore",
+			"Quest(45028) AS The Fate of Kanrethad",
+			"Quest(46020) AS Crystal Containment",
+			"Quest(46047) AS Champion: Kanrethad Ebonlocke",	
+			"Quest(47137) AS Champions of Legionfall",
+			
+		},
+	},
+
 }
 
 
