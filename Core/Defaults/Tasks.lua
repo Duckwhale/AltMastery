@@ -576,7 +576,7 @@ local defaultTasks = {
 	},
 	
 	WQ_LEGION_SABUUL = {
-		name = "Sabuul defeated",
+		name = "World Quest: Sabuul",
 		description = "Defeat Sabuul",
 		notes = "Fel-Spotted Egg",
 		iconPath = "inv_manaraymount_orange",
@@ -594,7 +594,7 @@ local defaultTasks = {
 	},
 	
 	WQ_LEGION_NAROUA = {
-		name = "Naroua defeated",
+		name = "World Quest: Naroua",
 		description = "Defeat Naroua, King of the Forest",
 		notes = "Fel-Spotted Egg",
 		iconPath = "inv_manaraymount_redfel", -- inv_egg_02
@@ -603,7 +603,7 @@ local defaultTasks = {
 	},
 	
 	WQ_LEGION_VARGA = {
-		name = "Varga defeated",
+		name = "World Quest: Varga",
 		description = "Defeat Varga",
 		notes = "Fel-Spotted Egg",
 		iconPath = "inv_manaraymount_purple", -- inv_egg_02
@@ -612,7 +612,7 @@ local defaultTasks = {
 	},
 	
 	WQ_LEGION_HOUNDMASTERKERRAX = {
-		name = "Houndmaster Kerrax",
+		name = "World Quest: Houndmaster Kerrax",
 		description = "TODO",
 		notes = "Mount",
 		iconPath = "inv_argusfelstalkermount",
@@ -621,7 +621,7 @@ local defaultTasks = {
 	},
 	
 	WQ_LEGION_WRANGLERKRAVOS = {
-		name = "Wrangler Kravos",
+		name = "World Quest: Wrangler Kravos",
 		description = "TODO",
 		notes = "Mount",
 		iconPath = "inv_argustalbukmount_felpurple",
@@ -630,7 +630,7 @@ local defaultTasks = {
 	},
 
 	WQ_LEGION_BLISTERMAW = {
-		name = "Blistermaw",
+		name = "World Quest: Blistermaw",
 		description = "TODO",
 		notes = "Mount",
 		iconPath = "inv_argusfelstalkermountred",
@@ -639,7 +639,7 @@ local defaultTasks = {
 	},
 	
 	WQ_LEGION_VRAXTHUL = {
-		name = "Vrax'thul",
+		name = "World Quest: Vrax'thul",
 		description = "TODO",
 		notes = "Mount",
 		iconPath = "inv_argusfelstalkermountblue",
@@ -648,7 +648,7 @@ local defaultTasks = {
 	},
 
 	WQ_LEGION_PUSCILLA = {
-		name = "Puscilla",
+		name = "World Quest: Puscilla",
 		description = "TODO",
 		notes = "Mount",
 		iconPath = "inv_argusfelstalkermountblue",
@@ -657,7 +657,7 @@ local defaultTasks = {
 	},
 	
 	WQ_LEGION_SKREEGTHEDEVOURER = {
-		name = "Skreeg the Devourer",
+		name = "World Quest: Skreeg the Devourer",
 		description = "TODO",
 		notes = "Mount",
 		iconPath = "inv_argusfelstalkermountgrey",
