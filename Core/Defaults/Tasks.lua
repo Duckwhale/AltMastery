@@ -1360,7 +1360,7 @@ local defaultTasks = {
 		name = "Nalak defeated",
 		description = " Defeat Nalak, the Storm Lord, on the Isle of Thunder", -- Achievement: 8028
 		notes = "Mount",
-		iconPath = "spell_holy_lightsgrace", -- inv_pandarenserpentmount_lightning_blue
+		iconPath = "inv_pandarenserpentmount_lightning_blue", --"spell_holy_lightsgrace",
 		Criteria = "Quest(32518)",
 		Filter = "Level() < 90", -- Needs Isle of Thunder intro quest to be completed?
 	},
