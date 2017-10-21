@@ -2084,6 +2084,19 @@ local defaultTasks = {
 		Filter = "Level() < 96",
 	},
 	
+	DAILY_WOD_GARRISON_OGREBOSSES = {
+		name = "Nagrand Ogre Rares",
+		notes = "Pet",
+		iconPath = "inv_relics_runestone", -- inv_jewelcrafting_gem_39 -- spell_arcane_arcaneresilience
+		Filter = "Level() < 100", -- TODO: Must have flying; only show if teleport is available?
+		Criteria = "Objectives(\"DAILY_WOD_GARRISON_OGREBOSSES\")",
+		Objectives = {
+			"Quest(40073) AS Pugg",		
+			"Quest(40074) AS Guk",
+			"Quest(40075) AS Rukdug",
+		},
+	},
+	
 }
 
 
