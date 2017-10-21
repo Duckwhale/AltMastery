@@ -1445,6 +1445,15 @@ local defaultTasks = {
 		},
 	},
 	
+	DAILY_TBC_DUNGEON_HEROICMANATOMBS = {
+		name = "Mana-Tombs (Heroic)",
+		description = "TODO",
+		notes = "Reputation",
+		iconPath = "achievement_boss_nexus_prince_shaffar", -- "inv_enchant_shardprismaticlarge",
+		Criteria = "DungeonLockout(MANA_TOMBS)",
+		Filter = "Level() < 70 OR Reputation(THE_CONSORTIUM) >= EXALTED",
+	},
+	
 }
 
 
