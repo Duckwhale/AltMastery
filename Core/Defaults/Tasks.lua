@@ -1560,6 +1560,18 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_ORDERHALLCAMPAIGN = {
+		name ="Forged for Battle",
+		description = "Complete your Order Campaign and unlock a new appearance for your artifact weapon. ",
+		iconPath = "achievement_bg_killxenemies_generalsroom",
+		Criteria = "Achievement(10746)",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Achievement(10746) AS Order Hall Campaign finished",
+			"Quest(43359) OR Quest(43407) OR Quest(43409) OR Quest(43414) OR Quest(43415) OR Quest(43418) OR Quest(43420) OR Quest(43422) OR Quest(43423) OR Quest(43424) OR Quest(43425) AS A Hero's Weapon (optional)", -- Formerly required to unlock the third relic slot
+		},
+	},
+	
 	DAILY_LEGION_WORLDQUEST_GEMCUTTERNEEDED = {
 		name = "Gemcutter Needed",
 		iconPath = "inv_jewelcrafting_70_saberseye",
