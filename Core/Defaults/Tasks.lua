@@ -228,6 +228,19 @@ local defaultTasks = {
 			}
 		},
 		
+		MONTHLY_WORLDEVENT_TIMEWALKING_TBC = {
+			name = "Timewalking: The Burning Crusade",
+			description = "Complete the quest \"The Swirling Vial\" during the Burning Crusade Timewalking event",
+			notes = "500 Timewarped Badges",
+			iconPath = "inv_alchemy_enchantedvial",
+			Criteria = "Quest(40168)",-- The Swirling Vial
+			Filter = "Level() < 71 OR NOT WorldEvent(TIMEWALKING_TBC)",
+			Objectives = {
+				"InventoryItem(129747) OR Quest(40168) AS Obtain a Swirling Timewarped Vial",
+				"Quest(40168) AS Bring it to Cupri in Shattrath City (Outland)",
+			}
+		},
+		
 		RESTOCK_LEGION_ORDERHALLRESOURCES = {
 			name = "5000 Order Resources",
 			description = "Obtain sufficient amounts of resources to send followers on missions in your Order Hall",
