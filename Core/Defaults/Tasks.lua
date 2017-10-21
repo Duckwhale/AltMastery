@@ -242,7 +242,7 @@ local defaultTasks = {
 		},
 		
 		RESTOCK_LEGION_ORDERHALLRESOURCES = {
-			name = "5000 Order Resources",
+			name = "Order Resources restocked",
 			description = "Obtain sufficient amounts of resources to send followers on missions in your Order Hall",
 			notes = "Gold missions (and sometimes others)",
 			iconPath = "inv_orderhall_orderresources",
