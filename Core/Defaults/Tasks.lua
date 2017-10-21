@@ -277,13 +277,14 @@ local defaultTasks = {
 			
 		},
 		
-		LIMITED_LEGIONFALL_NETHERDISRUPTOR = {
+		LIMITEDAVAILABILITY_LEGION_NETHERDISRUPTOR = {
 			name = "Boon of the Nether Disruptor",
 			description = "Complete the quest \"Boon of the Nether Disruptor\" and obtain an Armorcrafter's Commendation",
 			notes = "Legendary Crafting Item",
 			iconPath = "inv_misc_scrollrolled04d",
-			Criteria = "Quest(47015) OR Quest(47012) OR Quest(47016) OR Quest(47014)", -- TODO: Building has to be up (visibility?); only show legendary follower items? based on profession? prequests = http://www.wowhead.com/item=147451/armorcrafters-commendation#comments	http://www.wowhead.com/quest=46774 -> Quest is repeatable... needs caching to detect this properly -> new feature branch, as it could get complicated
-			Filter = "Level() < 110",
+			Criteria = "Buff(NETHERSTORM) OR Buff(REINFORCED_REINS) OR Buff(FATE_SMILES_UPON_YOU) OR Buff(SEAL_YOUR_FATE)", --"Quest(47015) OR Quest(47012) OR Quest(47016) OR Quest(47014)", -- Change to use the buff gained? Quest aren't detected, probably flagged as repeatable? -- TODO: Buff is lost if not in BI... pointless -> Since it only shows there, filter when not in BI?
+			-- TODO: Building has to be up (visibility?); only show legendary follower items? based on profession? prequests = http://www.wowhead.com/item=147451/armorcrafters-commendation#comments	http://www.wowhead.com/quest=46774
+			Filter = "Level() < 110 OR (ContributionState(NETHER_DISRUPTOR) ~= STATE_ACTIVE)", -- TODO: FIlter only for relevant professions?
 		},
 		
 		WQ_LEGION_UNDERBELLY_TESTSUBJECTS = {

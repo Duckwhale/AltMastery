@@ -188,6 +188,8 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			---- World bosses on Argus (Greater Invasion Point bosses)
 			"WEEKLY_LEGION_GREATERINVASIONPOINT",
 
+			"LIMITEDAVAILABILITY_LEGION_NETHERDISRUPTOR",
+
 			-- WOD
 			"DAILY_WOD_ACCOUNTWIDE_BLINGTRON4000",
 			"WEEKLY_WOD_WORLDBOSS_GORGRONDGOLIATHS",
