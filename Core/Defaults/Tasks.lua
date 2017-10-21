@@ -1412,6 +1412,22 @@ local defaultTasks = {
 		Filter = "Level() < 110",
 	},
 	
+	MILESTONE_MOP_TIMELOSTARTIFACT = {
+		name = "Time-Lost Artifact acquired",
+		description = "TODO",
+		notes = "Teleport",
+		iconPath = "inv_misc_trinketpanda_06",
+		Criteria = "InventoryItem(103678)",
+		Filter = "Level() < 90",
+		Objectives = {
+			"Reputation(EMPEROR_SHAOHAO) >= NEUTRAL AS Emperor Shaohao - Neutral",
+			"Reputation(EMPEROR_SHAOHAO) >= FRIENDLY AS Emperor Shaohao - Friendly",
+			"Reputation(EMPEROR_SHAOHAO) >= HONORED AS Emperor Shaohao - Honored",
+			"InventoryItem(103678) OR Currency(TIMELESS_COIN) > 7500 AS Collect 7500 Timeless Coins",
+			"InventoryItem(103678) AS Obtain the Time-Lost Artifact",
+		},
+	},
+	
 }
 
 
