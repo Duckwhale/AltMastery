@@ -1412,6 +1412,23 @@ local defaultTasks = {
 		Filter = "Level() < 110",
 	},
 	
+	DAILY_WOTLK_JEWELCRAFTINGSHIPMENT = {
+		name = "Jewelcrafting Shipment delivered",
+		description = "TODO",
+		notes = "Recipes",
+		iconPath = "inv_misc_gem_variety_01",
+		Criteria = "NumObjectives(\"DAILY_WOTLK_JEWELCRAFTINGSHIPMENT\") >= 1",
+		Filter = "Level() < 65 OR Profession(JEWELCRAFTING) < 375",
+		Objectives = {
+			"Quest(12958) AS Shipment: Blood Jade Amulet",
+			"Quest(12959) AS Shipment: Glowing Ivory Figurine",
+			"Quest(12960) AS Shipment: Wicked Sun Brooch",
+			"Quest(12961) AS Shipment: Intricate Bone Figurine",
+			"Quest(12962) AS Shipment: Bright Armor Relic",
+			"Quest(12963) AS Shipment: Shifting Sun Curio",
+		},
+	},
+	
 	MILESTONE_MOP_TIMELOSTARTIFACT = {
 		name = "Time-Lost Artifact acquired",
 		description = "TODO",
