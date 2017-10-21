@@ -1559,6 +1559,14 @@ local defaultTasks = {
 		},
 	},
 	
+	DAILY_LEGION_WORLDQUEST_GEMCUTTERNEEDED = {
+		name = "Gemcutter Needed",
+		iconPath = "inv_jewelcrafting_70_saberseye",
+		Criteria = "Quest(46134) OR Quest(46135) OR Quest(46136) OR Quest(46137) OR Quest(46138) OR Quest(46139)",
+		Filter = "not (WorldQuest(46134) OR WorldQuest(46135) OR WorldQuest(46136) OR WorldQuest(46137) OR WorldQuest(46138) OR WorldQuest(46139))",
+		
+	},
+	
 }
 
 
