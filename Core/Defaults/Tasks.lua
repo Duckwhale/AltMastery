@@ -1372,6 +1372,10 @@ local defaultTasks = {
 		iconPath = "ability_hunter_pet_devilsaur", -- ability_mount_triceratopsmount_blue -- achievement_boss_thokthebloodthirsty
 		Criteria = "Quest(32519)",
 		Filter = "Level() < 90",
+		Objectives = {
+			"Quest(32519) AS Oondasta looted",
+			"Quest(32922) AS Bonus Roll used",
+		},
 	},
 	
 	WEEKLY_MOP_WORLDBOSS_CELESTIALS = {
