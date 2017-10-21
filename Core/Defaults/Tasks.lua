@@ -407,7 +407,7 @@ local defaultTasks = {
 			description = "Complete the weekly quest \"Supplying Krokuun\" to recruit a Krokuul Ridgestalker",
 			iconPath = "achievement_reputation_ashtonguedeathsworn",
 			Criteria = "Quest(48910)",
-			Filter = "Level() < 110 OR NOT Quest(48442)", -- Needs to have completed the previous step (6 Champions at 900 IL)
+			Filter = "Level() < 110 OR NOT Quest(48441)", -- Requires completion of the first mission quest, "Remnants of Darkfall Ridge"
 			-- TODO: Individual unlock steps (quests) for all other troups also
 		},
 		
