@@ -1623,6 +1623,31 @@ local defaultTasks = {
 		Filter = "Level() < 70 OR NOT (Class(ROGUE) OR Class(DEATHKNIGHT) OR Class(MONK) OR Class(WARRIOR) OR Class(DEMONHUNTER)) OR BossesKilled(BLACK_TEMPLE) >= 9" -- Hide if locked out, as there is nothing else to do (for the week),
 	},
 	
+	DAILY_WOD_GARRISON_ARACHNIS = {
+		name = "Arachnis defeated",
+		notes = "Toy",
+		iconPath = "inv_misc_monsterspidercarapace_01",
+		Criteria = "Quest(39617)",
+		Filter = "Level() < 100",
+	},
+	
+	DAILY_WORLDEVENT_HEADLESSHORSEMAN = {
+		name = "Headless Horseman defeated",
+		description = "Defeat the Headless Horseman in the Scarlet Monastery during the Hallow's End world event",
+		notes = "Mount",
+		iconPath = "inv_misc_food_59",
+		Criteria = "EventBoss(HEADLESS_HORSEMAN)",
+		Filter = "Level() < 15 OR NOT WorldEvent(HALLOWS_END)",
+	},
+	
+	DAILY_LEGION_WORLDEVENT_UNDERTHECROOKEDTREE = {
+		name = "Hallow's End: Under the Crooked Tree",
+		notes = "Transmog",
+		iconPath = "inv_helm_cloth_witchhat_b_01",
+		Criteria = "Quest(43162)",
+		Filter = "Level() < 98 OR NOT WorldEvent(HALLOWS_END)",
+	},
+	
 }
 
 
