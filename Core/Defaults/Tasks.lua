@@ -1595,6 +1595,34 @@ local defaultTasks = {
 		
 	},
 	
+	WEEKLY_TBC_RAID_THEBLACKTEMPLE = {
+		name = "Black Temple",
+		notes = "Pets, Legendary",
+		iconPath = "achievement_boss_illidan",
+		Criteria = "BossesKilled(BLACK_TEMPLE) >= 9",
+		Filter = "Level() < 70 OR (Achievement(9824) AND (not (Class(ROGUE) OR Class(DEATHKNIGHT) OR Class(MONK) OR Class(WARRIOR) OR Class(DEMONHUNTER))) OR Achievement(426))", -- Simplified criteria: isAtLeastLevel70 or (finishedRWL and not canLootGlaives or) = not A or (B and (not C or D))
+		Objectives = { -- TODO: Incorrect if bosses are killed in a different order? -> Needs boss mapping... and different API?
+			"BossesKilled(BLACK_TEMPLE) >= 1 AS High Warlord Naj'entus",
+			"BossesKilled(BLACK_TEMPLE) >= 2 AS Supremus",
+			"BossesKilled(BLACK_TEMPLE) >= 3 AS Shade of Akama",
+			"BossesKilled(BLACK_TEMPLE) >= 4 AS Teron Gorefiend",
+			"BossesKilled(BLACK_TEMPLE) >= 5 AS Gurtogg Bloodboil",
+			"BossesKilled(BLACK_TEMPLE) >= 6 AS Reliquary of Souls",
+			"BossesKilled(BLACK_TEMPLE) >= 7 AS Mother Shahraz",
+			"BossesKilled(BLACK_TEMPLE) >= 8 AS The Illidari Council",
+			"BossesKilled(BLACK_TEMPLE) >= 9 AS Illidan Stormrage",
+		},
+	},
+	
+	MILESTONE_TBC_LEGENDARY_WARGLAIVESOFAZZINOTH = {
+		name = "Warglaives of Azzinoth",
+		description = "Wielder of a set of Warglaives of Azzinoth.",
+		note = "Legendary",
+		iconPath = "inv_weapon_glave_01",
+		Criteria = "Achievement(426)",
+		Filter = "Level() < 70 OR NOT (Class(ROGUE) OR Class(DEATHKNIGHT) OR Class(MONK) OR Class(WARRIOR) OR Class(DEMONHUNTER)) OR BossesKilled(BLACK_TEMPLE) >= 9" -- Hide if locked out, as there is nothing else to do (for the week),
+	},
+	
 }
 
 
