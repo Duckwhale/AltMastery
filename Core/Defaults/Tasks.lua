@@ -1511,6 +1511,33 @@ local defaultTasks = {
 		},
 	},
 	
+	
+	MILESTONE_TBC_UNLOCK_YOR = {
+		name = "The Eye of Haramad",
+		description = "TODO",
+		notes = "Summon boss: Yor",
+		iconPath = "inv_qiraj_hiltornate",
+		Criteria = "Objectives(\"MILESTONE_TBC_UNLOCK_YOR\")",
+		Filter = "Level() < 70",
+		Objectives = {
+
+			"Reputation(THE_CONSORTIUM) >= HONORED AS The Consortium: Honored",
+			"Quest(10969) OR Quest(10970) AS Seek Out Ameer (optional)", -- TODO: Breadcrumb = Optional
+			"Quest(10970) AS A Mission of Mercy",
+			"Quest(10971) AS Ethereum Secrets",
+			"Reputation(THE_CONSORTIUM) >= REVERED AS The Consortium: Revered",
+			"Quest(10973) AS A Thousand Worlds",
+			"Quest(10974) AS Stasis Chambers of Bash'ir",
+			"Quest(10975) OR Quest(10976) AS Purging the Chambers of Bash'ir", -- TODO: Repeatable = won't complete?
+			"Quest(10976) AS The Mark of the Nexus-King",
+			"Quest(10977) AS Stasis Chambers of the Mana-Tombs",
+			"Quest(10981) OR Quest(10982) AS Nexus-Prince Shaffar's Personal Chamber", -- TODO: Repeatable = won't complete?
+			"Reputation(THE_CONSORTIUM) >= EXALTED AS The Consortium: Exalted",
+			"Quest(10982) AS The Eye of Haramad",
+			
+		},
+	},
+	
 	MILESTONE_LEGION_UNLOCK_MOROES = {
 		name = "Moroes unlocked",
 		description = "TODO",
