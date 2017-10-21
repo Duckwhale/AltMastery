@@ -1403,6 +1403,15 @@ local defaultTasks = {
 		Filter = "Level() < 100",
 	},
 	
+	RESTOCK_LEGION_LEGIONFALLWARSUPPLIES = {
+		name = "Legionfall War Supplies spent",
+		description = "TODO",
+		notes = "<500 to avoid capping",
+		iconPath = "inv_misc_summonable_boss_token",
+		Criteria = "Currency(LEGIONFALL_WAR_SUPPLIES) < 500",
+		Filter = "Level() < 110",
+	},
+	
 }
 
 
