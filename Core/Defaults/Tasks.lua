@@ -1454,6 +1454,63 @@ local defaultTasks = {
 		Filter = "Level() < 70 OR Reputation(THE_CONSORTIUM) >= EXALTED",
 	},
 	
+	MILESTONE_WOD_TANAANCAMPAIGN = {
+		name = "In Pursuit of Gul'dan",
+		description = "TODO",
+		notes = "Pet, Apexis Follower, Shipyard",
+		iconPath = "achievement_zone_tanaanjungle",
+		Criteria = "Achievement(10067) OR Achievement(10074)", -- A/H
+		Filter = "Level() < 100",
+		Objectives = {
+
+			"Quest(38253) OR Quest(38567) AS Garrison Campaign: War Council",
+			"Quest(40418) OR Quest(40417) AS To Tanaan!", -- TODO: Breadcrumb / Optional (intro can be skipped? -> add Objectives attribute, such as optional = true)
+			"Quest(38257) OR Quest(38568) AS We Need a Shipwright",
+			"Quest(38254) OR Quest(38570) AS Derailment",
+			"Quest(38255) OR Quest(38571) AS The Train Gang",
+			"Quest(38256) OR Quest(38572) AS Hook, Line, and... Sink Him!",
+			"Quest(38258) OR Quest(38573) AS Nothing Remains",
+			"Quest(38259) OR Quest(38574) AS All Hands on Deck",
+			-- Step completed: All Hands on Deck
+			
+			"Quest(39082) OR Quest(39236) AS Let's Get To Work",
+			"Quest(39054) OR Quest(39241) AS Shipbuilding",
+			"Quest(39055) OR Quest(39242) AS Ship Shape",
+			"Quest(38435) OR Quest(37889) AS The Invasion of Tanaan",
+			"Quest(38436) OR Quest(37890) AS Obstacle Course",
+			"Quest(38444) OR Quest(37934) AS In, Through, and Beyond!",
+			"Quest(38445) OR Quest(37935) AS The Assault Base",
+			-- Step completed: The Invasion of Tanaan
+			
+			"Quest(38560) OR Quest(38453) AS Garrison Campaign: The Bane of the Bleeding Hollow",
+			"Quest(38270) AS Finding the Killer",
+			"Quest(38271) AS Following the Bloody Path",
+			"Quest(38272) AS The Bleeding Hollow",
+			"Quest(38273) AS Spirits of the Bleeding Hollow",
+			"Quest(38274) AS The Eye of Kilrogg",
+			-- Step completed: Bane of the Bleeding Hollow
+			
+			"Quest(37687) OR Quest(37688) AS Garrison Campaign: In the Shadows",
+			"Quest(38267) OR Quest(38269) AS Friends Above",
+			"Quest(38213) AS Get a Clue",
+			"Quest(38223) AS Dark Ascension",
+			-- Step completed: Dark Ascension
+			
+			"Quest(38421) OR Quest(38415) AS Garrison Campaign: Onslaught at Auchindoun",
+			"Quest(38562) OR Quest(38416) AS Secrets of the Sargerei",
+			-- Step completed: The Fate of Teron'gor
+			
+			"Quest(38561) OR Quest(38458) AS Garrison Campaign: The Warlock",
+			"Quest(38462) AS Breaching the Barrier",
+			"Quest(39394) OR Quest(38463) AS The Cipher of Damnation",
+			-- Step completed: The Cipher of Damnation
+			
+			"Quest(39395) AS Oronok's Offer",
+			-- Obtained Garrison follower: Oronok Tornheart
+			
+		},
+	},
+	
 }
 
 
