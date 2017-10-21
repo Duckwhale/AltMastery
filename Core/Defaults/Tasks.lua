@@ -1979,6 +1979,26 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_LFCHAMPIONS_PALADIN2 = { -- Maximilian of Northshire - technically not a LF champion, but whatever...
+		name = "Maximilian of Northshire joined",
+		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_PALADIN\")",
+		Filter = "Level() < 110 OR NOT Class(PALADIN) OR NOT Achievement(11846) OR NOT Quest(24707)", -- Achievement: "Champions of Legionfall" = The letter that starts the quest arrives with the next weekly reset, but only if the Un'goro chain featuring Maximilian has been completed
+		Objectives = {
+
+			"Quest(45561) AS Seek Me Out",
+			"Quest(45562) AS Kneel and Be Squired!",
+			"Quest(45565) AS Further Training",
+			"Quest(45566) AS A Knight's Belongings",
+			"Quest(45567) AS My Kingdom for a Horse",
+			"Quest(45568) AS They Stole Excaliberto!",
+			"Quest(45644) AS Oh Doloria, My Sweet Doloria",
+			"Quest(45645) AS A Fool's Errand",
+			"Quest(45813) AS Where Art Thou, My Sweet",
+
+		},
+	},
 		
 	MILESTONE_LEGION_LFCHAMPIONS_SHAMAN = {
 		name = "Champions of Legionfall",
