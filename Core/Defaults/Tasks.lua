@@ -270,9 +270,9 @@ local defaultTasks = {
 			Criteria = "BonusRolls(LEGION) > 0", -- TODO: More options for efficiency -> 1 coin per week
 			Filter = "Level() < 110",
 			Objectives = {
-				"BonusRolls(LEGION) == 1 AS First seal received",
-				"BonusRolls(LEGION) == 2 AS Second seal received",
-				"BonusRolls(LEGION) == 3 AS Third seal received",
+				"BonusRolls(LEGION) >= 1 AS First seal received",
+				"BonusRolls(LEGION) >= 2 AS Second seal received",
+				"BonusRolls(LEGION) >= 3 AS Third seal received",
 			},
 			
 		},
