@@ -2049,6 +2049,34 @@ local defaultTasks = {
 		},
 	},
 
+
+	MILESTONE_LEGION_BREACHINGTHETOMB = {
+		name = "Breaching the Tomb",
+		notes = "Order Hall Follower",
+		iconPath = "achievement_dungeon_tombofsargeras",
+		Criteria = "Objectives(\"MILESTONE_LEGION_BREACHINGTHETOMB\")",
+		Filter = "Level() < 110 OR NOT Quest(43341)", -- Required "Uniting the Isles"
+		Objectives = {
+
+			"Quest(46730) AS Armies of Legionfall",
+			"Quest(46734) AS Assault on Broken Shore (Scenario)",
+			"Quest(46245) AS Begin Construction",
+			"Quest(46832) AS Aalgen Point",
+			"Quest(46845) AS Vengeance Point",
+			"Quest(46247) AS Defending Broken Isles",
+			"Quest(47137) AS Champions of Legionfall",
+			"Quest(46251) AS Shard Times",
+			"Quest(47139) AS Mark of the Sentinax",
+			"Quest(46248) AS Self-Fulfilling Prophecy",
+			"Quest(46252) AS Intolerable Infestation",
+			"Quest(46769) AS Relieved of Their Valuables",
+			"Quest(46250) AS Take Out the Head...",
+			"Quest(46249) AS Championing Our Cause",
+			"Quest(46246) AS Strike Them Down",
+
+		},
+	},		
+	
 }
 
 
