@@ -1394,6 +1394,15 @@ local defaultTasks = {
 		Filter = "Level() < 90",
 	},
 	
+	RESTOCK_WOD_GARRISONRESOURCES = {
+		name = "Garrison Resources spent",
+		description = "TODO",
+		notes = "< 8.5k to avoid capping",
+		iconPath = "inv_garrison_resource",
+		Criteria = "Currency(GARRISON_RESOURCES) < 8500",
+		Filter = "Level() < 100",
+	},
+	
 }
 
 
