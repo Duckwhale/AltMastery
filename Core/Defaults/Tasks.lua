@@ -251,7 +251,7 @@ local defaultTasks = {
 		},
 		
 		DAILY_MOP_COOKINGSCHOOLBELL = {
-			name = "Cooking School Bell",
+			name = "Cooking School Bell used",
 			description = "Complete the quest \"A Token of Appreciation\" and recieve Nomi's gift",
 			notes = "Ironpaw Tokens",
 			iconPath = "inv_misc_bell_01",
