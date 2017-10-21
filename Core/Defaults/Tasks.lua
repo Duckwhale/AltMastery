@@ -2077,6 +2077,13 @@ local defaultTasks = {
 		},
 	},		
 	
+	DAILY_WOD_GARRISON_HERBGARDEN = {
+		name = "Garrison: Herbs gathered",
+		iconPath = "inv_farm_pumpkinseed_yellow", --inv_misc_herb_frostweed
+		Criteria = "Quest(36799)",
+		Filter = "Level() < 96",
+	},
+	
 }
 
 
