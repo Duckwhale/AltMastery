@@ -2111,8 +2111,8 @@ local function GetDefaultTasks()
 		local Task = AM.TaskDB:CreateTask() -- Is not readOnly by default, as this is usually used to create custom Tasks
 		Task.isReadOnly = true -- Lock as it's a default Task
 		
-		Task.name = entry.name
-		Task.description = entry.description
+		Task.name = entry.name or "UNNAMED"
+		Task.description = entry.description or "TODO"
 		Task.notes = entry.notes or ""
 		Task.iconPath = "Interface\\Icons\\" .. (entry.iconPath or "inv_misc_questionmark")
 		Task.Criteria = entry.Criteria or ""
