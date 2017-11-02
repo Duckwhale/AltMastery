@@ -134,7 +134,8 @@ local constants = { -- Used t look up actual ID if an alias was used
 	-- Contribution states
 	STATE_BUILDING = 1,
 	STATE_ACTIVE = 2,
-	STATE_DESTROYED = 3, -- Probably? (Untested)
+	STATE_UNDER_ATTACK = 3,
+	STATE_DESTROYED = 4, -- Probably? (Untested)
 	
 	-- Standing IDs (used for checking Reputations)
 	HATED = 1,
