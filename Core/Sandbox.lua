@@ -150,6 +150,12 @@ local constants = { -- Used t look up actual ID if an alias was used
 	-- Instance IDs
 	MANA_TOMBS = 179,
 	BLACK_TEMPLE = 196,
+	-- Map POI IDs (used for Legion Assaults)
+	AZSUNA = 5175,
+	STORMHEIM = 5178,
+	HIGHMOUNTAIN = 5177,
+	VALSHARAH = 5210,
+	
 	
 }
 
