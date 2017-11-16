@@ -67,6 +67,12 @@ local constants = { -- Used t look up actual ID if an alias was used
 		1129673, -- Event in progress	
 		-- Event ends
 	},
+	
+	TIMEWALKING_WOTLK = {
+		1129686, -- Event starts
+		1129685, -- Event in progress	
+		-- Event ends
+	},
 
 	DARKMOON_FAIRE = {
 		235464, -- Event starts?
