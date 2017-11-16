@@ -78,6 +78,7 @@ local constants = { -- Used t look up actual ID if an alias was used
 	DARKMOON_FAIRE = {
 		235464, -- Event starts?
 		235447, -- Event ends?
+		235448, -- ?? First day ??
 		235446, -- Last day?
 	},
 	
