@@ -55,6 +55,7 @@ local constants = { -- Used t look up actual ID if an alias was used
 	HALLOWS_END = {
 		1129675, -- First day
 		235461, -- In progress
+		235460, -- Last day
 	},
 	
 	TIMEWALKING_MOP = { 
