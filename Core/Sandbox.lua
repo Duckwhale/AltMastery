@@ -135,6 +135,9 @@ local constants = { -- Used t look up actual ID if an alias was used
 	THE_CONSORTIUM = 933,
 	THE_ASHEN_VERDICT = 1156,
 	EMPEROR_SHAOHAO = 1492,
+	THE_DREAMWEAVERS = 1883, -- 2088 = Paragon
+	THE_VALARJAR = 1948, -- 2086 = Paragon
+	ARMIES_OF_LEGIONFALL = 2045,
 	
 	-- Contribution IDs (for the Broken Shore Buildings)
 	MAGE_TOWER = 1,
