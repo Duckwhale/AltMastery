@@ -269,41 +269,77 @@ local function Buff(spellID)
 	
 end
 
---- Returns whether or not there's an emissary cache that expires in exactly X days (at the daily reset, not actually 24h time)
-local function Emissary(days)
-   
-   days = (type(days) == "number" and days >= 1 and days <= 3) and days or 3
-   local format, math_floor = format, math.floor
-   
-   local BountyQuest = GetQuestBountyInfoForMapID(1014) -- Dalaran (Broken Isles) - all Legion WQs should be available from there
-   
-   for BountyIndex, BountyInfo in ipairs(BountyQuest) do -- Check unfinished emissaries
-      
-      local title = GetQuestLogTitle(GetQuestLogIndexByID(BountyInfo.questID))
-      
-      local timeleft = C_TaskQuest.GetQuestTimeLeftMinutes(BountyInfo.questID)
-      
-      local _, _, isFinish, questDone, questNeed = GetQuestObjectiveInfo(BountyInfo.questID, 1, false)
-      
-      if timeleft then
-         
-         local t = (days - 1) * 1440 * 60 + GetQuestResetTime()
-         --  print(t)
-         local mins = math_floor(t/60 + 0.5)
 
-         local h = format("%d", math_floor(t/3600)); -- hours remaining (int)
-         local m = format("%d", math_floor((t/60 - h*60))); -- minutes remaining (int)
-         local s = format("%d", math_floor(t - h*3600 - m*60));
-     
-         
-         if timeleft <= mins + 2 and timeleft >= mins - 2 then -- This emissary is available for less than the requested time -> is a valid result for this query
-            
-            return not isFinish -- If it isn't done, this returns true to indicate there is still one left
-         end
-      end
-      
-   end
-   return false -- Assumes the query was valid and there was no emissary because it has been completed -> Not ideal; needs caching and then it can actually differentiate between completed = true and invalid = nil
+local emissaryInfo = {} -- Cache for emissary info, shared between Criteria that use the BountyQuest API (but it isn't stored, yet -> TODO)
+
+--- Returns info about the currently active emissary quests (bounties)
+-- Helper function, to be used by the Criteria API
+local function GetEmissaryInfo(questID)
+
+	local bounties = GetQuestBountyInfoForMapID(1014) -- Dalaran (Broken Isles) - all Legion WQs should be available from there
+	for _, bounty in ipairs(bounties) do -- Check  active emissary quests to see if the given ID matches any one of them
+	
+		if bounty.questID == questID then -- This is the right bounty
+			return bounty
+		end
+		
+		-- If no match was found, return nothing
+	end
+	
+end
+
+--- Returns the number of days until a given emissary quest expires. Only works if it hasn't been completed (which is considered "not active", because the API provides no data about it)
+local function Emissary(questID)
+
+	local bounty = GetEmissaryInfo(questID)
+	if not bounty then -- The emissary quest is not active
+		return 0
+	end
+
+	local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bounty.questID)
+	local statusText, description, isFinish, questDone, questNeed = GetQuestObjectiveInfo(bounty.questID, 1, false)
+	-- print(statusText, timeLeft) 
+	if timeLeft then -- Emissary quest is active -> check if it matches
+
+		if bounty.questID ==questID then -- This is the correct emissary quest -> Find out which position (in terms of expiry date) it occupies, e.g. <1day = 1, <2 days = 2, <3 days = 3
+	--print(questID, statusText)
+			local minutesUntilDailyReset = math.ceil(GetQuestResetTime() / 60 + 0.5)
+			local gracePeriod = 65 -- Using 65 minutes = 1 hour + 5 minutes, as emissaries have 1 day between them; there is a slight delay in the API updating (2 mins or so) and there could also be an issue with DST -> Precision doesn't matter, as they can never overlap -> TODO: Sync via GetServerTime()?
+					
+			for i=1, 3 do -- Calculate approximate reset times for each day (and emissary active that ends here)
+
+				-- Calculate the reset time interval, which is an approximate to account for the delayed API updates
+				local minutesLeft = (i-1) * 1440 + minutesUntilDailyReset -- Each day has 24 hours = 24 * 60 = 1440 minutes, minus the time already passed today. Therefore, this is the time that the i-th emissary has before it expires (EXACT)
+	--print(i, minutesLeft)									
+				-- Note: It may seem pointless to do it like this, as the bounties line up if all three are available, but if one is completed then the indices will shift and there is a mismatch which is being accounted for here
+				if timeLeft >= (minutesLeft - gracePeriod)  and timeLeft <= (minutesLeft + gracePeriod) then -- The i-th emissary expires in the same interval as the bounty that is currently being checked -> This is the DAY it expires, including today (1 = today, 2 = tomorrow, 3 = the day after tomorrow)
+	--print(i, "matched!")					
+					return i -- The given emissary expires in the interval around the i-th day's reset period, so this must be the right day
+				
+				end
+			
+			end
+
+		end
+	
+	end
+	
+	return 0 -- Emissary quest is not active -> Can be interpreted as "active for 0 days" = invalid or completed
+ 
+end
+
+local function EmissaryProgress(questID)
+
+	local bounty = GetEmissaryInfo(questID)
+	if not bounty then -- The emissary quest is not active
+		return 0
+	end
+
+	local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bounty.questID)
+	local statusText, description, isFinish, questDone, questNeed = GetQuestObjectiveInfo(bounty.questID, 1, false)
+
+	return questDone
+	
 end
 
 local function Faction(factionName)
@@ -410,6 +446,7 @@ Criteria = {
 	ContributionBuffs = ContributionBuffs,
 	Faction = Faction,
 	Emissary = Emissary,
+	EmissaryProgress = EmissaryProgress,
 	Quest = Quest,
 	Class = Class,
 	Level = Level,
