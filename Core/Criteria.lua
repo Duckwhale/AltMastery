@@ -411,10 +411,10 @@ local function BossesKilled(instanceID)
       
       local instanceName, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(index)
       
-      local dungeonorRaidName = GetLFGDungeonInfo(instanceID)
+      local dungeonOrRaidName = GetLFGDungeonInfo(instanceID)
       
-      if instanceName:gmatch(dungeonorRaidName) and encounterProgress and locked then -- Is probably the same dungeon? There might be issues if the dungeons are named ambiguously? (TODO)
-     --    AM:Print("Found lockout for instance = " .. instanceName .. " (dungeonorRaidName = " .. dungeonorRaidName .. ") - Defeated bosses: " .. encounterProgress .. "/" .. numEncounters)
+      if instanceName:match(dungeonOrRaidName) and encounterProgress and locked then -- Is probably the same dungeon? There might be issues if the dungeons are named ambiguously? (TODO)
+  --      AM:Print("Found lockout for instance = " .. instanceName .. " (dungeonOrRaidName = " .. dungeonOrRaidName .. ") - Defeated bosses: " .. encounterProgress .. "/" .. numEncounters)
          return encounterProgress
       end
       
