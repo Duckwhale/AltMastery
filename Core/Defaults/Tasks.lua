@@ -138,7 +138,7 @@ local PrototypeTask = {
 local defaultTasks = {
 -- TODO: Better naming scheme for consistency
 		MILESTONE_WOTLK_LEGENDARY_SHADOWMOURNE = {
-			name = "Unlock Shadowmourne",
+			name = "Shadowmourne",
 			description = "Retrieve Shadowmourne from the depths of Icecrown Citadel",
 --			Priority = "OPTIONAL", -- TODO: Localise priorities
 --			ResetType = "ONE_TIME", -- TODO
