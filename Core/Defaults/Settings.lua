@@ -45,7 +45,7 @@ local defaults = {
 		windowPadding = 4, -- The space between a window and its content pane (use Content.padding for the space between the content pane and its child elements)
 		
 		Tracker = { -- Tracker window: Shows the Tasks for the currently active Group
-			width = 350,
+			width = 320,
 			height = 500,
 			
 			-- TODO: Apply those and add settings in AceGUI
@@ -92,7 +92,7 @@ local defaults = {
 		},
 		
 		GroupSelector = { -- Group selector: Expandable sidepanel that allows selecting the active Group
-			width = 150,
+			width = 160,
 			height = 540,
 			useTextures = true, -- TODO: Not really looking too great yet
 			
