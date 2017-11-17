@@ -146,6 +146,7 @@ local defaultTasks = {
 			Criteria = "Achievement(4623)",
 			Filter = " NOT (Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT)) OR Level() < 80",
 			Objectives = {
+				"Reputation(THE_ASHEN_VERDICT) >= FRIENDLY AS The Ashen Verdict: Friendly",
 				"Quest(24545) AS The Sacred and the Corrupt", -- TODO: Localise steps/quest names?
 				"Quest(24743) AS Shadow's Edge",
 				"Quest(24547) AS A Feast of Souls",
