@@ -425,6 +425,18 @@ local function BossesKilled(instanceID)
    
 end
 
+-- Returns whether or not a Legion Assault ("Invasion") is currently ongoing for the given POI ID (=one for each zone)
+local function Invasion(POI)
+
+	local timeLeftMinutes = C_WorldMap.GetAreaPOITimeLeft(POI)
+	if timeLeftMinutes and timeLeftMinutes > 0 and timeLeftMinutes < 361 then -- Invasion is in progress -- According to the author of LegionInvasonTimer, some realms can return values that are too large when an event starts (?) -> Better to be safe than to be sorry
+		return true
+	end
+
+	return false
+	
+end
+
 	-- for index = 1, GetNumSavedInstances() do -- Check if instance matches the requested dungeon ID
 		
 		-- local name, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(index)
@@ -440,6 +452,7 @@ end
 
 
 Criteria = {
+	Invasion = Invasion,
 	BossesKilled = BossesKilled,
 	DungeonLockout = DungeonLockout,
 	ContributionState = ContributionState,
