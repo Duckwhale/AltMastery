@@ -255,6 +255,51 @@ local defaultTasks = {
 			}
 		},
 		
+		DAILY_WORLDEVENT_WOWANNIVERSARY_LOREQUIZ = {
+			name = "Anniversary: A Time to Reflect",
+			iconPath = "pvecurrency-justice",
+			Criteria = "Faction(ALLIANCE) AND Quest(43323) OR Quest(43461)",
+			Filter = "not WorldEvent(WOW_ANNIVERSARY)",
+		},
+		
+		-- TODO: Type "Seasonal" instead of World Event for this?
+		DAILY_WORLDEVENT_WOWANNIVERSARY_WORLDBOSSQUEST = {
+			name = "Anniversary: The Originals",
+			iconPath = "pvecurrency-justice",
+			Criteria = "Quest(47254) OR Quest(47253)", -- TODO: Alliance/Horde? Not sure...
+			Filter = "Level() < 60 OR NOT WorldEvent(WOW_ANNIVERSARY)",
+		},
+		
+		MISC_WORLDEVENT_WOWANNIVERSARY_REPUTATIONBOOST = {
+			name = "Anniversary: Celebration Package",
+			iconPath = "temp", -- inv_misc_gift_03
+			Criteria = "Buff(243305)",
+			Filter = "not WorldEvent(WOW_ANNIVERSARY)",
+		},
+		
+		DAILY_WORLDEVENT_WOWANNIVERSARY_WORLDBOSSES = {
+			name = "Anniversary: Legacy World Bosses",
+			iconPath = "inv_misc_celebrationcake_01",
+			Criteria = "NumObjectives(\"DAILY_WORLDEVENT_WOWANNIVERSARY_WORLDBOSSES\") >= 3",
+			Filter = "Level() < 60 OR NOT WorldEvent(WOW_ANNIVERSARY)",
+			Objectives = {
+				"Quest(47461) AS Lord Kazzak slain",
+--				"Quest(47464) AS Lord Kazzak: Bonus roll",
+				"Quest(47462) AS Azuregos slain",
+--				"Quest(47465) AS Azuregos: Bonus roll",
+				"Quest(47463) AS Dragon of Nightmare slain",
+--				"Quest(47466) AS Dragon of Nightmare: Bonus roll",
+				-- "false AS Lethon slain", -- 
+				-- "false AS Lethon: Bonus roll",
+				-- "Quest(47463) AS Taerar slain", -- 
+				-- "Quest(47466) AS Taerar: Bonus roll",
+				-- "Quest(47463) AS Ysondre slain", -- 
+				-- "false AS Ysondre: Bonus roll",
+				-- "Quest(47463) AS Emeriss slain", -- Duskwood
+				-- "Quest(47466) AS Emeriss: Bonus roll",
+			},
+		},
+		
 		RESTOCK_LEGION_ORDERHALLRESOURCES = {
 			name = "Order Resources restocked",
 			description = "Obtain sufficient amounts of resources to send followers on missions in your Order Hall",
