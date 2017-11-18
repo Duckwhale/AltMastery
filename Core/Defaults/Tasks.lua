@@ -242,6 +242,19 @@ local defaultTasks = {
 			}
 		},
 		
+		MONTHLY_WORLDEVENT_TIMEWALKING_WOTLK = {
+			name = "Timewalking: Wrath of the Lich King",
+			description = "Complete the quest \"The Unstable Prism\" during the Wrath of the Lich King Timewalking event",
+			notes = "500 Timewarped Badges",
+			iconPath = "inv_misc_uncutgemsuperior6",
+			Criteria = "Quest(40173)",
+			Filter = "Level() < 81 OR NOT WorldEvent(TIMEWALKING_WOTLK)",
+			Objectives = {
+				"InventoryItem(129928) OR Quest(40173) AS Obtain a Frigid Timewarped Prism",
+				"Quest(40173) AS Bring it to Auzin in Dalaran (Northrend)",
+			}
+		},
+		
 		RESTOCK_LEGION_ORDERHALLRESOURCES = {
 			name = "Order Resources restocked",
 			description = "Obtain sufficient amounts of resources to send followers on missions in your Order Hall",
