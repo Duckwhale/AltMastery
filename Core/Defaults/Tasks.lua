@@ -174,37 +174,32 @@ local defaultTasks = {
 		},
 
 		MILESTONE_LEGION_UNLOCK_KOSUMOTH = {
-			name = "Kosumoth the Hungering unlocked",
+			name = "Void Attunement", -- Kosumoth the Hungering unlocked
 			description = "Unlock access to Kosumoth the Hungering by activating all the hidden orbs",
-			notes = "Pet",
-			iconPath = "spell_priest_voidtendrils",
+			notes = "Pet, Mount",
+			iconPath = "ability_priest_voidentropy", -- "spell_priest_voidtendrils",
 			Criteria = "Objectives(\"MILESTONE_LEGION_UNLOCK_KOSUMOTH\")",
-			Filter = "Level() < 110 OR WorldQuest(43798)", -- Hide if the WQ is up, as that means it has already been unlocked
+			Filter = "Level() < 110 OR WorldQuest(43798)", -- Hide if the WQ is up, as that implies it has already been unlocked
 			Objectives = {
-				
-				"Quest(43730) AS  Aszuna: Nor'danil Wellsprings",
-				"Quest(43731) AS  Suramar/Stormheim: Border Cave",
-				"Quest(43732) AS  Val'Sharah: Harpy Grounds",
-				"Quest(43733) AS  Broken Shore: Underwater Cave",
-				"Quest(43734) AS  Aszuna: Ley-Ruins of Zarkhenar",
-				"Quest(43735) AS  Stormheim: Underwater (Shark)",
-				"Quest(43736) AS  Highmountain: Heymanhoof Slope",
-				"Quest(43737) AS  Aszuna: Llothien (Azurewing Repose)",
-				"Quest(43760) AS  Eye of Azshara: Underwater (Wreck)",
-				"Quest(43761) AS  Broken Shore:  On Drak'thul's Table",
-			
-				-- "Quest(43730) AS Activated First Orb",
-				-- "Quest(43731) AS Activated Second Orb",
-				-- "Quest(43732) AS Activated Third Orb",
-				-- "Quest(43733) AS Activated Fourth Orb",
-				-- "Quest(43734) AS Activated Fifth Orb",
-				-- "Quest(43735) AS Activated Sixth Orb",
-				-- "Quest(43736) AS Activated Seventh Orb",
-				-- "Quest(43737) AS Activated Eight Orb",
-				-- "Quest(43760) AS Activated Ninth Orb",
-				-- "Quest(43761) AS Activated Tenth Orb",
+				"Quest(43715) AS Drak'thul Intro: Feldust Cavern has opened", -- Flag 1
+				"InventoryItem(139783) OR Quest(43725) AS Weathered Relic looted",
+				"Quest(43725) AS Brought Relic to Drak'thul", -- Flag 2
+				"Quest(43727) AS Listened to Drak'thul's story", -- Flag 3
+				"Quest(43728) AS Witnessed Drak'thul's trance", -- Flag 4
+				"Quest(43729) AS Heard Drak'thul out: Orbs are clickable", -- Flag 5
+				"Quest(43730) AS Aszuna: Nor'danil Wellsprings", -- Flag A ... etc.
+				"Quest(43731) AS Suramar/Stormheim: Border cave",
+				"Quest(43732) AS Val'Sharah: Harpy grounds",
+				"Quest(43733) AS Broken Shore: Underwater cave",
+				"Quest(43734) AS Aszuna: Ley-Ruins of Zarkhenar",
+				"Quest(43735) AS Stormheim: Underwater (neutral shark)",
+				"Quest(43736) AS Highmountain: Heymanhoof Slope",
+				"Quest(43737) AS Aszuna: Llothien (Azurewing Repose)",
+				"Quest(43760) AS Eye of Azshara: Underwater (shipwreck)",
+				"Quest(43761) AS Broken Shore: On Drak'thul's table",
 			},
 		},
+		
 		
 		DAILY_WORLDEVENT_CORENDIREBREW = {
 			name = "Coren Direbrew defeated",
