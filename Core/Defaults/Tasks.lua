@@ -200,6 +200,20 @@ local defaultTasks = {
 			},
 		},
 		
+		DAILY_WORLDEVENT_PILGRIMSBOUNTY_QUESTS = {
+			name = "Pilgrim's Bounty Quests",
+			notes = "Pet, Toy, Transmog",
+			iconPath = "inv_misc_bag_33",
+			Criteria = "Objectives(\"DAILY_WORLDEVENT_PILGRIMSBOUNTY_QUESTS\")",
+			Filter = "not WorldEvent(PILGRIMS_BOUNTY)",
+			Objectives = { -- Quests: Alliance OR Horde (both are completed simultaneously, apparently)
+				"Quest(14051) OR Quest(14062) AS Don't Forget The Stuffing!",
+				"Quest(14054) OR Quest(14060) AS Easy As Pie",
+				"Quest(14053) OR Quest(14059) AS We're Out of Cranberry Chutney Again?",
+				"Quest(14055) OR Quest(14058) AS She Says Potato",
+				"Quest(14048) OR Quest(14061) AS Can't Get Enough Turkey",	
+			},
+		},
 		
 		DAILY_WORLDEVENT_CORENDIREBREW = {
 			name = "Coren Direbrew defeated",
