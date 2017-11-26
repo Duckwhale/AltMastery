@@ -20,15 +20,54 @@ if not AM then return end
 local Criteria = {}
 
 -- WOW API
-GetCurrencyInfo
+local GetCurrencyInfo = GetCurrencyInfo
+
 local IsQuestFlaggedCompleted = IsQuestFlaggedCompleted
-local GetMapNameByID = GetMapNameByID
-local GetRealZoneText = GetRealZoneText
-local SetMapToCurrentZone = SetMapToCurrentZone
+
+local UnitBuff = UnitBuff
+local UnitClass = UnitClass
+local UnitFactionGroup = UnitFactionGroup
+local UnitLevel = UnitLevel
+
+local GetAchievementInfo = GetAchievementInfo
+
+local CalendarGetNumDayEvents = CalendarGetNumDayEvents
+local CalendarGetHolidayInfo = CalendarGetHolidayInfo
+
+local GetContainerNumSlots = GetContainerNumSlots
+local GetContainerItemLink = GetContainerItemLink
+
+local GetItemInfoInstant = GetItemInfoInstant
+
+local GetFactionInfoByID = GetFactionInfoByID
+
+local GetLFGDungeonInfo = GetLFGDungeonInfo
+local GetLFGDungeonRewards = GetLFGDungeonRewards
+local GetSavedInstanceInfo = GetSavedInstanceInfo
+
+local GetProfessions = GetProfessions
+local GetProfessionInfo = GetProfessionInfo
+
+local GetQuestBountyInfoForMapID = GetQuestBountyInfoForMapID
+local GetQuestObjectiveInfo = GetQuestObjectiveInfo
+
 local GetCurrentMapAreaID = GetCurrentMapAreaID
+local GetMapNameByID = GetMapNameByID
+local SetMapToCurrentZone = SetMapToCurrentZone
+
+local GetRealZoneText = GetRealZoneText
+
+
+-- Constants
+local BACKPACK_CONTAINER = BACKPACK_CONTAINER
+local NUM_BAG_SLOTS = NUM_BAG_SLOTS
 
 -- Frames
 local WorldMapFrame
+
+-- AltMastery API (TODO)
+local GetNumCompletedObjectives = AM.TaskDB.PrototypeTask.GetNumCompletedObjectives
+
 
 -- Custom evaluator functions for criteria (strings) that will be added to the Parser's sandbox to check common criteria via the WOW API without revealing the underlying complexity (or lack therof :D)
 local function Quest(questID)
@@ -186,20 +225,27 @@ end
 -- TODO: Check for valid values? Might be unnecessary, as errors will simply be evaluated to false
 
 --- Returns the profession skill level if the player has the given profession, or 0 otherwise
+local professions = {}
 local function Profession(iconID)
 
 	local prof1, prof2, archaeology, fishing, cooking, firstAid = GetProfessions()
+	professions.prof1 = prof1
+	professions.prof2 = prof2
+	professions.archaeology = archaeology
+	professions.fishing = fishing
+	professions.cooking = cooking
+	professions.firstAid = firstAid
 	
-	local profs = {
-		prof1 = prof1,
-		prof2 = prof2,
-		archaeology = archaeology,
-		fishing = fishing,
-		cooking = cooking,
-		firstAid = firstAid,
-	}
+	-- local profs = {
+		-- prof1 = prof1,
+		-- prof2 = prof2,
+		-- archaeology = archaeology,
+		-- fishing = fishing,
+		-- cooking = cooking,
+		-- firstAid = firstAid,
+	-- }
 	
-	for key, profession in pairs(profs) do -- Check if the profession matches)
+	for key, profession in pairs(professions) do -- Check if the profession matches
 		
 		local _, icon, skillLevel = GetProfessionInfo(profession)
 		if not iconID or not icon then return false end -- Can't possibly have the profession
@@ -225,7 +271,7 @@ local function Objectives(taskID)
 	if not Task or #Task.Objectives == 0 then return end -- Invalid Tasks or Tasks without Objectives can never return true
 
 	local numObjectives = #Task.Objectives
-	local numCompletedObjectives = AM.TaskDB.PrototypeTask.GetNumCompletedObjectives(Task)
+	local numCompletedObjectives = GetNumCompletedObjectives(Task)
 
 	return (numObjectives == numCompletedObjectives)
 
@@ -239,7 +285,7 @@ local function NumObjectives(taskID)
 
 	if not Task or #Task.Objectives == 0 then return end -- Invalid Tasks or Tasks without Objectives can never return true
 
-	local numCompletedObjectives = AM.TaskDB.PrototypeTask.GetNumCompletedObjectives(Task)
+	local numCompletedObjectives = GetNumCompletedObjectives(Task)
 	return numCompletedObjectives
 	
 end
@@ -257,7 +303,7 @@ end
 
 local function WorldQuest(questID)
 
-	if not C_TaskQuest or not C_TaskQuest.IsActive then return end
+	if not C_TaskQuest or not C_TaskQuest.IsActive then return end -- TODO: Upvalue this, or could that cause issues?
 	return C_TaskQuest.IsActive(questID)
 	
 end
@@ -300,7 +346,7 @@ local function GetEmissaryInfo(questID)
 end
 
 --- Returns the number of days until a given emissary quest expires. Only works if it hasn't been completed (which is considered "not active", because the API provides no data about it)
-local function Emissary(questID)
+local function Emissary(questID) -- TODO: Upvalues?
 
 	local bounty = GetEmissaryInfo(questID)
 	if not bounty then -- The emissary quest is not active
@@ -339,7 +385,7 @@ local function Emissary(questID)
  
 end
 
-local function EmissaryProgress(questID)
+local function EmissaryProgress(questID) -- TODO: Upvalues?
 
 	local bounty = GetEmissaryInfo(questID)
 	if not bounty then -- The emissary quest is not active
@@ -365,7 +411,7 @@ local function Faction(factionName)
 end
 
 -- Returns the contribution state for Broken Shore buildings (TODO: Filter by buff if all we want is the free follower token? Maybe for a separate Task, in addition to the legendary crafting material - also add task to use them?)
-local function ContributionState(contributionID)
+local function ContributionState(contributionID) -- TODO: Upvalues
 
 	-- IDs = 1, 3, 4 are set only (maybe they will add more in the future?)
 --	local contributionName = C_ContributionCollector.GetName(contributionID);
@@ -377,14 +423,14 @@ local function ContributionState(contributionID)
 end
 
 -- Returns the reward spell (buff) currently active for the given contribution (Broken Shore building)
-local function ContributionBuff(contributionID)
+local function ContributionBuff(contributionID) -- TODO: Upvalues
 	
 	local _, rewardSpellID = C_ContributionCollector.GetBuffs(contributionID)
 	return rewardSpellID -- The first one doesn't really matter, as it's always the same (and it is a zone-wide buff, so it can't be tracked like other buffs)
 	
 end
 
-
+-- Returns the reputation level for a given faction
 local function Reputation(factionID)
 	
 	local name, description, standingID, barMin, barMax, barValue, atWarWith, canToggleAtWar, isHeader,
@@ -393,7 +439,6 @@ local function Reputation(factionID)
 	return standingID
 	
 end
-
 
 -- Saved dungeon lockout exists for a given dungeon ID
 local function DungeonLockout(dungeonID)
@@ -437,7 +482,7 @@ local function BossesKilled(instanceID)
 end
 
 -- Returns whether or not a Legion Assault ("Invasion") is currently ongoing for the given POI ID (=one for each zone)
-local function Invasion(POI)
+local function Invasion(POI) -- TODO: Upvalues
 
 	local timeLeftMinutes = C_WorldMap.GetAreaPOITimeLeft(POI)
 	if timeLeftMinutes and timeLeftMinutes > 0 and timeLeftMinutes < 361 then -- Invasion is in progress -- According to the author of LegionInvasonTimer, some realms can return values that are too large when an event starts (?) -> Better to be safe than to be sorry
@@ -486,7 +531,7 @@ end
 -- They are initialised with the localized names to make sure that subzone lookups work across all client versions
 local function GetSubZonesLUT()
 	
-	local subZones = { -- TODO: Super inefficient to do this here - move to initialisation routine
+	local subZones = { -- TODO: Inefficient to do this here - move to initialisation routine?
 		
 		-- Broken Isles (without Argus)
 		[1007] = {
