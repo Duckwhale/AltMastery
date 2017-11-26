@@ -19,6 +19,17 @@ if not AM then return end
 
 local Criteria = {}
 
+-- WOW API
+GetCurrencyInfo
+local IsQuestFlaggedCompleted = IsQuestFlaggedCompleted
+local GetMapNameByID = GetMapNameByID
+local GetRealZoneText = GetRealZoneText
+local SetMapToCurrentZone = SetMapToCurrentZone
+local GetCurrentMapAreaID = GetCurrentMapAreaID
+
+-- Frames
+local WorldMapFrame
+
 -- Custom evaluator functions for criteria (strings) that will be added to the Parser's sandbox to check common criteria via the WOW API without revealing the underlying complexity (or lack therof :D)
 local function Quest(questID)
 	return IsQuestFlaggedCompleted(questID)
