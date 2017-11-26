@@ -449,7 +449,86 @@ end
 	
 	-- -- Nothing saved -> Dungeon is not locked out
 	-- return false
+--- Returns whether or not the current zone matches a given map
+-- Note: Will not function properly if the WorldMapFrame is shown, to prevent the displayed map from changing while the player has it opened
+local function Zone(zoneMapID)
 
+--print("WorldMapFrame is visible", WorldMapFrame:IsShown())
+
+	if WorldMapFrame and not WorldMapFrame:IsShown() then -- Can switch map to get current zone map ID (there is no better way in the API, unfortunately...)
+	   SetMapToCurrentZone()
+	   local mapID, isContinent = GetCurrentMapAreaID()
+--print("Current map is continent", isContinent)
+	   
+	   if not isContinent then -- Map is set to continent after a UI reload until it has changed once, which means it's practically useless as it won't display the current ZONE (TODO: Does changing the map via the above API call work to fix this, or does it have to be done by the user?)
+			return (zoneMapID == mapID)
+--print("MapID is", mapID)
+	   end
+	end
+
+	-- Returns nil if World map is open -> displays "?" icon temporarily (not ideal, but well... it should hardly matter)
+	
+end	
+	
+--- Local helper function (TODO: Move elsewhere and integrate in proper initialisation routine)
+-- This just needs to be called once after logging in to populate the subzones LUT with their localised zone names (before the SubZone criteria can be used)
+-- They are initialised with the localized names to make sure that subzone lookups work across all client versions
+local function GetSubZonesLUT()
+	
+	local subZones = { -- TODO: Super inefficient to do this here - move to initialisation routine
+		
+		-- Broken Isles (without Argus)
+		[1007] = {
+			[GetMapNameByID(1015)] = true, -- Azsuna
+			[GetMapNameByID(1021)] = true, -- Broken Shore
+			[GetMapNameByID(1014)] = true, -- Dalaran -> Also matches the old Dalaran (in Northrend)... TODO
+			-- [GetMapNameByID(1098)] = true, -- Eye of Azshara (the zone, not the dungeon) -> Doesn't appear to be valid?
+			[GetMapNameByID(1024)] = true, -- Highmountain
+			[GetMapNameByID(1017)] = true, -- Stormheim
+			[GetMapNameByID(1033)] = true, -- Suramar
+			[GetMapNameByID(1018)] = true, -- Val'sharah 		
+		},
+		
+		-- Argus
+		[1184] = {
+			[GetMapNameByID(1170)] = true, -- Mac'Aree
+			[GetMapNameByID(1171)] = true, -- Antoran Wastes
+			[GetMapNameByID(1135)] = true, -- Krokuun		
+		},
+		
+	}
+	
+	return subZones
+	
+end
+
+-- Cached LUTs
+local subZones
+
+-- Returns whether or not the current zone is a subzone of a given map
+-- Used for zone-specific buffs that span across one or several subzones of any given continent (e.g., Draenor, Argus, ...)
+local function SubZone(mapID)
+
+	subZones = subZones or GetSubZonesLUT() -- Build LUT if this is the first time the criterion is being checked
+
+	if mapID and subZones[mapID] then -- LUT has an entry for the given zone (continent) -> Check if the current zone is part of it
+	
+		-- Special case: Dalaran (Northrend) should not count as a Broken Isles zone
+		if mapID == 1007 then -- Is BROKEN_ISLES
+			
+			if Zone(504) then -- Player is currently in the OLD Dalaran, which has the same name but should not count as a Broken Isles zone -> Override the subzone detection
+				return false
+			end
+		-- TODO
+		
+		end
+	
+		return (subZones[mapID][GetRealZoneText()]) ~= nil -- Will be true if an entry exists = current zone is a subzone of the given map/continent. If it's nil, that's fine as it will simply be evaluated as false, so no further logic is required here
+	
+	end
+
+end	
+	
 
 Criteria = {
 	Invasion = Invasion,
@@ -475,6 +554,8 @@ Criteria = {
 	WorldQuest = WorldQuest,
 	Buff = Buff,
 	Reputation = Reputation,
+	Zone = Zone,
+	SubZone = SubZone,
 }
 
 AM.Criteria = Criteria
