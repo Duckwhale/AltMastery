@@ -396,6 +396,24 @@ local defaultTasks = {
 			},
 		},
 		
+		
+		MILESTONE_CLASSIC_MINIMUMSKILL_COOKING = {
+			name = "Cooking: DMF Requirement met",
+			iconPath = "inv_misc_food_15",
+			Criteria = "Profession(COOKING) >= 75",
+			Filter = "not WorldEvent(DARKMOON_FAIRE)",
+		},
+		
+		MILESTONE_CLASSIC_MINIMUMSKILL_FIRSTAID = {
+			name = "First Aid: DMF Requirement met",
+			iconPath = "spell_holy_sealofsacrifice",
+			Criteria = "Profession(FIRST_AID) >= 75",
+			Filter = "not WorldEvent(DARKMOON_FAIRE)",
+		},
+		
+		-- TODO: Fishing -> Requires MORE skill to actually fish up something that is not junk... -> Use Jewel of the Sewers or Ironforge/Orgrimmar (achievements) etc?
+		-- TODO: Primary professions? But who would leave them below 75?
+		
 		MONTHLY_WORLDEVENT_DARKMOONFAIRE_TURNINS = {
 			name = "Darkmoon Faire: Turnins",
 			description = "Turn in ALL the items at the Darkmoon Faire",
