@@ -472,6 +472,14 @@ local defaultTasks = {
 			},
 		},
 		
+		MONTHLY_WORLDEVENT_DARKMOONFAIRE_BLIGHTBOARCONCERT = {
+			name = "Darkmoon Faire: Death Metal Knight",
+			notes = "Toy",
+			iconPath = "inv_mace_122",
+			Criteria = "Quest(47767)",
+			Filter = "Level() < 60 OR NOT WorldEvent(DARKMOON_FAIRE)", -- Doesn't drop anything but junk below level 60, apparently
+		},
+		
 		WEEKLY_LEGION_GREATERINVASIONPOINT = {
 			name = "Greater Invasion Point cleared",
 			description = "Defeat the Legion General by completing the Greater Invasion Point scenario available for the week",
