@@ -887,6 +887,93 @@ local defaultTasks = {
 		Filter = " NOT WorldQuest(48829)", -- World Quest
 	},
 	
+	-- Efficient rares (for OR, Weekly quests, reputation) -> Those are close to teleporters and can be killed quickly (with the LF Warframe)
+	WQ_LEGION_SLITHONTHELAST = {
+		name = "World Quest: Slithon the Last",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48936)", -- TODO: Tracking Quest = 48935?
+		Filter = "Level() < 110 OR NOT WorldQuest(48936)",
+	},
+	
+	WQ_LEGION_SOULTWISTEDMONSTROSITY = {
+		name = "World Quest: Soultwisted Monstrosity",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48694)", -- TODO: Tracking Quest = 48935?
+		Filter = "Level() < 110 OR NOT WorldQuest(48694)",
+	},
+	
+	WQ_LEGION_FEASELTHEMUFFINTHIEF = {
+		name = "World Quest: Feasel the Muffin Thief",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48702)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48722)", -- WQ
+	},
+	
+	WQ_LEGION_SIEGEMASTERVORAAN = {
+		name = "World Quest: Siegemaster Voraan",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(47542)", -- TODO: Tracking Quest = 48627?
+		Filter = "Level() < 110 OR NOT WorldQuest(47542)",
+	},
+	
+	WQ_LEGION_COMMANDERENDAXIS = {
+		name = "World Quest: Commander Endaxis",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48511)", -- TODO: Tracking Quest = ?
+		Filter = "Level() < 110 OR NOT WorldQuest(48511)",
+	},
+
+	WQ_LEGION_IMPMOTHERLAGLATH = {
+		name = "World Quest: Imp Mother Laglath",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48282)", -- TODO: Tracking Quest = 48562?
+		Filter = "Level() < 110 OR NOT WorldQuest(48282)",
+	},
+	
+	WQ_LEGION_COMMANDERSATHRENAEL = {
+		name = "World Quest: Commander Sathrenael",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48509)", -- TODO: Tracking Quest = 48562?
+		Filter = "Level() < 110 OR NOT WorldQuest(48509)",
+	},
+	
+	WQ_LEGION_SLUMBERINGBEHEMOTHS = {
+		name = "World Quest: Slumbering Behemoths",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48514)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48514)",
+	},
+	
+	WQ_LEGION_ALLSEERXANARIAN = {
+		name = "World Quest: All-Seer Xanarian",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48837)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48837)",
+	},
+	
+	WQ_LEGION_TUREKTHELUCID = {
+		name = "World Quest: Turek the Lucid",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48726)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48726)",
+	},
+	
+	WQ_LEGION_KAARATHEPALE = {
+		name = "World Quest: Kaara the Pale",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48698)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48698)",
+	},
+	
+	WQ_LEGION_OVERSEERYMORNA = {
+		name = "World Quest: Overseer Y'Morna",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48717)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48736)",
+	},
+	
+	-- 48716 Y'Sorna Lockout - WQ = ?
+	
 	WQ_LEGION_ATAXON = {
 		name = "World Quest: Ataxon",
 		iconPath = "inv_misc_primalsargerite",
