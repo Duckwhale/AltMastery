@@ -215,6 +215,31 @@ local defaultTasks = {
 			},
 		},
 		
+		DAILY_WORLDEVENT_WINTERVEIL_YETIBOSS = {
+			name = "Winter's Veil: You're a Mean One",
+			iconPath = "inv_holiday_christmas_present_01",
+			Criteria = "(Quest(6983) OR Quest(7043)) AND (Quest(6984) OR Quest(7045))",
+			Filter = "Level() < 60 OR NOT WorldEvent(FEAST_OF_WINTER_VEIL)",
+			Objectives = {
+				"Quest(6983) OR Quest(7043) AS You're a Mean One", -- Actual daily quest (present may contain... stuff?)
+				"Quest(6984) OR Quest(7045) AS A Smokywood Pastures' Thank You", -- Once per event only (present may contain two illusions)
+			},
+		},
+		
+		DAILY_WORLDEVENT_WINTERVEIL_GARRISONDAILIES = {
+			name = "Winter's Veil: Garrison Dailies",
+			iconPath = "achievement_worldevent_merrymaker",
+			Criteria = "Objectives(\"DAILY_WORLDEVENT_WINTERVEIL_GARRISONDAILIES\")",
+			Filter = "Level() < 60 OR NOT WorldEvent(FEAST_OF_WINTER_VEIL)",
+			Objectives = {
+				"Quest(39648) OR Quest(1111) AS Where Are the Children?",
+				"Quest(39649) OR Quest(1111) AS Menacing Grumplings",
+				"Quest(39668) OR Quest(1111) AS What Horrible Presents!",
+				"Quest(39651) OR Quest(1111) AS Grumpus",
+
+			},
+		},
+		
 		DAILY_WORLDEVENT_CORENDIREBREW = {
 			name = "Coren Direbrew defeated",
 			description = "Defeat Coren Direbrew in the Grim Guzzler during the Brewfest world event",
