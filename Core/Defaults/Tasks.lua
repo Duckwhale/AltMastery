@@ -1252,28 +1252,391 @@ local defaultTasks = {
 	},
 	
 	
-	DAILY_LEGION_EMISSARY1 = {
-		name = "First Emissary Cache",
-		description = "TODO",
+	WQ_LEGION_EMISSARY_KIRINTOR1 = {
+		name = "First Emissary: The Kirin Tor of Dalaran",
+		iconPath = "inv_legion_cache_kirintor",
+		Criteria = "Quest(43179)",
+		Filter = "Level() < 110 OR Emissary(43179) ~= 1",
+		Objectives = {
+			"EmissaryProgress(43179) >= 1 AS Complete one Kirin Tor world quest",
+			"EmissaryProgress(43179) >= 2 AS Complete two Kirin Tor world quests",
+			"EmissaryProgress(43179) >= 3 AS Complete three Kirin Tor world quests",
+		},
+	},
+
+	WQ_LEGION_EMISSARY_KIRINTOR2 = {
+		name = "Second Emissary: The Kirin Tor of Dalaran",
+		iconPath = "inv_legion_cache_kirintor",
+		Criteria = "Quest(43179)",
+		Filter = "Level() < 110 OR Emissary(43179) ~= 2",
+		Objectives = {
+			"EmissaryProgress(43179) >= 1 AS Complete one Kirin Tor world quest",
+			"EmissaryProgress(43179) >= 2 AS Complete two Kirin Tor world quests",
+			"EmissaryProgress(43179) >= 3 AS Complete three Kirin Tor world quests",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_KIRINTOR3 = {
+		name = "Third Emissary: The Kirin Tor of Dalaran",
+		iconPath = "inv_legion_cache_kirintor",
+		Criteria = "Quest(43179)",
+		Filter = "Level() < 110 OR Emissary(43179) ~= 3",
+		Objectives = {
+			"EmissaryProgress(43179) >= 1 AS Complete one Kirin Tor world quest",
+			"EmissaryProgress(43179) >= 2 AS Complete two Kirin Tor world quests",
+			"EmissaryProgress(43179) >= 3 AS Complete three Kirin Tor world quests",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_VALARJAR1 = {
+		name = "First Emissary: The Valarjar",
 		iconPath = "inv_legion_cache_valajar",
-		Criteria = " NOT Emissary(1)",
-		Filter = "Level() < 110 OR NOT Quest(43341)", -- Uniting the Isles
+		Criteria = "Quest(42234)",
+		Filter = "Level() < 110 OR Emissary(42234) ~= 1",
+		Objectives = {
+			"EmissaryProgress(42234) >= 1 AS Complete one world quest in Stormheim",
+			"EmissaryProgress(42234) >= 2 AS Complete two world quests in Stormheim",
+			"EmissaryProgress(42234) >= 3 AS Complete three world quests in Stormheim",
+			"EmissaryProgress(42234) >= 4 AS Complete four world quests in Stormheim",
+		},
 	},
 	
-	DAILY_LEGION_EMISSARY2 = {
-		name = "Second Emissary Cache ",
-		description = "TODO",
+	WQ_LEGION_EMISSARY_VALARJAR2 = {
+		name = "Second Emissary: The Valarjar",
+		iconPath = "inv_legion_cache_valajar",
+		Criteria = "Quest(42234)",
+		Filter = "Level() < 110 OR Emissary(42234) ~= 2",
+		Objectives = {
+			"EmissaryProgress(42234) >= 1 AS Complete one world quest in Stormheim",
+			"EmissaryProgress(42234) >= 2 AS Complete two world quests in Stormheim",
+			"EmissaryProgress(42234) >= 3 AS Complete three world quests in Stormheim",
+			"EmissaryProgress(42234) >= 4 AS Complete four world quests in Stormheim",
+		},
+	},
+		
+	WQ_LEGION_EMISSARY_VALARJAR3 = {
+		name = "Third Emissary: The Valarjar",
+		iconPath = "inv_legion_cache_valajar",
+		Criteria = "Quest(42234)",
+		Filter = "Level() < 110 OR Emissary(42234) ~= 3",
+		Objectives = {
+			"EmissaryProgress(42234) >= 1 AS Complete one world quest in Stormheim",
+			"EmissaryProgress(42234) >= 2 AS Complete two world quests in Stormheim",
+			"EmissaryProgress(42234) >= 3 AS Complete three world quests in Stormheim",
+			"EmissaryProgress(42234) >= 4 AS Complete four world quests in Stormheim",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_HIGHMOUNTAIN1 = {
+		name = "First Emissary: Highmountain Tribes",
+		iconPath = "inv_legion_cache_hightmountaintribes",
+		Criteria = "Quest(42233)",
+		Filter = "Level() < 110 OR Emissary(42233) ~= 1",
+		Objectives = {
+			"EmissaryProgress(42233) >= 1 AS Complete one world quest in Highmountain",
+			"EmissaryProgress(42233) >= 2 AS Complete two world quests in Highmountain",
+			"EmissaryProgress(42233) >= 3 AS Complete three world quests in Highmountain",
+			"EmissaryProgress(42233) >= 4 AS Complete four world quests in Highmountain",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_HIGHMOUNTAIN2 = {
+		name = "Second Emissary: Highmountain Tribes",
+		iconPath = "inv_legion_cache_hightmountaintribes",
+		Criteria = "Quest(42233)",
+		Filter = "Level() < 110 OR Emissary(42233) ~= 2",
+		Objectives = {
+			"EmissaryProgress(42233) >= 1 AS Complete one world quest in Highmountain",
+			"EmissaryProgress(42233) >= 2 AS Complete two world quests in Highmountain",
+			"EmissaryProgress(42233) >= 3 AS Complete three world quests in Highmountain",
+			"EmissaryProgress(42233) >= 4 AS Complete four world quests in Highmountain",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_HIGHMOUNTAIN3 = {
+		name = "Third Emissary: Highmountain Tribes",
+		iconPath = "inv_legion_cache_hightmountaintribes",
+		Criteria = "Quest(42233)",
+		Filter = "Level() < 110 OR Emissary(42233) ~= 3",
+		Objectives = {
+			"EmissaryProgress(42233) >= 1 AS Complete one world quest in Highmountain",
+			"EmissaryProgress(42233) >= 2 AS Complete two world quests in Highmountain",
+			"EmissaryProgress(42233) >= 3 AS Complete three world quests in Highmountain",
+			"EmissaryProgress(42233) >= 4 AS Complete four world quests in Highmountain",
+		},
+	},
+
+	WQ_LEGION_EMISSARY_NIGHTFALLEN1 = {
+		name = "First Emissary: The Nightfallen",
+		iconPath = "inv_legion_cache_nightfallen",
+		Criteria = "Quest(42421)",
+		Filter = "Level() < 110 OR Emissary(42421) ~= 1",
+		Objectives = {
+			"EmissaryProgress(42421) >= 1 AS Complete one world quest in Suramar",
+			"EmissaryProgress(42421) >= 2 AS Complete two world quests in Suramar",
+			"EmissaryProgress(42421) >= 3 AS Complete three world quests in Suramar",
+			"EmissaryProgress(42421) >= 4 AS Complete four world quests in Suramar",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_NIGHTFALLEN2 = {
+		name = "Second Emissary: The Nightfallen",
+		iconPath = "inv_legion_cache_nightfallen",
+		Criteria = "Quest(42421)",
+		Filter = "Level() < 110 OR Emissary(42421) ~= 2",
+		Objectives = {
+			"EmissaryProgress(42421) >= 1 AS Complete one world quest in Suramar",
+			"EmissaryProgress(42421) >= 2 AS Complete two world quests in Suramar",
+			"EmissaryProgress(42421) >= 3 AS Complete three world quests in Suramar",
+			"EmissaryProgress(42421) >= 4 AS Complete four world quests in Suramar",
+		},
+	},
+		
+	WQ_LEGION_EMISSARY_NIGHTFALLEN3 = {
+		name = "Third Emissary: The Nightfallen",
+		iconPath = "inv_legion_cache_nightfallen",
+		Criteria = "Quest(42421)",
+		Filter = "Level() < 110 OR Emissary(42421) ~= 3",
+		Objectives = {
+			"EmissaryProgress(42421) >= 1 AS Complete one world quest in Suramar",
+			"EmissaryProgress(42421) >= 2 AS Complete two world quests in Suramar",
+			"EmissaryProgress(42421) >= 3 AS Complete three world quests in Suramar",
+			"EmissaryProgress(42421) >= 4 AS Complete four world quests in Suramar",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_ARMYOFTHELIGHT1 = {
+		name = "First Emissary: Army of the Light",
 		iconPath = "inv_legion_cache_armyofthelight",
-		Criteria = " NOT Emissary(2)",
-		Filter = "Level() < 110 OR NOT Quest(43341)", -- Uniting the Isles
+		Criteria = "Quest(48642)",
+		Filter = "Level() < 110 OR Emissary(48639) ~= 1",
+		Objectives = {
+			"EmissaryProgress(48639) >= 1 AS Complete one Army of the Light world quest",
+			"EmissaryProgress(48639) >= 2 AS Complete two Army of the Light world quests",
+			"EmissaryProgress(48639) >= 3 AS Complete three Army of the Light world quests",
+			"EmissaryProgress(48639) >= 4 AS Complete four Army of the Light world quests",
+		},
 	},
 	
-	DAILY_LEGION_EMISSARY3 = {
-		name = "Third Emissary Cache",
-		description = "TODO",
+	WQ_LEGION_EMISSARY_ARMYOFTHELIGHT2 = {
+		name = "Second Emissary: Army of the Light",
+		iconPath = "inv_legion_cache_armyofthelight",
+		Criteria = "Quest(48639)",
+		Filter = "Level() < 110 OR Emissary(48639) ~= 2",
+		Objectives = {
+			"EmissaryProgress(48639) >= 1 AS Complete one Army of the Light world quest",
+			"EmissaryProgress(48639) >= 2 AS Complete two Army of the Light world quests",
+			"EmissaryProgress(48639) >= 3 AS Complete three Army of the Light world quests",
+			"EmissaryProgress(48639) >= 4 AS Complete four Army of the Light world quests",
+		},
+	},
+		
+	WQ_LEGION_EMISSARY_ARMYOFTHELIGHT3 = {
+		name = "Third Emissary: Army of the Light",
+		iconPath = "inv_legion_cache_armyofthelight",
+		Criteria = "Quest(48642)",
+		Filter = "Level() < 110 OR Emissary(48639) ~= 3",
+		Objectives = {
+			"EmissaryProgress(48639) >= 1 AS Complete one Army of the Light world quest",
+			"EmissaryProgress(48639) >= 2 AS Complete two Army of the Light world quests",
+			"EmissaryProgress(48639) >= 3 AS Complete three Army of the Light world quests",
+			"EmissaryProgress(48639) >= 4 AS Complete four Army of the Light world quests",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_ARGUSSIANREACH1 = {
+		name = "First Emissary: Argussian Reach",
 		iconPath = "inv_legion_cache_argussianreach",
-		Criteria = " NOT Emissary(3)",
-		Filter = "Level() < 110 OR NOT Quest(43341)", -- Uniting the Isles
+		Criteria = "Quest(48642)",
+		Filter = "Level() < 110 OR Emissary(48642) ~= 1",
+		Objectives = {
+			"EmissaryProgress(48642) >= 1 AS Complete one Argussian Reach world quest",
+			"EmissaryProgress(48642) >= 2 AS Complete two Argussian Reach world quests",
+			"EmissaryProgress(48642) >= 3 AS Complete three Argussian Reach world quests",
+			"EmissaryProgress(48642) >= 4 AS Complete four Argussian Reach world quests",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_ARGUSSIANREACH2 = {
+		name = "Second Emissary: Argussian Reach",
+		iconPath = "inv_legion_cache_argussianreach",
+		Criteria = "Quest(48642)",
+		Filter = "Level() < 110 OR Emissary(48642) ~= 2",
+		Objectives = {
+			"EmissaryProgress(48642) >= 1 AS Complete one Argussian Reach world quest",
+			"EmissaryProgress(48642) >= 2 AS Complete two Argussian Reach world quests",
+			"EmissaryProgress(48642) >= 3 AS Complete three Argussian Reach world quests",
+			"EmissaryProgress(48642) >= 4 AS Complete four Argussian Reach world quests",
+		},
+	},
+		
+	WQ_LEGION_EMISSARY_ARGUSSIANREACH3 = {
+		name = "Third Emissary: Argussian Reach",
+		iconPath = "inv_legion_cache_argussianreach",
+		Criteria = "Quest(48642)",
+		Filter = "Level() < 110 OR Emissary(48642) ~= 3",
+		Objectives = {
+			"EmissaryProgress(48642) >= 1 AS Complete one Argussian Reach world quest",
+			"EmissaryProgress(48642) >= 2 AS Complete two Argussian Reach world quests",
+			"EmissaryProgress(48642) >= 3 AS Complete three Argussian Reach world quests",
+			"EmissaryProgress(48642) >= 4 AS Complete four Argussian Reach world quests",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_THEWARDENS1 = {
+		name = "First Emissary: The Wardens",
+		iconPath = "inv_legion_cache_warden",
+		Criteria = "Quest(42422)",
+		Filter = "Level() < 110 OR Emissary(42422) ~= 1",
+		Objectives = {
+			"EmissaryProgress(42422) >= 1 AS Complete one The Wardens world quest",
+			"EmissaryProgress(42422) >= 2 AS Complete two The Wardens world quests",
+			"EmissaryProgress(42422) >= 3 AS Complete three The Wardens world quests",
+			"EmissaryProgress(42422) >= 4 AS Complete four Wardens World Quests",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_THEWARDENS2 = {
+		name = "Second Emissary: The Wardens",
+		iconPath = "inv_legion_cache_warden",
+		Criteria = "Quest(42422)",
+		Filter = "Level() < 110 OR Emissary(42422) ~= 2",
+		Objectives = {
+			"EmissaryProgress(42422) >= 1 AS Complete one The Wardens world quest",
+			"EmissaryProgress(42422) >= 2 AS Complete two The Wardens world quests",
+			"EmissaryProgress(42422) >= 3 AS Complete three The Wardens world quests",
+			"EmissaryProgress(42422) >= 4 AS Complete four Wardens World Quests",
+		},
+	},
+		
+	WQ_LEGION_EMISSARY_THEWARDENS3 = {
+		name = "Third Emissary: The Wardens",
+		iconPath = "inv_legion_cache_warden",
+		Criteria = "Quest(42422)",
+		Filter = "Level() < 110 OR Emissary(42422) ~= 3",
+		Objectives = {
+			"EmissaryProgress(42422) >= 1 AS Complete one The Wardens world quest",
+			"EmissaryProgress(42422) >= 2 AS Complete two The Wardens world quests",
+			"EmissaryProgress(42422) >= 3 AS Complete three The Wardens world quests",
+			"EmissaryProgress(42422) >= 4 AS Complete four Wardens World Quests",
+		},
+	},
+
+	WQ_LEGION_EMISSARY_ARMIESOFLEGIONFALL1 = {
+		name = "First Emissary: Armies of Legionfall",
+		iconPath = "Inv_legion_chest_Legionfall",
+		Criteria = "Quest(48641)",
+		Filter = "Level() < 110 OR Emissary(48641) ~= 1",
+		Objectives = {
+			"EmissaryProgress(48641) >= 1 AS Complete one World Quest on the Broken Shore",
+			"EmissaryProgress(48641) >= 2 AS Complete two World Quests on the Broken Shore",
+			"EmissaryProgress(48641) >= 3 AS Complete three World Quests on the Broken Shore",
+			"EmissaryProgress(48641) >= 4 AS Complete four World Quests on the Broken Shore",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_ARMIESOFLEGIONFALL2 = {
+		name = "Second Emissary: Armies of Legionfall",
+		iconPath = "Inv_legion_chest_Legionfall",
+		Criteria = "Quest(48641)",
+		Filter = "Level() < 110 OR Emissary(48641) ~= 2",
+		Objectives = {
+			"EmissaryProgress(48641) >= 1 AS Complete one World Quest on the Broken Shore",
+			"EmissaryProgress(48641) >= 2 AS Complete two World Quests on the Broken Shore",
+			"EmissaryProgress(48641) >= 3 AS Complete three World Quests on the Broken Shore",
+			"EmissaryProgress(48641) >= 4 AS Complete four World Quests on the Broken Shore",
+		},
+	},
+		
+	WQ_LEGION_EMISSARY_ARMIESOFLEGIONFALL3 = {
+		name = "Third Emissary: Armies of Legionfall",
+		iconPath = "Inv_legion_chest_Legionfall",
+		Criteria = "Quest(48641)",
+		Filter = "Level() < 110 OR Emissary(48641) ~= 3",
+		Objectives = {
+			"EmissaryProgress(48641) >= 1 AS Complete one World Quest on the Broken Shore",
+			"EmissaryProgress(48641) >= 2 AS Complete two World Quests on the Broken Shore",
+			"EmissaryProgress(48641) >= 3 AS Complete three World Quests on the Broken Shore",
+			"EmissaryProgress(48641) >= 4 AS Complete World Quests on the Broken Shore",
+		},
+	},
+
+	WQ_LEGION_EMISSARY_THEDREAMWEAVERS1 = {
+		name = "First Emissary: The Dreamweavers",
+		iconPath = "INV_Legion_Cache_DreamWeavers",
+		Criteria = "Quest(42170)",
+		Filter = "Level() < 110 OR Emissary(42170) ~= 1",
+		Objectives = {
+			"EmissaryProgress(42170) >= 1 AS Complete one World Quest in Val'sharah",
+			"EmissaryProgress(42170) >= 2 AS Complete two World Quests in Val'sharah",
+			"EmissaryProgress(42170) >= 3 AS Complete three World Quests in Val'sharah",
+			"EmissaryProgress(42170) >= 4 AS Complete four World Quests in Val'sharah",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_THEDREAMWEAVERS2 = {
+		name = "Second Emissary: The Dreamweavers",
+		iconPath = "INV_Legion_Cache_DreamWeavers",
+		Criteria = "Quest(42170)",
+		Filter = "Level() < 110 OR Emissary(42170) ~= 2",
+		Objectives = {
+			"EmissaryProgress(42170) >= 1 AS Complete one World Quest in Val'sharah",
+			"EmissaryProgress(42170) >= 2 AS Complete two World Quests in Val'sharah",
+			"EmissaryProgress(42170) >= 3 AS Complete three World Quests in Val'sharah",
+			"EmissaryProgress(42170) >= 4 AS Complete four World Quests in Val'sharah",
+		},
+	},
+		
+	WQ_LEGION_EMISSARY_THEDREAMWEAVERS3 = {
+		name = "Third Emissary: The Dreamweavers",
+		iconPath = "INV_Legion_Cache_DreamWeavers",
+		Criteria = "Quest(42170)",
+		Filter = "Level() < 110 OR Emissary(42170) ~= 3",
+		Objectives = {
+			"EmissaryProgress(42170) >= 1 AS Complete one World Quest in Val'sharah",
+			"EmissaryProgress(42170) >= 2 AS Complete two World Quests in Val'sharah",
+			"EmissaryProgress(42170) >= 3 AS Complete three World Quests in Val'sharah",
+			"EmissaryProgress(42170) >= 4 AS Complete World Quests in Val'sharah",
+		},
+	},
+
+	WQ_LEGION_EMISSARY_COURTOFFARONDIS1 = {
+		name = "First Emissary: Court of Farondis",
+		iconPath = "INV_Legion_Cache_CourtofFarnodis",
+		Criteria = "Quest(42420)",
+		Filter = "Level() < 110 OR Emissary(42420) ~= 1",
+		Objectives = {
+			"EmissaryProgress(42420) >= 1 AS Complete one World Quest in Azsuna",
+			"EmissaryProgress(42420) >= 2 AS Complete two World Quests in Azsunas",
+			"EmissaryProgress(42420) >= 3 AS Complete three World Quests in Azsunas",
+			"EmissaryProgress(42420) >= 4 AS Complete four World Quests in Azsuna",
+		},
+	},
+	
+	WQ_LEGION_EMISSARY_COURTOFFARONDIS2 = {
+		name = "Second Emissary: Court of Farondis",
+		iconPath = "INV_Legion_Cache_CourtofFarnodis",
+		Criteria = "Quest(42420)",
+		Filter = "Level() < 110 OR Emissary(42420) ~= 2",
+		Objectives = {
+			"EmissaryProgress(42420) >= 1 AS Complete one World Quest in Azsuna",
+			"EmissaryProgress(42420) >= 2 AS Complete two World Quests in Azsunas",
+			"EmissaryProgress(42420) >= 3 AS Complete three World Quests in Azsunas",
+			"EmissaryProgress(42420) >= 4 AS Complete four World Quests in Azsuna",
+		},
+	},
+		
+	WQ_LEGION_EMISSARY_COURTOFFARONDIS3 = {
+		name = "Third Emissary: Court of Farondis",
+		iconPath = "INV_Legion_Cache_CourtofFarnodis",
+		Criteria = "Quest(42420)",
+		Filter = "Level() < 110 OR Emissary(42420) ~= 3",
+		Objectives = {
+			"EmissaryProgress(42420) >= 1 AS Complete one World Quest in Azsuna",
+			"EmissaryProgress(42420) >= 2 AS Complete two World Quest in Azsunas",
+			"EmissaryProgress(42420) >= 3 AS Complete three World Quest in Azsunas",
+			"EmissaryProgress(42420) >= 4 AS Complete four World Quests in Azsuna",
+		},
 	},
 	
 	DAILY_CLASSIC_ACCOUNTWIDE_PETBATTLES = {
