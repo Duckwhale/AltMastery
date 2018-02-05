@@ -288,6 +288,19 @@ local defaultTasks = {
 				"Quest(40173) AS Bring it to Auzin in Dalaran (Northrend)",
 			}
 		},
+
+		MONTHLY_WORLDEVENT_TIMEWALKING_CATA = {
+			name = "Timewalking: Cataclysm",
+			description = "Complete the quest \"The Smoldering Ember\" during the Cataclysm Timewalking event",
+			notes = "500 Timewarped Badges",
+			iconPath = "inv_ember",
+			Criteria = "Quest(40787) OR Quest(40786)",
+			Filter = "Level() < 86 OR NOT WorldEvent(TIMEWALKING_CATA)",
+			Objectives = {
+				"InventoryItem(133377) OR InventoryItem(133378) OR Quest(40787) OR Quest(40786) AS Obtain a Smoldering Timewarped Ember",
+				"Quest(40787) OR Quest(40786) AS Bring it to the Circle of Elements (Stormwind/Orgrimmar)",
+			}
+		},
 		
 		DAILY_WORLDEVENT_WOWANNIVERSARY_LOREQUIZ = {
 			name = "Anniversary: A Time to Reflect",
