@@ -759,12 +759,12 @@ local defaultTasks = {
 	},
 	
 	WQ_LEGION_VENOMTAILSKYFIN = {
-		name = "Venomtail Skyfin defeated",
+		name = "World Quest: Venomtail Skyfin",
 		description = "Defeat the Venomtail Skyfin", -- TODO: in <zone>?
 		notes = "Mount",
 		iconPath = "inv_manaraymount_blackfel",
 		Criteria = "Quest(48705)", -- Tracking Quest
-		Filter = "Level() < 110", -- Doesn't have a world quest, apparently
+		Filter = "Level() < 110 OR NOT WorldQuest(48725)", -- "Venomtail Skyfin" = WQ
 	},
 	
 	WQ_LEGION_NAROUA = {
