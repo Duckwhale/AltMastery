@@ -901,6 +901,95 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(48502)",
 	},
 	
+	-- Argus: Turnin WQ (same as above)
+	WQ_LEGION_ASTRALGLORY1 = {
+		name = "Supplies Needed: Astral Glory",
+		iconPath = "inv_misc_herb_astralglory",
+		Criteria = "Quest(48338)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48338)",
+	},
+
+	WQ_LEGION_ASTRALGLORY2 = {
+		name = "Work Order: Astral Glory",
+		iconPath = "inv_misc_herb_astralglory",
+		Criteria = "Quest(48337)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48337)",
+	},
+	
+	WQ_LEGION_LIGHTWEAVECLOTH1 = {
+		name = "Supplies Needed: Lightweave Cloth",
+		iconPath = "inv_tailoring_lightweavecloth",
+		Criteria = "Quest(48374)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48374)",
+	},
+
+	WQ_LEGION_LIGHTWEAVECLOTH2 = {
+		name = "Work Order: Lightweave Cloth",
+		iconPath = "inv_tailoring_lightweavecloth",
+		Criteria = "Quest(48373)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48373)",
+	},
+
+	WQ_LEGION_FIENDISHLEATHER1 = {
+		name = "Supplies Needed: Fiendish Leather",
+		iconPath = "inv_leatherworking_fiendishleather",
+		Criteria = "Quest(48360)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48360)",
+	},
+
+	WQ_LEGION_FIENDISHLEATHER2 = {
+		name = "Work Order: Fiendish Leather",
+		iconPath = "inv_leatherworking_fiendishleather",
+		Criteria = "Quest(48359)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48359)",
+	},
+	
+	WQ_LEGION_EMPYRIUM1 = {
+		name = "Supplies Needed: Empyrium",
+		iconPath = "inv_misc_starmetal",
+		Criteria = "Quest(48358)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48358)",
+	},
+
+	WQ_LEGION_EMPYRIUM2 = {
+		name = "Work Order: Empyrium",
+		iconPath = "inv_misc_starmetal",
+		Criteria = "Quest(48349)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48349)",
+	},
+	
+	WQ_LEGION_TEARSOFTHENAARU = {
+		name = "Work Order: Tears of the Naaru",
+		iconPath = "inv_alchemy_tearsofthenaaru",
+		Criteria = "Quest(48323)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48323)",
+	},
+	
+	WQ_LEGION_LIGHTBLOODELIXIRS = {
+		name = "Work Order: Lightblood Elixirs",
+		iconPath = "inv_alchemy_lightbloodelixir",
+		Criteria = "Quest(48318)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48318)",
+	},
+		
+
+	-- Regular Broken Isles WQ
+	
+	WQ_LEGION_BROKENSHORE_BEHINDENEMYPORTALS = {
+		name = "World Quest: Behind Enemy Portals",
+		iconPath = "inv_misc_summonable_boss_token",
+		Criteria = "Quest(45520)",
+		Filter = "Level() < 110 OR NOT (WorldQuest(45520) AND (WorldQuest(45379) OR (Emissary(48641) ~= 0)))", --Level() < 110 OR (NOT WorldQuest(45520) OR NOT WorldQuest(45379)) AND (Emissary(48641) == 0)", -- "Level() < 110 OR NOT WorldQuest(45520) OR (NOT (WorldQuest(45379) OR Quest(45379)) AND (Emissary(48641) ~= 0))", -- Only show this if the Treasure Master Iks'reeged WQ is available OR the Legionfall Emissary is active
+	},
+	
+	WQ_LEGION_BROKENSHORE_MINIONKILLTHATONETOO = {
+		name = "World Quest: Minion! Kill That One Too!",
+		iconPath = "ability_warlock_impoweredimp",
+		Criteria = "Quest(46707)",
+		Filter = "Level() < 110 OR NOT (WorldQuest(46707) AND (WorldQuest(45379) OR (Emissary(48641) ~= 0)))", -- Only show this if the Treasure Master Iks'reeged WQ is available OR the Legionfall Emissary is active
+	},
+	-- TODO: Pet rares		/dump IsQuestFlaggedCompleted(45379)
+	
 	WEEKLY_LEGION_DUNGEONEVENT = {
 		name = "Legion Dungeon Event",
 		description = "Complete the weekly quest \"Emissary of War\" and claim your reward",
