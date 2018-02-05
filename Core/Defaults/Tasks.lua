@@ -732,6 +732,22 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(48732)", -- "Sabuul" = WQ
 	},
 	
+	WQ_LEGION_VIGILANTKURO = {
+		name = "World Quest: Vigilant Kuro",
+		notes = "Toy",
+		iconPath = "spell_fire_twilightfireward",
+		Criteria = "Quest(48704)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48724)",
+	},
+	
+	WQ_LEGION_VIGILANTTHANOS = {
+		name = "World Quest: Vigilant Thanos",
+		notes = "Toy",
+		iconPath = "spell_fire_twilightfireward",
+		Criteria = "Quest(48703)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48723)",
+	},
+	
 	WQ_LEGION_VENOMTAILSKYFIN = {
 		name = "Venomtail Skyfin defeated",
 		description = "Defeat the Venomtail Skyfin", -- TODO: in <zone>?
@@ -811,6 +827,78 @@ local defaultTasks = {
 		iconPath = "inv_argusfelstalkermountgrey",
 		Criteria = "Quest(48721)", -- Tracking Quest
 		Filter = " NOT WorldQuest(48740)", -- World Quest
+	},
+	
+	WQ_LEGION_RARE_DOOMCASTERSUPRAX = {
+		name = "Doomcaster Suprax defeated",
+		description = "TODO",
+		notes = "Toy",
+		iconPath = "inv_icon_shadowcouncilorb_green",
+		Criteria = "Quest(48968)", -- Tracking Quest
+		Filter = "Level () < 110",
+	},
+	
+	WQ_LEGION_RARE_SQUADRONCOMMANDERVISHAX = {
+		name = "Squadron Commander Vishax defeated",
+		description = "TODO",
+		notes = "Toy",
+		iconPath = "ability_felarakkoa_feldetonation_green",
+		Criteria = "Quest(48967)", -- Tracking Quest
+		Filter = "Level() < 110",
+		Objectives = {
+			"Quest(49007) AS Commander On Deck (Portal opened)", --  TODO
+			"Quest(48967) AS Squadron Commander Vishax defeated",
+		},		
+	},
+	
+	WQ_LEGION_RARE_BARUUTTHEBRISK = {
+		name = "World Quest: Baarut the Bloodthirsty",
+		description = "TODO",
+		notes = "Toy",
+		iconPath = "inv_misc_foot_centaur",
+		Criteria = "Quest(48700)", -- Tracking Quest
+		Filter = " NOT WorldQuest(48701)", -- World Quest
+	},
+	
+	WQ_LEGION_RARE_INSTRUCTORTARAHNA = {
+		name = "World Quest: Instructor Tarahna",
+		description = "TODO",
+		notes = "Toy",
+		iconPath = "inv_inscription_runescrolloffortitude_red",
+		Criteria = "Quest(48718)", -- Tracking Quest
+		Filter = " NOT WorldQuest(48737)", -- World Quest
+	},
+	
+	WQ_LEGION_RARE_SISTERSUBVERSIA = {
+		name = "World Quest: Sister Subversia",
+		description = "TODO",
+		notes = "Toy",
+		iconPath = "inv_plate_belt_eredarargus_d_01",
+		Criteria = "Quest(48565)", -- Tracking Quest
+		Filter = " NOT WorldQuest(48512)", -- World Quest
+	},
+	
+	WQ_LEGION_RARE_WRATHLORDYAREZ = {
+		name = "World Quest: Wrath-Lord Yarez",
+		description = "TODO",
+		notes = "Toy",
+		iconPath = "spell_fire_felpyroblast",
+		Criteria = "Quest(48814)", -- Tracking Quest
+		Filter = " NOT WorldQuest(48829)", -- World Quest
+	},
+	
+	WQ_LEGION_ATAXON = {
+		name = "World Quest: Ataxon",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48709)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48729)", -- WQ
+	},	
+	
+	WQ_LEGION_NAROUA = {
+		name = "World Quest: Naroua",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48667)", -- TODO: Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48502)",
 	},
 	
 	WEEKLY_LEGION_DUNGEONEVENT = {
