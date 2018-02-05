@@ -535,13 +535,28 @@ local defaultTasks = {
 			},
 		},
 
-		WEEKLY_LEGION_ARGUSTROOPS = {
-			name = "Krokuul Ridgestalker recruited",
-			description = "Complete the weekly quest \"Supplying Krokuun\" to recruit a Krokuul Ridgestalker",
+		WEEKLY_LEGION_ARGUSTROOPS1 = {
+			name = "Krokul Ridgestalker recruited",
+			description = "Complete the weekly quest \"Supplying Krokuun\" to recruit a Krokul Ridgestalker",
 			iconPath = "achievement_reputation_ashtonguedeathsworn",
 			Criteria = "Quest(48910)",
 			Filter = "Level() < 110 OR NOT Quest(48441)", -- Requires completion of the first mission quest, "Remnants of Darkfall Ridge"
-			-- TODO: Individual unlock steps (quests) for all other troups also
+		},
+		
+		WEEKLY_LEGION_ARGUSTROOPS2 = {
+			name = "Void-Purged Krokul recruited",
+			description = "Complete the weekly quest \"Void Inoculation\" to recruit a Void-Purged Krokul",
+			iconPath = "spell_priest_shadow mend",
+			Criteria = "Quest(48911)",
+			Filter = "Level() < 110 OR NOT Quest(48445)", -- Requires completion of the second mission quest, "The Ruins of Oronaar"
+		},
+		
+		WEEKLY_LEGION_ARGUSTROOPS3 = {
+			name = "Lightforged Bulwark recruited",
+			description = "Complete the weekly quest \"Supplying the Antoran Campaign\" to recruit a Lightforged Bulwark",
+			iconPath = "ability_paladin_righteousvengeance",
+			Criteria = "Quest(48912)",
+			Filter = "Level() < 110 OR NOT Quest(48448)", -- Requires completion of the third mission quest, "Hindering the Legion War Machine"
 		},
 		
 		WQ_LEGION_KOSUMOTH = {
