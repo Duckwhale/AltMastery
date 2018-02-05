@@ -1736,7 +1736,7 @@ local defaultTasks = {
 		notes = "Unlocks Treasure Master Iks'reeged's cave",
 		iconPath = "inv_misc_key_11",
 		Criteria = "Quest(46666)",
-		Filter = "Level() < 110",
+		Filter = "Level() < 110 OR NOT Quest(46945)", -- Requires "Vengeance Point" to appear on the map (as a Quest POI)
 		Objectives = {
 			"Quest(46499) AS Spiders, huh?",
 			"Quest(46501) AS Grave Robbin'",
