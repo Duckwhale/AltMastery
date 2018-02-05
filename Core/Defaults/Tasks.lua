@@ -575,7 +575,7 @@ local defaultTasks = {
 			-- Only show if reward is pet? (TODO)
 			iconPath = "spell_priest_voidtendrils",
 			Criteria = "Quest(43798)",
-			Filter = "Level() < 100 OR NOT Objectives(\"UNLOCK_LEGION_KOSUMOTH\")", -- TODO: Filter if WQ reward is crap
+			Filter = "Level() < 100 OR NOT Objectives(\"MILESTONE_LEGION_UNLOCK_KOSUMOTH\")", -- TODO: Filter if WQ reward is crap
 		},
 		
 		MILESTONE_LEGION_UNLOCK_MEATBALL = {
