@@ -391,6 +391,16 @@ local defaultTasks = {
 			Criteria = "Buff(NETHERSTORM) OR Buff(REINFORCED_REINS) OR Buff(FATE_SMILES_UPON_YOU) OR Buff(SEAL_YOUR_FATE)", --"Quest(47015) OR Quest(47012) OR Quest(47016) OR Quest(47014)", -- Change to use the buff gained? Quest aren't detected, probably flagged as repeatable? -- TODO: Buff is lost if not in BI... pointless -> Since it only shows there, filter when not in BI?
 			-- TODO: Building has to be up (visibility?); only show legendary follower items? based on profession? prequests = http://www.wowhead.com/item=147451/armorcrafters-commendation#comments	http://www.wowhead.com/quest=46774
 			Filter = "Level() < 110 OR (ContributionState(NETHER_DISRUPTOR) ~= STATE_ACTIVE)", -- TODO: FIlter only for relevant professions?
+		
+		WEEKLY_LEGION_ROGUECOINS = {
+			name = "Rogue: I'll Take Those, Thanks!",
+			iconPath = "ability_monk_pathofmists",
+			Criteria = "Quest(47594)",
+			Filter = "Level() < 110 OR NOT Class(ROGUE) OR NOT Quest(47605)",
+			Objectives = {
+				"Currency(COINS_OF_AIR) >= 10000 AS Collected 10,000 Coins of Air",
+				"Quest(47594) AS Traded them in for 4500 Gold",
+			},
 		},
 		
 		WQ_LEGION_UNDERBELLY_TESTSUBJECTS = {
