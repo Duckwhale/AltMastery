@@ -1748,7 +1748,7 @@ local defaultTasks = {
 	},
 	
 	LEGION_DAILY_RITUALOFDOOM = {
-		name = "Ritual of Doom",
+		name = "Warlock: Ritual of Doom",
 		description = "TODO",
 		notes = "Pet, Hidden Artifact Skin (Destruction)",
 		iconPath = "inv_staff_2h_artifactsargeras_d_05",
@@ -1757,7 +1757,7 @@ local defaultTasks = {
 	},
 	
 	LEGION_DAILY_TWISTINGNETHER = {
-		name = "Twisting Nether",
+		name = "Demon Hunter: Twisting Nether",
 		description = "TODO",
 		notes = "Pet, Hidden Artifact Skin (Vengeance)",
 		iconPath = "inv_glaive_1h_artifactaldrochi_d_05",
