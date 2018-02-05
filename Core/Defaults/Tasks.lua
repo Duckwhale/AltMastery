@@ -1911,6 +1911,19 @@ local defaultTasks = {
 		iconPath = "inv_misc_bag_cenarionherbbag",
 	},
 	
+	MILESTONE_LEGION_BLOODHUNTERENCHANT = {
+		name = "Bloodhunter Enchant unlocked",
+		iconPath = "inv_legion_faction_warden",
+		Criteria = "Reputation(THE_WARDENS) >= REVERED",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Reputation(THE_WARDENS) >= NEUTRAL AS The Wardens: Neutral",
+			"Reputation(THE_WARDENS) >= FRIENDLY AS The Wardens: Friendly",
+			"Reputation(THE_WARDENS) >= HONORED AS The Wardens: Honored",
+			"Reputation(THE_WARDENS) >= REVERED AS The Wardens: Revered",
+		},
+},
+	
 	MILESTONE_LEGION_ARGUSTROOPS = {
 		name = "Argus Troops & Missions unlocked",
 		description = "TODO",
