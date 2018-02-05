@@ -584,6 +584,47 @@ local function SubZone(mapID)
 	end
 
 end	
+
+
+local MythicMaps = {}
+	
+local function MythicPlus(typeID) -- TODO: Upvalues
+
+	if typeID == 2 then -- ALL_TIME_BEST
+		-- TODO
+	end
+
+	if typeID == 1 then -- WEEKLY_BEST
+		C_ChallengeMode.RequestMapInfo()
+		MythicMaps = C_ChallengeMode.GetMapTable()
+		local bestlevel = 0
+		for i = 1, #MythicMaps do
+		   local _, _, level = C_ChallengeMode.GetMapPlayerStats(MythicMaps[i]);
+		   --     1    lastCompletionMilliseconds    number    
+		   --     2    bestCompletionMilliseconds    number    
+		   --     3    bestLevel    number    
+		   --     4    affixIDs    number[]    
+		   --     5    bestLevelYear    number    
+		   --     6    bestLevelMonth    number    
+		   --     7    bestLevelDay    number    
+		   --     8    bestLevelHour    number    
+		   --     9    bestLevelMinute    number    
+		   --     10    bestSpecIDs1    number    
+		   --     +    (bestSpecIDs2), ...
+		   if level then
+	--		  print("Level", level)
+			  
+			  if level > bestlevel then
+				 bestlevel = level
+			  end
+		   end
+		end
+
+	--	print("Best level", bestlevel)
+		return bestlevel
+	end
+	
+end
 	
 
 Criteria = {
@@ -612,6 +653,7 @@ Criteria = {
 	Reputation = Reputation,
 	Zone = Zone,
 	SubZone = SubZone,
+	MythicPlus = MythicPlus,
 }
 
 AM.Criteria = Criteria
