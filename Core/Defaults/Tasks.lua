@@ -1144,11 +1144,11 @@ local defaultTasks = {
 		},
 	},
 	
-	MILESTONE_LEGION_TAILORINGQUESTS = {
+	MILESTONE_LEGION_PROFESSIONQUESTS_TAILORING = {
 		name = "Legion Tailoring Quests completed",
 		description = "TODO",
 		iconPath = "inv_tailoring_70_silkweave",
-		Criteria = "Objectives(\"MILESTONE_LEGION_TAILORINGQUESTS\")",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_TAILORING\")",
 		Filter = "Level() < 100 OR NOT (Profession(TAILORING) > 0)",
 		Objectives = {
 			"Quest(38944) AS Sew It Begins",
@@ -1195,11 +1195,11 @@ local defaultTasks = {
 		},
 	},
 	
-	MILESTONE_LEGION_ENCHANTINGQUESTS = {
+	MILESTONE_LEGION_PROFESSIONQUESTS_ENCHANTING = {
 		name = "Legion Enchanting Quests completed",
 		description = "TODO",
 		iconPath = "inv_enchanting_70_chaosshard",
-		Criteria = "Objectives(\"MILESTONE_LEGION_ENCHANTINGQUESTS\")",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_ENCHANTING\")",
 		Filter = "Level() < 100 OR NOT (Profession(ENCHANTING) > 0)",
 		Objectives = {
 			"Quest(39875) AS The Last Few",
