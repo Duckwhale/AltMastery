@@ -2200,6 +2200,13 @@ local defaultTasks = {
 		Filter = "Level() < 110",
 	},
 	
+	RESTOCK_LEGION_VEILEDARGUNITE = {
+		name = "Veiled Argunite spent",
+		iconPath = "oshugun_crystalfragments",
+		Criteria = "Currency(VEILED_ARGUNITE) < 1300",
+		Filter = "Level() < 110",
+	},
+	
 	DAILY_WOTLK_JEWELCRAFTINGSHIPMENT = {
 		name = "Jewelcrafting Shipment delivered",
 		description = "TODO",
