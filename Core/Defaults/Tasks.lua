@@ -1960,7 +1960,7 @@ local defaultTasks = {
 		notes = "WQs, Profession Quests, Argus troops",
 		iconPath = "ability_demonhunter_specdps",
 		Criteria = "Objectives(\"MILESTONE_LEGION_ARGUSCAMPAIGN\")",
-		Filter = "Level() < 110",
+		Filter = "Level() < 110 OR NOT Quest(46734)", -- Requires Broken Shore intro (scenario)
 		Objectives = {
 		
 		-- 1. The Assault Begins
