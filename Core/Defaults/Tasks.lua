@@ -1937,18 +1937,18 @@ local defaultTasks = {
 			"Quest(48455) AS Duskcloak Problem",
 			"Quest(48453) AS Strike Back",
 			"Quest(48544) AS Woah, Nelly!", -- Petrified Forest WQs
-			"Quest(48441) AS Remnants of Darkfall Ridge", -- Krokuun Equipment
+			"Quest(48441) AS Remnants of Darkfall Ridge", -- Krokuun Equipment = Uncommon
 			"Quest(48442) AS Nath'raxas Hold: Preparations", 
-			"Quest(48910) AS Supplying Krokuun", -- Krokuul Ridgestalker
+			"Quest(48910) OR Quest(48443) AS Supplying Krokuun",
 			"Quest(48443) AS Nath'raxas Hold: Rescue Mission", -- Krokuun Missions
-			"Quest(48445) AS The Ruins of Oronaar", -- Mac'aree Equipment
+			"Quest(48445) AS The Ruins of Oronaar", -- Mac'aree Equipment = Rare
 			"Quest(48446) AS Relics of the Ancient Eredar",
 			"Quest(48654) AS Beneath Oronaar",
-			"Quest(48911) AS Void Inoculation", -- Void-Purged Krokuul
+			"Quest(48911) OR Quest(48447) AS Void Inoculation", -- Void-Purged Krokuul
 			"Quest(48447) AS Shadowguard Dispersion", -- Mac'aree Missions
-			"Quest(48448) AS Hindering the Legion War Machine", -- Lightforged Equipment
+			"Quest(48448) AS Hindering the Legion War Machine", -- Lightforged Equipment = Epic
 			"Quest(48600) AS Take the Edge Off",
-			"Quest(48912) AS Supplying the Antoran Campaign", -- Lightforged Bulwark
+			"Quest(48912) OR Quest(48601) AS Supplying the Antoran Campaign", -- Lightforged Bulwark
 			"Quest(48601) AS Felfire Shattering", -- Lightforged Missions
 
 		},
