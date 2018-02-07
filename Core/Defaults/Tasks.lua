@@ -2915,6 +2915,22 @@ local defaultTasks = {
 	},
 	
 }
+	
+	MILESTONE_LEGION_DALARANSEWERS_PORTALKEYS = {
+		name = "Dalaran: Underbelly Portals",
+		iconPath = "inv_misc_key_02",
+		Criteria = "Objectives(\"MILESTONE_LEGION_DALARANSEWERS_PORTALKEYS\")",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Quest(42527) AS Sewer Guard Station",
+			"Quest(42528) AS Black Market",
+			"Quest(42529) AS Inn Entrance",
+			"Quest(42530) AS Alchemist's Lair",
+			"Quest(42531) AS Abandoned Shack",
+			"Quest(42532) AS Rear Entrance",
+		},
+	},
+		
 
 
 --- Return the table containing default task entries
