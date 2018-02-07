@@ -2931,6 +2931,30 @@ local defaultTasks = {
 		},
 	},
 		
+	WEEKLY_LEGION_MYTHICPLUS_WEEKLYBEST = {
+		name = "Mythic Plus: Grand Challenger's Bounty",
+		iconPath = "inv_relics_hourglass",
+		Criteria = "MythicPlus(WEEKLY_BEST) >= 15",
+		Filter = "Level() < 110",
+		Objectives = {
+			"MythicPlus(WEEKLY_BEST) >= 1 AS Weekly Best: Level 1",
+			"MythicPlus(WEEKLY_BEST) >= 2 AS Weekly Best: Level 2",
+			"MythicPlus(WEEKLY_BEST) >= 3 AS Weekly Best: Level 3",
+			"MythicPlus(WEEKLY_BEST) >= 4 AS Weekly Best: Level 4",
+			"MythicPlus(WEEKLY_BEST) >= 5 AS Weekly Best: Level 5",
+			"MythicPlus(WEEKLY_BEST) >= 6 AS Weekly Best: Level 6",
+			"MythicPlus(WEEKLY_BEST) >= 7 AS Weekly Best: Level 7",
+			"MythicPlus(WEEKLY_BEST) >= 8 AS Weekly Best: Level 8",
+			"MythicPlus(WEEKLY_BEST) >= 9 AS Weekly Best: Level 9",
+			"MythicPlus(WEEKLY_BEST) >= 10 AS Weekly Best: Level 10",
+			"MythicPlus(WEEKLY_BEST) >= 11 AS Weekly Best: Level 11",
+			"MythicPlus(WEEKLY_BEST) >= 12 AS Weekly Best: Level 12",
+			"MythicPlus(WEEKLY_BEST) >= 13 AS Weekly Best: Level 13",
+			"MythicPlus(WEEKLY_BEST) >= 14 AS Weekly Best: Level 14",
+			"MythicPlus(WEEKLY_BEST) >= 15 AS Weekly Best: Level 15",
+		},
+	},
+	
 
 
 --- Return the table containing default task entries
