@@ -2915,6 +2915,31 @@ local defaultTasks = {
 	},
 	
 }
+
+	MILESTONE_CATA_LEGENDARY_FANGSOFTHEFATHER = {
+		name = "Fangs of the Father",
+		description = "Wielder of the Fangs of the Father.",
+		note = "Legendary",
+		iconPath = "inv_knife_1h_deathwingraid_e_03",
+		Criteria = "Achievement(6181)",
+		Filter = "Level() < 85 OR NOT Class(ROGUE)",
+		Objectives = {
+			"Quest(29801) AS Proving Your Worth",
+			"Quest(29802) AS A Hidden Message",
+			"Quest(29934) AS To Ravenholdt",
+			"Quest(29847) AS To Catch a Thief",
+			"Quest(30092) AS Our Man in Gilneas",
+			"Quest(30093) AS Assassinate Creed",
+			"Quest(30106) AS The Deed is Done",
+			"Quest(30107) AS Cluster Clutch",
+			"Quest(30108) AS Our Man in Karazhan",
+			"Quest(30109) AS Blood of the Betrayer",
+			"Quest(30113) AS Victory in the Depths",
+			"Quest(30116) AS Sharpening Your Fangs",
+			"Quest(30118) AS Patricide",
+		},
+	},
+	
 	
 	MILESTONE_LEGION_DALARANSEWERS_PORTALKEYS = {
 		name = "Dalaran: Underbelly Portals",
