@@ -2469,6 +2469,11 @@ local defaultTasks = {
 		iconPath = "inv_rod_enchantedfelsteel",
 		Criteria = "InventoryItem(147707)",
 		Filter = "Level() < 110",
+		Objectives = {
+			"Reputation(ARMIES_OF_LEGIONFALL) >= REVERED AS Armies of Legionfall: Revered",
+			"Currency(NETHERSHARD) >= 7500 AS Collect 7500 Nethershards",
+			"InventoryItem(147707) AS Purchase the Repurposed Fel Focuser",
+		},
 	},
 	
 	MILESTONE_LEGION_LFCHAMPIONS_WARRIOR_ALLIANCE = {
