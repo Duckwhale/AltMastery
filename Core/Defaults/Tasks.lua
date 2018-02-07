@@ -2312,7 +2312,7 @@ local defaultTasks = {
 		notes = "Teleport",
 		iconPath = "inv_jewelry_ring_73",
 		Criteria = "Achievement(2084)", -- TODO: Achievement can be gained by buying a ring and refunding it, but in that case the player probably doesn't want to keep the teleport anyway (otherwise, it could use InventoryItem(<id1> OR <id2> ... <idN>) to make sure it's still in their possession?)
-		Filter = "Level() < 80 OR Class(Mage)", -- Mages can teleport wherever they want to, anyway :D
+		Filter = "Level() < 80 OR Class(MAGE)", -- Mages can teleport wherever they want to, anyway :D
 	},
 	
 	MILESTONE_TBC_UNLOCK_YOR = {
