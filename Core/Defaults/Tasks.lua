@@ -2434,6 +2434,14 @@ local defaultTasks = {
 		Filter = "Level() < 15 OR NOT WorldEvent(HALLOWS_END)",
 	},
 	
+	DAILY_WORLDEVENT_CROWNCHEMICALCO = {
+		name = "The Crown Chemical Co. defeated",
+		notes = "Mount",
+		iconPath = "inv_valentinesboxofchocolates02",
+		Criteria = "EventBoss(CROWN_CHEMICAL_CO)",
+		Filter = "Level() < 15 OR NOT WorldEvent(LOVE_IS_IN_THE_AIR)",
+	},
+	
 	DAILY_LEGION_WORLDEVENT_UNDERTHECROOKEDTREE = {
 		name = "Hallow's End: Under the Crooked Tree",
 		notes = "Transmog",
