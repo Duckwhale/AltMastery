@@ -2980,6 +2980,61 @@ local defaultTasks = {
 		},
 	},
 	
+	
+	MILESTONE_LEGION_CLASSINTRO_DEMONHUNTER = {
+		name = "Demon Hunter: Class Introduction",
+		iconPath = "classicon_demonhunter",
+		Criteria = "Objectives(\"MILESTONE_LEGION_CLASSINTRO_DEMONHUNTER\")",
+		Filter = "Level() < 98 OR NOT Class(DEMONHUNTER)",
+		Objectives = {
+		
+			-- Mardum Storyline
+			"Quest(40077) AS The Invasion Begins",
+			"Quest(39279) AS Assault on Mardum",
+			"Quest(40378) AS Enter the Illidari: Ashtongue",
+			"Quest(40379) AS Enter the Illidari: Coilskar",
+			"Quest(38759) AS Set Them Free",
+			"Quest(39049) AS Eye On the Prize",
+			"Quest(39050) AS Meeting With the Queen",
+			"Quest(38765) AS Enter the Illidari: Shivarra",
+			"Quest(38766) AS Before We're Overrun",
+			"Quest(38813) AS Orders for Your Captains",
+			"Quest(39262) AS Give Me Sight Beyond Sight",
+			"Quest(39495) AS Hidden No More",
+			"Quest(38819) AS Their Numbers Are Legion",
+			"Quest(38727) AS Stop the Bombardment",
+			"Quest(38725) AS Into the Foul Creche",
+			"Quest(40222) AS The Imp Mother's Tome",
+			"Quest(40051) AS Fel Secrets",
+			"Quest(39516) AS Cry Havoc and Let Slip the Illidari!",
+			"Quest(39663) AS On Felbat Wings",
+			"Quest(38728) AS The Keystone",
+			"Quest(38729) AS Return to the Black Temple",
+			
+			-- Vault of the Wardens Storyline
+			"Quest(38672) AS Breaking Out",
+			"Quest(39742) AS Vault of the Wardens",
+			"Quest(38689) AS Fel Infusion",
+			"Quest(38690) AS Rise of the Illidari",
+			"Quest(40253) AS Stop Gul'dan!",
+			"Quest(39682) AS Grand Theft Felbat",
+			"Quest(39683) AS Forged in Fire",
+			"Quest(39684) AS Beam Me Up",
+			"Quest(39685) AS Frozen in Time",
+			"Quest(39686) AS All The Way Up",
+			"Quest(40373) AS A New Direction",
+			"Quest(39688) OR Quest(39694) OR Quest(40255) OR Quest(40256) AS Between Us and Freedom",
+			"Quest(39689) OR Quest(39690) AS Illidari, We Are Leaving",
+			
+			-- Faction Storyline (TODO: Different for Horde/Alliance?)
+			"Quest(39691) OR Quest(40976) AS The Call of War / Audience with the Warchief",
+			"Quest(44471) OR Quest(40982) AS Second Sight",
+			"Quest(44463) OR Quest(40983) AS Demons Among Them",
+			"Quest(44473) OR Quest(41002) AS A Weapon of the Alliance / A Weapon of the Horde",
+			
+		},
+	},
+
 
 
 --- Return the table containing default task entries
