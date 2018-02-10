@@ -2916,6 +2916,20 @@ local defaultTasks = {
 	
 }
 	
+	WQ_LEGION_DALARANPETBATTLE_SPLINTSJR = {
+		name = "Pet Battle: Splints Jr.",
+		iconPath = "achievement_guildperk_honorablemention",
+		Criteria = "Quest(41886)",
+		Filter = "Level() < 110 OR NOT WorldQuest(41886)",
+	},
+	
+	WQ_LEGION_DALARANPETBATTLE_STITCHESJRJR = {
+		name = "Pet Battle: Stitches Jr. Jr.",
+		iconPath = "achievement_guildperk_honorablemention",
+		Criteria = "Quest(42062)",
+		Filter = "Level() < 110 OR NOT WorldQuest(42062)",
+	},
+	
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_SHAMAN_ELEMENTAL = {
 		name = "Elemental: Lost Codex of the Amani",
 		notes = "Artifact skin",
