@@ -2915,6 +2915,419 @@ local defaultTasks = {
 	},
 	
 }
+	
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_SHAMAN_ELEMENTAL = {
+		name = "Elemental: Lost Codex of the Amani",
+		notes = "Artifact skin",
+		iconPath = "inv_hand_1h_artifactstormfist_d_06",
+		Criteria = "Quest(43673)",
+		Filter = "Level() < 110 OR NOT Class(SHAMAN)", 
+	},
+	
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_SHAMAN_ENHANCEMENT = {
+		name = "Enhancement: The Warmace of Shirvallah",
+		notes = "Artifact skin",
+		iconPath = "inv_mace_1h_artifactdoomhammer_d_06",
+		Criteria = "Quest(43674)",
+		Filter = "Level() < 110 OR NOT Class(SHAMAN)",
+	},
+	
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_SHAMAN_RESTORATION = {
+		name = "Restoration: Coil of the Drowned Queen",
+		notes = "Artifact skin",
+		iconPath = "inv_mace_1h_artifactazshara_d_06",
+		Criteria = "Quest(43675)",
+		Filter = "Level() < 110 OR NOT Class(SHAMAN)",
+	},
+	
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DEATHKNIGHT_BLOOD = {
+		name = "Blood: Twisting Anima of Souls",
+		notes = "Artifact skin",
+		iconPath = "spell_misc_zandalari_council_soulswap",
+		Criteria = "Quest(43646)",
+		Filter = "Level() < 110 OR NOT Class(DEATHKNIGHT)",
+		Objectives = {
+			"Quest(44636) AS Building an Army (Suramar)",
+			"Quest(43943) AS Withered Army Training (Scenario)",
+			"Quest(43646) AS Obtained the Twisting Anima of Souls",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DEATHKNIGHT_FROST = {
+		name = "Frost: Runes of the Darkening",
+		notes = "Artifact skin",
+		iconPath = "inv_offhand_1h_deathwingraid_d_01",
+		Criteria = "Quest(43647)",
+		Filter = "Level() < 110 OR NOT Class(DEATHKNIGHT)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DEATHKNIGHT_UNHOLY = {
+		name = "Unholy: The Bonereaper's Hook",
+		notes = "Artifact skin",
+		iconPath = "inv_sword_2h_artifactsoulrend_d_05",
+		Criteria = "Quest(43648)",
+		Filter = "Level() < 110 OR NOT Class(DEATHKNIGHT)",
+		Objectives = {
+			"Quest(44188) AS Army of the Dead spawned",
+			"Quest(43648) AS Bonereaper's Hook obtained (from Stitchwork)",
+		},
+	},
+	
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DEMONHUNTER_HAVOC = {
+		name = "Havoc: Guise of the Deathwalker",
+		notes = "Artifact skin",
+		iconPath = "inv_glaive_1h_artifactazgalor_d_06",
+		Criteria = "Quest(43649)",
+		Filter = "Level() < 110 OR NOT Class(DEMONHUNTER)",
+	},
+	
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DEMONHUNTER_VENGEANCE = {
+		name = "Vengeance: Bulwark of the Iron Warden",
+		notes = "Artifact skin",
+		iconPath = "inv_glaive_1h_artifactaldrochi_d_05",
+		Criteria = "Quest(43650)",
+		Filter = "Level() < 110 OR NOT Class(DEMONHUNTER)",
+	},
+	
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DRUID_BALANCE = {
+		name = "Balance: The Sunbloom",
+		notes = "Artifact skin",
+		iconPath = "inv_summerfest_fireflower",
+		Criteria = "Quest(43651)",
+		Filter = "Level() < 110 OR NOT Class(DRUID)",
+		Objectives = {
+			"Reputation(THE_DREAMWEAVERS) >= EXALTED AS The Dreamweavers: Exalted",
+			"InventoryItem(140652) OR InventoryItem(140652) OR Quest(43651) AS Seed of Solar Fire",
+			"InventoryItem(140653) OR InventoryItem(140652) OR Quest(43651) AS Pure Drop of Shaladrassil's Sap",
+			"Quest(43651) AS The Sunbloom",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DRUID_FERAL = {
+		name = "Feral: Feather of the Moonspirit",
+		notes = "Artifact skin",
+		iconPath = "inv_feather_14",
+		Criteria = "Quest(43652)",
+		Filter = "Level() < 110 OR NOT Class(DRUID)",
+		Objectives = {
+			"Quest(44327) AS Feralas Stone: Active",
+			"Quest(44331) AS Feralas Stone: Touched",
+			"Quest(44328) AS Hinterlands Stone: Active",
+			"Quest(44332) AS Hinterlands Stone: Touched",
+			"Quest(44329) AS Duskwood Stone: Active",
+			"Quest(44330) AS Duskwood Stone: Touched",
+			"Quest(43652) AS Feather of the Moonspirit",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DRUID_GUARDIAN = {
+		name = "Guardian: Mark of the Glade Guardian",
+		notes = "Artifact skin",
+		iconPath = "ability_druid_markofursol",
+		Criteria = "Quest(43653)",
+		Filter = "Level() < 110 OR NOT Class(DRUID)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DRUID_RESTORATION = {
+		name = "Restoration: Acorn of the Endless",
+		notes = "Artifact skin",
+		iconPath = "inv_farm_enchantedseed",
+		Criteria = "Quest(43654)",
+		Filter = "Level() < 110 OR NOT Class(DRUID)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_HUNTER_BEASTMASTERY = {
+		name = "Beast Mastery: Designs of the Grand Architect",
+		notes = "Artifact skin",
+		iconPath = "inv_engineering_blingtronscircuitdesigntutorial",
+		Criteria = "Quest(43655)",
+		Filter = "Level() < 110 OR NOT Class(HUNTER)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_HUNTER_MARKSMANSHIP = {
+		name = "Marksmanship: Syriel Crescentfall's Notes (Ravenguard)",
+		notes = "Artifact skin",
+		iconPath = "inv_bow_2h_crossbow_artifactwindrunner_d_05",
+		Criteria = "Quest(43656)",
+		Filter = "Level() < 110 OR NOT Class(HUNTER)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_HUNTER_SURVIVAL = {
+		name = "Survival: Last Breath of the Forest",
+		notes = "Artifact skin",
+		iconPath = "inv_polearm_2h_artifacteagle_d_05",
+		Criteria = "Quest(43657)",
+		Filter = "Level() < 110 OR NOT Class(HUNTER)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_MAGE_ARCANE = {
+		name = "Arcane: The Woolomancer's Charge",
+		notes = "Artifact skin",
+		iconPath = "inv_staff_2h_sheepstick_d_01",
+		Criteria = "Quest(43658)",
+		Filter = "Level() < 110 OR NOT Class(MAGE)",
+		Objectives = {
+			"Quest(43787) AS Cliffwing Hippogryph polymorphed (Azsuna)",
+			"Quest(43788) AS Highpeak Goat polymorphed (Highmountain)",
+			"Quest(43789) AS Plains Runehorn Calf polymorphed (Stormheim)",
+			"Quest(43791) AS Heartwood Doe polymorphed (Suramar)",
+			"Quest(43790) AS Wild Dreamrunner polymorphed (Val'sharah)",
+			"Quest(43828) AS Hall of the Guardian: Sheep Summon Daily Roll (After Teleport)",
+			"Quest(43799) AS Hall of the Guardian: Sheep exploded (Right-click it!)", -- TODO: May require Arcane spec to be active?
+			"Quest(43800) AS Extremely Volatile Stormheim Sheep detonated",
+			--"Quest(aaaaa) AS Event: Tower of Azora (Elwynn Forest)", -- TODO: I don't think there's actually a quest for this
+			"InventoryItem(139558) OR Quest(43658) AS The Woolomancer's Charge obtained",
+			"Quest(43658) AS Woolomancer's Charge unlocked",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_MAGE_FIRE = {
+		name = "Fire: The Stars' Design",
+		notes = "Artifact skin",
+		iconPath = "inv_sword_1h_artifactfelomelorn_d_06",
+		Criteria = "Quest(43659)",
+		Filter = "Level() < 110 OR NOT Class(MAGE)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_MAGE_FROST = {
+		name = "Frost: Everburning Crystal",
+		notes = "Artifact skin",
+		iconPath = "inv_staff_2h_artifactantonidas_d_04",
+		Criteria = "Quest(43660)",
+		Filter = "Level() < 110 OR NOT Class(MAGE)",
+		Objectives = {
+			"Quest(44384) AS Daily Portal Roll completed",
+			-- "Quest(aaaaaa) AS Used portal to Frostfire Ridge", -- TODO
+			-- "Quest(aaaaaa) AS Everburning Crystal looted", -- TODO
+			"Quest(43660) AS Everburning Crystal used",
+			
+		},
+	},
+	
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_MONK_BREWMASTER = {
+		name = "Brewmaster: Legend of the Monkey King",
+		notes = "Artifact skin",
+		iconPath = "inv_staff_2h_artifactmonkeyking_d_06",
+		Criteria = "Quest(43661)",
+		Filter = "Level() < 110 OR NOT Class(MONK)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_MONK_MISTWEAVER = {
+		name = "Mistweaver: Breath of the Undying Serpent",
+		notes = "Artifact skin",
+		iconPath = "inv_misc_head_dragon_black_nightmare",
+		Criteria = "Quest(43662)",
+		Filter = "Level() < 110 OR NOT Class(MONK)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_MONK_WINDWALKER = {
+		name = "Windwalker: The Stormfist",
+		notes = "Artifact skin",
+		iconPath = "inv_hand_1h_artifactskywall_d_05",
+		Criteria = "Quest(43663)",
+		Filter = "Level() < 110 OR NOT Class(MONK)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_PALADIN_HOLY = {
+		name = "Holy: Lost Edicts of the Watcher",
+		notes = "Artifact skin",
+		iconPath = "inv_shield_2h_artifactsilverhand_d_06",
+		Criteria = "Quest(43664)",
+		Filter = "Level() < 110 OR NOT Class(PALADIN)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_PALADIN_PROTECTION = {
+		name = "Protection: Spark of the Fallen Exarch",
+		notes = "Artifact skin",
+		iconPath = "inv_shield_1h_artifactnorgannon_d_05",
+		Criteria = "Quest(43665)",
+		Filter = "Level() < 110 OR NOT Class(PALADIN)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_PALADIN_RETRIBUTION = {
+		name = "Retribution: Heart of Corruption",
+		notes = "Artifact skin",
+		iconPath = "inv_misc_shadowegg",
+		Criteria = "Quest(43666)",
+		Filter = "Level() < 110 OR NOT Class(PALADIN)",
+		Objectives = {
+			"InventoryItem(18229) OR InventoryItem(139620) OR Quest(43682) AS Nat Pagle's Guide to Extreme Anglin'",
+			"InventoryItem(18365) OR InventoryItem(139620) OR Quest(43682) AS A Thoroughly Read Copy of \"Nat Pagle's Guide to Extreme Anglin'.\"",
+			"InventoryItem(19002) OR InventoryItem(19003) OR InventoryItem(139620) OR Quest(43682) AS Head of Nefarian",
+			"InventoryItem(139620) OR Quest(43682) AS A Complete Copy of \"Nat Pagle's Guide to Extreme Anglin'.\"",
+			"Quest(43682) AS Book presented - to Prince Tortheldrin (in Dire Maul)",
+			"Quest(43683) AS Traveler found - at The Bulwark/Tirisfal Glades or Chillwind Camp/Plaguelands",
+			"Quest(43684) AS Notes read - Grand Inquisitor Isillien's Journal (Hearthglen)",
+			"InventoryItem(139623) OR Quest(43685) AS Timolain's Phylactery obainted - Large Vile Slime killed (Thorondil River/Plaguelands)",
+			"Quest(43685) AS Phylactery used (exhaust dialogue options)",
+			"InventoryItem(139624) OR Quest(43688) AS Shard of Darkness obtained",
+			"Quest(43688) AS Talked to Lord Maxwell Tyrosus",
+			"Quest(43687) AS Walking in Shadows (Acherus: The Ebon Hold)",
+			"InventoryItem(139566) OR Quest(43666) AS Heart of Corruption obtained",
+			"Quest(43666) AS Corrupted Remembrance unlocked",
+		},
+	},
+	
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_PRIEST_DISCIPLINE = {
+		name = "Discipline: Writings of the End",
+		notes = "Artifact skin",
+		iconPath = "inv_staff_2h_artifacttome_d_04",
+		Criteria = "Quest(43667)",
+		Filter = "Level() < 110 OR NOT Class(PRIEST)",
+		Objectives = {
+			"Quest(44342) AS Spoken to Archivist Inkforge (Netherlight Temple)",
+			"Quest(44339) AS Dalaran - The Violet Citadel",
+			"Quest(44340) AS Class Order Hall - Juvess the Duskwhisperer",
+			"Quest(44341) AS Northrend - New Hearthglen",
+			"Quest(44343) AS Scholomance - Chillheart's Room - Dungeon",
+			"Quest(44344) AS Class Order Hall - Meridelle Lightspark",
+			"Quest(44345) AS Scarlet Halls - The Flameweaver's Library - Dungeon",
+			"Quest(44346) AS Azsuna - Chief Bitterbrine Azsuna - Rare",
+			"Quest(44347) AS Suramar - Artificer Lothaire - Rare",
+			"Quest(44348) AS Black Rook Hold - Library after First Boss - Dungeon",
+			"Quest(44349) AS Karazhan - Guardian's Library - Dungeon",
+			"Quest(44350) AS Stormheim - Inquisitor Ernstonbok - Rare",
+			"InventoryItem(139567) OR Quest(43667) AS The Annals of Light and Shadow combined",
+			"Quest(43667) AS Tomekeeper's Spire unlocked",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_PRIEST_HOLY = {
+		name = "Holy: Staff of the Lightborn",
+		notes = "Artifact skin",
+		iconPath = "inv_staff_2h_artifactheartofkure_d_06",
+		Criteria = "Quest(43668)",
+		Filter = "Level() < 110 OR NOT Class(PRIEST)",
+		Objectives = {
+			"InventoryItem(140657) OR InventoryItem(aaaaaa) OR InventoryItem(139568) OR Quest(43668) AS Crest of the Lightborn obtained",
+			"Reputation(THE_VALARJAR) >= EXALTED AS The Valarjar: Exalted",
+			"InventoryItem(140656) OR InventoryItem(139568) OR Quest(43668) AS Rod of the Ascended obtained",
+			"InventoryItem(139568) OR Quest(43668) AS Staff of the Lightborn obtained",
+			"Quest(43668) AS Staff of the Lightborn used",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_PRIEST_SHADOW = {
+		name = "Shadow: Claw of N'Zoth",
+		notes = "Artifact skin",
+		iconPath = "inv_knife_1h_artifactcthun_d_06",
+		Criteria = "Quest(43669)",
+		Filter = "Level() < 110 OR NOT Class(PRIEST)",
+	},
+
+	
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_ROGUE_ASSASSINATION = {
+		name = "Assassination: The Cypher of Broken Bone",
+		notes = "Artifact skin",
+		iconPath = "inv_knife_1h_artifactgarona_d_05",
+		Criteria = "Quest(43670)",
+		Filter = "Level() < 110 OR NOT Class(ROGUE)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_ROGUE_OUTLAW = {
+		name = "Outlaw: Emanation of the Winds",
+		notes = "Artifact skin",
+		iconPath = "inv_sword_1h_artifactskywall_d_06",
+		Criteria = "Quest(43671)",
+		Filter = "Level() < 110 OR NOT Class(ROGUE)",
+		Objectives = {
+			"InventoryItem(139468) OR Quest(43671) AS Right half of the Bindings of the Windlord obtained (Ash'golm)",
+			"InventoryItem(139466) OR Quest(43671) AS Left half of the Bindings of the Windlord  obtained (Dargrul)",
+			"InventoryItem(139536) OR Quest(43671) AS Both halves combined",
+			"Quest(43671) AS Emanation of the Winds used",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_ROGUE_SUBTLETLY = {
+		name = "Subtletly: Tome of Otherworldly Venoms",
+		notes = "Artifact skin",
+		iconPath = "inv_knife_1h_artifactfangs_d_06",
+		Criteria = "Quest(43672)",
+		Filter = "Level() < 110 OR NOT Class(ROGUE)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_WARLOCK_AFFLICTION = {
+		name = "Affliction: Essence of the Executioner",
+		notes = "Artifact skin",
+		iconPath = "inv_staff_2h_artifactdeadwind_d_04",
+		Criteria = "Quest(43676)",
+		Filter = "Level() < 110 OR NOT Class(WARLOCK)",
+		Objectives = {
+			"InventoryItem(140764) OR Quest(44083) AS Grimoire of the First Necrolyte obtained",
+			"Quest(44083) AS The Grimoire of the First Necrolyte",
+			"Quest(44153) AS The Rite of the Executioner",
+			"InventoryItem(139575) OR Quest(43676) AS Essence of the Executioner obtained",
+			"Quest(43676) AS Essence of the Executioner used",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_WARLOCK_DEMONOLOGY = {
+		name = "Demonology: Visage of the First Wakener",
+		notes = "Artifact skin",
+		iconPath = "inv_offhand_1h_artifactskulloferedar_d_06",
+		Criteria = "Quest(43677)",
+		Filter = "Level() < 110 OR NOT Class(WARLOCK)",
+		Objectives = {
+			"Quest(44093) AS Damaged Eredar Head looted",
+			"Quest(44094) AS Deformed Eredar Head	 looted",
+			"Quest(44095) AS Malformed Eredar Head looted",
+			"Quest(44096) AS Deficient Eredar Head looted",
+			"Quest(44097) AS Nearly Satisfactory Eredar Head looted",
+			"InventoryItem(139576) OR Quest(43677) AS Visage of the First Wakener obtained",
+			"Quest(43677) AS Visage of the First Wakener used",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_WARLOCK_DESTRUCTION = {
+		name = "Destruction: The Burning Jewel of Sargeras",
+		notes = "Artifact skin",
+		iconPath = "inv_staff_2h_artifactsargeras_d_05",
+		Criteria = "Quest(43678)",
+		Filter = "Level() < 110 OR NOT Class(WARLOCK)",
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_WARRIOR_ARMS = {
+		name = "Arms: The Arcanite Bladebreaker",
+		notes = "Artifact skin",
+		iconPath = "inv_axe_2h_artifactarathor_d_06",
+		Criteria = "Quest(43679)",
+		Filter = "Level() < 110 OR NOT Class(WARRIOR)",
+		Objectives = {
+			"Quest(43643) AS Secrets of the Axes",
+			"InventoryItem(139578) OR Quest(43679) AS The Arcanite Bladebreaker obtained",
+			"Quest(43679) AS Arcanite Bladebreaker unlocked",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_WARRIOR_FURY = {
+		name = "Fury: The Dragonslayers",
+		notes = "Artifact skin",
+		iconPath = "inv_axe_1h_artifactvigfus_d_06dual",
+		Criteria = "Quest(43680)",
+		Filter = "Level() < 110 OR NOT Class(WARRIOR)",
+		Objectives = {
+			"Reputation(THE_VALARJAR) >= EXALTED AS The Valarjar: Exalted",
+			"InventoryItem(140660) OR InventoryItem(139579) OR Quest(43680) AS Haft of the God-King obtained",
+			"InventoryItem(140659) OR InventoryItem(139579) OR Quest(43680) AS Skull of Shar'thos obtained",
+			"InventoryItem(140658) OR InventoryItem(139579) OR Quest(43680) AS Skull of Nithogg obtained",
+			"InventoryItem(139579) OR Quest(43680) AS The Dragonslayers obtained",
+			"Quest(43680) AS Dragonslayer's Edge unlocked",
+		},
+	},
+
+	MILESTONE_LEGION_HIDDENARTIFACTSKIN_WARRIOR_PROTECTION = {
+		name = "Protection: Burning Plate of the Worldbreaker",
+		notes = "Artifact skin",
+		iconPath = "inv_shield_1h_artifactmagnar_d_05",
+		Criteria = "Quest(43681)",
+		Filter = "Level() < 110 OR NOT Class(WARRIOR)",
+		Objectives = {
+			"Quest(44311) AS Burning Plate of the Worldbreaker Available", -- This "Event" quest is required for the appearance to be lootable... I think
+			"Quest(44312) AS Burning Plate of the Worldbreaker Denied", -- Daily quest that can also trigger if the roll failed and it isn't available, after all (RNG)
+			"InventoryItem(139580) OR Quest(43681) AS Burning Plate of the Worldbreaker obtained",
+			"Quest(43681) AS Last Breath of the Worldbreaker unlocked",
+		},
+	},
 
 	MILESTONE_CATA_LEGENDARY_FANGSOFTHEFATHER = {
 		name = "Fangs of the Father",
