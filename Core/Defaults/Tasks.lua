@@ -2916,6 +2916,24 @@ local defaultTasks = {
 	
 }
 	
+	MILESTONE_LEGION_UNLOCK_SURAMARLEYLINEFEEDS = {
+		name = "Suramar: Leyline Feeds",
+		iconPath = "sha_ability_mage_firestarter_nightborne",
+		Criteria = "Achievement(10756)",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Quest(41028) AS Anora Hollow", -- Power Grid",
+			"Quest(43588) AS Kel'balor",
+			"Quest(43592) AS Falanaar Arcway",
+			"Quest(43594) AS Halls of the Eclipse",
+			"Quest(43590) AS Ley Station Moonfall",
+			"Quest(43593) AS Falanaar Depths",
+			"Quest(43587) AS Elor'shan",
+			"Quest(43591) AS Ley Station Aethenar",
+		},
+	},
+	
+	
 	WQ_LEGION_ASSAULT_STORMHEIM = {
 		name = "Assault on Stormheim",
 		iconPath = "warlock_pvp_burninglegion",
