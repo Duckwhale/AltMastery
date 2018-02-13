@@ -2916,6 +2916,21 @@ local defaultTasks = {
 	
 }
 	
+	MILESTONE_LEGION_SURAMAR_ANCIENTMANACAP = {
+		name = "Ancient Mana Cap increased",
+		iconPath = "inv_misc_ancient_mana",
+		Criteria = "Achievement(11133)",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Quest(42842) AS Kel'danath's Manaflask",
+			"Quest(43988) AS Volatile Leyline Crystal",
+			"Quest(43989) AS Infinite Stone",
+			"Quest(43986) AS Enchanted Burial Urn",
+			"Quest(43987) AS Kyrtos's Research Notes",
+		},
+	},
+
+	
 	MILESTONE_LEGION_UNLOCK_SURAMARLEYLINEFEEDS = {
 		name = "Suramar: Leyline Feeds",
 		iconPath = "sha_ability_mage_firestarter_nightborne",
