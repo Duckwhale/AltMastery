@@ -2916,6 +2916,128 @@ local defaultTasks = {
 	
 }
 	
+	WQ_LEGION_ASSAULT_STORMHEIM = {
+		name = "Assault on Stormheim",
+		iconPath = "warlock_pvp_burninglegion",
+		Criteria = "(Level() < 110 AND NumObjectives(\"WQ_LEGION_ASSAULT_STORMHEIM\") == 6) OR (NumObjectives(\"WQ_LEGION_ASSAULT_STORMHEIM\") == 12)",
+		Filter = "Level() < 98 OR NOT Invasion(STORMHEIM)",
+		Objectives = {
+		
+			"Quest(45839) AS Phase 1: Assault on Stormheim",
+			"Quest(45406) AS Phase 2: The Storm's Fury",
+			"Quest(46110) AS Phase 3: Battle for Stormheim",
+			
+			"Quest(46264) AS Their Eyes Are Upon Us",
+			"Quest(45390) AS Souls of the Vrykul",
+			"Quest(45786) AS Feast of the Hounds",
+			"Quest(46179) AS Crushing the Legion",
+			"Quest(46216) AS Congealed Corruption",
+			"Quest(45439) AS An Invasion of... Murlocs?",
+			"Quest(46021) AS Thel'draz",
+			"Quest(46017) AS Shel'drozul",
+			"Quest(46015) AS Idra'zuul",
+			"Quest(46014) AS Gelthrog",
+			"Quest(46013) AS Firecaller Rok'duun",
+			"Quest(46012) AS Fel Commander Urgoz",
+			"Quest(46011) AS Colossal Infernal",
+			"Quest(46010) AS Bonecrusher Korgolath",
+			"Quest(46008) AS Balnazoth",
+			"Quest(46006) AS Arkuthaz",
+		}
+	},
+	
+	WQ_LEGION_ASSAULT_AZSUNA = {
+		name = "Assault on Azsuna",
+		iconPath = "warlock_pvp_burninglegion",
+		Criteria = "(Level() < 110 AND NumObjectives(\"WQ_LEGION_ASSAULT_AZSUNA\") == 6) OR (NumObjectives(\"WQ_LEGION_ASSAULT_AZSUNA\") == 12)", -- Low level alts can only do the P1 quests, not the follow-up quests and the scenario
+		Filter = "Level() < 98 OR NOT Invasion(AZSUNA)",
+		Objectives = {
+			"Quest(45838) AS Phase 1: Assault on Azsuna",
+			"Quest(45795) AS Phase 2: Presence of Power",
+			"Quest(46205) AS Phase 2: A Conduit No More",
+			"Quest(46199) AS Phase 3: Battle for Azszuna",
+			
+			"Quest(46263) AS Weaving Fel Webs",
+			"Quest(45134) AS The Soul Harvesters", --
+			"Quest(46146) AS The Burning Shores", --
+			"Quest(45058) AS Release the Wardens!", --
+			"Quest(46116) AS On Unhallowed Grounds",
+			"Quest(45203) AS Battle for the Ruins", --
+			"Quest(46163) AS Thaz'gul",
+			"Quest(46170) AS Thar'gokk",
+			"Quest(46162) AS Subjugator Val'rek",
+			"Quest(46164) AS Mal'serus", -- 
+			"Quest(46167) AS Kozrum", --
+			"Quest(46165) AS Kazruul",
+			"Quest(46166) AS Garthulak the Crusher",
+			"Quest(46161) AS Felcaller Thalezra",
+			"Quest(46169) AS Dro'zek",
+			"Quest(46168) AS Commander Vorlax",
+		}
+	},
+	
+	WQ_LEGION_ASSAULT_VALSHARAH = {
+		name = "Assault on Val'sharah",
+		iconPath = "warlock_pvp_burninglegion",
+		Criteria = "(Level() < 110 AND NumObjectives(\"WQ_LEGION_ASSAULT_VALSHARAH\") == 6) OR (NumObjectives(\"WQ_LEGION_ASSAULT_VALSHARAH\") == 12)",
+		Filter = "Level() < 98 OR NOT Invasion(VALSHARAH)",
+		Objectives = {
+	
+			"Quest(45812) AS Phase 1: Assault on Val'sharah",
+			"Quest(44789) AS Phase 2: Holding the Ramparts",
+			"Quest(45856) AS Phase 3: Battle for Val'sharah",
+
+			"Quest(44884) AS Defense of Emerald Bay",
+			"Quest(46261) AS The Taste of Corruption",
+			"Quest(45804) AS Impvasion!",
+			"Quest(46265) AS The Fel and the Fawns",
+			"Quest(44730) AS Ravaged Dreams",
+			"Quest(44759) AS The Vale of Dread",
+			"Quest(45921) AS Thal'xur",
+			"Quest(45922) AS Agmozuul",
+			"Quest(45923) AS Gloth",
+			"Quest(45928) AS Gelthrak",
+			"Quest(45924) AS Abyssal Monstrosity",
+			"Quest(45925) AS Nez'val",
+			"Quest(45926) AS Zar'teth",
+			"Quest(45927) AS Zagmothar",
+			"Quest(46763) AS Drol'maz",
+			"Quest(46766) AS Ulgthax",
+
+		}
+	},
+
+	WQ_LEGION_ASSAULT_HIGHMOUNTAIN = {
+		name = "Assault on Highmountain",
+		iconPath = "warlock_pvp_burninglegion",
+		Criteria = "(Level() < 110 AND NumObjectives(\"WQ_LEGION_ASSAULT_HIGHMOUNTAIN\") == 6) OR (NumObjectives(\"WQ_LEGION_ASSAULT_HIGHMOUNTAIN\") == 12)",
+		Filter = "Level() < 98 OR NOT Invasion(HIGHMOUNTAIN)",
+		Objectives = {
+		
+			"Quest(45840) AS P1: Assault on Highmountain",
+			"Quest(45572) AS P2: Holding Our Ground",
+			"Quest(46182) AS P3: Battle for Highmountain",
+			
+			"Quest(46194) AS Wolves of the Legion",
+			"Quest(46195) AS Swarming Skies",
+			"Quest(46262) AS Save the Tadpoles!",
+			"Quest(46197) AS From the Skies They Fel",
+			"Quest(46196) AS Class Dismissed",
+			"Quest(46193) AS Borne of Fel",
+			"Quest(46192) AS Zar'vok",
+			"Quest(46190) AS Ulgrom",
+			"Quest(46189) AS Shel'zuul",
+			"Quest(46188) AS Orgrokk",
+			"Quest(46187) AS Larthogg",
+			"Quest(46186) AS Ix'dreloth",
+			"Quest(46185) AS Iroxus",
+			"Quest(46184) AS Gelgothar",
+			"Quest(46183) AS Commander Zarthak",
+			"Quest(46191) AS Balinar",
+		}
+	},
+	
+	
 	WQ_LEGION_DALARANPETBATTLE_SPLINTSJR = {
 		name = "Pet Battle: Splints Jr.",
 		iconPath = "achievement_guildperk_honorablemention",
