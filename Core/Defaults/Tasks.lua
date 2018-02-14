@@ -3911,6 +3911,13 @@ local defaultTasks = {
 		},
 	},
 
+	MILESTONE_CATACLYSM_MASTERRIDING = {
+		name = "Master Riding purchased", -- "Breaking the Sound Barrier",
+		iconPath = "spell_nature_swiftness", -- "ability_mount_rocketmount"
+		Criteria = "Achievement(5180)",
+		Filter = "Level() < 80",
+	},
+	
 
 
 --- Return the table containing default task entries
