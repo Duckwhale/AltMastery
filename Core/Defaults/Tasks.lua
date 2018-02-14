@@ -2930,6 +2930,300 @@ local defaultTasks = {
 		},
 	},
 
+	MILESTONE_LEGION_STORYLINE_SURAMAR_1 = {
+		name = "Suramar: Nightfallen But Not Forgotten",
+		iconPath = "achievements_zone_suramar",
+		notes = "Required to unlock the Nightborne as Allied Race",
+		Criteria = "Achievement(10617)", -- Nightfallen But Not Forgotten
+		Filter = "Level() < 110",
+		Objectives = {
+			
+			-- Nightfall
+			"Quest(39985) OR (44555) AS Khadgar's Discovery",
+			"Quest(39986) AS Magic Message",
+			"Quest(39987) AS Trail of Echoes",
+			"Quest(40008) AS The Only Way Out is Through",
+			"Quest(40123) AS The Nightborne Pact",
+			"Quest(40009) AS Arcane Thirst",
+			"Quest(42229) AS Shal'Aran", -- Required to turn in Emissary quests in Shal'aran
+			
+			-- Arcanist Kel'danath
+			"Quest(40012) AS An Old Ally",
+			"Quest(40326) AS Scattered Memories",
+			"Quest(41702) AS Written in Stone",
+			"Quest(41704) AS Subject 16",
+			"Quest(41760) AS Kel'danath's Legacy",
+			
+			-- Chief Telemancer Oculeth
+			"Quest(40011) AS Oculeth's Workshop",
+			"Quest(40747) AS The Delicate Art of Telemancy",
+			"Quest(40748) AS Network Security",
+			"Quest(40830) AS Close Enough",
+			"Quest(44691) AS Hungry Work",
+			"Quest(40956) AS Survey Says...",
+			
+			-- Masquerade
+			"Quest(41762) AS Sympathizers Among the Shal'dorei",
+			"Quest(41834) AS The Masks We Wear",
+			"Quest(41989) AS Blood of My Blood",
+			"Quest(42079) AS Masquerade", -- Unlocks Masquerade (city-wide disguise)
+			"Quest(42147) AS First Contact",
+			
+			-- Feeding Shal'Aran
+			"Quest(40010) AS Tapping the Leylines",
+			"Quest(41028) AS Power Grid",
+			"Quest(41138) AS Feeding Shal'Aran", -- Unlocks Leyline Feeds
+			
+			-- The Light Below	
+			"Quest(40324) AS Arcane Communion",
+			"Quest(40325) AS Scenes from a Memory",
+			"Quest(42224) AS Cloaked in Moonshade",
+			"Quest(42225) AS Breaking the Seal",
+			"Quest(42226) AS Moonshade Holdout",
+			"Quest(42227) AS Into the Crevasse",
+			"Quest(42228) AS The Hidden City",
+			"Quest(42230) AS The Valewalker's Burden",
+			
+		},
+	},
+
+	MILESTONE_LEGION_STORYLINE_SURAMAR_2 = {
+		name = "Suramar: Good Suramaritan",
+		iconPath = "achievements_zone_suramar",
+		notes = "Required to unlock the Nightborne as Allied Race",
+		Criteria = "Achievement(10617)", -- Good Suramaritan
+		Filter = "Level() < 110 OR NOT Quest(42229)", -- Shal'Aran = "Nightfall" chapter of the Suramar storyline
+		Objectives = {
+			
+			-- Breaking the Lightbreaker
+			"Quest(40297) AS Lyana Darksorrow",
+			"Quest(40307) AS Glaive Circumstances",
+			"Quest(40898) AS Fresh Meat",
+			"Quest(40901) AS Grimwing the Devourer",
+			"Quest(40328) AS A Fate Worse Than Dying",
+			"Quest(40929) AS Symbols of Power",
+			"Quest(41097) AS Shard of Vorgos",
+			"Quest(41098) AS Shard of Kozak",
+			"Quest(40412) AS Azoran Must Die",
+			
+			-- Moon Guard Stronghold
+			"Quest(40883) AS Fate of the Guard",
+			"Quest(40949) AS Not Their Last Stand",
+			"Quest(40963) AS Take Them in Claw",
+			"Quest(40964) AS The Rift Between",
+			"Quest(40968) AS Recovering Stolen Power",
+			"Quest(40967) AS Precious Little Left",
+			"Quest(40965) AS Lay Waste, Lay Mines",
+			"Quest(41032) AS Stop the Spell Seekers",
+			"Quest(40969) AS Starweaver's Fate",
+			"Quest(40970) AS The Orchestrator of Our Demise",
+			"Quest(40971) AS Overwhelming Distraction",
+			"Quest(40972) AS Last Stand of the Moon Guard",
+
+			-- Jandvik's Jarl
+			"Quest(40907) AS Removing Obstacles",
+			"Quest(40908) AS Jarl Come Back Now",
+			"Quest(40332) AS Beach Bonfire",
+			"Quest(40320) AS Band of Blood Brothers",
+			"Quest(40331) AS Bite of the Sashj'tar",
+			"Quest(40334) AS Fisherman's Tonic", -- Rewards Draught of Seawalking
+			"Quest(41034) AS Testing the Waters",
+			"Quest(40927) AS Jandvik's Last Hope",
+			"Quest(41426) AS Against Their Will",
+			"Quest(41709) AS Breaking Down the Big Guns",
+			"Quest(40336) AS Turning the Tidemistress",
+	
+			-- Eminent Grow-main
+			"Quest(41452) AS Feline Frantic",
+			"Quest(41463) AS Missing Along the Way",
+			"Quest(41464) AS Not Here, Not Now, Not Ever",
+			"Quest(41467) AS The Only Choice We Can Make",
+			"Quest(41453) AS Homeward Bounding",
+			"Quest(41197) AS You've Got to Be Kitten Me Right Meow",
+			"Quest(41473) AS Redhoof the Ancient",
+			"Quest(41474) AS Fertilizing the Future",
+			"Quest(41475) AS Prongs and Fangs",
+			"Quest(41478) AS The Final Blessing",
+			"Quest(41480) AS Managazer",
+			"Quest(41485) AS Moonwhisper Rescue",
+			"Quest(41479) AS Natural Adversaries",
+			"Quest(41469) AS Return to Irongrove Retreat",
+			"Quest(41494) AS Eminent Grow-main",
+	
+			-- Tidying Tel'Anor
+			"Quest(40266) AS The Lost Advisor",
+			"Quest(40744) AS An Ancient Recipe",
+			"Quest(40227) AS Bad Intentions",
+			"Quest(40300) AS Tools of the Trade",
+			"Quest(40306) AS The Last Chapter",
+			"Quest(40578) AS Paying Respects",
+			"Quest(40315) AS End of the Line",
+			"Quest(40319) AS The Final Ingredient",
+			"Quest(40321) AS Feathersong's Redemption",
+	
+			-- An Ancient Gift
+			"Quest(40324) AS Arcane Communion",
+			"Quest(40325) AS Scenes from a Memory",
+			"Quest(42224) AS Cloaked in Moonshade",
+			"Quest(42225) AS Breaking the Seal",
+			"Quest(42226) AS Moonshade Holdout",
+			"Quest(42227) AS Into the Crevasse",
+			"Quest(42228) AS The Hidden City",
+			"Quest(42230) AS The Valewalker's Burden",
+	
+			-- The Waning Crescent
+			"Quest(41877) AS Lady Lunastre",
+			"Quest(40746) AS One of the People",
+			"Quest(41148) AS Dispensing Compassion",
+			"Quest(40947) AS Special Delivery",
+			"Quest(40745) AS Shift Change",
+			"Quest(42722) AS Friends in Cages",
+			"Quest(42486) AS Little One Lost",
+			"Quest(42487) AS Friends On the Outside",
+			"Quest(42488) AS Thalyssra's Abode",
+	
+			-- Blood and Wine
+			"Quest(42828) AS Moths to a Flame",
+			"Quest(42829) AS Make an Entrance",
+			"Quest(42832) AS The Fruit of Our Efforts",
+			"Quest(42833) AS How It's Made: Arcwine",
+			"Quest(42834) AS Intense Concentration",
+			"Quest(42835) AS The Old Fashioned Way",
+			"Quest(42837) AS Balance to Spare",
+			"Quest(42836) AS Silkwing Sabotage",
+			"Quest(42838) AS Reversal",
+			"Quest(42839) AS Seek the Unsavory",
+			"Quest(43969) AS Hired Help",
+			"Quest(42840) AS If Words Don't Work...",
+			"Quest(42841) AS A Big Score",
+			"Quest(43352) AS Asset Security",
+			"Quest(42792) AS Make Your Mark",
+			"Quest(44052) AS And They Will Tremble",
+	
+			-- Statecraft
+			"Quest(43309) AS The Perfect Opportunity",
+			"Quest(43310) AS Either With Us",
+			"Quest(43312) AS Thinly Veiled Threats",
+			"Quest(44040) AS Vote of Confidence",
+			"Quest(43311) AS Or Against Us",
+			"Quest(43315) AS Death Becomes Him",
+			"Quest(43313) AS Rumor Has It",
+			"Quest(43317) AS In the Bag",
+			"Quest(43318) AS Ly'leth's Champion",
+
+			-- A Growing Crisis
+			"Quest(44152) AS A Growing Crisis",
+			"Quest(43361) AS Fragments of Disaster",
+			"Quest(43360) AS The Shardmaidens",
+			"Quest(44156) AS Another Arcan'dor Closes...",
+			"Quest(43362) AS The Emerald Nightmare: The Stuff of Dreams",
+	
+			-- A Change of Seasons
+			"Quest(43502) AS A Change of Seasons",
+			"Quest(43562) AS Giving It All We've Got",
+			"Quest(43563) AS Ephemeral Manastorm Projector",
+			"Quest(43564) AS Flow Control",
+			"Quest(43565) AS Bring Home the Beacon",
+			"Quest(43567) AS All In",
+			"Quest(43568) AS Arcan'dor, Gift of the Ancient Magi",
+			"Quest(43569) AS Arluin's Request",
+		
+		},
+	},	
+	
+	MILESTONE_LEGION_STORYLINE_SURAMAR_3 = {
+		name = "Suramar: Insurrection",
+		iconPath = "inv_nightbornefemale",
+		notes = "Required to unlock the Nightborne as Allied Race",
+		Criteria = "Achievement(10617)", -- Insurrection
+		Filter = "Level() < 110 OR NOT Quest(43569)", -- Arluin's Request = "A Change of Seasons" chapter of the Suramar storyline
+		Objectives = {
+			
+			-- Lockdown
+			"Quest(45260) AS One Day at a Time",
+			"Quest(38649) AS Silence in the City",
+			"Quest(38695) AS Crackdown",
+			"Quest(38692) AS Answering Aggression",
+			"Quest(38720) AS No Reason to Stay",
+			"Quest(38694) AS Regroup",
+			"Quest(42889) AS The Way Back Home",
+			"Quest(44955) AS Visitor in Shal'Aran",
+	
+			-- Missing Persons
+			"Quest(45261) AS Continuing the Cure",
+			"Quest(44722) AS Disillusioned Defector",
+			"Quest(44724) AS Missing Persons",
+			"Quest(44723) AS More Like Me",
+			"Quest(44725) AS Hostage Situation",
+			"Quest(44726) AS In the Business of Souls",
+			"Quest(44727) AS Smuggled!",
+			"Quest(44814) AS Waning Refuge",
+			
+			-- Waxing Crescent
+			"Quest(45262) AS A Message From Ly'leth",
+			"Quest(44742) AS Tavernkeeper's Fate",
+			"Quest(44752) AS Essence Triangulation",
+			"Quest(44753) AS On Public Display ",
+			"Quest(44754) AS Waxing Crescent",
+			"Quest(44756) AS Sign of the Dusk Lily",
+
+			-- An Elven Problem
+			"Quest(45316) AS Stabilizing Suramar",
+			"Quest(45263) AS Eating Before the Meeting",
+			"Quest(40391) AS Take Me To Your Leader",
+			"Quest(43810) AS Down to Business",
+			"Quest(44831) AS Taking a Promenade",
+			"Quest(44834) AS Nullified",
+			"Quest(44842) AS Shield, Meet Spell",
+			"Quest(44843) AS Crystal Clearing",
+			"Quest(44844) AS Powering Down the Portal",
+			"Quest(44845) AS Break An Arm",
+	
+			-- Crafting War
+			"Quest(45265) AS Feeding the Rebellion",
+			"Quest(44743) AS Tyrande's Command",
+			"Quest(44858) AS Trolling Them",
+			"Quest(44928) AS Something's Not Quite Right...",
+			"Quest(44861) AS Arming the Rebels",
+			"Quest(44827) AS Citizens' Army",
+			"Quest(44829) AS We Need Weapons",
+			"Quest(44830) AS Learning From the Dead",
+			"Quest(44790) AS Trial by Demonfire",
+	
+			-- March on Suramar
+			"Quest(45266) AS A United Front",
+			"Quest(44739) AS Ready for Battle",
+			"Quest(44738) AS Full Might of the Elves",
+			"Quest(44740) AS Staging Point",
+	
+			-- Elisande's Retort
+			"Quest(45317) AS Fighting on All Fronts",
+			"Quest(45267) AS Before the Siege",
+			"Quest(44736) AS Gates of the Nighthold",
+			"Quest(44822) AS Temporal Investigations",
+			"Quest(45209) AS Those Scrying Eyes",
+			"Quest(44832) AS Scouting the Breach",
+			"Quest(44833) AS The Seal's Power",
+	
+			-- As Strong As Our Will
+			"Quest(45268) AS The Advisor and the Arcanist",
+			"Quest(44918) AS A Message From Our Enemies",
+			"Quest(44919) AS A Challenge From Our Enemies",
+			"Quest(45063) AS The Felsoul Experiments",
+			"Quest(45062) AS Resisting Arrest",
+			"Quest(45067) AS Telemantic Expanse",
+			"Quest(45065) AS Survey the City",
+			"Quest(45066) AS Experimental Instability",
+			"Quest(45064) AS Felborne No More",
+	
+			-- Breaking the Nighthold
+			"Quest(45269) AS A Taste of Freedom",
+			"Quest(44964) AS I'll Just Leave This Here",
+			"Quest(44719) AS Breaching the Sanctum",
+			
+		},
+	},
+	
 	
 	MILESTONE_LEGION_UNLOCK_SURAMARLEYLINEFEEDS = {
 		name = "Suramar: Leyline Feeds",
