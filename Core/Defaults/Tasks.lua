@@ -3224,6 +3224,23 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_UNLOCK_SURAMARPORTALS = {
+		name = "Suramar: Portals unlocked",
+		iconPath = "INV_Engineering_Failure Detection Pylon", -- "spell_arcane_portaldarnassus",
+		Criteria = "Achievement(11125)",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Quest(40956) AS Ruins of Elune'eth", -- Survey Says...",
+			"Quest(42230) AS Falanaar", -- The Valewalker's Burden",
+			"Quest(42487) AS The Waning Crescent", -- Friends On the Outside",
+			"Quest(44084) AS Twilight Vineyards", -- Vengeance for Margaux",
+			"Quest(41575) AS Felsoul Hold", -- Felsoul Teleporter Online!",
+			"Quest(43811) AS Lunastre Estate", -- Lunastre Estate Teleporter Online!",
+			"Quest(43808) AS Moon Guard", -- Moon Guard Teleporter Online!",
+			"Quest(43813) AS Sanctum of Order", -- Sanctum of Order Teleporter Online!",
+			"Quest(43809) AS Tel'anor", -- Tel'anor'eporter Online!",
+		},
+	},
 	
 	MILESTONE_LEGION_UNLOCK_SURAMARLEYLINEFEEDS = {
 		name = "Suramar: Leyline Feeds",
