@@ -2916,6 +2916,31 @@ local defaultTasks = {
 	
 }
 	
+	WQ_LEGION_WITHEREDARMYTRAINING = {
+		name = "Withered Army Training",
+		notes = "Toy, Hidden Artifact Skin",
+		iconPath = "foxmounticon", -- inv_misc_ancient_mana
+		Criteria = "Quest(43943)",
+		Filter = "Level() < 110 OR NOT WorldQuest(43943)", -- Requires quests (up to 44636) in Suramar, but those are implied (as the WQ won't be available before completing them, anyway)
+		Objectives  = {
+			"Quest(43149) AS Petrified Silkweave",
+			"Quest(43071) AS Berserking Helm of Ondry'el",
+			"Quest(43140) AS Traveler's Banking Chest",
+			"Quest(43111) AS Soothing Leystone Shard",
+			"Quest(43146) AS Spellmask of Azsylla",
+			"Quest(43143) AS Manafused Fal'dorei Egg Sac", 
+			"Quest(43142) AS Treemender's Beacon",
+			"Quest(43141) AS Leyline Broodling",
+			"Quest(43145) AS Berserking Helm of Taenna",
+			"Quest(43120) AS Box of Calming Whispers",
+			"Quest(43144) AS Ancient Mana Basin",
+			"Quest(43134) AS Lenses of Spellseer Dellian",
+			"Quest(43148) AS Lens of Qin'dera",
+			"Quest(43135) AS Disc of the Starcaller",
+			"Quest(43128) AS Spellmask of Alla'onus",
+		},
+	},
+	
 	MILESTONE_LEGION_SURAMAR_ANCIENTMANACAP = {
 		name = "Ancient Mana Cap increased",
 		iconPath = "inv_misc_ancient_mana",
