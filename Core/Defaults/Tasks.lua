@@ -3365,6 +3365,13 @@ local defaultTasks = {
 	},
 	
 	
+	WEEKLY_LEGION_MYTHICPLUS_CHEST = {
+		name = "Mythic Keystone Weekly Reward",
+		iconPath = "inv_relics_hourglass",
+		Criteria = "Quest(44554)", -- Mythic Keystone Weekly Tracking Quest
+		Filter = "Level() < 110",
+	},
+	
 	WQ_LEGION_DALARANPETBATTLE_SPLINTSJR = {
 		name = "Pet Battle: Splints Jr.",
 		iconPath = "achievement_guildperk_honorablemention",
