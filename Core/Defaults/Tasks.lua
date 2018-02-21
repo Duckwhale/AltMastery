@@ -1077,7 +1077,7 @@ local defaultTasks = {
 		name = "World Quest: Behind Enemy Portals",
 		iconPath = "inv_misc_summonable_boss_token",
 		Criteria = "Quest(45520)",
-		Filter = "Level() < 110 OR NOT (WorldQuest(45520) AND (WorldQuest(45379) OR (Emissary(48641) ~= 0)))", --Level() < 110 OR (NOT WorldQuest(45520) OR NOT WorldQuest(45379)) AND (Emissary(48641) == 0)", -- "Level() < 110 OR NOT WorldQuest(45520) OR (NOT (WorldQuest(45379) OR Quest(45379)) AND (Emissary(48641) ~= 0))", -- Only show this if the Treasure Master Iks'reeged WQ is available OR the Legionfall Emissary is active
+		Filter = "Level() < 110 OR NOT (WorldQuest(45520) AND (WorldQuest(45379) OR (Emissary(48641) ~= 0)))", -- Only show this if the Treasure Master Iks'reeged WQ is available OR the Legionfall Emissary is active
 	},
 	
 	WQ_LEGION_BROKENSHORE_MINIONKILLTHATONETOO = {
