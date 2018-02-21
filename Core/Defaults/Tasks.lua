@@ -1234,6 +1234,371 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_PROFESSIONQUESTS_LEATHERWORKING = {
+		name = "Leatherworking: Broken Isles Quests completed",
+		iconPath = "inv_misc_armorkit_17",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_LEATHERWORKING\")",
+		Filter = "Level() < 98 OR NOT (Profession(LEATHERWORKING) > 0)", 
+		Objectives = {
+			"Quest(39958) AS Skin Deep",
+			"Quest(40183) AS Over Your Head",
+			"Quest(40196) AS Adventuring Anxieties",
+			"Quest(40197) AS The Necessary Materials",
+			"Quest(41889) AS Dazed of the Past",
+			"Quest(40200) OR Quest(40241) AS Battle Bonds",
+			"Quest(40201) AS Playthings",
+			"Quest(40177) AS Leather Lady",
+			"Quest(40179) AS Stormheim Savagery",
+			"Quest(40178) AS Vestment Opportunity",
+			"Quest(40180) AS Mail Men",
+			"Quest(40181) AS Black Rook Bandit",
+			"Quest(40182) AS Too Good To Pass Up",
+			"Quest(40176) AS From Head to Toe",
+			"Quest(40184) AS Tauren Tanning",
+			"Quest(40186) AS Drogbar Durability",
+			"Quest(40185) AS Shoulder the Burden",
+			"Quest(40192) AS Claw of the Land",
+			"Quest(40191) AS Stamped Stories",
+			"Quest(40198) AS Rats!",
+			"Quest(40202) AS The Final Lessons",
+			"Quest(40205) AS Respect for the Past",
+			"Quest(40203) AS Strength of the Past",
+			"Quest(40204) AS Evolution of the Past",
+			"Quest(40415) AS Well Spent Time",
+			"Quest(40211) AS Demon Flesh",
+			"Quest(40213) AS Hounds Abound",
+			"Quest(40212) AS Wrong End of the Knife",
+			"Quest(40214) AS Fel Tanning",
+			"Quest(40187) AS Links in the Chain",
+			"Quest(40189) AS Naga Know-How",
+			"Quest(40195) AS A Daring Rescue",
+			"Quest(40327) AS Testing the Metal",
+			"Quest(40194) AS Reclaimed Cargo",
+			"Quest(40188) AS Best Served Cold",
+			"Quest(40199) AS Leather Legwork",
+			"Quest(40206) AS A Debt Paid",			
+			"Quest(40209) AS Scales of the Earth",
+			"Quest(40207) AS Scales of the Arcane",
+			"Quest(40208) AS Eye of Azshara: Scales of the Sea",
+			"Quest(40210) AS Time Well Spent",
+			"Quest(40215) AS Mounting Made Easy",
+		},
+	},	
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_JEWELCRAFTING = {
+		name = "Jewelcrafting: Broken Isles Quests completed",
+		iconPath = "inv_misc_gem_03",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_JEWELCRAFTING\")",
+		Filter = "Level() < 98 OR NOT (Profession(JEWELCRAFTING) > 0)", 
+		Objectives = {
+		
+			-- L98
+			"Quest(40523) AS Facet-nating Friends",
+			"Quest(40529) AS Truly Outrageous",
+			"Quest(40530) AS An Eye for Detail",
+			"Quest(40531) AS Swift Vengeance",
+			"Quest(40534) AS Making the Cut",
+			"Quest(40524) AS A Familiar Ring to It",
+			"Quest(40525) AS Getting the Band Back Together",
+			"Quest(42214) AS Knocked for a Loop",
+			"Quest(40526) AS Finishing Touches",		
+			
+			-- L102
+			"Quest(40535) AS Raising the Drogbar",
+			"Quest(40536) AS Bruls Before Jewels",
+			
+			-- L104
+			"Quest(40538) AS Lapidary Lessons",
+			"Quest(40539) AS Hidden Intentions",
+			
+			-- L106
+			"Quest(40540) AS Come at Me, Brul",
+			"Quest(40541) AS The Charge Within",
+			"Quest(40546) AS Mysteries of Nature",
+			"Quest(40542) AS Eyes of Nashal",	
+			
+			-- L108
+			"Quest(40556) AS Jabrul Needs You",
+			"Quest(40547) AS To Dalaran, With Love",
+			
+			-- L110
+			"Quest(40558) AS Socket to Me",
+			"Quest(40561) AS Halls of Valor: Jewel of the Heavens",
+			"Quest(40560) AS Maw of Souls: Spiriting Away",
+			"Quest(40559) AS Black Rook Hold: The Raven's Wisdom",
+			"Quest(40562) AS A Personal Touch",
+
+		},
+	},	
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_JEWELCRAFTING_ARGUS = {
+		name = "Jewelcrafting: Argus Quests completed",
+		iconPath = "inv_helm_crown_c_01_silver",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_JEWELCRAFTING_ARGUS\")",
+		Filter = "Level() < 110 OR NOT (Profession(JEWELCRAFTING) > 0) OR NOT Quest(47686)", -- Not-So-Humble Beginnings (Mac'aree) OR maybe it is 47690 = The Defiler's Legacy?
+		Objectives = {
+			"Quest(48075) AS A Colorful Key",
+			"Quest(48076) AS A Crowning Achievement",
+			--"Reputation(ARMY_OF_THE_LIGHT) >= REVERED AS Army of the Light: Revered",	(used for R2, but the recipe seems worthless, so there's no point in tracking it here)
+		},
+	},
+
+	-- MILESTONE_LEGION_PROFESSIONQUESTS_INSCRIPTION_ARGUS = {
+		-- name = "Inscription: Argus Quests completed",
+		-- iconPath = "achievement_dungeon_outland_dungeonmaster",
+		-- Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_INSCRIPTION_ARGUS\")",
+		-- Filter = "Level() < 110 OR NOT (Profession(INSCRIPTION) > 0) OR NOT Quest(47686)", -- Not-So-Humble Beginnings (Mac'aree) OR maybe it is 47690 = The Defiler's Legacy?
+		-- Objectives = {
+			-- "Quest(48075) AS A Colorful Key",
+
+			-- --"Reputation(ARMY_OF_THE_LIGHT) >= REVERED AS Army of the Light: Revered",	(used for R2, but the recipe seems worthless, so there's no point in tracking it here)
+		-- },
+	-- },
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_ALCHEMY_ARGUS = {
+		name = "Alchemy: Argus Quests completed",
+		iconPath = "inv_alchemy_tearsofthenaaru", -- "trade_alchemy",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_ALCHEMY_ARGUS\")",
+		Filter = "Level() < 110 OR NOT (Profession(ALCHEMY) > 0) OR NOT Quest(46816)", --  Rendezvous (Krokuun)
+		Objectives = {
+			"Quest(48002) AS Limited Supplies",
+			"Quest(48013) AS Tracking the Trackers",
+			"Quest(48016) AS A Ascending Alchemy Key",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_INSCRIPTION = {
+		name = "Inscription: Broken Isles Quests completed",
+		iconPath = "inv_inscription_tradeskill01",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_INSCRIPTION\")",
+		Filter = "Level() < 98 OR NOT (Profession(INSCRIPTION) > 0)", 
+		Objectives = {
+		
+			-- L98
+			"Quest(39847) AS Sign This",
+			"Quest(39931) AS Smashing Herbs",
+			"Quest(39932) AS Fish Ink",
+			"Quest(39933) AS The Card Shark",	
+			
+			-- L102
+			"Quest(40056) AS Our New Allies",
+			"Quest(40057) AS The Price of Power",
+			"Quest(39939) AS Scribal Knowledge",
+			"Quest(40063) AS Control is Key",
+			"Quest(39940) AS Runes of Power",
+			"Quest(39936) AS Inscription of the Body",
+			"Quest(39937) AS Opposites Repel",
+			"Quest(40060) AS Containing the Demon Within",
+			"Quest(39943) AS The Burdens of Hunting",
+			
+			-- L104
+			"Quest(39944) AS Mysterious Messages",
+			"Quest(39945) AS Runes Within the Ruins",
+			"Quest(39946) AS Right Tool for the Job",
+			"Quest(39947) AS Not So Complex?",
+			"Quest(40052) AS Ancient Vrykul Mastered",
+			
+			-- L106
+			"Quest(39948) AS The Ink Flows",
+			"Quest(39949) AS Once a Scribe Like You",
+			"Quest(39950) AS An Odd Trinket",
+			"Quest(39953) AS Halls of Valor: Vision of Valor",
+			
+			-- L108
+			"Quest(39954) AS Mass Milling Techniques",
+			"Quest(39961) AS An Embarrassing Revelation",
+			"Quest(39955) OR Quest(39960) AS The Plot Thickens / The Legacy Passed On", -- A / H
+			
+			-- L110
+			"Quest(39957) AS Demon Ink",
+
+		},
+	},	
+
+	MILESTONE_LEGION_PROFESSIONQUESTS_ALCHEMY = {
+		name = "Alchemy: Broken Isles Quests completed",
+		iconPath = "trade_alchemy",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_ALCHEMY\")",
+		Filter = "Level() < 98 OR NOT (Profession(ALCHEMY) > 0)", 
+		Objectives = {
+		
+			-- L98 (100?)
+			"Quest(39325) AS Get Your Mix On",
+			"Quest(39326) AS Missing Shipments",
+			"Quest(39327) AS There's a Scribe for That",
+			"Quest(39328) AS Ancient Knowledge",
+			"Quest(39329) AS A Dormant Burner",
+			"Quest(39330) AS Ley Hunting",
+			
+			-- L102
+			"Quest(39331) AS Eye of Azshara: Put a Cork in It",
+			"Quest(39332) AS Furbolg Firewater",
+			
+			-- L104
+			"Quest(39430) AS Flasking for a Favor",
+			"Quest(39334) AS Thanks for Flasking",
+			
+			-- L106
+			"Quest(39335) AS Neltharion's Lair: Potent Powder",
+			"Quest(39336) AS We Need More Powder!",
+			
+			-- L108
+			"Quest(39337) AS Forlorn Filter",
+			"Quest(39431) AS Mending the Filter",
+			"Quest(44112) AS Trading for Dreams",
+			"Quest(39338) AS Return the Filter",
+			
+			-- L110
+			"Quest(39343) AS Vault of the Wardens: Bendy Glass Tubes",
+
+		},
+	},				
+
+	MILESTONE_LEGION_PROFESSIONQUESTS_BLACKSMITHING = {
+		name = "Blacksmithing: Broken Isles Quests completed",
+		iconPath = "trade_blacksmithing",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_BLACKSMITHING\")",
+		Filter = "Level() < 98 OR NOT (Profession(BLACKSMITHING) > 0)", 
+		Objectives = {
+		-- TODO: Double-check wowhead guides & count quests
+			-- L98 (100?)
+			"Quest(38499) AS Strange New Ores",
+			"Quest(39681) AS The Properties of Leystone",
+			"Quest(38502) AS The Methods of the Nightfallen",
+			"Quest(38501) AS Hatecoil Hammerwork",
+			
+			-- L102
+			"Quest(38505) AS Engineers: Not COMPLETELY Useless",
+			"Quest(38506) AS Chicken Scratch",
+			"Quest(38507) AS Secrets of Leysmithing",
+			"Quest(38515) AS Nature Provides",
+			"Quest(38500) AS Leysmithing Mastery",
+			"Quest(38563) AS Flower-Pickers and Potion-Quaffers",
+			
+			-- L104
+			"Quest(38513) AS The Highmountain Smiths",
+			"Quest(38514) AS You Are Not Worthy",
+			"Quest(39699) AS Ironhorn Leysmithing",
+			"Quest(38519) AS Grayheft",
+			"Quest(38518) AS From One Master to Another",
+
+			-- L106
+			"Quest(38522) AS Not Just Weapons and Armor",
+			"Quest(38523) AS Leystone Hoofplates",
+			
+			-- L108
+			"Quest(39702) AS Legend of Black Rook Hold",
+			"Quest(39680) AS Between the Hammer...",
+			"Quest(39726) AS ...And the Anvil",
+			"Quest(39729) AS The Knowledge of Black Rook",
+			"Quest(38564) AS A Sweet Bargain",
+			"Quest(44449) AS Advanced Quenching",
+			
+			-- L110
+			"Quest(38524) AS Felsmith Nal'ryssa",
+			"Quest(38525) AS Part of the Team",
+			"Quest(38526) AS Smith Under Fire",
+			"Quest(38527) AS Nal'ryssa's Technique",
+			"Quest(38528) AS Leystone's Potential",
+			"Quest(38530) AS The Firmament Stone",
+			"Quest(38531) AS Leystone Mastery",
+			"Quest(38532) AS Maw of Souls: Hammered By The Storm",
+			"Quest(38559) AS Worthy of the Stone",
+			"Quest(38833) AS The Art of Demonsteel",
+			"Quest(38533) AS Tribal Knowledge",
+
+		},
+	},				
+
+	MILESTONE_LEGION_PROFESSIONQUESTS_BLACKSMITHING_ARGUS = {
+		name = "Blacksmithing: Argus Quests completed",
+		iconPath = "inv_chest_plate_raidpaladinmythic_s_01",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_BLACKSMITHING_ARGUS\")",
+		Filter = "Level() < 110 OR NOT (Profession(BLACKSMITHING) > 0) OR NOT Quest(47653)", -- Light's Return (Krokuun)
+		Objectives = {
+			"Quest(48055) AS A Empyrial Strength",
+			"Quest(48053) OR Quest(48054) AS A Weigh Anchor",
+		},
+	},
+
+	MILESTONE_LEGION_PROFESSIONQUESTS_ENGINEERING_ARGUS = {
+		name = "Engineering: Argus Quests completed",
+		iconPath = "inv_helm_crown_c_01_silver",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_ENGINEERING_ARGUS\")",
+		Filter = "Level() < 110 OR NOT (Profession(ENGINEERING) > 0) OR NOT Quest(46941)", -- The Path Forward (Mac'aree)
+		Objectives = {
+			"Quest(48069) AS The Wrench Calls",
+			"Quest(48065) AS Extraterrestrial Exploration",
+			"Quest(48056) AS A Harsh Mistress",
+		},
+	},
+
+	MILESTONE_LEGION_PROFESSIONQUESTS_ENGINEERING = {
+		name = "Engineering: Broken Isles Quests completed",
+		iconPath = "trade_engineering",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_ENGINEERING\")",
+		Filter = "Level() < 98 OR NOT (Profession(ENGINEERING) > 0)", 
+		Objectives = {
+		
+			-- L98 (100?)
+			"Quest(40545) AS Aww Scrap!",
+			"Quest(40854) AS Endless Possibilities",
+			"Quest(40855) AS Our Man in Azsuna",
+			"Quest(40859) AS The Latest Fashion: Headguns!",
+			"Quest(40856) AS It'll Cost You",
+			"Quest(40858) AS The Missing Pieces",
+			
+			-- L102
+			"Quest(40863) AS Always the Last Thing",
+			"Quest(40864) AS Modular Modifications",
+			
+			-- L104
+			"Quest(40870) AS Here Comes the BOOM!",
+			"Quest(40869) AS Fire and Forget",
+			"Quest(40865) AS It's Not Rocket Science",
+			"Quest(40867) AS Bubble Baubles",
+			"Quest(40866) AS The Shell, You Say?",
+			"Quest(40868) AS Wibbly-Wobbly, Timey-Wimey",
+			
+			-- L106
+			"Quest(40871) AS 'Locke and Load",
+			"Quest(40872) AS Going Out With a Bang",
+			"Quest(40873) AS Keep Yer Powder Dry",
+			"Quest(40875) AS Going to Waste",
+			"Quest(40874) AS I'd Do It Myself, But...",
+			"Quest(40876) AS 'Locke, Stock and Barrel",
+			
+			-- L108
+			"Quest(40877) AS Halls of Valor: Trigger Happy",
+			"Quest(40878) AS Assault on Violet Hold: Cheating Death",
+			
+			-- L110
+			"Quest(40882) AS Court of Stars: Revamping the Recoil",
+			"Quest(40880) AS Short Circuit",
+			"Quest(40881) AS Oil Rags to Riches",
+			"Quest(40879) AS It's On With Automatons",
+
+		},
+	},				
+
+	MILESTONE_LEGION_PROFESSIONQUESTS_COOKING = {
+		name = "Cooking: Broken Isles Quests Completed", -- Nomi's Kitchen Set Up",
+		iconPath = "spell_fire_fire",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_COOKING\")",
+		Filter = "Level() < 98 OR NOT (Profession(COOKING) > 0)", 
+		Objectives = {
+			"Quest(40989) OR Quest(40988) AS The Prodigal Sous Chef / Too Many Cooks",
+			"Quest(39867) AS I'm Not Lion!",
+			"Quest(44581) AS Spicing Things Up",
+			"Quest(37536) AS Morale Booster", -- Azsuna
+			"Quest(39117) AS Shriek No More", -- Bradensbrook, Val'sharah
+			"Quest(37727) AS The Magister of Mixology", -- Azsuna
+			"Quest(40078) AS A Heavy Burden", -- Odyn's story, Stormheim
+			"Quest(40102) AS Murlocs: The Next Generation", -- Murky's story, Highmountain
+			"Quest(40991) AS Opening the Test Kitchen",
+		},
+	},
+	
 	MILESTONE_LEGION_ATTUNEMENT_RETURNTOKARAZHAN = {
 		name = "Return to Karazhan Attunement",
 		description = "TODO",
