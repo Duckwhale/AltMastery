@@ -625,6 +625,16 @@ local function MythicPlus(typeID) -- TODO: Upvalues
 	end
 	
 end
+
+-- Returns whether or not a given faction has a Paragon Reward available that hasn't been collected yet
+local function ParagonReward(factionID)
+
+	local currentValue, threshold, rewardQuestID, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID) -- TODO: Upvalue
+
+	return hasRewardPending
+	
+end	
+
 	
 
 Criteria = {
@@ -654,6 +664,7 @@ Criteria = {
 	Zone = Zone,
 	SubZone = SubZone,
 	MythicPlus = MythicPlus,
+	ParagonReward = ParagonReward,
 }
 
 AM.Criteria = Criteria
