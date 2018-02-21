@@ -978,7 +978,12 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(48736)",
 	},
 	
-	-- 48716 Y'Sorna Lockout - WQ = ?
+	WQ_LEGION_OVERSEERYBEDA = {
+		name = "World Quest: Overseer Y'Beda",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48716)",
+		Filter = "Level() < 110 OR NOT WorldQuest(48734)",
+	},
 	
 	WQ_LEGION_ATAXON = {
 		name = "World Quest: Ataxon",
