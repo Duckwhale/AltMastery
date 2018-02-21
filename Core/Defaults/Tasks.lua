@@ -4422,6 +4422,56 @@ local defaultTasks = {
 		Filter = "Level() < 80",
 	},
 	
+	
+	WQ_LEGION_PARAGONREWARD_ARGUSSIANREACH = {
+		name = "Supplies From the Argussian Reach",
+		iconPath = "inv_legion_paragoncache_argussianreach",
+		Criteria = " NOT ParagonReward(ARGUSSIAN_REACH)",
+		Filter = "Level() < 110 OR NOT Reputation(ARGUSSIAN_REACH) >= EXALTED",
+	},
+
+	WQ_LEGION_PARAGONREWARD_ARMYOFTHELIGHT = {
+		name = "Supplies From the Army of the Light",
+		iconPath = "inv_legion_paragoncache_armyofthelight",
+		Criteria = " NOT ParagonReward(ARMY_OF_THE_LIGHT)",
+		Filter = "Level() < 110 OR Reputation(ARMY_OF_THE_LIGHT) < EXALTED",
+	},
+
+	WQ_LEGION_PARAGONREWARD_COURTOFFARONDIS = {
+		name = "Supplies From the Court",
+		iconPath = "inv_legion_chest_courtoffarnodis",
+		Criteria = " NOT ParagonReward(COURT_OF_FARONDIS)",
+		Filter = "Level() < 110 OR Reputation(COURT_OF_FARONDIS) < EXALTED",
+	},
+
+	WQ_LEGION_PARAGONREWARD_DREAMWEAVERS = {
+		name = "Supplies From the Dreamweavers",
+		iconPath = "inv_legion_chest_dreamweavers",
+		Criteria = " NOT ParagonReward(DREAMWEAVERS)",
+		Filter = "Level() < 110 OR Reputation(DREAMWEAVERS) < EXALTED",
+	},
+
+	WQ_LEGION_PARAGONREWARD_HIGHMOUNTAIN = {
+		name = "Supplies From Highmountain",
+		iconPath = "inv_legion_chest_hightmountaintribes",
+		Criteria = " NOT ParagonReward(HIGHMOUNTAIN_TRIBE)",
+		Filter = "Level() < 110 OR Reputation(HIGHMOUNTAIN_TRIBE) < EXALTED",
+	},
+
+	WQ_LEGION_PARAGONREWARD_THENIGHTFALLEN = {
+		name = "Supplies From the Nightfallen",
+		iconPath = "inv_legion_chest_nightfallen",
+		Criteria = " NOT ParagonReward(THE_NIGHTFALLEN)",
+		Filter = "Level() < 110 OR Reputation(THE_NIGHTFALLEN) < EXALTED",
+	},
+
+	WQ_LEGION_PARAGONREWARD_THEVALARJAR = {
+		name = "Supplies From the Valarjar",
+		iconPath = "inv_legion_chest_valajar",
+		Criteria = " NOT ParagonReward(THE_VALARJAR)",
+		Filter = "Level() < 110 OR Reputation(THE_VALARJAR) < EXALTED",
+	},
+
 }		
 
 
