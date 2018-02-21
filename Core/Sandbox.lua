@@ -74,6 +74,12 @@ local constants = { -- Used t look up actual ID if an alias was used
 		1129685, -- Event in progress	
 		-- Event ends
 	},
+	
+	TIMEWALKING_CATA = {
+		1304688, -- Event starts
+		1304687, -- Event in progress	
+		1304686, -- Event ends
+	},
 
 	DARKMOON_FAIRE = {
 		235464, -- Event starts?
@@ -82,9 +88,33 @@ local constants = { -- Used t look up actual ID if an alias was used
 		235446, -- Last day?
 	},
 	
+	WOW_ANNIVERSARY = {
+		1084434, -- 13th: First day
+		1084433, -- 13th: In progress
+		1084432, -- 13th: Last day/expired
+	},
+	
+	PILGRIMS_BOUNTY = {
+		235464, -- In progress
+	},
+	
+	FEAST_OF_WINTER_VEIL = {
+		235485, -- First day
+		235484, -- In progress
+	},
+	
+	LOVE_IS_IN_THE_AIR = {
+		235468, -- First day
+		235467, -- In Progress
+		235466, -- Last day
+	},
+	
+	
 	-- Dungeon IDs
 	HEADLESS_HORSEMAN = 285,
 	COREN_DIREBREW = 287,
+	CROWN_CHEMICAL_CO = 288,
+	RANDOM_LEGION_HEROIC = 1046,
 	
 	-- Currency IDs
 	MOGU_RUNE_OF_FATE = 752,
@@ -95,6 +125,7 @@ local constants = { -- Used t look up actual ID if an alias was used
 	LEGIONFALL_WAR_SUPPLIES = 1342,
 	COINS_OF_AIR = 1416,
 	VEILED_ARGUNITE = 1508,
+	WAKENING_ESSENCE = 1533,
 	
 	-- Expansion IDs
 	LEGION = 6,
@@ -135,10 +166,28 @@ local constants = { -- Used t look up actual ID if an alias was used
 	-- Faction IDs
 	THE_CONSORTIUM = 933,
 	THE_ASHEN_VERDICT = 1156,
+	BARADINS_WARDENS = 1177,
+	HELLSCREAMS_REACH = 1178,
 	EMPEROR_SHAOHAO = 1492,
-	THE_DREAMWEAVERS = 1883, -- 2088 = Paragon
-	THE_VALARJAR = 1948, -- 2086 = Paragon
+	COURT_OF_FARONDIS = 1900,
+--	COURT_OF_FARONDIS_PARAGON = 2087,
+	DREAMWEAVERS = 1883,
+--	DREAMWEAVERS_PARAGON = 2088,
+	HIGHMOUNTAIN_TRIBE = 1828,
+--	HIGHMOUNTAIN_TRIBE_PARAGON = 2085,
+	THE_NIGHTFALLEN = 1859,
+	THE_NIGHTFALLEN_PARAGON = 2089,
+	THE_VALARJAR = 1948,
+--	THE_VALARJAR_PARAGON = 2086,
+	THE_WARDENS = 1894,
+--	THE_WARDENS_PARAGON = 2090,
 	ARMIES_OF_LEGIONFALL = 2045,
+--	ARMIES_OF_LEGIONFALL_PARAGON = 2091,
+	ARMY_OF_THE_LIGHT = 2165,
+--	ARMY_OF_THE_LIGHT_PARAGON = 2166,
+	ARGUSSIAN_REACH = 2170,
+--	ARGUSSIAN_REACH_PARAGON = 2167,
+	TALONS_VENGEANCE = 2018,
 	
 	-- Contribution IDs (for the Broken Shore Buildings)
 	MAGE_TOWER = 1,
@@ -170,6 +219,16 @@ local constants = { -- Used t look up actual ID if an alias was used
 	HIGHMOUNTAIN = 5177,
 	VALSHARAH = 5210,
 	
+	-- Continents (World Map IDs)
+	BROKEN_ISLES = 1007,
+	ARGUS = 1184,
+	
+	-- Mythic Plus type IDs
+	WEEKLY_BEST = 1,
+	ALL_TIME_BEST = 2,
+	
+	-- UI settings
+	CURRENT_EXPANSION_MAX_BAG_SIZE = 30, -- Last updated for: Legion
 	
 }
 
