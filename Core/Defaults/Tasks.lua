@@ -2575,6 +2575,13 @@ local defaultTasks = {
 		Filter = "Level() < 110",
 	},
 	
+	RESTOCK_LEGION_WAKENINGESSENCE = {
+		name = "Wakening Essence spent",
+		iconPath = "spell_holy_circleofrenewal",
+		Criteria = "Currency(WAKENING_ESSENCE) < 1000", -- Not actually capped (AFAIK), but... time for a legendary!
+		Filter = "Level() < 110",
+	},
+	
 	DAILY_WOTLK_JEWELCRAFTINGSHIPMENT = {
 		name = "Jewelcrafting Shipment delivered",
 		description = "TODO",
