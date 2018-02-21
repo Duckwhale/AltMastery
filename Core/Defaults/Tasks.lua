@@ -1146,7 +1146,7 @@ local defaultTasks = {
 	},
 	
 	MILESTONE_LEGION_PROFESSIONQUESTS_TAILORING = {
-		name = "Legion Tailoring Quests completed",
+		name = "Tailoring: Broken Isles Quests completed",
 		description = "TODO",
 		iconPath = "inv_tailoring_70_silkweave",
 		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_TAILORING\")",
@@ -1197,9 +1197,9 @@ local defaultTasks = {
 	},
 	
 	MILESTONE_LEGION_PROFESSIONQUESTS_ENCHANTING = {
-		name = "Legion Enchanting Quests completed",
+		name = "Enchanting: Broken Isles Quests completed",
 		description = "TODO",
-		iconPath = "inv_enchanting_70_chaosshard",
+		iconPath = "trade_engraving",
 		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_ENCHANTING\")",
 		Filter = "Level() < 100 OR NOT (Profession(ENCHANTING) > 0)",
 		Objectives = {
