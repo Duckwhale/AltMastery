@@ -635,7 +635,25 @@ local function ParagonReward(factionID)
 	
 end	
 
+
+-- Returns whether or not all of the player's bag slots are occupied with bags of the given bagSize
+--- Empty slots will always make this return false, as numSlots is returned as 0 by the API
+local function BagSize(bagSize)
+
+	bagSize = bagSize or 0
+
+	for bagIndex=firstBagIndex, lastBagIndex do -- Check if this bag is of the given bagSize
+
+		local numSlots = GetContainerNumSlots(bagIndex)
+		local isCorrectBagSize = (numSlots == bagSize)
+		
+		if not isCorrectBagSize then return false end -- Only return if at least one bag doesn't match the given bagSize
 	
+	end
+	
+	return true -- All bags passed the test
+	
+end
 
 Criteria = {
 	Invasion = Invasion,
@@ -665,6 +683,7 @@ Criteria = {
 	SubZone = SubZone,
 	MythicPlus = MythicPlus,
 	ParagonReward = ParagonReward,
+	BagSize = BagSize,
 }
 
 AM.Criteria = Criteria
