@@ -1203,6 +1203,7 @@ local defaultTasks = {
 		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_ENCHANTING\")",
 		Filter = "Level() < 100 OR NOT (Profession(ENCHANTING) > 0)",
 		Objectives = {
+			"Quest(39874) AS Some Enchanted Evening",
 			"Quest(39875) AS The Last Few",
 			"Quest(39876) AS Helping the Hunters",
 			"Quest(39877) AS In the Loop",
@@ -1226,6 +1227,7 @@ local defaultTasks = {
 			"Quest(39910) AS The Druid's Debt",
 			"Quest(39906) AS Prepping For Battle",
 			"Quest(39914) AS Sentinel's Final Duty",
+			"Quest(39907) AS Elven Enchantments",
 			"Quest(39920) AS On Azure Wings",
 			"Quest(39921) AS Neltharion's Lair: Rod of Azure",
 			"Quest(39923) AS Down to the Core",
