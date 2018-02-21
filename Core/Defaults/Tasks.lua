@@ -3282,7 +3282,94 @@ local defaultTasks = {
 		},
 	},
 	
-}
+	MILESTONE_LEGION_ARTIFACT_SCYTHEOFELUNE = {
+		name = "Scythe of Elune obtained",
+		iconPath = "inv_staff_2h_artifactelune_d_01",
+		Criteria = "Objectives(\"MILESTONE_LEGION_ARTIFACT_SCYTHEOFELUNE\")",
+		Filter = "Level() < 98 OR NOT Class(DRUID)",
+		Objectives = {
+			"Quest(40783) AS The Scythe of Elune",
+			"Quest(40784) AS Its Rightful Place",
+			"Quest(40785) AS A Foe of the Dark",
+			"Quest(40834) AS Following the Curse",
+			"Quest(40835) AS Disturbing the Past",
+			"Quest(40837) AS The Deadwind Hunt",
+			"Quest(40838) AS The Dark Riders",
+			"Quest(40900) AS The Burden Borne",
+		},
+	},
+	
+	MILESTONE_LEGION_ARTIFACT_GHANIRTHEMOTHERTREE = {
+		name = "G'Hanir, the Mother Tree obtained",
+		iconPath = "inv_staff_2h_artifactnordrassil_d_01",
+		Criteria = "Objectives(\"MILESTONE_LEGION_ARTIFACT_GHANIRTHEMOTHERTREE\")",
+		Filter = "Level() < 98 OR NOT Class(DRUID)",
+		Objectives = {
+			"Quest(40649) AS Meet with Mylune",
+			"Quest(41422) AS Necessary Preparations",
+			"Quest(41449) AS Join the Dreamer",
+			"Quest(41436) AS In Deep Slumber",
+			"Quest(41690) AS Reconvene",
+			"Quest(41689) AS Cleansing the Mother Tree",
+	
+		},
+	},
+	
+	MILESTONE_LEGION_ARTIFACT_MAWOFTHEDAMNED = {
+		name = "Maw of the Damned obtained",
+		iconPath = "inv_axe_2h_artifactmaw_d_01",
+		Criteria = "Quest(40740)",
+		Filter = "Level() < 98 OR NOT Class(DEATHKNIGHT)",
+	},
+	
+	MILESTONE_LEGION_ARTIFACT_BLADESOFTHEFALLENPRINCE = {
+		name = "Blades of the Fallen Prince obtained",
+		iconPath = "inv_sword_1h_artifactruneblade_d_01",
+		Criteria = "Quest(38990)",
+		Filter = "Level() < 98 OR NOT Class(DEATHKNIGHT)",
+	},
+	
+	MILESTONE_LEGION_ARTIFACT_APOCALYPSE = {
+		name = "Apocalypse obtained",
+		iconPath = "inv_sword_2h_artifactsoulrend_d_01",
+		Criteria = "Objectives(\"MILESTONE_LEGION_ARTIFACT_APOCALYPSE\")",
+		Filter = "Level() < 98 OR NOT Class(DEATHKNIGHT)",
+		Objectives = {
+			"Quest(40930) AS Apocalypse",
+			"Quest(40931) AS Following the Curse",
+			"Quest(40932) AS Disturbing the Past",
+			"Quest(40933) AS A Grisly Task",
+			"Quest(40934) AS The Dark Riders",
+			"Quest(40935) AS The Call of Vengeance",
+		},
+	},
+	
+	MILESTONE_LEGION_ARTIFACT_TWINBLADESOFTHEDECEIVER = {
+		name = "Twinblades of the Deceiver obtained",
+		iconPath = "inv_glaive_1h_artifactazgalor_d_01",
+		Criteria = "Objectives(\"MILESTONE_LEGION_ARTIFACT_TWINBLADESOFTHEDECEIVER\")",
+		Filter = "Level() < 98 OR NOT Class(DEMONHUNTER) OR NOT Objectives(\"MILESTONE_LEGION_CLASSINTRO_DEMONHUNTER\")",
+		Objectives = {
+			"Quest(41120) AS Making Arrangements",
+			"Quest(41121) AS By Any Means",
+			"Quest(41119) AS The Hunt",
+		},
+	},
+	
+	MILESTONE_LEGION_ARTIFACT_ALDRACHIWARBLADES = {
+		name = "Aldrachi Warblades obtained",
+		iconPath = "inv_glaive_1h_artifactaldrochi_d_01",
+		Criteria = "Objectives(\"MILESTONE_LEGION_ARTIFACT_ALDRACHIWARBLADES\")",
+		Filter = "Level() < 98 OR NOT Class(DEMONHUNTER) OR NOT Objectives(\"MILESTONE_LEGION_CLASSINTRO_DEMONHUNTER\")",
+		Objectives = {
+			"Quest(40247) AS Asking a Favor",
+			"Quest(41804) AS Ask and You Shall Receive",
+			"Quest(41806) AS Return to Jace",
+			"Quest(41807) AS Establishing a Connection",
+			"Quest(40249) AS Vengeance Will Be Ours",
+		},
+	},
+	
 	
 	WQ_LEGION_WITHEREDARMYTRAINING = {
 		name = "Withered Army Training",
@@ -4335,6 +4422,7 @@ local defaultTasks = {
 		Filter = "Level() < 80",
 	},
 	
+}		
 
 
 --- Return the table containing default task entries
