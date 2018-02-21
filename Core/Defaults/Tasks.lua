@@ -160,17 +160,13 @@ local defaultTasks = {
 			},
 		},
 		
-		WEEKLY_LEGION_WQEVENT = { -- TODO: CalendarEvent OR Buff and then Objectives = 20 WQ? 44175 = The World Awaits
-			name = "Legion World Quest Event",
+		WEEKLY_LEGION_WQEVENT = {
+			name = "Weekend Event: The World Awaits", -- "Legion World Quest Event",
 			description = "Complete the weekly quest \"The World Awaits\" and claim your reward",
 			notes = "5000 Order Hall Resources",
 			iconPath = "achievement_reputation_08",
-			Criteria = "Objectives(\"WEEKLY_LEGION_WQEVENT\")",
-			Filter = " NOT Buff(225788) OR Level() < 110", -- "Sign of the Emissary" buff is only available when the event is active. This is much simpler and also more reliable than checking the calendar
-			Objectives = {
-				"Quest(43341) AS Uniting the Isles",
-				"Quest(44175) AS The World Awaits",
-			},
+			Criteria = "Quest(44175)", -- "The World Awaits"
+			Filter = "Level() < 110 OR NOT Buff(225788) OR NOT Quest(43341)", -- "Sign of the Emissary" buff is only available when the event is active. This is much simpler and also more reliable than checking the calendar. Also requires "Uniting the Isles"
 		},
 
 		MILESTONE_LEGION_UNLOCK_KOSUMOTH = {
