@@ -919,15 +919,15 @@ local defaultTasks = {
 	WQ_LEGION_SLITHONTHELAST = {
 		name = "World Quest: Slithon the Last",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48936)", -- TODO: Tracking Quest = 48935?
 		Filter = "Level() < 110 OR NOT WorldQuest(48936)",
+		Criteria = "Quest(48935)", -- Tracking Quest
 	},
 	
 	WQ_LEGION_SOULTWISTEDMONSTROSITY = {
 		name = "World Quest: Soultwisted Monstrosity",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48694)", -- TODO: Tracking Quest = 48935?
 		Filter = "Level() < 110 OR NOT WorldQuest(48694)",
+		Criteria = "Quest(48935)", -- Tracking Quest
 	},
 	
 	WQ_LEGION_FEASELTHEMUFFINTHIEF = {
@@ -940,71 +940,71 @@ local defaultTasks = {
 	WQ_LEGION_SIEGEMASTERVORAAN = {
 		name = "World Quest: Siegemaster Voraan",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(47542)", -- TODO: Tracking Quest = 48627?
 		Filter = "Level() < 110 OR NOT WorldQuest(47542)",
+		Criteria = "Quest(48627)", -- Tracking Quest
 	},
 	
 	WQ_LEGION_COMMANDERENDAXIS = {
 		name = "World Quest: Commander Endaxis",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48511)", -- TODO: Tracking Quest = ?
 		Filter = "Level() < 110 OR NOT WorldQuest(48511)",
+		Criteria = "Quest(48564)", -- Tracking Quest
 	},
 
 	WQ_LEGION_IMPMOTHERLAGLATH = {
 		name = "World Quest: Imp Mother Laglath",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48282)", -- TODO: Tracking Quest = 48562?
 		Filter = "Level() < 110 OR NOT WorldQuest(48282)",
+		Criteria = "Quest(48666)", -- Tracking Quest
 	},
 	
 	WQ_LEGION_COMMANDERSATHRENAEL = {
 		name = "World Quest: Commander Sathrenael",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48509)", -- TODO: Tracking Quest = 48562?
 		Filter = "Level() < 110 OR NOT WorldQuest(48509)",
+		Criteria = "Quest(48562)", -- Tracking Quest
 	},
 	
 	WQ_LEGION_SLUMBERINGBEHEMOTHS = {
 		name = "World Quest: Slumbering Behemoths",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48514)",
 		Filter = "Level() < 110 OR NOT WorldQuest(48514)",
+		Criteria = "Quest(48514)", -- WQ
 	},
 	
 	WQ_LEGION_ALLSEERXANARIAN = {
 		name = "World Quest: All-Seer Xanarian",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48837)",
 		Filter = "Level() < 110 OR NOT WorldQuest(48837)",
+		Criteria = "Quest(48818)", -- Tracking Quest
 	},
 	
 	WQ_LEGION_TUREKTHELUCID = {
 		name = "World Quest: Turek the Lucid",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48726)",
 		Filter = "Level() < 110 OR NOT WorldQuest(48726)",
+		Criteria = "Quest(48706)", -- Tracking Quest
 	},
 	
 	WQ_LEGION_KAARATHEPALE = {
 		name = "World Quest: Kaara the Pale",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48698)",
 		Filter = "Level() < 110 OR NOT WorldQuest(48698)",
+		Criteria = "Quest(48697)", -- Tracking Quest
 	},
 	
 	WQ_LEGION_OVERSEERYMORNA = {
 		name = "World Quest: Overseer Y'Morna",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48717)",
 		Filter = "Level() < 110 OR NOT WorldQuest(48736)",
+		Criteria = "Quest(48717)", -- Tracking Quest
 	},
 	
 	WQ_LEGION_OVERSEERYBEDA = {
 		name = "World Quest: Overseer Y'Beda",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48716)",
 		Filter = "Level() < 110 OR NOT WorldQuest(48734)",
+		Criteria = "Quest(48716)", -- Tracking Quest
 	},
 	
 	WQ_LEGION_ATAXON = {
@@ -1017,9 +1017,9 @@ local defaultTasks = {
 	WQ_LEGION_NAROUA = {
 		name = "World Quest: Naroua",
 		iconPath = "inv_misc_primalsargerite",
-		Criteria = "Quest(48667)", -- TODO: Tracking Quest
 		Filter = "Level() < 110 OR NOT WorldQuest(48502)",
 	},
+		Criteria = "Quest(48628)", -- Tracking Quest
 	
 	-- Argus: Turnin WQ (same as above)
 	WQ_LEGION_ASTRALGLORY1 = {
