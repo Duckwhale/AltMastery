@@ -20,47 +20,45 @@ if not AM then return end
 local Criteria = {}
 
 -- WOW API
+local CalendarGetNumDayEvents = CalendarGetNumDayEvents
+local CalendarGetHolidayInfo = CalendarGetHolidayInfo
+local GetAchievementInfo = GetAchievementInfo
+local GetContainerNumSlots = GetContainerNumSlots
+local GetContainerItemLink = GetContainerItemLink
 local GetCurrencyInfo = GetCurrencyInfo
-
+local GetCurrentMapAreaID = GetCurrentMapAreaID
+local GetFactionInfoByID = GetFactionInfoByID
+local GetItemInfoInstant = GetItemInfoInstant
+local GetLFGDungeonInfo = GetLFGDungeonInfo
+local GetLFGDungeonRewards = GetLFGDungeonRewards
+local GetMapNameByID = GetMapNameByID
+local GetProfessions = GetProfessions
+local GetProfessionInfo = GetProfessionInfo
+local GetQuestBountyInfoForMapID = GetQuestBountyInfoForMapID
+local GetQuestLogRewardCurrencyInfo = GetQuestLogRewardCurrencyInfo
+local GetQuestLogRewardInfo = GetQuestLogRewardInfo
+local GetQuestObjectiveInfo = GetQuestObjectiveInfo
+local GetRealZoneText = GetRealZoneText
+local GetSavedInstanceInfo = GetSavedInstanceInfo
+local HaveQuestData = HaveQuestData
 local IsQuestFlaggedCompleted = IsQuestFlaggedCompleted
-
+local SetMapToCurrentZone = SetMapToCurrentZone
 local UnitBuff = UnitBuff
 local UnitClass = UnitClass
 local UnitFactionGroup = UnitFactionGroup
 local UnitLevel = UnitLevel
 
-local GetAchievementInfo = GetAchievementInfo
+-- Blizzard Interface functionality (Maybe not the best idea to rely on it, but hey...)
+local QuestUtils_IsQuestWorldQuest = QuestUtils_IsQuestWorldQuest
 
-local CalendarGetNumDayEvents = CalendarGetNumDayEvents
-local CalendarGetHolidayInfo = CalendarGetHolidayInfo
-
-local GetContainerNumSlots = GetContainerNumSlots
-local GetContainerItemLink = GetContainerItemLink
-
-local GetItemInfoInstant = GetItemInfoInstant
-
-local GetFactionInfoByID = GetFactionInfoByID
-
-local GetLFGDungeonInfo = GetLFGDungeonInfo
-local GetLFGDungeonRewards = GetLFGDungeonRewards
-local GetSavedInstanceInfo = GetSavedInstanceInfo
-
-local GetProfessions = GetProfessions
-local GetProfessionInfo = GetProfessionInfo
-
-local GetQuestBountyInfoForMapID = GetQuestBountyInfoForMapID
-local GetQuestObjectiveInfo = GetQuestObjectiveInfo
-
-local GetCurrentMapAreaID = GetCurrentMapAreaID
-local GetMapNameByID = GetMapNameByID
-local SetMapToCurrentZone = SetMapToCurrentZone
-
-local GetRealZoneText = GetRealZoneText
-
+-- Lua API
+local tostring = tostring
+local type = type
 
 -- Constants
 local BACKPACK_CONTAINER = BACKPACK_CONTAINER
 local NUM_BAG_SLOTS = NUM_BAG_SLOTS
+local firstBagIndex, lastBagIndex = BACKPACK_CONTAINER + 1, NUM_BAG_SLOTS
 
 -- Frames
 local WorldMapFrame
