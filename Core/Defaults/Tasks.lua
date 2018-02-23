@@ -388,6 +388,21 @@ local defaultTasks = {
 			-- TODO: Building has to be up (visibility?); only show legendary follower items? based on profession? prequests = http://www.wowhead.com/item=147451/armorcrafters-commendation#comments	http://www.wowhead.com/quest=46774
 			Filter = "Level() < 110 OR (ContributionState(NETHER_DISRUPTOR) ~= STATE_ACTIVE)", -- TODO: FIlter only for relevant professions?
 		
+		LIMITEDAVAILABILITY_LEGION_COMMANDCENTER = {
+			name = "Boon of the Command Center",
+			notes = "Legendary Follower Item",
+			iconPath = "ability_hunter_killcommand",
+			Criteria = "Quest(46870)", -- 7.2 Broken Shore - Buildings - Command Center - Buff Activation - Tracking Quest
+			Filter = "Level() < 110 OR NOT Quest(46245) OR NOT (ContributionState(COMMAND_CENTER) == STATE_ACTIVE) OR (ContributionState(COMMAND_CENTER) == STATE_UNDER_ATTACK)", -- Prequest: Begin Construction
+		},
+		
+		LIMITEDAVAILABILITY_LEGION_MAGETOWER = {
+			name = "Boon of the Mage Tower",
+			iconPath = "ability_mage_livingbomb",
+			Criteria = "Quest(46793)", -- 7.2 Broken Shore - Buildings - Mage Tower - Buff Activation - Tracking Quest
+			Filter = "Level() < 110 OR NOT Quest(46245) OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK)", -- Prequest: Begin Construction
+		},
+		
 		WEEKLY_LEGION_ROGUECOINS = {
 			name = "Rogue: I'll Take Those, Thanks!",
 			iconPath = "ability_monk_pathofmists",
