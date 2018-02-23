@@ -2361,7 +2361,20 @@ local defaultTasks = {
 			"Reputation(THE_WARDENS) >= HONORED AS The Wardens: Honored",
 			"Reputation(THE_WARDENS) >= REVERED AS The Wardens: Revered",
 		},
-},
+	},
+	
+	MILESTONE_LEGION_LIGHTBEARERENCHANT = {
+		name = "Lightbearer Enchant unlocked",
+		iconPath = "inv_legion_faction_armyofthelight", -- "spell_holy_blessingofprotection"
+		Criteria = "Reputation(ARMY_OF_THE_LIGHT) >= REVERED",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Reputation(ARMY_OF_THE_LIGHT) >= NEUTRAL AS Army of the Light: Neutral",
+			"Reputation(ARMY_OF_THE_LIGHT) >= FRIENDLY AS Army of the Light: Friendly",
+			"Reputation(ARMY_OF_THE_LIGHT) >= HONORED AS Army of the Light: Honored",
+			"Reputation(ARMY_OF_THE_LIGHT) >= REVERED AS Army of the Light: Revered",
+		},
+	},
 	
 	MILESTONE_LEGION_ARGUSTROOPS = {
 		name = "Argus Troops & Missions unlocked",
