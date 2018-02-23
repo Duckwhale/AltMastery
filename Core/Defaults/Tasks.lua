@@ -757,23 +757,23 @@ local defaultTasks = {
 		notes = "Fel-Spotted Egg",
 		iconPath = "inv_manaraymount_orange",
 		Criteria = "Quest(48712)", -- Tracking Quest
-		Filter = "Level() < 110 OR NOT WorldQuest(48732)", -- "Sabuul" = WQ
+		Filter = "Level() < 110 OR NOT WorldQuest(48732) OR NOT IsWorldQuestRewarding(48732)", -- WQ
 	},
 	
 	WQ_LEGION_VIGILANTKURO = {
 		name = "World Quest: Vigilant Kuro",
 		notes = "Toy",
 		iconPath = "spell_fire_twilightfireward",
-		Criteria = "Quest(48704)",
-		Filter = "Level() < 110 OR NOT WorldQuest(48724)",
+		Criteria = "Quest(48704)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48724) OR NOT IsWorldQuestRewarding(48704)", -- WQ
 	},
 	
 	WQ_LEGION_VIGILANTTHANOS = {
 		name = "World Quest: Vigilant Thanos",
 		notes = "Toy",
 		iconPath = "spell_fire_twilightfireward",
-		Criteria = "Quest(48703)",
-		Filter = "Level() < 110 OR NOT WorldQuest(48723)",
+		Criteria = "Quest(48703)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48723) OR NOT IsWorldQuestRewarding(48723)", -- WQ
 	},
 	
 	WQ_LEGION_VENOMTAILSKYFIN = {
@@ -782,25 +782,25 @@ local defaultTasks = {
 		notes = "Mount",
 		iconPath = "inv_manaraymount_blackfel",
 		Criteria = "Quest(48705)", -- Tracking Quest
-		Filter = "Level() < 110 OR NOT WorldQuest(48725)", -- "Venomtail Skyfin" = WQ
+		Filter = "Level() < 110 OR NOT WorldQuest(48725) OR NOT IsWorldQuestRewarding(48725)", -- WQ
 	},
 	
 	WQ_LEGION_NAROUA = {
 		name = "World Quest: Naroua",
 		description = "Defeat Naroua, King of the Forest",
 		notes = "Fel-Spotted Egg",
-		iconPath = "inv_manaraymount_redfel", -- inv_egg_02
+		iconPath = "inv_manaraymount_redfel",
 		Criteria = "Quest(48667)", -- Tracking Quest
-		Filter = "Level() < 110 OR NOT WorldQuest(48502)", -- "Naroua, King of the Forest" = WQ
+		Filter = "Level() < 110 OR NOT WorldQuest(48502) OR NOT IsWorldQuestRewarding(48502)", -- WQ
 	},
 	
 	WQ_LEGION_VARGA = {
 		name = "World Quest: Varga",
 		description = "Defeat Varga",
 		notes = "Fel-Spotted Egg",
-		iconPath = "inv_manaraymount_purple", -- inv_egg_02
+		iconPath = "inv_manaraymount_purple",
 		Criteria = "Quest(48812)", -- Tracking Quest
-		Filter = "Level() < 110 OR NOT WorldQuest(48827)", -- "Varga" = WQ
+		Filter = "Level() < 110 OR NOT WorldQuest(48827) OR NOT IsWorldQuestRewarding(48827)", -- WQ
 	},
 	
 	WQ_LEGION_HOUNDMASTERKERRAX = {
@@ -809,7 +809,7 @@ local defaultTasks = {
 		notes = "Mount",
 		iconPath = "inv_argusfelstalkermount",
 		Criteria = "Quest(48821)", -- Tracking Quest
-		Filter = " NOT WorldQuest(48835)", -- World Quest
+		Filter = " NOT WorldQuest(48835) OR NOT IsWorldQuestRewarding(48835)", -- WQ
 	},
 	
 	WQ_LEGION_WRANGLERKRAVOS = {
@@ -818,7 +818,7 @@ local defaultTasks = {
 		notes = "Mount",
 		iconPath = "inv_argustalbukmount_felpurple",
 		Criteria = "Quest(48695)", -- Tracking Quest
-		Filter = " NOT WorldQuest(48696)", -- World Quest
+		Filter = " NOT WorldQuest(48696) OR NOT IsWorldQuestRewarding(48696)", -- WQ
 	},
 
 	WQ_LEGION_BLISTERMAW = {
@@ -827,7 +827,7 @@ local defaultTasks = {
 		notes = "Mount",
 		iconPath = "inv_argusfelstalkermountred",
 		Criteria = "Quest(49183)", -- Tracking Quest
-		Filter = " NOT WorldQuest(47561)", -- World Quest
+		Filter = " NOT WorldQuest(47561) OR NOT IsWorldQuestRewarding(49183)", -- WQ
 	},
 	
 	WQ_LEGION_VRAXTHUL = {
@@ -836,7 +836,7 @@ local defaultTasks = {
 		notes = "Mount",
 		iconPath = "inv_argusfelstalkermountblue",
 		Criteria = "Quest(48810)", -- Tracking Quest
-		Filter = " NOT WorldQuest(48465)", -- World Quest
+		Filter = " NOT WorldQuest(48465) OR NOT IsWorldQuestRewarding(48465)", -- WQ
 	},
 
 	WQ_LEGION_PUSCILLA = {
@@ -845,7 +845,7 @@ local defaultTasks = {
 		notes = "Mount",
 		iconPath = "inv_argusfelstalkermountblue",
 		Criteria = "Quest(48809)", -- Tracking Quest
-		Filter = " NOT WorldQuest(48467)", -- World Quest
+		Filter = " NOT WorldQuest(48467) OR NOT IsWorldQuestRewarding(48467)", -- WQ
 	},
 	
 	WQ_LEGION_SKREEGTHEDEVOURER = {
@@ -854,7 +854,7 @@ local defaultTasks = {
 		notes = "Mount",
 		iconPath = "inv_argusfelstalkermountgrey",
 		Criteria = "Quest(48721)", -- Tracking Quest
-		Filter = " NOT WorldQuest(48740)", -- World Quest
+		Filter = " NOT WorldQuest(48740) OR NOT IsWorldQuestRewarding(48740)", -- WQ
 	},
 	
 	WQ_LEGION_RARE_DOOMCASTERSUPRAX = {
@@ -885,7 +885,7 @@ local defaultTasks = {
 		notes = "Toy",
 		iconPath = "inv_misc_foot_centaur",
 		Criteria = "Quest(48700)", -- Tracking Quest
-		Filter = " NOT WorldQuest(48701)", -- World Quest
+		Filter = " NOT WorldQuest(48701) OR NOT IsWorldQuestRewarding(48701)", -- WQ
 	},
 	
 	WQ_LEGION_RARE_INSTRUCTORTARAHNA = {
@@ -894,7 +894,7 @@ local defaultTasks = {
 		notes = "Toy",
 		iconPath = "inv_inscription_runescrolloffortitude_red",
 		Criteria = "Quest(48718)", -- Tracking Quest
-		Filter = " NOT WorldQuest(48737)", -- World Quest
+		Filter = " NOT WorldQuest(48737) OR NOT IsWorldQuestRewarding(48737)", -- WQ
 	},
 	
 	WQ_LEGION_RARE_SISTERSUBVERSIA = {
@@ -903,7 +903,7 @@ local defaultTasks = {
 		notes = "Toy",
 		iconPath = "inv_plate_belt_eredarargus_d_01",
 		Criteria = "Quest(48565)", -- Tracking Quest
-		Filter = " NOT WorldQuest(48512)", -- World Quest
+		Filter = " NOT WorldQuest(48512) OR NOT IsWorldQuestRewarding(48512)", -- WQ
 	},
 	
 	WQ_LEGION_RARE_WRATHLORDYAREZ = {
@@ -912,106 +912,106 @@ local defaultTasks = {
 		notes = "Toy",
 		iconPath = "spell_fire_felpyroblast",
 		Criteria = "Quest(48814)", -- Tracking Quest
-		Filter = " NOT WorldQuest(48829)", -- World Quest
+		Filter = " NOT WorldQuest(48829) OR NOT IsWorldQuestRewarding(48829)", -- WQ
 	},
 	
 	-- Efficient rares (for OR, Weekly quests, reputation) -> Those are close to teleporters and can be killed quickly (with the LF Warframe)
 	WQ_LEGION_SLITHONTHELAST = {
 		name = "World Quest: Slithon the Last",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48936)",
 		Criteria = "Quest(48935)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48936) OR NOT IsWorldQuestRewarding(48936)", -- WQ
 	},
 	
 	WQ_LEGION_SOULTWISTEDMONSTROSITY = {
 		name = "World Quest: Soultwisted Monstrosity",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48694)",
 		Criteria = "Quest(48935)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48694) OR NOT IsWorldQuestRewarding(48694)", -- WQ
 	},
 	
 	WQ_LEGION_FEASELTHEMUFFINTHIEF = {
 		name = "World Quest: Feasel the Muffin Thief",
 		iconPath = "inv_misc_primalsargerite",
 		Criteria = "Quest(48702)", -- Tracking Quest
-		Filter = "Level() < 110 OR NOT WorldQuest(48722)", -- WQ
+		Filter = "Level() < 110 OR NOT WorldQuest(48722) OR NOT IsWorldQuestRewarding(48722)", -- WQ
 	},
 	
 	WQ_LEGION_SIEGEMASTERVORAAN = {
 		name = "World Quest: Siegemaster Voraan",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(47542)",
 		Criteria = "Quest(48627)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(47542) OR NOT IsWorldQuestRewarding(47542)", -- WQ
 	},
 	
 	WQ_LEGION_COMMANDERENDAXIS = {
 		name = "World Quest: Commander Endaxis",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48511)",
 		Criteria = "Quest(48564)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48511) OR NOT IsWorldQuestRewarding(48511)", -- WQ
 	},
 
 	WQ_LEGION_IMPMOTHERLAGLATH = {
 		name = "World Quest: Imp Mother Laglath",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48282)",
 		Criteria = "Quest(48666)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48282) OR NOT IsWorldQuestRewarding(48282)", -- WQ
 	},
 	
 	WQ_LEGION_COMMANDERSATHRENAEL = {
 		name = "World Quest: Commander Sathrenael",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48509)",
 		Criteria = "Quest(48562)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48509) OR NOT IsWorldQuestRewarding(48509)", -- WQ
 	},
 	
 	WQ_LEGION_SLUMBERINGBEHEMOTHS = {
 		name = "World Quest: Slumbering Behemoths",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48514)",
 		Criteria = "Quest(48514)", -- WQ
+		Filter = "Level() < 110 OR NOT WorldQuest(48514) OR NOT IsWorldQuestRewarding(48514)", -- WQ
 	},
 	
 	WQ_LEGION_ALLSEERXANARIAN = {
 		name = "World Quest: All-Seer Xanarian",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48837)",
 		Criteria = "Quest(48818)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48837) OR NOT IsWorldQuestRewarding(48837)", -- WQ
 	},
 	
 	WQ_LEGION_TUREKTHELUCID = {
 		name = "World Quest: Turek the Lucid",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48726)",
 		Criteria = "Quest(48706)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48726) OR NOT IsWorldQuestRewarding(48726)", -- WQ
 	},
 	
 	WQ_LEGION_KAARATHEPALE = {
 		name = "World Quest: Kaara the Pale",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48698)",
 		Criteria = "Quest(48697)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48698) OR NOT IsWorldQuestRewarding(48698)", -- WQ
 	},
 	
 	WQ_LEGION_OVERSEERYMORNA = {
 		name = "World Quest: Overseer Y'Morna",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48736)",
 		Criteria = "Quest(48717)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48736) OR NOT IsWorldQuestRewarding(48736)", -- WQ
 	},
 	
 	WQ_LEGION_OVERSEERYBEDA = {
 		name = "World Quest: Overseer Y'Beda",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48734)",
 		Criteria = "Quest(48716)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48734) OR NOT IsWorldQuestRewarding(48734)", -- WQ
 	},
 	
 	WQ_LEGION_ATAXON = {
 		name = "World Quest: Ataxon",
 		iconPath = "inv_misc_primalsargerite",
 		Criteria = "Quest(48709)", -- Tracking Quest
-		Filter = "Level() < 110 OR NOT WorldQuest(48729)", -- WQ
+		Filter = "Level() < 110 OR NOT WorldQuest(48729) OR NOT IsWorldQuestRewarding(48729)", -- WQ
 	},	
 	
 	WQ_LEGION_NAROUA = {
