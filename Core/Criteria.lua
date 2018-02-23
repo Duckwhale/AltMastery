@@ -303,6 +303,7 @@ local function Level(filterLevel)
 	
 end
 
+--- Returns whether or not a given world quest is currently active (and not completed)
 local function WorldQuest(questID)
 
 	if not C_TaskQuest or not C_TaskQuest.IsActive then return end -- TODO: Upvalue this, or could that cause issues?
@@ -735,6 +736,8 @@ local function MythicPlus(typeID) -- TODO: Upvalues
 end
 
 -- Returns whether or not a given faction has a Paragon Reward available that hasn't been collected yet
+--- @factionID The ID of the ORIGINAL (not Paragon) faction
+-- @return hasRewardPending of the C_Reputation API
 local function ParagonReward(factionID)
 
 	local currentValue, threshold, rewardQuestID, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID) -- TODO: Upvalue
