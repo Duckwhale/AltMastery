@@ -183,6 +183,24 @@ local function Currency(currencyID)
 	return select(2, GetCurrencyInfo(currencyID))
 end
 
+
+local bonusRollQuests = {
+	-- Legion: Seal of Broken Fate
+	[6] = {
+		[43895] = true, -- 1000 Gold
+		[43896] = true, -- 2000 Gold
+		[43897] = true, -- 4000 Gold
+		[43892] = true, -- 1000 OR
+		[43893] = true, -- 2000 OR
+		[43894] = true, -- 4000 OR
+		[43510] = true, -- Order Hall
+		[47851] = true, -- Mark of Honor x 5
+		[47864] = true, -- Mark of Honor x 10
+		[47865] = true, -- Mark of Honor x 20		
+	},
+}
+
+	
 --- Returns the number of obtained bonus rolls for a given expansion
 local function BonusRolls(expansionID)
 
@@ -194,21 +212,7 @@ local function BonusRolls(expansionID)
 -- Edit: Doesn't seem to work for this currency (no max amount)... boo.
 
 
-	local bonusRollQuests = {
-		-- Legion: Seal of Broken Fate
-		[6] = {
-			[43895] = true, -- 1000 Gold
-			[43896] = true, -- 2000 Gold
-			[43897] = true, -- 4000 Gold
-			[43892] = true, -- 1000 OR
-			[43893] = true, -- 2000 OR
-			[43894] = true, -- 4000 OR
-			[43510] = true, -- Order Hall
-			[47851] = true, -- Mark of Honor x 5
-			[47864] = true, -- Mark of Honor x 10
-			[47865] = true, -- Mark of Honor x 20		
-		},
-	}
+
 	
 	--Count completed bonus roll quests for the week
 	local count = 0
