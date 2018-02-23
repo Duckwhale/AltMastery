@@ -384,9 +384,16 @@ local defaultTasks = {
 			description = "Complete the quest \"Boon of the Nether Disruptor\" and obtain an Armorcrafter's Commendation",
 			notes = "Legendary Crafting Item",
 			iconPath = "inv_misc_scrollrolled04d",
-			Criteria = "Buff(NETHERSTORM) OR Buff(REINFORCED_REINS) OR Buff(FATE_SMILES_UPON_YOU) OR Buff(SEAL_YOUR_FATE)", --"Quest(47015) OR Quest(47012) OR Quest(47016) OR Quest(47014)", -- Change to use the buff gained? Quest aren't detected, probably flagged as repeatable? -- TODO: Buff is lost if not in BI... pointless -> Since it only shows there, filter when not in BI?
-			-- TODO: Building has to be up (visibility?); only show legendary follower items? based on profession? prequests = http://www.wowhead.com/item=147451/armorcrafters-commendation#comments	http://www.wowhead.com/quest=46774
-			Filter = "Level() < 110 OR (ContributionState(NETHER_DISRUPTOR) ~= STATE_ACTIVE)", -- TODO: FIlter only for relevant professions?
+			Criteria = "Objectives(\"LIMITEDAVAILABILITY_LEGION_NETHERDISRUPTOR\")",
+			Filter = "Level() < 110 OR NOT Quest(46245) OR NOT ((ContributionState(NETHER_DISRUPTOR) == STATE_ACTIVE) OR (ContributionState(NETHER_DISRUPTOR) == STATE_UNDER_ATTACK))", -- Prequest: Begin Construction
+			Objectives = {
+				"Quest(46774) AS The Nether Disruptor - Construction Complete", -- "The Nether Disruptor"
+				"Quest(46871) AS Boon of the Nether Disruptor received", -- 7.2 Broken Shore - Buildings - Nether Disruptor - Buff Activation - Tracking Quest
+				"Quest(47038) AS Seal Your Fate - Day 1", -- 7.2 Broken Shore - Buildings - Activation Buff - Nether Disruptor - Seal Your Fate - Day 1 - Tracking
+				"Quest(47044) AS Seal Your Fate - Day 2", -- 7.2 Broken Shore - Buildings - Activation Buff - Nether Disruptor - Seal Your Fate - Day 2 - Tracking
+				"Quest(47053) AS Seal Your Fate - Day 3", -- 7.2 Broken Shore - Buildings - Activation Buff - Nether Disruptor - Seal Your Fate - Day 3 - Tracking
+			},
+		},
 		
 		LIMITEDAVAILABILITY_LEGION_COMMANDCENTER = {
 			name = "Boon of the Command Center",

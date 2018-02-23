@@ -158,11 +158,6 @@ local constants = { -- Used t look up actual ID if an alias was used
 	SIGN_OF_THE_WARRIOR = 225787, -- Legion Dungeon Event
 	SIGN_OF_THE_CRITTER = 186406, -- Legion Pet Battle Event
 
-	NETHERSTORM = 239969, -- Broken Shore: Buildings
-	REINFORCED_REINS = 240985,
-	FATE_SMILES_UPON_YOU = 239968,
-	SEAL_YOUR_FATE = 239967,
-	
 	-- Faction IDs
 	THE_CONSORTIUM = 933,
 	THE_ASHEN_VERDICT = 1156,
@@ -198,7 +193,7 @@ local constants = { -- Used t look up actual ID if an alias was used
 	STATE_BUILDING = 1,
 	STATE_ACTIVE = 2,
 	STATE_UNDER_ATTACK = 3,
-	STATE_DESTROYED = 4, -- Probably? (Untested)
+	STATE_DESTROYED = 4,
 	
 	-- Standing IDs (used for checking Reputations)
 	HATED = 1,
