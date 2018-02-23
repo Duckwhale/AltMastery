@@ -1007,6 +1007,13 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(48734) OR NOT IsWorldQuestRewarding(48734)", -- WQ
 	},
 	
+	WQ_LEGION_OVERSEERYSORNA = {
+		name = "World Quest: Overseer Y'Sorna",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48716)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48735) OR NOT IsWorldQuestRewarding(48735)", -- WQ
+	},
+	
 	WQ_LEGION_ATAXON = {
 		name = "World Quest: Ataxon",
 		iconPath = "inv_misc_primalsargerite",
@@ -1014,12 +1021,54 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(48729) OR NOT IsWorldQuestRewarding(48729)", -- WQ
 	},	
 	
-	WQ_LEGION_NAROUA = {
-		name = "World Quest: Naroua",
+	WQ_LEGION_TALESTRATHEVILE = {
+		name = "World Quest: Talestra the Vile",
 		iconPath = "inv_misc_primalsargerite",
-		Filter = "Level() < 110 OR NOT WorldQuest(48502)",
-	},
 		Criteria = "Quest(48628)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(47728) OR NOT IsWorldQuestRewarding(47728)", -- WQ
+	},	
+	
+	WQ_LEGION_SOROLISTHEILLFATED = {
+		name = "World Quest: Sorolis the Ill-Fated",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48710)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48730) OR NOT IsWorldQuestRewarding(48730)", -- WQ
+	},	
+	
+	WQ_LEGION_JEDHINCHAMPIONVORUSK = {
+		name = "World Quest: Jed'hin Champion Vorusk",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48713)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48733) OR NOT IsWorldQuestRewarding(48733)", -- WQ
+	},	
+	
+	WQ_LEGION_SHADOWCASTERVORUUN = {
+		name = "World Quest: Shadowcaster Voruun",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48692)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(47833) OR NOT IsWorldQuestRewarding(47833)", -- WQ
+	},	
+	
+	WQ_LEGION_UMBRALISS = {
+		name = "World Quest: Umbraliss",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48708)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48728) OR NOT IsWorldQuestRewarding(48728)", -- WQ
+	},	
+	
+	WQ_LEGION_CAPTAINFARUQ = {
+		name = "World Quest: Captain Faruq",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48707)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48727) OR NOT IsWorldQuestRewarding(48727)", -- WQ
+	},	
+	
+	WQ_LEGION_ZULTANTHENUMEROUS = {
+		name = "World Quest: Zul'tan the Numerous",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48719)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48738) OR NOT IsWorldQuestRewarding(48738)", -- WQ
+	},	
 	
 	-- Argus: Turnin WQ (same as above)
 	WQ_LEGION_ASTRALGLORY1 = {
