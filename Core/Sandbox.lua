@@ -30,7 +30,7 @@ if not AM then return end
 
 
 -- TODO: Move elsewhere
-local constants = { -- Used t look up actual ID if an alias was used
+local constants = { -- Used to look up actual ID if an alias was used
 	
 	-- Class IDs
 	WARRIOR = 1,
