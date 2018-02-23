@@ -310,6 +310,112 @@ local function WorldQuest(questID)
 	
 end
 
+-- Sandboxed constants -> Are only available here if copied over, which isn't ideal (since the Criteria evaluation happens in the sandbox, but these predefined Criteria APIs aren't running inside it)
+local Sandbox = AM.Sandbox -- TODO: needed for other constants also -> Sandbox needs to be loaded before Criteria for it to be accessible
+local REWARDTYPE_GOLD = 1 -- Sandbox.REWARDTYPE_GOLD
+local REWARDTYPE_ITEM = 2 -- Sandbox.REWARDTYPE_ITEM
+local REWARDTYPE_CURRENCY = 3 -- Sandbox.REWARDTYPE_CURRENCY
+-- Also TODO: Allow multiple types via bitmask (0x01 = Gold, 0x02 = Item, 0x04 = Currency, 0x08 = AP) -> Not needed right now, as the only WQs with multiple reward types are Legion Assaults (which aren't efficient enough to consider them for specific WQ tasks in AltMastery) -> Maybe in BfA if they add WQ all over the world?
+
+-- LUT for currency WQ rewards
+-- Format: Texture ID (as used by the WOW API) -> CURRENCY_ID (constants used in the Sandbox environment and the WOW API)
+local supportedCurrencies = {
+	[132775] = ORDER_RESOURCES, -- 1220
+	[1] = VEILED_ARGUNITE, -- 1508 TODO - can't test unless a WQ is up with this
+}
+
+-- Helper function to filter quest rewards
+local function GetQuestReward(questID)
+
+	if not questID then return end
+
+	-- Check if the quest data is available
+	if not HaveQuestData(questID) then return end -- TODO: Report errors? Pointless, I suppose...
+
+	-- Query server if reward data is unavailable
+	if (not HaveQuestRewardData (questID)) then -- TODO: upvalue
+		C_TaskQuest.RequestPreloadRewardData (questID) -- TODO: Is this immediately available? Might need a delay/timer
+	end
+
+	-- Retrieve rewards data
+	local numQuestCurrencies = GetNumQuestLogRewardCurrencies(questID)
+	local gold = GetQuestLogRewardMoney(questID)
+	local numQuestRewards = GetNumQuestLogRewards(questID)
+
+	if type(numQuestCurrencies) == "number" and numQuestCurrencies > 0 then -- return first currency reward (see below for caveats)
+		
+		-- Detect currency ID (only works for supported currencies, as it requires a lookup)
+		local localizedName, texture, amount = GetQuestLogRewardCurrencyInfo (1, questID)
+		
+		local currencyID = supportedCurrencies[curencyID] or 0 -- Invalid type for WQ that award a currency, but not one that is supported by the addon
+		-- TODO: Exact currency likely doesn't matter, as the WQ that are being tracked can only award items, or AP, or OHR (high amount) or Veiled Argunite (low amount), or gold -> needs to be improved later, of course
+		return REWARDTYPE_CURRENCY, amount, currencyID -- currencyID isn't used in the API after this, but having it doesn't hurt in case something breaks and needs testing
+		
+	end
+	
+	if type(numQuestRewards) == "number" and numQuestRewards > 0 then -- return first item reward (same issues)
+		
+		local itemName, itemTexture, quantity, quality, isUsable, itemID = GetQuestLogRewardInfo (1, questID)
+		
+		if not itemID then return end
+		return REWARDTYPE_ITEM, quantity, itemID --, itemTexture
+		
+	end
+	
+	-- for i = 1, numQuestCurrencies do -- TODO: Multiple currencies aren't supported
+	
+		-- local name, texture, numItems = GetQuestLogRewardCurrencyInfo (i, questID)
+		-- if type(texture) == "string" or type(texture) == "number" and type(numItems) == "number" and numItems > 0 then -- Is avalid currency reward -> return its texture, not name (TODO: it may be possible to do that if only some currencies are supported, but the API is 100% English so that'll have to do)
+			-- return REWARDTYPE_CURRENCY, numItems, texture -- TODO: Always returns the first currency - right now this works, but it may give unintended results if there are WQ with multiple rewards
+		-- end
+
+	-- end
+
+	if type(gold) == "number" and gold > 0 then
+		return REWARDTYPE_GOLD, gold
+	end
+
+	-- Note: Doesn't work if the quest rewards multiple types, or even multiples of one specific type, at once, but this doesn't happen for world quests (and since this entire API will only be used for them, it's acceptable like this)
+
+end
+
+
+-- Returns the rewards for a given world quest (if it is active and not completed)
+local function GetWorldQuestReward(questID)
+	
+	-- Check if it's actually a World Quest
+	if not QuestUtils_IsQuestWorldQuest(questID) then return end 
+	
+	local rewardType, amount, ID = GetQuestReward(questID)
+	
+	return rewardType, amount
+	
+end
+
+-- Alias functions for ease-of-use (readability when used in Criteria)
+local function WorldQuestRewardType(questID)
+	return GetWorldQuestReward(questID)
+end
+
+local function WorldQuestRewardAmount(questID)
+	return select(2, GetWorldQuestReward(questID))
+end
+
+--- Returns whether or not the given world quest has valuable rewards (arbitrarily set, for now - testing only)
+local function IsWorldQuestRewarding(questID)
+
+	local isValuable =
+		(WorldQuestRewardType(questID) == REWARDTYPE_CURRENCY and WorldQuestRewardAmount(questID) > 500) -- Large amounts of Order Resources (no Veiled Argunite)
+		or
+		(WorldQuestRewardType(questID) == REWARDTYPE_ITEM and WorldQuestRewardAmount(questID) > 1) -- Reputation tokens or several Primal Sargerites (no AP tokens)
+		or
+		(WorldQuestRewardType(questID) == REWARDTYPE_GOLD and WorldQuestRewardAmount(questID) > 3000000) -- More than 300g (meh)
+	
+	return isValuable
+	
+	--"(WorldQuestRewardType(aaaaaaaa) == REWARDTYPE_CURRENCY AND WorldQuestRewardAmount(aaaaaaaa) > 500) OR (WorldQuestRewardType(aaaaaaaa) == REWARDTYPE_ITEM AND WorldQuestRewardAmount(aaaaaaaa) > 1) OR (WorldQuestRewardType(aaaaaaaa) == REWARDTYPE_GOLD AND WorldQuestRewardAmount(aaaaaaaa) > 3000000)"
+end
+
 local function Buff(spellID)
 	
 	if not type(spellID) == "number" then return end
@@ -685,7 +791,10 @@ Criteria = {
 	SubZone = SubZone,
 	MythicPlus = MythicPlus,
 	ParagonReward = ParagonReward,
+	IsWorldQuestRewarding = IsWorldQuestRewarding,
 	BagSize = BagSize,
+	WorldQuestRewardType = WorldQuestRewardType,
+	WorldQuestRewardAmount = WorldQuestRewardAmount,
 }
 
 AM.Criteria = Criteria
