@@ -120,6 +120,7 @@ local constants = { -- Used to look up actual ID if an alias was used
 	MOGU_RUNE_OF_FATE = 752,
 	TIMELESS_COIN = 777,
 	GARRISON_RESOURCES = 824,
+	SIGHTLESS_EYE = 1149,
 	ORDER_RESOURCES = 1220,
 	NETHERSHARD = 1226,
 	LEGIONFALL_WAR_SUPPLIES = 1342,

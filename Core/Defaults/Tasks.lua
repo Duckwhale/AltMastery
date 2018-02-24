@@ -421,6 +421,14 @@ local defaultTasks = {
 			},
 		},
 		
+		DUMP_LEGION_SIGHTLESSEYE = {
+			name = "Sightless Eyes spent",
+			notes = "< 4.5k to avoid capping",
+			iconPath = "achievement_reputation_kirintor_offensive",
+			Criteria = "Currency(SIGHTLESS_EYE) < 4500",
+			Filter = "Level() < 110",
+		},		
+		
 		WQ_LEGION_UNDERBELLY_TESTSUBJECTS = {
 			name = "Fizzi Liverzapper",
 			description = "Complete the quest \"Experimental Potion: Test Subjects Needed\" and the Underbelly of Dalaran (Legion)",
