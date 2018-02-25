@@ -2661,7 +2661,7 @@ local defaultTasks = {
 		Filter = "Level() < 90",
 	},
 	
-	RESTOCK_WOD_GARRISONRESOURCES = {
+	DUMP_WOD_GARRISONRESOURCES = {
 		name = "Garrison Resources spent",
 		description = "TODO",
 		notes = "< 8.5k to avoid capping",
@@ -2670,7 +2670,7 @@ local defaultTasks = {
 		Filter = "Level() < 100",
 	},
 	
-	RESTOCK_LEGION_LEGIONFALLWARSUPPLIES = {
+	DUMP_LEGION_LEGIONFALLWARSUPPLIES = {
 		name = "Legionfall War Supplies spent",
 		description = "TODO",
 		notes = "<500 to avoid capping",
@@ -2679,14 +2679,14 @@ local defaultTasks = {
 		Filter = "Level() < 110",
 	},
 	
-	RESTOCK_LEGION_VEILEDARGUNITE = {
+	DUMP_LEGION_VEILEDARGUNITE = {
 		name = "Veiled Argunite spent",
 		iconPath = "oshugun_crystalfragments",
 		Criteria = "Currency(VEILED_ARGUNITE) < 1300",
 		Filter = "Level() < 110",
 	},
 	
-	RESTOCK_LEGION_WAKENINGESSENCE = {
+	DUMP_LEGION_WAKENINGESSENCE = {
 		name = "Wakening Essence spent",
 		iconPath = "spell_holy_circleofrenewal",
 		Criteria = "Currency(WAKENING_ESSENCE) < 1000", -- Not actually capped (AFAIK), but... time for a legendary!
