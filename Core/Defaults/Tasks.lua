@@ -1501,6 +1501,8 @@ local defaultTasks = {
 		Filter = "Level() < 98 OR NOT (Profession(ALCHEMY) > 0)", 
 		Objectives = {
 		
+			-- Potions (basic quest line)
+			
 			-- L98 (100?)
 			"Quest(39325) AS Get Your Mix On",
 			"Quest(39326) AS Missing Shipments",
@@ -1529,6 +1531,23 @@ local defaultTasks = {
 			
 			-- L110
 			"Quest(39343) AS Vault of the Wardens: Bendy Glass Tubes",
+			
+			--- Trinkets
+			"Quest(39339) AS A Fragile Crucible",
+			"Quest(39340) AS Lining the Crucible",
+			"Quest(39341) AS Vault of the Wardens: Demon's Bile",
+			
+			-- Flasks
+			"Quest(39342) AS The Price of the Black Market",
+			"Quest(39333) AS An Imprecise Burette",
+			"Quest(39645) OR Quest(39345) AS Calibration Experts",
+			"Quest(39346) AS Testing the Calibration",
+			
+			-- Cauldrons
+			"Quest(39348) AS Halls of Valor: The Prime Ingredient",
+			"Quest(39349) AS Black Rook Hold: Heavy, But Helpful",
+			"Quest(39350) AS Maw of Souls: A Hope in Helheim",
+			"Quest(39351) AS The Emerald Nightmare: Rage Fire",
 
 		},
 	},				
