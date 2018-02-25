@@ -1621,7 +1621,7 @@ local defaultTasks = {
 
 	MILESTONE_LEGION_PROFESSIONQUESTS_ENGINEERING_ARGUS = {
 		name = "Engineering: Argus Quests completed",
-		iconPath = "inv_helm_crown_c_01_silver",
+		iconPath = "inv_engineering_gravitationalreductionslippers",
 		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_ENGINEERING_ARGUS\")",
 		Filter = "Level() < 110 OR NOT (Profession(ENGINEERING) > 0) OR NOT Quest(46941)", -- The Path Forward (Mac'aree)
 		Objectives = {
