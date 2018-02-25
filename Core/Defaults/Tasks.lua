@@ -3091,7 +3091,7 @@ local defaultTasks = {
 		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
 		iconPath = "achievement_garrisonfollower_rare",
 		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_DEATHKNIGHT\")",
-		Filter = "Level() < 110 OR NOT Class(DEATHKNIGHT) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Filter = "Level() < 110 OR NOT Class(DEATHKNIGHT) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (intro scenario/quest) or on cooldown (more gating, yay)
 		Objectives = {
 		
 			"Quest(45240) AS Making Preparations",
