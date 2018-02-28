@@ -735,6 +735,18 @@ local function MythicPlus(typeID) -- TODO: Upvalues
 	
 end
 
+
+local isWeeklyRewardAvailable -- Used to cache the result from the last query. The server doesn't always update fast enough to display it right away, and pausing the Criteria check to wait for it isn't feasible
+-- Returns whether or not the Mythic Plus reward chest for the week is available
+local function MythicPlusWeeklyReward()
+
+	C_ChallengeMode.RequestRewards()
+	isWeeklyRewardAvailable = C_ChallengeMode.IsWeeklyRewardAvailable() -- Will usually update for the next time the status is queried... not ideal, but asynchronous updating is way too complex for this and not really needed (since the state is updated much more than necessary right now)
+	
+	return isWeeklyRewardAvailable
+	
+end
+
 -- Returns whether or not a given faction has a Paragon Reward available that hasn't been collected yet
 --- @factionID The ID of the ORIGINAL (not Paragon) faction
 -- @return hasRewardPending of the C_Reputation API
@@ -798,6 +810,7 @@ Criteria = {
 	BagSize = BagSize,
 	WorldQuestRewardType = WorldQuestRewardType,
 	WorldQuestRewardAmount = WorldQuestRewardAmount,
+	MythicPlusWeeklyReward = MythicPlusWeeklyReward,
 }
 
 AM.Criteria = Criteria
