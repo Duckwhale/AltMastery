@@ -4652,41 +4652,67 @@ local defaultTasks = {
 		iconPath = "inv_valkiergoldpet",
 		Criteria = "not AutoCompleteSpellUsed()",
 		Filter = "Level() < 98 OR NOT Class(WARRIOR)", 
-	},
+		Objectives = {
+			"InventoryItem(140157) AS Horn of War picked up",
+			"AutoCompleteSpellUsed() AS Val'kyr unleashed",
+			},
+		},
 	
 	COOLDOWN_LEGION_AUTOCOMPLETE_PALADIN = {
 		name = "Order Hall: Vanguard of the Silver Hand",
 		iconPath = "spell_holy_greaterblessingoflight",
 		Criteria = "not AutoCompleteSpellUsed()",
-		Filter = "Level() < 98 OR NOT Class(PALADIN)", 
+		Filter = "Level() < 98 OR NOT Class(PALADIN)",
+		Objectives = {
+			"InventoryItem(140155) AS Silver Hand Orders picked up",
+			"AutoCompleteSpellUsed() AS Vanguard of the Silver Hand unleashed",
+		},
 	},
 	
 	COOLDOWN_LEGION_AUTOCOMPLETE_DEATHKNIGHT = {
 		name = "Order Hall: Summon Frost Wyrm",
 		iconPath = "spell_deathknight_breathofsindragosa",
 		Criteria = "not AutoCompleteSpellUsed()",
-		Filter = "Level() < 98 OR NOT Class(DEATHKNIGHT)", 
+		Filter = "Level() < 98 OR NOT Class(DEATHKNIGHT)",
+		Objectives = {
+			"InventoryItem(139888) AS Frost Crux picked up",
+			"AutoCompleteSpellUsed() AS Frost Wyrm unleashed",
+		},
 	},
 	
 	COOLDOWN_LEGION_AUTOCOMPLETE_MAGE = {
 		name = "Order Hall: Might of Dalaran",
 		iconPath = "spell_mage_presenceofmind",
 		Criteria = "not AutoCompleteSpellUsed()",
-		Filter = "Level() < 98 OR NOT Class(MAGE)", 
+		Filter = "Level() < 98 OR NOT Class(MAGE)",
+		Objectives = {
+			"InventoryItem(140038) AS Focusing Crystal picked up",
+			"AutoCompleteSpellUsed() AS Might of Dalaran unleashed",
+		},
 	},
 	
 	COOLDOWN_LEGION_AUTOCOMPLETE_WARLOCK = {
 		name = "Order Hall: Unleash Infernal",
 		iconPath = "spell_fire_felpyroblast",
 		Criteria = "not AutoCompleteSpellUsed()",
-		Filter = "Level() < 98 OR NOT Class(WARLOCK)", 
+		Filter = "Level() < 98 OR NOT Class(WARLOCK)",
+		Objectives = {
+			"InventoryItem(139892) AS Demonic Phylactery picked up",
+			"AutoCompleteSpellUsed() AS Infernal unleashed",
+		},
 	},
 	
 	COOLDOWN_LEGION_AUTOCOMPLETE_DEMONHUNTER = {
 		name = "Order Hall: Rift Cannon",
 		iconPath = "ability_demonhunter_spectralsight",
 		Criteria = "not AutoCompleteSpellUsed()",
-		Filter = "Level() < 98 OR NOT Class(DEMONHUNTER)", 
+		Filter = "Level() < 98 OR NOT Class(DEMONHUNTER)",
+		Objectives = {
+			"InventoryItem(140158) AS Empowered Rift Core picked up",
+			"AutoCompleteSpellUsed() AS Rift Cannon fired",
+		},
+	},
+	
 	},
 
 }		
