@@ -40,6 +40,7 @@ local GetQuestLogRewardInfo = GetQuestLogRewardInfo
 local GetQuestObjectiveInfo = GetQuestObjectiveInfo
 local GetRealZoneText = GetRealZoneText
 local GetSavedInstanceInfo = GetSavedInstanceInfo
+local GetSpellCooldown = GetSpellCooldown
 local HaveQuestData = HaveQuestData
 local IsQuestFlaggedCompleted = IsQuestFlaggedCompleted
 local SetMapToCurrentZone = SetMapToCurrentZone
@@ -49,11 +50,15 @@ local UnitFactionGroup = UnitFactionGroup
 local UnitLevel = UnitLevel
 
 -- Blizzard Interface functionality (Maybe not the best idea to rely on it, but hey...)
+local C_ChallengeMode = C_ChallengeMode
+local C_Garrison = C_Garrison
 local QuestUtils_IsQuestWorldQuest = QuestUtils_IsQuestWorldQuest
 
 -- Lua API
 local tostring = tostring
 local type = type
+local select = select
+local ipairs = ipairs
 
 -- Constants
 local BACKPACK_CONTAINER = BACKPACK_CONTAINER
