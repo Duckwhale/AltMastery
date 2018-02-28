@@ -4589,6 +4589,105 @@ local defaultTasks = {
 		Criteria = " NOT ParagonReward(THE_VALARJAR)",
 		Filter = "Level() < 110 OR Reputation(THE_VALARJAR) < EXALTED",
 	},
+	
+	WQ_LEGION_PARAGONREWARD_ARMIESOFLEGIONFALL = {
+		name = "The Bounties of Legionfall",
+		iconPath = "inv_misc_treasurechest03d",
+		Criteria = " NOT ParagonReward(ARMIES_OF_LEGIONFALL)",
+		Filter = "Level() < 110 OR Reputation(ARMIES_OF_LEGIONFALL) < EXALTED",
+	},
+
+	MILESTONE_LEGION_ACCOUNTWIDE_RIDDLERSMOUNT = {
+		name = "Riddler's Mind-Worm",
+		iconPath = "inv_serpentmount_darkblue",
+		Criteria = "Objectives(\"MILESTONE_LEGION_ACCOUNTWIDE_RIDDLERSMOUNT\")",
+		Filter = "Level() < 110", -- TODO. Filter if mount has already been learned
+		Objectives = {
+			"Quest(45470) AS Page 9 - Dalaran (Broken Isles): The Legerdemain Lounge",
+			"Quest(47207) AS Page 78 - Duskwood: Twilight Grove",
+			"Quest(47208) AS Page 161 - Firelands (Raid): Sulfuron Keep",
+			"Quest(47209) AS Page 655 - Uldum: Vir'naal River Delta", -- Lost City of the Tol'vir
+			"Quest(47210) AS Page 845 - Siege of Orgrimmar (Raid): Vault of Y'Shaarj",
+			"Quest(47211) AS Page 1127 - Well of Eternity (Dungeon): Shores of the Well",
+			"Quest(47212) AS Page 2351 - Kun-lai Summit: Shado-Pan Monastery",
+			"Quest(47213) AS Page 5555 - Uldum: The Steps of Fate,",
+			"Quest(47214) AS Gift of the Mind-Seekers - Westfall: Longshore",
+			"Quest(47215) AS Riddler's Mind-Worm obtained",	
+		},
+	},
+	
+	MILESTONE_WOD_HEXWEAVEBAGS = {
+		name = "Hexweave Bags", -- Also counts any similarly-sized bag
+		iconPath = "inv_tailoring_hexweavebag",
+		Criteria = "BagSize(CURRENT_EXPANSION_MAX_BAG_SIZE)",
+		Filter = "Level() < 100",
+	},
+	
+	MILESTONE_LEGION_LIGHTSHEARTQUESTLINE = {
+		name = "Illidan's Redemption",
+		iconPath = "inv_qiraj_jewelengraved", -- "inv_jewelcrafting_taladitecrystal",
+		Criteria = "Objectives(\"MILESTONE_LEGION_LIGHTSHEARTQUESTLINE\")",
+		Filter = "Level() < 98",
+		Objectives = {
+			"Quest(42866) OR NOT Class(Paladin) AS A Sign From The Sky (Paladins only)",
+			"Quest(44257) OR Quest(44009) AS A Falling Star",
+			"Quest(44004) AS Bringer of the Light",
+			"Quest(44153) AS Light's Charge",
+			"Quest(44337) OR Quest(44338) AS Goddess Watch Over You",
+			"Quest(44448) AS In the House of Light and Shadow",
+			"Quest(44464) AS Awakenings",
+			"Quest(44466) AS An Unclear Path",
+			"Quest(44479) AS Ravencrest's Legacy",
+			"Quest(44480) AS In My Father's House",
+			"Quest(44481) OR Quest(44496) OR Quest(44497) AS Destiny Unfulfilled",
+			"Quest(45174) AS The Hunt for Illidan Stormrage",
+			"Quest(45175) AS Soul Prism of the Illidari",
+			"Quest(45176) AS Trial of Valor: The Once and Future Lord of Shadows",
+			"Quest(45177) AS The Nighthold",
+		},
+	},
+	
+	COOLDOWN_LEGION_AUTOCOMPLETE_WARRIOR = {
+		name = "Order Hall: Call the Val'kyr",
+		iconPath = "inv_valkiergoldpet",
+		Criteria = "not AutoCompleteSpellUsed()",
+		Filter = "Level() < 98 OR NOT Class(WARRIOR)", 
+	},
+	
+	COOLDOWN_LEGION_AUTOCOMPLETE_PALADIN = {
+		name = "Order Hall: Vanguard of the Silver Hand",
+		iconPath = "spell_holy_greaterblessingoflight",
+		Criteria = "not AutoCompleteSpellUsed()",
+		Filter = "Level() < 98 OR NOT Class(PALADIN)", 
+	},
+	
+	COOLDOWN_LEGION_AUTOCOMPLETE_DEATHKNIGHT = {
+		name = "Order Hall: Summon Frost Wyrm",
+		iconPath = "spell_deathknight_breathofsindragosa",
+		Criteria = "not AutoCompleteSpellUsed()",
+		Filter = "Level() < 98 OR NOT Class(DEATHKNIGHT)", 
+	},
+	
+	COOLDOWN_LEGION_AUTOCOMPLETE_MAGE = {
+		name = "Order Hall: Might of Dalaran",
+		iconPath = "spell_mage_presenceofmind",
+		Criteria = "not AutoCompleteSpellUsed()",
+		Filter = "Level() < 98 OR NOT Class(MAGE)", 
+	},
+	
+	COOLDOWN_LEGION_AUTOCOMPLETE_WARLOCK = {
+		name = "Order Hall: Unleash Infernal",
+		iconPath = "spell_fire_felpyroblast",
+		Criteria = "not AutoCompleteSpellUsed()",
+		Filter = "Level() < 98 OR NOT Class(WARLOCK)", 
+	},
+	
+	COOLDOWN_LEGION_AUTOCOMPLETE_DEMONHUNTER = {
+		name = "Order Hall: Rift Cannon",
+		iconPath = "ability_demonhunter_spectralsight",
+		Criteria = "not AutoCompleteSpellUsed()",
+		Filter = "Level() < 98 OR NOT Class(DEMONHUNTER)", 
+	},
 
 }		
 
