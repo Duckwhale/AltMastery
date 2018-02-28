@@ -759,6 +759,49 @@ local function ParagonReward(factionID)
 end	
 
 
+local autocompleteSpells = { -- Maps classId (https://wow.gamepedia.com/ClassId) to autocomplete spell IDs - if the class has one - or false
+	221597, -- Warrior: Call the Val'kyr
+	221587, -- Paladin: Vanguard of the Silver Hand
+	false, -- Hunter
+	false, -- Rogue
+	false, -- Priest
+	221557, -- Death Knight: Summon Frost Wyrm
+	false, -- Shaman
+	221602, -- Mage: Might of Dalaran
+	219540, -- Warlock: Unleash Infernal
+	false, -- Monk
+	false, -- Druid
+	221561, -- Demon Hunter: Rift Cannon
+}
+
+-- Returns whether or not the class' autocomplete WQ spell (OH talent) is available
+local function AutoCompleteSpellUsed()
+	
+	local classID = select(3, UnitClass("player"))
+	local classAutocompleteSpellID = autocompleteSpells[classID]
+
+	local talentTrees = C_Garrison.GetTalentTreeIDsByClassID(LE_GARRISON_TYPE_7_0, classID) -- Order Hall talents
+
+	if not talentTrees then return end
+
+	for treeIndex, treeID in ipairs(talentTrees) do -- ?_? Can there actually be more than one talent tree? I've only seen one so far, but maybe there is a point to this nested structure...
+		
+		local _, _, tree = C_Garrison.GetTalentTreeInfoForID(treeID)
+		
+		for talentIndex, talent in ipairs(tree) do -- Iterate the talent entries and try to find the class' respective WQ autocomplete talent
+		
+			if talent.perkSpellID == classAutocompleteSpellID and talent.selected then -- Talent is available -> Check its cooldown (will always be 0 if not available, so simply checking for the cooldown directly doesn't work)
+				local start, duration, enabled, modRate = GetSpellCooldown(classAutocompleteSpellID)
+				return (start == 0 and duration == 0) -- Spell is not on cooldown
+				
+			end
+		
+		end
+	
+	end
+	
+end
+
 -- Returns whether or not all of the player's bag slots are occupied with bags of the given bagSize
 --- Empty slots will always make this return false, as numSlots is returned as 0 by the API
 local function BagSize(bagSize)
@@ -811,6 +854,7 @@ Criteria = {
 	WorldQuestRewardType = WorldQuestRewardType,
 	WorldQuestRewardAmount = WorldQuestRewardAmount,
 	MythicPlusWeeklyReward = MythicPlusWeeklyReward,
+	AutoCompleteSpellUsed = AutoCompleteSpellUsed,
 }
 
 AM.Criteria = Criteria
