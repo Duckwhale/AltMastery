@@ -797,7 +797,7 @@ local function AutoCompleteSpellUsed()
 		
 			if talent.perkSpellID == classAutocompleteSpellID and talent.selected then -- Talent is available -> Check its cooldown (will always be 0 if not available, so simply checking for the cooldown directly doesn't work)
 				local start, duration, enabled, modRate = GetSpellCooldown(classAutocompleteSpellID)
-				return (start == 0 and duration == 0) -- Spell is not on cooldown
+				return not (start == 0 and duration == 0) -- Spell is not on cooldown
 				
 			end
 		
