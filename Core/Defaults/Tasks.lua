@@ -2693,6 +2693,17 @@ local defaultTasks = {
 		Filter = "Level() < 110",
 	},
 	
+	DAILY_LEGION_RANDOMHEROICBONUS = {
+		name = "Random Legion Heroic",
+		notes = "Wakening Essence",
+		iconPath = "achievement_dungeon_ulduar80_25man",
+		Criteria = "DailyLFG(RANDOM_LEGION_HEROIC)",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Currency(WAKENING_ESSENCE) >= 910 AND Currency(WAKENING_ESSENCE) < 1000 AS Approaching Legendary",
+		},
+	},
+	
 	DAILY_WOTLK_JEWELCRAFTINGSHIPMENT = {
 		name = "Jewelcrafting Shipment delivered",
 		description = "TODO",
