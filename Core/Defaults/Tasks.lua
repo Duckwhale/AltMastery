@@ -3313,6 +3313,21 @@ local defaultTasks = {
 
 		},
 	},
+
+	MILESTONE_LEGION_CHAMPIONS_ARCANEDESTROYER = {
+		name = "Arcane Destroyer recruited",
+		notes ="Order Hall Follower",
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_CHAMPIONS_ARCANEDESTROYER\")",
+		Filter = "Level() < 110 OR NOT Class(MAGE)",
+		Objectives = {
+			"Quest(42954) AS A Small Favor",
+			"Quest(42955) AS The Proper Way of Things!",
+			"Quest(42956) AS Ari's Package",
+			"Quest(42959) AS Three Is a Lucky Number",
+		},
+	},
+	
 		
 	MILESTONE_LEGION_LFCHAMPIONS_SHAMAN = {
 		name = "Champions of Legionfall",
