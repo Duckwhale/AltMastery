@@ -176,27 +176,6 @@ local function DailyLFG(dungeonID)
 
 end
 
---- Checks whether or not a given event boss has been defeated (resets daily)
-local function EventBoss(dungeonID)
-
-	local name, typeID, subtypeID, minLevel, maxLevel, recLevel, minRecLevel, maxRecLevel, expansionLevel, groupID, textureFilename, difficulty, maxPlayers, description, isHoliday, bonusRepAmount, minPlayers, isTimeWalker, name2, minGearLevel = GetLFGDungeonInfo(dungeonID)
-
-	-- Check minimum level first, as otherwise the dungeon can't even be queued for
-	local level  = UnitLevel("player")
-	if not ((level >= minLevel) and (level <= maxLevel)) then
-		return false
-	end
-	
-	-- Only allow holiday bosses (TODO: General purpose dungeon API later)
-	if not isHoliday then return false end
-	
-	-- TODO: Optimize this IF chain
-	local doneToday, moneyBase, moneyVar, experienceBase, experienceVar, numRewards = GetLFGDungeonRewards(dungeonID)
-		
-	return doneToday
-	
-end
-
 --- Returns the amount of currency owned by the player
 local function Currency(currencyID)
 	return select(2, GetCurrencyInfo(currencyID))
@@ -857,7 +836,6 @@ Criteria = {
 	Achievement = Achievement,
 	Profession = Profession,
 	WorldEvent = WorldEvent,
-	EventBoss = EventBoss,
 	InventoryItem = InventoryItem,
 	Currency = Currency,
 	BonusRolls = BonusRolls,
