@@ -160,6 +160,22 @@ local function InventoryItem(itemID)
 	
 end
 
+-- Returns whether or not the daily bonus for a given LFG dungeon is no longer obtainable (i.e., whether or not the dungeon has been completed today)
+local function DailyLFG(dungeonID)
+	
+	local name, typeID, subtypeID, minLevel, maxLevel, recLevel, minRecLevel, maxRecLevel, expansionLevel, groupID, textureFilename, difficulty, maxPlayers, description, isHoliday, bonusRepAmount, minPlayers, isTimeWalker, name2, minGearLevel = GetLFGDungeonInfo(dungeonID)
+
+	-- Check minimum level first, as otherwise the dungeon can't even be queued for
+	local level  = UnitLevel("player")
+	if not ((level >= minLevel) and (level <= maxLevel)) then
+		return false
+	end
+	
+	local doneToday, moneyBase, moneyVar, experienceBase, experienceVar, numRewards = GetLFGDungeonRewards(dungeonID)
+	return doneToday
+
+end
+
 --- Checks whether or not a given event boss has been defeated (resets daily)
 local function EventBoss(dungeonID)
 
@@ -860,6 +876,7 @@ Criteria = {
 	WorldQuestRewardAmount = WorldQuestRewardAmount,
 	MythicPlusWeeklyReward = MythicPlusWeeklyReward,
 	AutoCompleteSpellUsed = AutoCompleteSpellUsed,
+	DailyLFG = DailyLFG,
 }
 
 AM.Criteria = Criteria

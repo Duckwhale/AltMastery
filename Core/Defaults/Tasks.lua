@@ -241,7 +241,7 @@ local defaultTasks = {
 			description = "Defeat Coren Direbrew in the Grim Guzzler during the Brewfest world event",
 			notes = "BOE Maces",
 			iconPath = "inv_misc_head_dwarf_01",
-			Criteria = "EventBoss(COREN_DIREBREW)",
+			Criteria = "DailyLFG(COREN_DIREBREW)",
 			Filter = " NOT WorldEvent(BREWFEST)",
 		},
 		
@@ -2916,7 +2916,7 @@ local defaultTasks = {
 		description = "Defeat the Headless Horseman in the Scarlet Monastery during the Hallow's End world event",
 		notes = "Mount",
 		iconPath = "inv_misc_food_59",
-		Criteria = "EventBoss(HEADLESS_HORSEMAN)",
+		Criteria = "DailyLFG(HEADLESS_HORSEMAN)",
 		Filter = "Level() < 15 OR NOT WorldEvent(HALLOWS_END)",
 	},
 	
@@ -2924,7 +2924,7 @@ local defaultTasks = {
 		name = "The Crown Chemical Co. defeated",
 		notes = "Mount",
 		iconPath = "inv_valentinesboxofchocolates02",
-		Criteria = "EventBoss(CROWN_CHEMICAL_CO)",
+		Criteria = "DailyLFG(CROWN_CHEMICAL_CO)",
 		Filter = "Level() < 15 OR NOT WorldEvent(LOVE_IS_IN_THE_AIR)",
 	},
 	
