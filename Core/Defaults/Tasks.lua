@@ -1165,7 +1165,6 @@ local defaultTasks = {
 		Criteria = "Quest(46707)",
 		Filter = "Level() < 110 OR NOT (WorldQuest(46707) AND (WorldQuest(45379) OR (Emissary(48641) ~= 0)))", -- Only show this if the Treasure Master Iks'reeged WQ is available OR the Legionfall Emissary is active
 	},
-	-- TODO: Pet rares		/dump IsQuestFlaggedCompleted(45379)
 	
 	WEEKLY_LEGION_DUNGEONEVENT = {
 		name = "Legion Dungeon Event",
@@ -1726,7 +1725,6 @@ local defaultTasks = {
 			-- "Quest(aaaaa) AS bbbbbb",			
 		},
 	},
-	
 	
 	WQ_LEGION_EMISSARY_KIRINTOR1 = {
 		name = "First Emissary: The Kirin Tor of Dalaran",
@@ -2379,7 +2377,7 @@ local defaultTasks = {
 	
 	MILESTONE_LEGION_BLOODHUNTERENCHANT = {
 		name = "Bloodhunter Enchant unlocked",
-		iconPath = "inv_legion_faction_warden",
+		iconPath = "inv_legion_faction_warden", -- "spell_fire_felfireward",
 		Criteria = "Reputation(THE_WARDENS) >= REVERED",
 		Filter = "Level() < 110",
 		Objectives = {
@@ -2408,7 +2406,7 @@ local defaultTasks = {
 		description = "TODO",
 		iconPath = "ability_paladin_gaurdedbythelight",
 		Criteria = "Quest(48601)",
-		Filter = "Level() < 110 OR NOT Quest(48199)", -- TODO: Also needs item level 900 champions?
+		Filter = "Level() < 110 OR NOT Quest(48199)",
 		Objectives = {
 		
 			"Quest(48460) AS The Wranglers",
@@ -2595,7 +2593,6 @@ local defaultTasks = {
 		Filter = "Level() < 100",
 	},
 	
-		-- TODO: Filter if mount is already learned
 	RESTOCK_MOP_MOGURUNES = {
 		name = "4 Mogu Runes of Fate",
 		description = "TODO",
@@ -2689,7 +2686,7 @@ local defaultTasks = {
 	DUMP_LEGION_WAKENINGESSENCE = {
 		name = "Wakening Essence spent",
 		iconPath = "spell_holy_circleofrenewal",
-		Criteria = "Currency(WAKENING_ESSENCE) < 1000", -- Not actually capped (AFAIK), but... time for a legendary!
+		Criteria = "Currency(WAKENING_ESSENCE) < 1000",
 		Filter = "Level() < 110",
 	},
 	
@@ -3030,7 +3027,7 @@ local defaultTasks = {
 		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...
 		iconPath = "achievement_garrisonfollower_rare",
 		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_PRIEST\")",
-		Filter = "Level() < 110 OR NOT Class(PRIEST) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
+		Filter = "Level() < 110 OR NOT Class(PRIEST) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
 		Objectives = {
 		
 			"Quest(45343) AS A Curious Contagion",
@@ -3128,7 +3125,6 @@ local defaultTasks = {
 		Criteria = "Objectives(\"MILESTONE_LEGION_LFCHAMPIONS_DEMONHUNTER\")",
 		Filter = "Level() < 110 OR NOT Class(DEMONHUNTER) OR NOT Achievement(10746) OR NOT Quest(46734) OR Quest(46775)", -- Achievement: "Forged for Battle" = Finished Order Hall Campaign (7.0) or not Assault on the Broken Shore (into scenario/quest) or on cooldown (more gating, yay)
 		Objectives = {
-		
 			"Quest(46159) AS An Urgent Message",
 			"Quest(45301) AS Taking Charge",
 			"Quest(45330) AS Scouting Party",
@@ -3495,7 +3491,6 @@ local defaultTasks = {
 			
 		},
 	},
-
 
 	MILESTONE_LEGION_BREACHINGTHETOMB = {
 		name = "Breaching the Tomb",
