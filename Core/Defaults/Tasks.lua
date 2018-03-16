@@ -4218,7 +4218,7 @@ local defaultTasks = {
 		Criteria = "Quest(43651)",
 		Filter = "Level() < 110 OR NOT Class(DRUID)",
 		Objectives = {
-			"Reputation(THE_DREAMWEAVERS) >= EXALTED AS The Dreamweavers: Exalted",
+			"Reputation(DREAMWEAVERS) >= EXALTED AS The Dreamweavers: Exalted",
 			"InventoryItem(140652) OR InventoryItem(140652) OR Quest(43651) AS Seed of Solar Fire",
 			"InventoryItem(140653) OR InventoryItem(140652) OR Quest(43651) AS Pure Drop of Shaladrassil's Sap",
 			"Quest(43651) AS The Sunbloom",
