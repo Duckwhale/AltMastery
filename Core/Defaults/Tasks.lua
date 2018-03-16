@@ -3328,6 +3328,20 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_CHAMPIONS_THEGREATAKAZAMZARAK = {
+		name = "Arcane Destroyer recruited",
+		notes ="Order Hall Follower",
+		iconPath = "achievement_garrisonfollower_rare",
+		Criteria = "Objectives(\"MILESTONE_LEGION_CHAMPIONS_THEGREATAKAZAMZARAK\")",
+		Filter = "Level() < 110 OR NOT Class(MAGE) OR NOT Quest(46043)", -- Champion: Aethas Sunreaver (Champions of Legionfall)
+		Objectives = {
+			"Quest(45615) AS Finders Keepers",
+			"Quest(45630) AS Servant to No One",
+			"Quest(46722) AS Nothing Up My Sleeve",
+			"Quest(46723) AS Down the Rabbit Hole",
+			"Quest(46724) AS Champion: The Great Akazamzarak",
+		},
+	},
 
 	DAILY_CATA_TOLBARAD_PENINSULA = {
 		name = "Tol Barad Peninsula: Daily Quests",
