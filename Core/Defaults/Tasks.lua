@@ -140,14 +140,12 @@ local defaultTasks = {
 		MILESTONE_WOTLK_LEGENDARY_SHADOWMOURNE = {
 			name = "Shadowmourne",
 			description = "Retrieve Shadowmourne from the depths of Icecrown Citadel",
---			Priority = "OPTIONAL", -- TODO: Localise priorities
---			ResetType = "ONE_TIME", -- TODO
 			iconPath = "inv_axe_113",
 			Criteria = "Achievement(4623)",
 			Filter = " NOT (Class(WARRIOR) OR Class(PALADIN) OR Class(DEATHKNIGHT)) OR Level() < 80",
 			Objectives = {
 				"Reputation(THE_ASHEN_VERDICT) >= FRIENDLY AS The Ashen Verdict: Friendly",
-				"Quest(24545) AS The Sacred and the Corrupt", -- TODO: Localise steps/quest names?
+				"Quest(24545) AS The Sacred and the Corrupt",
 				"Quest(24743) AS Shadow's Edge",
 				"Quest(24547) AS A Feast of Souls",
 				"Quest(24749) AS Unholy Infusion",
@@ -562,7 +560,7 @@ local defaultTasks = {
 			Criteria = "NumObjectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT\") > 0", -- TODO: "Quest(49165) OR Quest(49166) OR Quest(49167) OR Quest(49168) OR Quest(49169) OR Quest(49171)" once all bosses are tested
 			Filter = "Level() < 110",
 			Objectives = {
-				"Quest(49170) AS Occularus defeated", -- 49165 = ? 
+				"Quest(49170) AS Occularus defeated",
 				"Quest(49166) AS Inquisitor Meto defeated",
 				"Quest(49167) AS Mistress Alluradel defeated",
 				"Quest(49168) AS Pit Lord Vilemus defeated",
