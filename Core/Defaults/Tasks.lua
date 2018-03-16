@@ -4120,7 +4120,7 @@ local defaultTasks = {
 	WEEKLY_LEGION_MYTHICPLUS_CHEST = {
 		name = "Mythic Keystone Weekly Reward",
 		iconPath = "inv_relics_hourglass",
-		Criteria = "Quest(44554)", -- Mythic Keystone Weekly Tracking Quest
+		Criteria = " NOT MythicPlusWeeklyReward()", --"Quest(44554)", -- Mythic Keystone Weekly Tracking Quest
 		Filter = "Level() < 110",
 	},
 	
