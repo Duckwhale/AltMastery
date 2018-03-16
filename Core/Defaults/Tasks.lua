@@ -4575,6 +4575,31 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_CATA_LEGENDARY_DRAGONWRATH = {
+		name = "Dragonwrath, Tarecgosa's Rest",
+		iconPath = "stave_2h_tarecgosa_e_01stagefinal",
+		Criteria = "Achievement(5839)",
+		Filter = "Level() < 85 OR NOT (Class(DRUID) OR Class(MAGE) OR Class(PRIEST) OR Class(SHAMAN) OR Class(WARLOCK))",
+		Objectives = {
+			"Quest(29453) OR Quest(29452) AS Your Time Has Come",
+			"Quest(29132) OR Quest(29129) AS A Legendary Engagement",
+			"Quest(29134) AS A Wrinkle in Time",
+			"Quest(29135) AS All-Seeing Eye",	
+			"Quest(29193) AS On a Wing and a Prayer",
+			"Quest(29194) AS Through a Glass, Darkly",
+			"Quest(29225) AS Actionable Intelligence",
+			"Quest(29234) AS Delegation",
+			"Quest(29432) AS Delegation Tracker",
+			"Quest(30119) AS Well of Eternity RP Tracker",
+			"Quest(29239) AS Nordrassil's Bough",
+			"Quest(29240) AS Emergency Extraction",
+			"Quest(29269) AS At One",
+			"Quest(29270) AS Time Grows Short",
+			"Quest(29285) AS Alignment",
+			"Quest(29307) AS Heart of Flame",
+			"Quest(29312) OR Quest(29309) AS The Stuff of Legends",
+		},
+	},
 	
 	MILESTONE_LEGION_DALARANSEWERS_PORTALKEYS = {
 		name = "Dalaran: Underbelly Portals",
