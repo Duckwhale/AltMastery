@@ -2173,14 +2173,14 @@ local defaultTasks = {
 		description = "Receive a Premium Bag of Gems from Gezhe in Nagrand (Outland)", -- TODO: Only Premium if reputation is exalted - what about the others?
 		notes = "Gems",
 		iconPath = "inv_misc_bag_17",
-		Criteria = "NumObjectives(\"MONTHLY_TBC_MEMBERSHIPBENEFITS\") > 0",
+		Criteria = "Quest(9886) OR Quest(9884) OR Quest(9885) OR Quest(9887)", -- "NumObjectives(\"MONTHLY_TBC_MEMBERSHIPBENEFITS\") > 0",
 		Filter = "Level() < 70",
-		Objectives = {
-			"Quest(9886) AS Membership Benefits (Friendly)",
-			"Quest(9884) AS Membership Benefits (Honored)",
-			"Quest(9885) AS Membership Benefits (Revered)",
-			"Quest(9887) AS Membership Benefits (Exalted)",
-		},
+		-- Objectives = {
+			-- "Quest(9886) AS Membership Benefits (Friendly)",
+			-- "Quest(9884) AS Membership Benefits (Honored)",
+			-- "Quest(9885) AS Membership Benefits (Revered)",
+			-- "Quest(9887) AS Membership Benefits (Exalted)",
+		-- },
 	},
 	
 	DAILY_CLASSIC_ACCOUNTWIDE_CYRASFLIERS = {
