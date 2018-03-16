@@ -3328,7 +3328,111 @@ local defaultTasks = {
 		},
 	},
 	
+
+	DAILY_CATA_TOLBARAD_PENINSULA = {
+		name = "Tol Barad Peninsula: Daily Quests",
+		iconPath = "achievement_zone_tolbarad",
+		notes = "Tabard (Teleport)",
+		Criteria = "NumObjectives(\"DAILY_CATA_TOLBARAD_PENINSULA\") >= 5", -- TODO
+		Filter = "Level() < 85 OR (Faction(ALLIANCE) AND Reputation(BARADINS_WARDENS) >= HONORED) OR (Faction(HORDE) AND Reputation(HELLSCREAMS_REACH) >= HONORED)",
+		Objectives = {
 		
+			-- The Darkwood (Spider Forest - CENTER)
+			"Quest(27948) OR Quest(28684) AS A Sticky Task",
+			"Quest(27944) OR Quest(28683) AS Thinning the Brood",
+		
+			-- Wellson Shipyard (Wharf - WEST)
+			"Quest(28275) OR Quest(28696) AS Bombs Away!",
+			"Quest(27975) OR Quest(28695) AS WANTED: Foreman Wellson",
+			"Quest(27973) OR Quest(28694) AS Watch Out For Splinters!",
+		
+			-- Cape of Lost Hope (Shore - NORTH)
+			"Quest(27972) OR Quest(28680) AS Boosting Morale",
+			"Quest(28050) OR Quest(28681) AS Shark Tank",
+			"Quest(27970) OR Quest(28678) AS Captain P. Harris",
+			"Quest(27971) OR Quest(28679) AS Rattling Their Cages",
+		
+			-- Largo's Overlook (Watchtower - EAST)
+			"Quest(27987) OR Quest(28698) AS Cannonball!",
+			"Quest(27978) OR Quest(28697) AS Ghostbuster",
+			"Quest(27991) OR Quest(27991) AS Taking the Overlook Back",
+		
+			-- Farson Hold (Keep - NORTHWEST)
+			"Quest(28059) OR Quest(28682) AS Claiming The Keep",
+			"Quest(28063) OR Quest(28685) AS Leave No Weapon Behind",
+			"Quest(28065) OR Quest(28721) AS Walk A Mile In Their Shoes",
+		
+			-- Restless Front (Battlefield - SOUTHWEST)
+			"Quest(28046) OR Quest(28693) AS Finish The Job",
+			"Quest(27992) OR Quest(28692) AS Magnets, How Do They Work?",
+	
+			-- Forgotten Hill (Undead Graveyard - SOUTHWEST)
+			"Quest(27967) OR Quest(28691) AS First Lieutenant Connor",			
+			"Quest(27966) OR Quest(28690) AS Salvaging the Remains",
+			"Quest(27949) OR Quest(28689) AS The Forgotten",
+			
+			-- Rustberg Village (Undead town - NORTHEAST)
+			"Quest(28130) OR Quest(28686) AS Not The Friendliest Town",
+			"Quest(28137) OR Quest(28687) AS Teach A Man To Fish.... Or Steal",
+
+		},
+	},
+	
+	DAILY_CATA_TOLBARAD_PVPZONE = {
+		name = "Tol Barad: Daily Quests",
+		iconPath = "achievement_zone_tolbarad",
+		notes = "Tabard (Teleport)",
+		Criteria = "NumObjectives(\"DAILY_CATA_TOLBARAD_PENINSULA\") >= 6", -- TODO
+		Filter = "Level() < 85 OR (Faction(ALLIANCE) AND Reputation(BARADINS_WARDENS) >= HONORED) OR (Faction(HORDE) AND Reputation(HELLSCREAMS_REACH) >= HONORED)",
+		Objectives = {
+		
+			-- Always available
+			"Quest(28122) OR Quest(28657) AS A Huge Problem",
+			"Quest(28163) OR Quest(28659) AS The Leftovers",
+			"Quest(28162) OR Quest(28658) AS Swamp Bait",
+			
+			-- Cursed Depths (East)
+			"Quest(28117) OR Quest(28660) AS Clearing the Depths",
+			"Quest(28120) OR Quest(28662) AS Learning From The Past",
+			"Quest(28118) OR Quest(28661) AS The Imprisoned Archmage",
+
+			-- D-Block (Northwest)
+			"Quest(28186) OR Quest(28665) AS Cursed Shackles",
+			"Quest(28165) OR Quest(28663) AS D-Block",
+			"Quest(28185) OR Quest(28664) AS Svarnos",
+
+			-- The Hole (Southwest)
+			"Quest(28232) OR Quest(28670) AS Food From Below",
+			"Quest(28188) OR Quest(28668) AS Prison Revolt",
+			"Quest(28223) OR Quest(28669) AS The Warden",
+			
+		},
+	},
+	
+	MILESTONE_CATA_TOLBARAD_TELEPORT_ALLIANCE = {
+		name = "Baradin's Wardens Tabard",
+		iconPath = "inv_misc_tabard_baradinwardens",
+		Criteria = "Objectives(\"MILESTONE_CATA_TOLBARAD_TELEPORT_ALLIANCE\")",
+		Filter = "Level() < 85 OR Faction(HORDE)	",
+		Objectives = {
+			"Reputation(BARADINS_WARDENS) >= HONORED AS Baradin's Wardens: Honored",
+			"Currency(TOL_BARAD_COMMENDATION) >= 40 OR InventoryItem(63379) AS Collect 40 Tol Barad Commendations",
+			"InventoryItem(63379) AS Purchase the Baradin's Wardens Tabard",
+		},
+	},
+		
+	MILESTONE_CATA_TOLBARAD_TELEPORT_HORDE = {
+		name = "Hellscream's Reach Tabard",
+		iconPath = "inv_misc_tabard_hellscream",		
+		Criteria = "Objectives(\"MILESTONE_CATA_TOLBARAD_TELEPORT_HORDE\")",
+		Filter = "Level() < 85 OR Faction(ALLIANCE)",
+		Objectives = {
+			"Reputation(HELLSCREAMS_REACH) >= HONORED AS Hellscream's Reach: Honored",
+			"Currency(TOL_BARAD_COMMENDATION) >= 40 OR InventoryItem(63379) AS Collect 40 Tol Barad Commendations",
+			"InventoryItem(63378) AS Purchase the Hellscream's Reach Tabard",
+		},
+	},
+	
 	MILESTONE_LEGION_LFCHAMPIONS_SHAMAN = {
 		name = "Champions of Legionfall",
 		notes ="Order Hall Follower",-- TODO: Tags instead of notes? Mount, Pet, Garrison, Order Hall, ...

@@ -117,6 +117,7 @@ local constants = { -- Used to look up actual ID if an alias was used
 	RANDOM_LEGION_HEROIC = 1046,
 	
 	-- Currency IDs
+	TOL_BARAD_COMMENDATION = 391,
 	MOGU_RUNE_OF_FATE = 752,
 	TIMELESS_COIN = 777,
 	GARRISON_RESOURCES = 824,
