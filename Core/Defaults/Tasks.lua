@@ -3524,6 +3524,24 @@ local defaultTasks = {
 		},
 	},		
 	
+	MILESTONE_LEGION_INGRAMSPUZZLE = {
+		name = "Ingram's Puzzle obtained",
+		iconPath = "inv_misc_dice_01",
+		Criteria = "Objectives(\"MILESTONE_LEGION_INGRAMSPUZZLE\")",
+		Filter = "Level() < 110",
+		Objectives = {
+			"Currency(CURIOUS_COIN) >= 50 OR InventoryItem(141860) AS Collect 50 Curious Coins",
+			"InventoryItem(141860) AS Purchase Ingram's Puzzle", -- TODO: Check if it is available that day?
+		}
+	},
+	
+	WEEKLY_LEGION_INGRAMSPUZZLE = {
+		name = "Ingram's Puzzle solved",
+		iconPath = "inv_misc_dice_01",
+		Criteria = "InventoryItemCooldown(141860) > 0",
+		Filter = "Level() < 110 OR NOT Objectives(\"MILESTONE_LEGION_INGRAMSPUZZLE\")",
+	},
+	
 	DAILY_WOD_GARRISON_HERBGARDEN = {
 		name = "Garrison: Herbs gathered",
 		iconPath = "inv_farm_pumpkinseed_yellow", --inv_misc_herb_frostweed
