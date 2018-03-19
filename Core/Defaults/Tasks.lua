@@ -2594,7 +2594,7 @@ local defaultTasks = {
 		name = "Supreme Lord Kazzak defeated",
 		description = "TODO",
 		iconPath = "warlock_summon_doomguard", -- spell_yorsahj_bloodboil_green
-		Criteria = "Quest(94015)",
+		Criteria = "Quest(39380)", -- Short-Supply Reward (weekly) -> appears to have been re-used
 		Filter = "Level() < 100",
 	},
 	
