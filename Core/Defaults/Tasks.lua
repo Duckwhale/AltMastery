@@ -617,17 +617,17 @@ local defaultTasks = {
 			},
 		},
 		
-		DAILY_CATA_JEWELCRAFTING = {
-			name = "Nibbler! No!", -- TODO: There are other quests, but they aren't profitable (and it is still bugged so it's just this one quest over and over again)
-			description = "Complete the Cataclysm jewelcrafting daily quest",
-			iconPath = "inv_misc_uncutgemsuperior6" ,-- "inv_misc_token_argentdawn3", <- Illustrious token 
-			notes = "Chimaera's Eyes",
-			Criteria = "Quest(25105)",
-			Filter = "Profession(JEWELCRAFTING) < 450",
-			Objectives = {
-				--"InventoryItem(ZEPHYRITE) >= 3", -- TODO
-			},
+	DAILY_CATA_JEWELCRAFTING = {
+		name = "Nibbler! No!", -- TODO: There are other quests, but they aren't profitable (and it is still bugged so it's just this one quest over and over again)
+		description = "Complete the Cataclysm jewelcrafting daily quest",
+		iconPath = "inv_misc_uncutgemsuperior6" ,-- "inv_misc_token_argentdawn3", <- Illustrious token 
+		notes = "Chimaera's Eyes",
+		Criteria = "Quest(25105)",
+		Filter = "Profession(JEWELCRAFTING) < 450",
+		Objectives = {
+			--"InventoryItem(ZEPHYRITE) >= 3", -- TODO
 		},
+	},
 
 	WEEKLY_LEGION_WORLDBOSS_NITHOGG = {
 		name = "Nithogg defeated",
