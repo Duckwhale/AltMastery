@@ -3375,7 +3375,7 @@ local defaultTasks = {
 			-- Farson Hold (Keep - NORTHWEST)
 			"Quest(28059) OR Quest(28682) AS Claiming The Keep",
 			"Quest(28063) OR Quest(28685) AS Leave No Weapon Behind",
-			"Quest(28065) OR Quest(28721) AS Walk A Mile In Their Shoes",
+			--"Quest(28065) OR Quest(28721) AS Walk A Mile In Their Shoes", -- Apparently, this is bugged and was disabled "until it can be fixed" (read: never)
 		
 			-- Restless Front (Battlefield - SOUTHWEST)
 			"Quest(28046) OR Quest(28693) AS Finish The Job",
