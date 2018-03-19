@@ -971,6 +971,13 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT WorldQuest(48509) OR NOT IsWorldQuestRewarding(48509)", -- WQ
 	},
 	
+	WQ_LEGION_COMMANDERVECAYA = {
+		name = "World Quest: Commander Vecaya",
+		iconPath = "inv_misc_primalsargerite",
+		Criteria = "Quest(48562)", -- Tracking Quest
+		Filter = "Level() < 110 OR NOT WorldQuest(48510) OR NOT IsWorldQuestRewarding(48510)", -- WQ
+	},
+	
 	WQ_LEGION_SLUMBERINGBEHEMOTHS = {
 		name = "World Quest: Slumbering Behemoths",
 		iconPath = "inv_misc_primalsargerite",
