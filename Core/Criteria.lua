@@ -821,6 +821,18 @@ local function BagSize(bagSize)
 	
 end
 
+-- Returns the cooldown of an item in the player's inventory, 0 if it is not on cooldown, and nil if it wasn't found
+-- TODO: Only checks the first item, so don't use it with non-unique items =)
+local function InventoryItemCooldown(itemID)
+
+	local amount, bag, slot = InventoryItem(itemID)
+	if not amount then return end -- Item was not found -> return nil
+	
+	local start, duration, enable = GetContainerItemCooldown(bag, slot)
+	return duration -- Should be 0 if not on cooldown. If it doesn't have one, enabled will be 1 -- TODO: Does this matter if used with items that have no CD?
+	
+end
+
 Criteria = {
 	Invasion = Invasion,
 	BossesKilled = BossesKilled,
@@ -855,6 +867,7 @@ Criteria = {
 	MythicPlusWeeklyReward = MythicPlusWeeklyReward,
 	AutoCompleteSpellUsed = AutoCompleteSpellUsed,
 	DailyLFG = DailyLFG,
+	InventoryItemCooldown = InventoryItemCooldown,
 }
 
 AM.Criteria = Criteria
