@@ -3397,7 +3397,7 @@ local defaultTasks = {
 		name = "Tol Barad: Daily Quests",
 		iconPath = "achievement_zone_tolbarad",
 		notes = "Tabard (Teleport)",
-		Criteria = "NumObjectives(\"DAILY_CATA_TOLBARAD_PENINSULA\") >= 6", -- TODO
+		Criteria = "Objectives(\"DAILY_CATA_TOLBARAD_PVPZONE\")", -- TODO
 		Filter = "Level() < 85 OR (Faction(ALLIANCE) AND Reputation(BARADINS_WARDENS) >= HONORED) OR (Faction(HORDE) AND Reputation(HELLSCREAMS_REACH) >= HONORED)",
 		Objectives = {
 		
