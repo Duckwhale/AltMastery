@@ -129,7 +129,7 @@ local function WorldEvent(textureID)
 end
 
 
---- Checks whether or not an item with the given ID is in the player's inventory
+--- Checks whether or not an item with the given ID is in the player's inventory, and returns the inventorySlot if it was found
 local function InventoryItem(itemID)
 
 	 -- Temporary values that will be overwritten with the next item
@@ -146,7 +146,7 @@ local function InventoryItem(itemID)
 			
 				tempItemID = GetItemInfoInstant(tempItemLink)
 				if tempItemID == itemID then -- Found item -> is in inventory
-					return true
+					return true, bag, slot
 				end
 			
 			end
