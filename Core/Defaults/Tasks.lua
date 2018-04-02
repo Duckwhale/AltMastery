@@ -3718,6 +3718,255 @@ local defaultTasks = {
 	},
 	
 	
+	MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_ASTRALGLORY = {
+		name = "Herbalism: Astral Glory",
+		iconPath = "inv_misc_herb_astralglory",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_ASTRALGLORY\")",
+		Filter = "Level() < 110 OR NOT (Profession(HERBALISM) > 0)", 
+		Objectives = {
+			"Quest(48027) AS The Glory of Argus",
+			"Quest(48028) AS Youthful Resistance",
+			"Quest(48029) AS The Heart of It",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_AETHRIL = {
+		name = "Herbalism: Aethril",
+		iconPath = "inv_herbalism_70_aethril",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_AETHRIL\")",
+		Filter = "Level() < 98 OR NOT (Profession(HERBALISM) > 0)", 
+		Objectives = {
+			"Quest(40013) AS Aethril  Sample",
+			"Quest(40014) AS Spayed by the Spade",
+			"Quest(40016) AS Desperation Breeds Ingenuity",
+			"Quest(40017) AS A Slip of the Hand",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_DREAMLEAF = {
+		name = "Herbalism: Dreamleaf",
+		iconPath = "inv_herbalism_70_dreamleaf",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_DREAMLEAF\")",
+		Filter = "Level() < 98 OR NOT (Profession(HERBALISM) > 0)", 
+		Objectives = {
+			"Quest(40018) AS Dreamleaf Sample",
+			"Quest(40019) AS An Empathetic Herb",
+			"Quest(40021) AS One Dead Plant is One Too Many",
+			"Quest(40023) AS The Last Straw",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_FELWORT = {
+		name = "Herbalism: Felwort",
+		iconPath = "inv_herbalism_70_felwort",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_FELWORT\")",
+		Filter = "Level() < 98 OR NOT (Profession(HERBALISM) > 0)", 
+		Objectives = {
+			"Quest(40040) AS Felwort Sample",
+			"Quest(40041) AS Felwort Analysis",
+			"Quest(40042) AS The Emerald Nightmare: Felwort Mastery",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_FJARNSKAGGL = {
+		name = "Herbalism: Fjarnskaggl",
+		iconPath = "inv_herbalism_70_fjarnskaggl",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_FJARNSKAGGL\")",
+		Filter = "Level() < 98 OR NOT (Profession(HERBALISM) > 0)", 
+		Objectives = {
+			"Quest(40029) AS Fjarnskaggl Sample",
+			"Quest(40030) AS Ram's-Horn Trowel",
+			"Quest(40031) AS Vrykul Herblore",
+			"Quest(40033) AS Fjarnskaggl",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_FOXFLOWER = {
+		name = "Herbalism: Foxflower",
+		iconPath = "inv_herbalism_70_foxflower",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_FOXFLOWER\")",
+		Filter = "Level() < 98 OR NOT (Profession(HERBALISM) > 0)", 
+		Objectives = {
+			"Quest(40024) AS Foxflower Sample",
+			"Quest(40025) AS Teeny Bite Marks",
+			"Quest(40026) AS Chase the Culprit",
+			"Quest(40028) AS The Pied Picker",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_STARLIGHTROSE = {
+		name = "Herbalism: Starlight Rose",
+		iconPath = "inv_herbalism_70_starlightrosepetals",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_HERBALISM_STARLIGHTROSE\")",
+		Filter = "Level() < 98 OR NOT (Profession(HERBALISM) > 0)", 
+		Objectives = {
+			"Quest(40034) AS Starlight Rosedust",
+			"Quest(40035) AS The Gentlest Touch",
+			"Quest(40036) AS Jeweled Spade Handle",
+			"Quest(40037) AS The Spade's Blade",
+			"Quest(40038) AS Insane Ramblings",
+			"Quest(40039) AS Tharillon's Fall",
+		},
+	},
+
+	MILESTONE_LEGION_PROFESSIONQUESTS_MINING_EMPYRIUMSEAM = {
+		name = "Mining: Empyrium Seam",
+		iconPath = "inv_misc_starmetal", -- inv_ore_trueironore	icon_upgradestone_rare	inv_ore_eternium_nugget
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_MINING_EMPYRIUMSEAM\")",
+		Filter = "Level() < 110 OR NOT (Profession(MINING) > 0)", 
+		Objectives = {
+			"Quest(48037) AS Empyrium Seam Chunk",
+			"Quest(48038) AS Don't Just Pick At It",
+			"Quest(48039) AS Balancing the Break",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_MINING_EMPYRIUMDEPOSIT = {
+		name = "Mining: Empyrium Deposit",
+		iconPath = "inv_misc_starmetal", -- inv_ore_trueironore	inv_misc_dust_infinite	inv_icon_shadowcouncilorb_purple
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_MINING_EMPYRIUMDEPOSIT\")",
+		Filter = "Level() < 110 OR NOT (Profession(MINING) > 0)", 
+		Objectives = {
+			"Quest(48034) AS Empyrium Deposit Chunk",
+			"Quest(48035) AS Angling For a Better Strike",
+			"Quest(48036) AS Precision Perfected",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_MINING_LEYSTONE = {
+		name = "Mining: Leystone",
+		iconPath = "inv_leystone",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_MINING_LEYSTONE\")",
+		Filter = "Level() < 98 OR NOT (Profession(MINING) > 0)", 
+		Objectives = {
+			"Quest(38785) AS Living Leystone Sample",
+			"Quest(38784) AS Leystone Seam Sample",
+			"Quest(38777) AS Leystone Deposit Sample",
+			"Quest(38888) AS The Highmountain Tauren",
+			"Quest(38786) AS Where Respect is Due",
+			"Quest(38787) AS The Legend of Rethu Ironhorn",
+			"Quest(38790) AS Rethu's Pick",
+			"Quest(38789) AS Rethu's Journal",
+			"Quest(38791) AS Rethu's Horn",
+			"Quest(38792) AS Rethu's Lesson",
+			"Quest(38793) AS Rethu's Experience",
+			"Quest(38794) AS Rethu's Sacrifice",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_MINING_FELSLATE = {
+		name = "Mining: Felslate",
+		iconPath = "inv_felslate",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_MINING_FELSLATE\")",
+		Filter = "Level() < 98 OR NOT (Profession(MINING) > 0)", 
+		Objectives = {
+			"Quest(38795) AS Felslate Deposit Sample",
+			"Quest(38796) AS Felslate Seam Sample",
+			"Quest(38797) AS Living Felslate Sample",
+			"Quest(38901) AS The Felsmiths",
+			"Quest(38798) AS A Shred of Your Humanity",
+			"Quest(38799) AS Darkheart Thicket: Nal'ryssa's Sisters",
+			"Quest(38802) AS Ondri's Still-Beating Heart",
+			"Quest(38801) AS Lyrelle's Right Arm",
+			"Quest(38800) AS Rin'thissa's Eye",
+			"Quest(38805) AS Ondri",
+			"Quest(38804) AS Lyrelle",
+			"Quest(38803) AS Rin'thissa",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_MINING_INFERNALBRIMSTONE = {
+		name = "Mining: Infernal Brimstone",
+		iconPath = "inv_infernalbrimstone",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_MINING_INFERNALBRIMSTONE\")",
+		Filter = "Level() < 110 OR NOT (Profession(MINING) > 0)", 
+		Objectives = {
+			"Quest(38806) AS Infernal Brimstone Sample",
+			"Quest(38807) AS Infernal Brimstone Analysis",
+			"Quest(39790) AS Infernal Brimstone Theory",
+			"Quest(39763) AS For Whom the Fel Tolls",
+			"Quest(39817) AS The Brimstone's Secret",
+			"Quest(39830) AS Hellfire Citadel: Hellfire and Brimstone",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_SKINNING_FELHIDE = {
+		name = "Skinning: Felhide",
+		iconPath = "inv_misc_leatherfelhide",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_SKINNING_FELHIDE\")",
+		Filter = "Level() < 110 OR NOT (Profession(SKINNING) >= 100)", -- TODO: Is Skinning 100 still required? Can get cooking at lower skill levels, for sure...
+		Objectives = {
+			"Quest(40156) AS Felhide Sample",
+			"Quest(40157) AS An Unseemly Task",
+			"Quest(40158) AS Darkheart Thicket: Demons Be Different",
+			"Quest(40159) AS The Emerald Nightmare: The Pestilential Hide of Nythendra",	
+		},
+	},
+
+	MILESTONE_LEGION_PROFESSIONQUESTS_SKINNING_STORMSCALE = {
+		name = "Skinning: Stormscale",
+		iconPath = "inv_misc_leatherstormscale",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_SKINNING_STORMSCALE\")",
+		Filter = "Level() < 98 OR NOT (Profession(SKINNING) > 0)", 
+		Objectives = {
+			"Quest(40141) AS Stormscale Sample",
+			"Quest(40142) AS The Core of the Stormscale",
+			"Quest(40144) AS Glielle",
+			"Quest(40145) AS Under Down",
+			"Quest(40143) AS Unfinished Treatise on the Properties of Stormscale",
+			"Quest(40146) AS Seymour and Agnes",
+			"Quest(40147) AS Mother's Prized Knife",
+			"Quest(40148) AS Red-Eyed Revenge",
+			"Quest(40149) AS Drakol'nir Must Die",
+			"Quest(40151) AS Immaculate Stormscale",
+			"Quest(40152) AS Scales for Ske'rit",
+			"Quest(40153) AS Return to Karazhan: Scales of Legend",
+			"Quest(40154) AS Eye of Azshara: The Scales of Serpentrix",
+			"Quest(40155) AS Ske'rit's Scale-Skinning Suggestions",
+		},
+	},
+
+	MILESTONE_LEGION_PROFESSIONQUESTS_SKINNING_STONEHIDELEATHER = {
+		name = "Skinning: Stonehide Leather",
+		iconPath = "inv_misc_leatherstonehide",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_SKINNING_STONEHIDELEATHER\")",
+		Filter = "Level() < 98 OR NOT (Profession(SKINNING) > 0)", 
+		Objectives = {
+			"Quest(40131) AS Stonehide Leather Sample",
+			"Quest(40132) AS In One Piece",
+			"Quest(40133) AS Scrap of Pants",
+			"Quest(40135) AS The Freedom to Roam",
+			"Quest(40134) AS Highmountain Hides",
+			"Quest(40136) AS Immaculate Stonehide Leather",
+			"Quest(40137) AS Leather for Ske'rit",
+			"Quest(40139) AS Halls of Valor: The Hide of Fenryr",
+			"Quest(40138) AS Trial of the Crusader: Hides of Legend",
+			"Quest(40140) AS Ske'rit's Leather Handbook",
+		},
+	},
+	
+	MILESTONE_LEGION_PROFESSIONQUESTS_TAILORING_LIGHTWEAVE = {
+		name = "Tailoring: Lightweave Cloth",
+		iconPath = "inv_tailoring_lightweavecloth",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_TAILORING_LIGHTWEAVE\")",
+		Filter = "Level() < 110 OR NOT (Profession(TAILORING) > 0) OR NOT Quest(48107)", -- The Sigil of Awakening (Mac'aree Intro)
+		Objectives = {
+			"Quest(48074) AS Looming Over Me",
+			--"Reputation(ARMY_OF_THE_LIGHT) >= REVERED AS Army of the Light: Revered",	(used for R2, but the recipe seems worthless, so there's no point in tracking it here)
+		},
+	},
+
+	MILESTONE_LEGION_PROFESSIONQUESTS_LEATHERWORKING_FIENDISHLEATHER = {
+		name = "Leatherworking: Fiendish Leather",
+		iconPath = "inv_leatherworking_fiendishleather",
+		Criteria = "Objectives(\"MILESTONE_LEGION_PROFESSIONQUESTS_LEATHERWORKING_FIENDISHLEATHER\")",
+		Filter = "Level() < 110 OR NOT (Profession(LEATHERWORKING) > 0) OR NOT Quest(47743)", -- The Child of Light and Shadow (Mac'aree)
+		Objectives = {
+			"Quest(48078) AS Counterbalancing",
+			--"Reputation(ARMY_OF_THE_LIGHT) >= REVERED AS Army of the Light: Revered",	(used for R2, but the recipe seems worthless, so there's no point in tracking it here)
+		},
+	},
+	
 	WQ_LEGION_WITHEREDARMYTRAINING = {
 		name = "Withered Army Training",
 		notes = "Toy, Hidden Artifact Skin",
