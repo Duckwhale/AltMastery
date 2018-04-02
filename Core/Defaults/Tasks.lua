@@ -4967,8 +4967,288 @@ local defaultTasks = {
 		},
 	},
 	
+	
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_PALADIN = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(WARRIOR) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_PALADIN\")",
+		Objectives = {
+		
+			-- Holy
+			"Quest(46035) AS End of the Risen Threat",
+			"Quest(45906) AS Jarod's Gift",
+			
+			-- Protection
+			"Quest(45416) AS The Highlord's Return",
+			"Quest(45905) AS Kruul's Gift",
+			
+			-- Retribution
+			"Quest(45526) AS The God-Queen's Fury",
+			"Quest(45527) AS Eyir's Forgiveness",
+			"Quest(45534) AS A Common Enemy",
+			"Quest(45904) AS The God-Queen's Gift",
+
+		},
+	},
+	
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_DEMONHUNTER = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(DEMONHUNTER) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_DEMONHUNTER\")",
+		Objectives = {
+		
+			-- Havoc
+			"Quest(44925) AS Closing the Eye",
+			"Quest(45570) AS In Safer Hands",
+			"Quest(45908) AS Xylem's Gift",
+			
+			-- Vengeance
+			"Quest(45416) AS The Highlord's Return",
+			"Quest(45905) AS Kruul's Gift",
+
+		},
+	},
+	
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_WARRIOR = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(WARRIOR) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_WARRIOR\")",
+		Objectives = {
+		
+			-- Arms
+			"Quest(44925) AS Closing the Eye",
+			"Quest(45570) AS In Safer Hands",
+			"Quest(45908) AS Xylem's Gift",
+
+			-- Fury
+			"Quest(46065) AS An Impossible Foe",
+			"Quest(45902) AS The Imp Mother's Gift",
+			
+			-- Protection
+			"Quest(45416) AS The Highlord's Return",
+			"Quest(45905) AS Kruul's Gift",
+
+		},
 	},
 
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_DEATHKNIGHT = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(DEATHKNIGHT) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_DEATHKNIGHT\")",
+		Objectives = {
+		
+			-- Blood
+			"Quest(45416) AS The Highlord's Return",
+			"Quest(45905) AS Kruul's Gift",
+			
+			-- Frost
+			"Quest(44925) AS Closing the Eye",
+			"Quest(45570) AS In Safer Hands",
+			"Quest(45908) AS Xylem's Gift",
+			
+			-- Unholy
+			"Quest(46065) AS An Impossible Foe",
+			"Quest(45902) AS The Imp Mother's Gift",
+
+		},
+	},
+
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_SHAMAN = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(SHAMAN) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_SHAMAN\")",
+		Objectives = {
+		
+			-- Elemental
+			"Quest(46065) AS An Impossible Foe",
+			"Quest(45902) AS The Imp Mother's Gift",
+			
+			-- Enhancement
+			"Quest(45526) AS The God-Queen's Fury",
+			"Quest(45527) AS Eyir's Forgiveness",
+			"Quest(45534) AS A Common Enemy",
+			"Quest(45904) AS The God-Queen's Gift",
+
+			-- Restoration
+			"Quest(46035) AS End of the Risen Threat",
+			"Quest(45906) AS Jarod's Gift",
+						
+		},
+	},
+
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_HUNTER = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(HUNTER) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_HUNTER\")",
+		Objectives = {
+		
+			-- Beast Mastery
+			"Quest(45627) AS Feltotem's Fall",
+			"Quest(45909) AS Navarrogg's Gift",
+
+			-- Marksmanship
+			"Quest(46127) AS Thwarting the Twins",			
+			"Quest(45910) AS Raest's Gift",
+
+			-- Survival
+			"Quest(44925) AS Closing the Eye",
+			"Quest(45570) AS In Safer Hands",
+			"Quest(45908) AS Xylem's Gift",
+
+		},
+	},
+
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_PRIEST = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(PRIEST) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_PRIEST\")",
+		Objectives = {
+		
+			-- Discipline
+			"Quest(45627) AS Feltotem's Fall",
+			"Quest(45909) AS Navarrogg's Gift",
+
+			-- Holy
+			"Quest(46035) AS End of the Risen Threat",
+			"Quest(45906) AS Jarod's Gift",
+
+			-- Shadow
+			"Quest(46127) AS Thwarting the Twins",			
+			"Quest(45910) AS Raest's Gift",
+
+		},
+	},
+
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_WARLOCK = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(WARLOCK) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_WARLOCK\")",
+		Objectives = {
+		
+			-- Affliction
+			"Quest(46127) AS Thwarting the Twins",			
+			"Quest(45910) AS Raest's Gift",
+
+			-- Demonology
+			"Quest(45526) AS The God-Queen's Fury",
+			"Quest(45527) AS Eyir's Forgiveness",
+			"Quest(45534) AS A Common Enemy",
+			"Quest(45904) AS The God-Queen's Gift",
+
+			-- Destruction
+			"Quest(45627) AS Feltotem's Fall",
+			"Quest(45909) AS Navarrogg's Gift",
+			
+		},
+	},
+
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_MAGE = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(MAGE) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_MAGE\")",
+		Objectives = {
+		
+			-- Arcane
+			"Quest(45526) AS The God-Queen's Fury",
+			"Quest(45527) AS Eyir's Forgiveness",
+			"Quest(45534) AS A Common Enemy",
+			"Quest(45904) AS The God-Queen's Gift",
+
+			-- Fire
+			"Quest(46065) AS An Impossible Foe",
+			"Quest(45902) AS The Imp Mother's Gift",
+
+			-- Frost
+			"Quest(46127) AS Thwarting the Twins",			
+			"Quest(45910) AS Raest's Gift",
+			
+		},
+	},
+
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_ROGUE = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(ROGUE) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_ROGUE\")",
+		Objectives = {
+		
+			-- Assassination
+			"Quest(45526) AS The God-Queen's Fury",
+			"Quest(45527) AS Eyir's Forgiveness",
+			"Quest(45534) AS A Common Enemy",
+			"Quest(45904) AS The God-Queen's Gift",
+			
+			-- Outlaw
+			"Quest(46065) AS An Impossible Foe",
+			"Quest(45902) AS The Imp Mother's Gift",
+
+			-- Subtletly
+			"Quest(44925) AS Closing the Eye",
+			"Quest(45570) AS In Safer Hands",
+			"Quest(45908) AS Xylem's Gift",
+			
+		},
+	},
+
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_MONK = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(MONK) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_MONK\")",
+		Objectives = {
+		
+			-- Brewmaster
+			"Quest(45416) AS The Highlord's Return",
+			"Quest(45905) AS Kruul's Gift",
+			
+			-- Mistweaver
+			"Quest(46035) AS End of the Risen Threat",
+			"Quest(45906) AS Jarod's Gift",
+
+			-- Windwalker
+			"Quest(45627) AS Feltotem's Fall",
+			"Quest(45909) AS Navarrogg's Gift",
+
+		},
+	},
+
+	MILESTONE_LEGION_MAGETOWERCHALLENGES_DRUID = {
+		name = "Fighting with Style: Challenging",
+		iconPath = "inv_icon_heirloomtoken_weapon01",
+		Criteria = "Achievement(11612)", -- Fighting with Style: Challenging
+		Filter = "Level() < 110 OR NOT (ContributionState(MAGE_TOWER) == STATE_ACTIVE) OR (ContributionState(MAGE_TOWER) == STATE_UNDER_ATTACK) OR NOT Class(DRUID) OR NOT Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_DRUID\")",
+		Objectives = {
+		
+			-- Balance
+			"Quest(46127) AS Thwarting the Twins",			
+			"Quest(45910) AS Raest's Gift",
+			
+			-- Feral
+			"Quest(46065) AS An Impossible Foe",
+			"Quest(45902) AS The Imp Mother's Gift",
+			
+			-- Guardian
+			"Quest(45416) AS The Highlord's Return",
+			"Quest(45905) AS Kruul's Gift",
+			
+			-- Restoration
+			"Quest(46035) AS End of the Risen Threat",
+			"Quest(45906) AS Jarod's Gift",
+			
+		},
+	},
+
+
+	
 }		
 
 
