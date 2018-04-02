@@ -29,6 +29,7 @@ local GetCurrencyInfo = GetCurrencyInfo
 local GetCurrentMapAreaID = GetCurrentMapAreaID
 local GetFactionInfoByID = GetFactionInfoByID
 local GetItemInfoInstant = GetItemInfoInstant
+local GetInventoryItemCooldown = GetInventoryItemCooldown
 local GetLFGDungeonInfo = GetLFGDungeonInfo
 local GetLFGDungeonRewards = GetLFGDungeonRewards
 local GetMapNameByID = GetMapNameByID
