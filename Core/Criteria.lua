@@ -590,6 +590,15 @@ local function BossesKilled(instanceID)
    
 end
 
+-- Returns whether or not a given world map POI is currently displayed/active
+-- Note: This only works with timed POIs (such as invasion points)
+local function WorldMapPOI(areaPOIID)
+	
+	local timeLeftMinutes = C_WorldMap.GetAreaPOITimeLeft(areaPOIID)
+	return (timeLeftMinutes ~= nil)
+	
+end
+
 -- Returns whether or not a Legion Assault ("Invasion") is currently ongoing for the given POI ID (=one for each zone)
 local function Invasion(POI) -- TODO: Upvalues
 
@@ -868,6 +877,7 @@ Criteria = {
 	AutoCompleteSpellUsed = AutoCompleteSpellUsed,
 	DailyLFG = DailyLFG,
 	InventoryItemCooldown = InventoryItemCooldown,
+	WorldMapPOI = WorldMapPOI,
 }
 
 AM.Criteria = Criteria
