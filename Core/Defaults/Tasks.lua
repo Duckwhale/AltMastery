@@ -4881,7 +4881,7 @@ local defaultTasks = {
 		name = "Hexweave Bags", -- Also counts any similarly-sized bag
 		iconPath = "inv_tailoring_hexweavebag",
 		Criteria = "BagSize(CURRENT_EXPANSION_MAX_BAG_SIZE)",
-		Filter = "Level() < 100",
+		--Filter = "Level() < 100",
 	},
 	
 	MILESTONE_LEGION_LIGHTSHEARTQUESTLINE = {
