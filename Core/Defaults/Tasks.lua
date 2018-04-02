@@ -4967,6 +4967,561 @@ local defaultTasks = {
 		},
 	},
 	
+	MILESTONE_LEGION_EMPOWEREDTRAITS_PALADIN = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(PALADIN)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_PALADIN\")",
+		Objectives = {
+		
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats", -- optional
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+			
+			-- Retribution
+			"Quest(47033) OR Quest(47052) AS Legion Threat: Suramar",
+			"Quest(47052) AS Retribution: Fate of the Tideskorn",
+			"Quest(45486) AS The Reluctant Queen",
+			"Quest(45522) AS To Silence the Bonespeakers",
+			"Quest(45523) AS To Tame the Drekirjar",
+			"Quest(45524) AS The Forgotten Heir",
+			"Quest(45525) AS Unanswered Questions",
+			"Quest(46340) AS The Gates Are Closed",
+			"Quest(45862) AS A Gift From the Six (Sigryn)",
+			
+			-- Protection
+			"Quest(47030) OR Quest(47022) AS Legion Threat: Dalaran Infiltration",			
+			"Quest(47022) AS Protection: Aid of the Illidari",
+			"Quest(45413) AS Gathering Information",
+			"Quest(45414) AS Confirming Suspicions",
+			"Quest(45415) AS Between Worlds",
+			"Quest(45863) AS A Gift From the Six (Kruul)",
+
+			-- Holy
+			"Quest(47027) OR Quest(47006) AS Legion Threat: Val'sharah",
+			"Quest(47006) AS Holy: The Bradensbrook Investigation",
+			"Quest(46079) AS Aid on the Front Lines",
+			"Quest(46080) AS Quieting the Spirits",
+			"Quest(46082) AS Shadowsong's Return",
+			"Quest(46106) AS Cutting off the Heads",
+			"Quest(46107) AS Source of the Corruption",			
+			"Quest(45864) AS A Gift From the Six (Erdris)",
+
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_MAGE = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(MAGE)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_MAGE\")",
+		Objectives = {
+
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+
+			-- Arcane
+			"Quest(47033) OR Quest(45482) AS Legion Threat: Suramar",
+			"Quest(45482) AS Arcane: Fate of the Tideskorn",
+			"Quest(45486) AS The Reluctant Queen",
+			"Quest(45522) AS To Silence the Bonespeakers",
+			"Quest(45523) AS To Tame the Drekirjar",
+			"Quest(45524) AS The Forgotten Heir",
+			"Quest(45525) AS Unanswered Questions",
+			"Quest(46340) AS The Gates Are Closed",
+			"Quest(45862) AS A Gift From the Six (Sigryn)",
+
+			-- Fire
+			"Quest(47035) OR Quest(47055) AS Legion Threat: The Missing Mage",			
+			"Quest(47055) AS Fire: The Folly of Levia Laurence",
+			"Quest(45916) AS The Acolyte Imperiled",
+			"Quest(45917) AS Following the Scent",
+			"Quest(45125) AS Dabbling in the Demonic",
+			"Quest(45126) AS Unlikely Seduction",			
+			"Quest(45127) AS Fel-Crossed Lovers",
+			"Quest(45861) AS A Gift From the Six (Agatha)",	
+
+			-- Frost
+			"Quest(47034) OR Quest(45182) AS Legion Threat: The Necromancer",
+			"Quest(45182) AS Frost: The Twisted Twin",
+			"Quest(45185) AS Message from the Shadows",
+			"Quest(45187) AS Secrets in the Underbelly",
+			"Quest(45188) AS The Wisdom of the Council",
+			"Quest(45190) AS Where it's Thinnest",
+			"Quest(45192) AS Runes of Rending",
+			"Quest(45193) AS One Step Behind",
+			"Quest(45866) AS A Gift From the Six (Raest)",
+
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_ROGUE = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(ROGUE)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_ROGUE\")",
+		Objectives = {
+		
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+
+			-- Assassination
+			"Quest(47033) OR Quest(47051) AS Legion Threat: Suramar",
+			"Quest(47051) AS Assassination: Fate of the Tideskorn",
+			"Quest(45486) AS The Reluctant Queen",
+			"Quest(45522) AS To Silence the Bonespeakers",
+			"Quest(45523) AS To Tame the Drekirjar",
+			"Quest(45524) AS The Forgotten Heir",
+			"Quest(45525) AS Unanswered Questions",
+			"Quest(46340) AS The Gates Are Closed",
+			"Quest(45862) AS A Gift From the Six (Sigryn)",
+			
+			-- Subletly
+			"Quest(47032) OR Quest(47048) AS Legion Threat: Azshara",			
+			"Quest(47048) AS Subletly: The Thieving Apprentice",
+			"Quest(44915) AS Professionally Good Looking",
+			"Quest(44920) AS Order of Incantations",
+			"Quest(44924) AS The Archmage Accosted",
+			"Quest(45865) AS A Gift From the Six (Xylem)",
+			
+			-- Outlaw
+			"Quest(47035) OR Quest(47058) AS Legion Threat: The Missing Mage",			
+			"Quest(47058) AS Outlaw: The Folly of Levia Laurence",
+			"Quest(45916) AS The Acolyte Imperiled",
+			"Quest(45917) AS Following the Scent",
+			"Quest(45125) AS Dabbling in the Demonic",
+			"Quest(45126) AS Unlikely Seduction",			
+			"Quest(45127) AS Fel-Crossed Lovers",
+			"Quest(45861) AS A Gift From the Six (Agatha)",
+			
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_WARLOCK = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(WARLOCK)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_WARLOCK\")",
+		Objectives = {
+
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+
+			-- Demonology
+			"Quest(47033) OR Quest(47049) AS Legion Threat: Suramar",
+			"Quest(47049) AS Demonology: Fate of the Tideskorn",
+			"Quest(45486) AS The Reluctant Queen",
+			"Quest(45522) AS To Silence the Bonespeakers",
+			"Quest(45523) AS To Tame the Drekirjar",
+			"Quest(45524) AS The Forgotten Heir",
+			"Quest(45525) AS Unanswered Questions",
+			"Quest(46340) AS The Gates Are Closed",
+			"Quest(45862) AS A Gift From the Six (Sigryn)",
+			
+			-- Destruction
+			"Quest(47031) OR Quest(45560) AS Legion Threat: Highmountain",
+			"Quest(45560) AS Destruction: Rumblings Near Feltotem",
+			"Quest(45564) AS The Burning Birds",
+			"Quest(45726) AS The Tainted Marsh",
+			"Quest(45575) AS Village of the Corruptors",
+			"Quest(45587) AS The Feltotem Menace",
+			"Quest(45796) AS Destroying the Nest",
+			"Quest(45842) AS A Gift From the Six (Tugar)",
+			
+			-- Affliction
+			"Quest(47034) OR Quest(47041) AS Legion Threat: The Necromancer",
+			"Quest(47041) AS Affliction: The Twisted Twin",
+			"Quest(45185) AS Message from the Shadows",
+			"Quest(45187) AS Secrets in the Underbelly",
+			"Quest(45188) AS The Wisdom of the Council",
+			"Quest(45190) AS Where it's Thinnest",
+			"Quest(45192) AS Runes of Rending",
+			"Quest(45193) AS One Step Behind",			
+			"Quest(45866) AS A Gift From the Six (Raest)",
+			
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_SHAMAN = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(SHAMAN)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_SHAMAN\")",
+		Objectives = {
+		
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+			
+			-- Enhancement
+			"Quest(47033) OR Quest(47050) AS Legion Threat: Suramar",
+			"Quest(47050) AS Enhancement: Fate of the Tideskorn",
+			"Quest(45486) AS The Reluctant Queen",
+			"Quest(45522) AS To Silence the Bonespeakers",
+			"Quest(45523) AS To Tame the Drekirjar",
+			"Quest(45524) AS The Forgotten Heir",
+			"Quest(45525) AS Unanswered Questions",
+			"Quest(46340) AS The Gates Are Closed",
+			"Quest(45862) AS A Gift From the Six (Sigryn)",
+			
+			-- Restoration
+			"Quest(47027) OR Quest(47003) AS Legion Threat: Val'sharah",
+			"Quest(47003) AS Restoration: The Bradensbrook Investigation",
+			"Quest(46079) AS Aid on the Front Lines",
+			"Quest(46080) AS Quieting the Spirits",
+			"Quest(46082) AS Shadowsong's Return",
+			"Quest(46106) AS Cutting off the Heads",
+			"Quest(46107) AS Source of the Corruption",
+			"Quest(46200) AS The Matter Resolved... For Now...",
+			"Quest(45864) AS A Gift From the Six (Erdris)",
+			
+			-- Elemental
+			"Quest(47035) OR Quest(45123) AS Legion Threat: The Missing Mage",			
+			"Quest(45123) AS Elemental: The Folly of Levia Laurence",
+			"Quest(45916) AS The Acolyte Imperiled",
+			"Quest(45917) AS Following the Scent",
+			"Quest(45125) AS Dabbling in the Demonic",
+			"Quest(45126) AS Unlikely Seduction",		
+			"Quest(45127) AS Fel-Crossed Lovers",
+			"Quest(45861) AS A Gift From the Six (Agatha)",	
+			
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_HUNTER = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(HUNTER)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_HUNTER\")",
+		Objectives = {
+
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+
+			-- Survival
+			"Quest(47032) OR Quest(47047) AS Legion Threat: Azshara",			
+			"Quest(47047) AS Survival: The Thieving Apprentice",
+			"Quest(44915) AS Professionally Good Looking",
+			"Quest(44920) AS Order of Incantations",
+			"Quest(44924) AS The Archmage Accosted",
+			"Quest(45865) AS A Gift From the Six (Xylem)",
+			
+			-- Beast Mastery
+			"Quest(47031) OR Quest(47018) AS Legion Threat: Highmountain",
+			"Quest(47018) AS Beast Mastery: Rumblings Near Feltotem",
+			"Quest(45564) AS The Burning Birds",
+			"Quest(45726) AS The Tainted Marsh",
+			"Quest(45575) AS Village of the Corruptors",
+			"Quest(45587) AS The Feltotem Menace",
+			"Quest(45796) AS Destroying the Nest",
+			"Quest(45842) AS A Gift From the Six (Tugar)",
+			
+			-- Marksmanship
+			"Quest(47034) OR Quest(47039) AS Legion Threat: The Necromancer",
+			"Quest(47039) AS Marksmanship: The Twisted Twin",
+			"Quest(45185) AS Message from the Shadows",
+			"Quest(45187) AS Secrets in the Underbelly",
+			"Quest(45188) AS The Wisdom of the Council",
+			"Quest(45190) AS Where it's Thinnest",
+			"Quest(45192) AS Runes of Rending",
+			"Quest(45193) AS One Step Behind",			
+			"Quest(45866) AS A Gift From the Six (Raest)",
+			
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_DEMONHUNTER = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(DEMONHUNTER)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_DEMONHUNTER\")",
+		Objectives = {
+		
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+			
+			-- Havoc
+			"Quest(47032) OR Quest(47043) AS Legion Threat: Azshara",			
+			"Quest(47043) AS Havoc: The Thieving Apprentice",
+			"Quest(44915) AS Professionally Good Looking",
+			"Quest(44920) AS Order of Incantations",
+			"Quest(44924) AS The Archmage Accosted",
+			"Quest(45865) AS A Gift From the Six (Xylem)",
+			
+			-- Vengeance
+			"Quest(47030) OR Quest(46314) AS Legion Threat: Dalaran Infiltration",
+			"Quest(46314) AS Vengeance: Seeking Kor'vas",
+			"Quest(45413) AS Gathering Information",
+			"Quest(45414) AS Confirming Suspicions",
+			"Quest(45415) AS Between Worlds",				
+			"Quest(45863) AS A Gift From the Six (Kruul)",
+			
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_WARRIOR = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(WARRIOR)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_WARRIOR\")",
+		Objectives = {
+		
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+
+			-- Arms
+			"Quest(47032) OR Quest(44914) AS Legion Threat: Azshara",			
+			"Quest(44914) AS Arms: The Thieving Apprentice",
+			"Quest(44915) AS Professionally Good Looking",
+			"Quest(44920) AS Order of Incantations",
+			"Quest(44924) AS The Archmage Accosted",
+			"Quest(45865) AS A Gift From the Six (Xylem)",
+			
+			-- Protection
+			"Quest(47030) OR Quest(45412) AS Legion Threat: Dalaran Infiltration",			
+			"Quest(45412) AS Protection: Aid of the Illidari",
+			"Quest(45413) AS Gathering Information",
+			"Quest(45414) AS Confirming Suspicions",
+			"Quest(45415) AS Between Worlds",		
+			"Quest(45863) AS A Gift From the Six (Kruul)",
+			
+			-- Fury
+			"Quest(47035) OR Quest(47056) AS Legion Threat: The Missing Mage",
+			"Quest(47056) AS Fury: The Folly of Levia Laurence",
+			"Quest(45916) AS The Acolyte Imperiled",
+			"Quest(45917) AS Following the Scent",
+			"Quest(45125) AS Dabbling in the Demonic",
+			"Quest(45126) AS Unlikely Seduction",			
+			"Quest(45127) AS Fel-Crossed Lovers",
+			"Quest(45861) AS A Gift From the Six (Agatha)",
+			
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_DEATHKNIGHT = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(DEATHKNIGHT)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_DEATHKNIGHT\")",
+		Objectives = {
+		
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+
+			-- Frost
+			"Quest(47032) OR Quest(47046) AS Legion Threat: Azshara",			
+			"Quest(47046) AS Frost: The Thieving Apprentice",
+			"Quest(44915) AS Professionally Good Looking",
+			"Quest(44920) AS Order of Incantations",
+			"Quest(44924) AS The Archmage Accosted",
+			"Quest(45865) AS A Gift From the Six (Xylem)",
+			
+			-- Blood
+			"Quest(47030) OR Quest(47025) AS Legion Threat: Dalaran Infiltration",			
+			"Quest(47025) AS Blood: Aid of the Illidari",
+			"Quest(45413) AS Gathering Information",
+			"Quest(45414) AS Confirming Suspicions",
+			"Quest(45415) AS Between Worlds",
+			"Quest(45863) AS A Gift From the Six (Kruul)",
+			
+			-- Unholy
+			"Quest(47035) OR Quest(47057) AS Legion Threat: The Missing Mage",
+			"Quest(47057) AS Unholy: The Folly of Levia Laurence",
+			"Quest(45916) AS The Acolyte Imperiled",
+			"Quest(45917) AS Following the Scent",
+			"Quest(45125) AS Dabbling in the Demonic",
+			"Quest(45126) AS Unlikely Seduction",			
+			"Quest(45127) AS Fel-Crossed Lovers",
+			"Quest(45861) AS A Gift From the Six (Agatha)",		
+			
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_DRUID = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(DRUID)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_DRUID\")",
+		Objectives = {
+		
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+			
+			-- Guardian
+			"Quest(47030) OR Quest(47023) AS Legion Threat: Dalaran Infiltration",			
+			"Quest(47023) AS Guardian: Aid of the Illidari",
+			"Quest(45413) AS Gathering Information",
+			"Quest(45414) AS Confirming Suspicions",
+			"Quest(45415) AS Between Worlds",
+			"Quest(45863) AS A Gift From the Six (Kruul)",
+			
+			-- Restoration
+			"Quest(47027) OR Quest(47004) AS Legion Threat: Val'sharah",
+			"Quest(47004) AS Restoration: The Bradensbrook Investigation",
+			"Quest(46079) AS Aid on the Front Lines",
+			"Quest(46080) AS Quieting the Spirits",
+			"Quest(46082) AS Shadowsong's Return",
+			"Quest(46106) AS Cutting off the Heads",
+			"Quest(46107) AS Source of the Corruption",
+			"Quest(46200) AS The Matter Resolved... For Now...",
+			"Quest(45864) AS A Gift From the Six (Erdris)",
+			
+			-- Feral
+			"Quest(47035) OR Quest(47059) AS Legion Threat: The Missing Mage",
+			"Quest(47059) AS Feral: The Folly of Levia Laurence",
+			"Quest(45916) AS The Acolyte Imperiled",
+			"Quest(45917) AS Following the Scent",
+			"Quest(45125) AS Dabbling in the Demonic",
+			"Quest(45126) AS Unlikely Seduction",
+			"Quest(45127) AS Fel-Crossed Lovers",
+			"Quest(45861) AS A Gift From the Six (Agatha)",		
+			
+			-- Balance
+			"Quest(47034) OR Quest(47037) AS Legion Threat: The Necromancer",
+			"Quest(47037) AS Balance: The Twisted Twin",
+			"Quest(45185) AS Message from the Shadows",
+			"Quest(45187) AS Secrets in the Underbelly",
+			"Quest(45188) AS The Wisdom of the Council",
+			"Quest(45190) AS Where it's Thinnest",
+			"Quest(45192) AS Runes of Rending",
+			"Quest(45193) AS One Step Behind",					
+			"Quest(45866) AS A Gift From the Six (Raest)",	
+			
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_MONK = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(MONK)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_MONK\")",
+		Objectives = {
+		
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+			
+			-- Brewmaster
+			"Quest(47030) OR Quest(47024) AS Legion Threat: Dalaran Infiltration",			
+			"Quest(47024) AS Brewmaster: Aid of the Illidari",
+			"Quest(45413) AS Gathering Information",
+			"Quest(45414) AS Confirming Suspicions",
+			"Quest(45415) AS Between Worlds",
+			"Quest(45863) AS A Gift From the Six (Kruul)",
+			
+			-- Mistweaver
+			"Quest(47027) OR Quest(47005) AS Legion Threat: Val'sharah",
+			"Quest(47005) AS Mistweaver: The Bradensbrook Investigation",
+			"Quest(46079) AS Aid on the Front Lines",
+			"Quest(46080) AS Quieting the Spirits",
+			"Quest(46082) AS Shadowsong's Return",
+			"Quest(46106) AS Cutting off the Heads",
+			"Quest(46107) AS Source of the Corruption",
+			"Quest(46200) AS The Matter Resolved... For Now...",
+			"Quest(45864) AS A Gift From the Six (Erdris)",
+			
+			-- Windwalker
+			"Quest(47031) OR Quest(47019) AS Legion Threat: Highmountain",
+			"Quest(47019) AS Windwalker: Rumblings Near Feltotem",
+			"Quest(45564) AS The Burning Birds",
+			"Quest(45726) AS The Tainted Marsh",
+			"Quest(45575) AS Village of the Corruptors",
+			"Quest(45587) AS The Feltotem Menace",
+			"Quest(45796) AS Destroying the Nest",			
+			"Quest(45842) AS A Gift From the Six (Tugar)",
+			
+		},
+	},
+
+	MILESTONE_LEGION_EMPOWEREDTRAITS_PRIEST = {
+		name = "Broken Shore: Artifact Empowerment",
+		iconPath = "inv_misc_scrollrolled02d",
+		Filter = "Level() < 110 OR NOT Quest(46734) OR NOT Class(PRIEST)", -- Assault on Broken Shore
+		Criteria = "Objectives(\"MILESTONE_LEGION_EMPOWEREDTRAITS_PRIEST\")",
+		Objectives = {
+
+			-- Intro
+			"Quest(46744) OR Quest(46765) AS Greater Power for Greater Threats",
+			"Quest(46765) AS Broken Shore: Investigating the Legion",
+			"Quest(47000) AS The Council's Call",
+			"Quest(44782) AS Away From Prying Eyes",
+			"Quest(44821) AS In Dire Need",
+			
+			-- Holy
+			"Quest(47027) OR Quest(46078) AS Legion Threat: Val'sharah",
+			"Quest(46078) AS Holy: The Bradensbrook Investigation",
+			"Quest(46079) AS Aid on the Front Lines",
+			"Quest(46080) AS Quieting the Spirits",
+			"Quest(46082) AS Shadowsong's Return",
+			"Quest(46106) AS Cutting off the Heads",
+			"Quest(46107) AS Source of the Corruption",
+			"Quest(46200) AS The Matter Resolved... For Now...",
+			"Quest(45864) AS A Gift From the Six (Erdris)",
+			
+			-- Discipline
+			"Quest(47031) OR Quest(47020) AS Legion Threat: Highmountain",
+			"Quest(47020) AS Discipline: Rumblings Near Feltotem",
+			"Quest(45564) AS The Burning Birds",
+			"Quest(45726) AS The Tainted Marsh",
+			"Quest(45575) AS Village of the Corruptors",
+			"Quest(45587) AS The Feltotem Menace",
+			"Quest(45796) AS Destroying the Nest",
+			"Quest(45842) AS A Gift From the Six (Tugar)",
+			
+			-- Shadow
+			"Quest(47034) OR Quest(47042) AS Legion Threat: The Necromancer",
+			"Quest(47042) AS Shadow: The Twisted Twin",
+			"Quest(45185) AS Message from the Shadows",
+			"Quest(45187) AS Secrets in the Underbelly",
+			"Quest(45188) AS The Wisdom of the Council",
+			"Quest(45190) AS Where it's Thinnest",
+			"Quest(45192) AS Runes of Rending",
+			"Quest(45193) AS One Step Behind",		
+			"Quest(45866) AS A Gift From the Six (Raest)",
+			
+		},
+	},	
 	
 	MILESTONE_LEGION_MAGETOWERCHALLENGES_PALADIN = {
 		name = "Fighting with Style: Challenging",
