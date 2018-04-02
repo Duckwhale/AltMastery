@@ -4457,6 +4457,21 @@ local defaultTasks = {
 		}
 	},
 	
+	POI_LEGION_ARGUS_INVASIONS = {
+		name = "Invasion Points cleared",
+		iconPath = "spell_warlock_demonwrath",
+		Criteria = "Objectives(\"POI_LEGION_ARGUS_INVASIONS\")",
+		Filter = "Level() < 110 OR NOT Quest(48440) OR (Quest(49293) AND Quest(48799))", -- Filter if Argus Campaign was not started (arrival on Argus), or if both VA weekly quest were already completed
+		Objectives = {
+			" NOT (WorldMapPOI(INVASION_POINT_SANGUA_1) AND WorldMapPOI(INVASION_POINT_SANGUA_2)) AND AS Invasion Point: Sangua",
+			" NOT (WorldMapPOI(INVASION_POINT_AURINOR_1) AND WorldMapPOI(INVASION_POINT_AURINOR_2)) AS Invasion Point: Aurinor",
+			" NOT (WorldMapPOI(INVASION_POINT_NAIGTAL_1) AND WorldMapPOI(INVASION_POINT_NAIGTAL_2)) AS Invasion Point: Naigtal",
+			" NOT (WorldMapPOI(INVASION_POINT_VAL_1) AND WorldMapPOI(INVASION_POINT_VAL_2)) AS Invasion Point: Val",
+			" NOT (WorldMapPOI(INVASION_POINT_CENGAR_1) AND WorldMapPOI(INVASION_POINT_CENGAR_1)) AS Invasion Point: Cen'gar",
+			" NOT (WorldMapPOI(INVASION_POINT_BONICH_1) AND WorldMapPOI(INVASION_POINT_BONICH_2)) AS Invasion Point: Bonich",
+		},
+	},
+	
 	
 	WEEKLY_LEGION_MYTHICPLUS_CHEST = {
 		name = "Mythic Keystone Weekly Reward",
