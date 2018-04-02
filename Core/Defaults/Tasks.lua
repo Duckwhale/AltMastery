@@ -4236,6 +4236,10 @@ local defaultTasks = {
 		iconPath = "inv_hand_1h_artifactstormfist_d_06",
 		Criteria = "Quest(43673)",
 		Filter = "Level() < 110 OR NOT Class(SHAMAN)", 
+		Objectives = {
+			"InventoryItem(139572) OR Quest(43673) AS Lost Codex of the Amani obtained",
+			"Quest(43673) AS Appearance: Prestige of the Amani unlocked",
+		},
 	},
 	
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_SHAMAN_ENHANCEMENT = {
@@ -4244,6 +4248,10 @@ local defaultTasks = {
 		iconPath = "inv_mace_1h_artifactdoomhammer_d_06",
 		Criteria = "Quest(43674)",
 		Filter = "Level() < 110 OR NOT Class(SHAMAN)",
+		Objectives = {
+			"InventoryItem(139573) OR Quest(43674) AS The Warmace of Shirvallah obtained",
+			"Quest(43674) AS Appearance: Zandalar Champion unlocked",
+		},
 	},
 	
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_SHAMAN_RESTORATION = {
@@ -4252,6 +4260,10 @@ local defaultTasks = {
 		iconPath = "inv_mace_1h_artifactazshara_d_06",
 		Criteria = "Quest(43675)",
 		Filter = "Level() < 110 OR NOT Class(SHAMAN)",
+		Objectives = {
+			"InventoryItem(139574) OR Quest(43675) AS Coil of the Drowned Queen obtained",
+			"Quest(43675) AS Appearance: Serpent's Coil unlocked",
+		},
 	},
 	
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DEATHKNIGHT_BLOOD = {
@@ -4263,7 +4275,8 @@ local defaultTasks = {
 		Objectives = {
 			"Quest(44636) AS Building an Army (Suramar)",
 			"Quest(43943) AS Withered Army Training (Scenario)",
-			"Quest(43646) AS Obtained the Twisting Anima of Souls",
+			"InventoryItem(139546) OR Quest(43646) AS Twisting Anima of Souls obtained",
+			"Quest(43646) AS Appearance: Touch of Undeath unlocked",
 		},
 	},
 
@@ -4273,6 +4286,10 @@ local defaultTasks = {
 		iconPath = "inv_offhand_1h_deathwingraid_d_01",
 		Criteria = "Quest(43647)",
 		Filter = "Level() < 110 OR NOT Class(DEATHKNIGHT)",
+		Objectives = {
+			"InventoryItem(139547) OR Quest(43647) AS Runes of the Darkening obtained",
+			"Quest(43647) AS Appearance: Dark Runeblade unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DEATHKNIGHT_UNHOLY = {
@@ -4283,7 +4300,8 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR NOT Class(DEATHKNIGHT)",
 		Objectives = {
 			"Quest(44188) AS Army of the Dead spawned",
-			"Quest(43648) AS Bonereaper's Hook obtained (from Stitchwork)",
+			"InventoryItem(139548) OR Quest(43648) AS The Bonereaper's Hook obtained",
+			"Quest(43648) AS Appearance: Bone Reaper unlocked",
 		},
 	},
 	
@@ -4293,6 +4311,10 @@ local defaultTasks = {
 		iconPath = "inv_glaive_1h_artifactazgalor_d_06",
 		Criteria = "Quest(43649)",
 		Filter = "Level() < 110 OR NOT Class(DEMONHUNTER)",
+		Objectives = {
+			"InventoryItem(139549) OR Quest(43649) AS Guise of the Deathwalker obtained",
+			"Quest(43649) AS Appearance: Deathwalker unlocked",		
+		},
 	},
 	
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DEMONHUNTER_VENGEANCE = {
@@ -4301,6 +4323,10 @@ local defaultTasks = {
 		iconPath = "inv_glaive_1h_artifactaldrochi_d_05",
 		Criteria = "Quest(43650)",
 		Filter = "Level() < 110 OR NOT Class(DEMONHUNTER)",
+		Objectives = {
+			"InventoryItem(139550) OR Quest(43650) AS Bulwark of the Iron Warden obtained",
+			"Quest(43650) AS Appearance: Iron Warden unlocked",
+		},
 	},
 	
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DRUID_BALANCE = {
@@ -4313,7 +4339,8 @@ local defaultTasks = {
 			"Reputation(DREAMWEAVERS) >= EXALTED AS The Dreamweavers: Exalted",
 			"InventoryItem(140652) OR InventoryItem(140652) OR Quest(43651) AS Seed of Solar Fire",
 			"InventoryItem(140653) OR InventoryItem(140652) OR Quest(43651) AS Pure Drop of Shaladrassil's Sap",
-			"Quest(43651) AS The Sunbloom",
+			"InventoryItem(139551) OR Quest(43651) AS The Sunbloom obtained",
+			"Quest(43651) AS Appearance: Sunkeeper's Reach unlocked",
 		},
 	},
 
@@ -4330,7 +4357,8 @@ local defaultTasks = {
 			"Quest(44332) AS Hinterlands Stone: Touched",
 			"Quest(44329) AS Duskwood Stone: Active",
 			"Quest(44330) AS Duskwood Stone: Touched",
-			"Quest(43652) AS Feather of the Moonspirit",
+			"InventoryItem(139552) OR Quest(43652) AS Feather of the Moonspirit obtained",
+			"Quest(43652) AS Appearance: Moonspirit unlocked",
 		},
 	},
 
@@ -4340,6 +4368,10 @@ local defaultTasks = {
 		iconPath = "ability_druid_markofursol",
 		Criteria = "Quest(43653)",
 		Filter = "Level() < 110 OR NOT Class(DRUID)",
+		Objectives = {
+			"InventoryItem(139553) OR Quest(43653) AS Mark of the Glade Guardian obtained",
+			"Quest(43653) AS Appearance: Guardian of the Glade unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_DRUID_RESTORATION = {
@@ -4348,6 +4380,10 @@ local defaultTasks = {
 		iconPath = "inv_farm_enchantedseed",
 		Criteria = "Quest(43654)",
 		Filter = "Level() < 110 OR NOT Class(DRUID)",
+		Objectives = {
+			"InventoryItem(139554) OR Quest(43654) AS ccccccccccccccccc obtained",
+			"Quest(43654) AS Appearance: Warden's Crown unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_HUNTER_BEASTMASTERY = {
@@ -4356,6 +4392,10 @@ local defaultTasks = {
 		iconPath = "inv_engineering_blingtronscircuitdesigntutorial",
 		Criteria = "Quest(43655)",
 		Filter = "Level() < 110 OR NOT Class(HUNTER)",
+		Objectives = {
+			"InventoryItem(139555) OR Quest(43655) AS Designs of the Grand Architect obtained",
+			"Quest(43655) AS Appearance: Titan's Reach unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_HUNTER_MARKSMANSHIP = {
@@ -4364,6 +4404,11 @@ local defaultTasks = {
 		iconPath = "inv_bow_2h_crossbow_artifactwindrunner_d_05",
 		Criteria = "Quest(43656)",
 		Filter = "Level() < 110 OR NOT Class(HUNTER)",
+		Objectives = {
+			"Reputation(COURT_OF_FARONDIS) >= REVERED AS Court of Farondis: Revered",
+			"InventoryItem(139556) OR Quest(43656) AS Syriel Crescentfall's Notes: Ravenguard obtained",
+			"Quest(43656) AS Appearance: Ravenguard unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_HUNTER_SURVIVAL = {
@@ -4372,6 +4417,10 @@ local defaultTasks = {
 		iconPath = "inv_polearm_2h_artifacteagle_d_05",
 		Criteria = "Quest(43657)",
 		Filter = "Level() < 110 OR NOT Class(HUNTER)",
+		Objectives = {
+			"InventoryItem(139557) OR Quest(43657) AS Last Breath of the Forest obtained",
+			"Quest(43657) AS Appearance: Bear's Fortitude unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_MAGE_ARCANE = {
@@ -4391,7 +4440,7 @@ local defaultTasks = {
 			"Quest(43800) AS Extremely Volatile Stormheim Sheep detonated",
 			--"Quest(aaaaa) AS Event: Tower of Azora (Elwynn Forest)", -- TODO: I don't think there's actually a quest for this
 			"InventoryItem(139558) OR Quest(43658) AS The Woolomancer's Charge obtained",
-			"Quest(43658) AS Woolomancer's Charge unlocked",
+			"Quest(43658) AS Appearance: Woolomancer's Charge unlocked",
 		},
 	},
 
@@ -4401,6 +4450,10 @@ local defaultTasks = {
 		iconPath = "inv_sword_1h_artifactfelomelorn_d_06",
 		Criteria = "Quest(43659)",
 		Filter = "Level() < 110 OR NOT Class(MAGE)",
+		Objectives = {
+			"InventoryItem(139559) OR Quest(43659) AS The Stars' Design obtained",
+			"Quest(43659) AS Appearance: Star's Design unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_MAGE_FROST = {
@@ -4413,8 +4466,8 @@ local defaultTasks = {
 			"Quest(44384) AS Daily Portal Roll completed",
 			-- "Quest(aaaaaa) AS Used portal to Frostfire Ridge", -- TODO
 			-- "Quest(aaaaaa) AS Everburning Crystal looted", -- TODO
-			"Quest(43660) AS Everburning Crystal used",
-			
+			"InventoryItem(139560) OR Quest(43660) AS Everburning Crystal obtained",
+			"Quest(43660) AS Appearance: Frostfire Remembrance unlocked",			
 		},
 	},
 	
@@ -4424,6 +4477,10 @@ local defaultTasks = {
 		iconPath = "inv_staff_2h_artifactmonkeyking_d_06",
 		Criteria = "Quest(43661)",
 		Filter = "Level() < 110 OR NOT Class(MONK)",
+		Objectives = {
+			"InventoryItem(139561) OR Quest(43661) AS Legend of the Monkey King obtained",
+			"Quest(43661) AS Appearance: Ancient Brewkeeper unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_MONK_MISTWEAVER = {
@@ -4432,6 +4489,10 @@ local defaultTasks = {
 		iconPath = "inv_misc_head_dragon_black_nightmare",
 		Criteria = "Quest(43662)",
 		Filter = "Level() < 110 OR NOT Class(MONK)",
+		Objectives = {
+			"InventoryItem(139562) OR Quest(43662) AS Breath of the Undying Serpent obtained",
+			"Quest(43662) AS Appearance: Breath of the Undying Serpent unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_MONK_WINDWALKER = {
@@ -4440,6 +4501,10 @@ local defaultTasks = {
 		iconPath = "inv_hand_1h_artifactskywall_d_05",
 		Criteria = "Quest(43663)",
 		Filter = "Level() < 110 OR NOT Class(MONK)",
+		Objectives = {
+			"InventoryItem(139563) OR Quest(43663) AS The Stormfist obtained",
+			"Quest(43663) AS Appearance: Stormfist unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_PALADIN_HOLY = {
@@ -4448,6 +4513,10 @@ local defaultTasks = {
 		iconPath = "inv_shield_2h_artifactsilverhand_d_06",
 		Criteria = "Quest(43664)",
 		Filter = "Level() < 110 OR NOT Class(PALADIN)",
+		Objectives = {
+			"InventoryItem(139564) OR Quest(43664) AS Lost Edicts of the Watcher obtained",
+			"Quest(43664) AS Appearance: Watcher's Armament unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_PALADIN_PROTECTION = {
@@ -4456,6 +4525,10 @@ local defaultTasks = {
 		iconPath = "inv_shield_1h_artifactnorgannon_d_05",
 		Criteria = "Quest(43665)",
 		Filter = "Level() < 110 OR NOT Class(PALADIN)",
+		Objectives = {
+			"InventoryItem(139565) OR Quest(43665) AS Spark of the Fallen Exarch obtained",
+			"Quest(43665) AS Appearance: Vindicator's Bulwark unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_PALADIN_RETRIBUTION = {
@@ -4478,7 +4551,7 @@ local defaultTasks = {
 			"Quest(43688) AS Talked to Lord Maxwell Tyrosus",
 			"Quest(43687) AS Walking in Shadows (Acherus: The Ebon Hold)",
 			"InventoryItem(139566) OR Quest(43666) AS Heart of Corruption obtained",
-			"Quest(43666) AS Corrupted Remembrance unlocked",
+			"Quest(43666) AS Appearance: Corrupted Remembrance unlocked",
 		},
 	},
 	
@@ -4502,7 +4575,7 @@ local defaultTasks = {
 			"Quest(44349) AS Karazhan - Guardian's Library - Dungeon",
 			"Quest(44350) AS Stormheim - Inquisitor Ernstonbok - Rare",
 			"InventoryItem(139567) OR Quest(43667) AS The Annals of Light and Shadow combined",
-			"Quest(43667) AS Tomekeeper's Spire unlocked",
+			"Quest(43667) AS Appearance: Tomekeeper's Spire unlocked",
 		},
 	},
 
@@ -4517,7 +4590,7 @@ local defaultTasks = {
 			"Reputation(THE_VALARJAR) >= EXALTED AS The Valarjar: Exalted",
 			"InventoryItem(140656) OR InventoryItem(139568) OR Quest(43668) AS Rod of the Ascended obtained",
 			"InventoryItem(139568) OR Quest(43668) AS Staff of the Lightborn obtained",
-			"Quest(43668) AS Staff of the Lightborn used",
+			"Quest(43668) AS Appearance: Crest of the Lightborn unlocked",
 		},
 	},
 
@@ -4527,6 +4600,10 @@ local defaultTasks = {
 		iconPath = "inv_knife_1h_artifactcthun_d_06",
 		Criteria = "Quest(43669)",
 		Filter = "Level() < 110 OR NOT Class(PRIEST)",
+		Objectives = {
+			"InventoryItem(139569) OR Quest(43669) AS Claw of N'Zoth obtained",
+			"Quest(43669) AS Appearance: Claw of N'Zoth unlocked",
+		},
 	},
 
 	
@@ -4536,6 +4613,10 @@ local defaultTasks = {
 		iconPath = "inv_knife_1h_artifactgarona_d_05",
 		Criteria = "Quest(43670)",
 		Filter = "Level() < 110 OR NOT Class(ROGUE)",
+		Objectives = {
+			"InventoryItem(Claw of N'Zoth) OR Quest(43670) AS The Cypher of Broken Bone obtained",
+			"Quest(43670) AS Appearance: Bonebreaker unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_ROGUE_OUTLAW = {
@@ -4547,8 +4628,8 @@ local defaultTasks = {
 		Objectives = {
 			"InventoryItem(139468) OR Quest(43671) AS Right half of the Bindings of the Windlord obtained (Ash'golm)",
 			"InventoryItem(139466) OR Quest(43671) AS Left half of the Bindings of the Windlord  obtained (Dargrul)",
-			"InventoryItem(139536) OR Quest(43671) AS Both halves combined",
-			"Quest(43671) AS Emanation of the Winds used",
+			"InventoryItem(139536) OR Quest(43671) AS Emanation of the Winds obtained",
+			"Quest(43671) AS Appearance: Thunderflurry, Hallowed Blade of the Windlord unlocked",
 		},
 	},
 
@@ -4558,6 +4639,10 @@ local defaultTasks = {
 		iconPath = "inv_knife_1h_artifactfangs_d_06",
 		Criteria = "Quest(43672)",
 		Filter = "Level() < 110 OR NOT Class(ROGUE)",
+		Objectives = {
+			"InventoryItem(139571) OR Quest(43672) AS Tome of Otherworldly Venoms obtained",
+			"Quest(43672) AS Appearance: Venombite unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_WARLOCK_AFFLICTION = {
@@ -4571,7 +4656,7 @@ local defaultTasks = {
 			"Quest(44083) AS The Grimoire of the First Necrolyte",
 			"Quest(44153) AS The Rite of the Executioner",
 			"InventoryItem(139575) OR Quest(43676) AS Essence of the Executioner obtained",
-			"Quest(43676) AS Essence of the Executioner used",
+			"Quest(43676) AS Appearance: Fate's End unlocked",
 		},
 	},
 
@@ -4588,7 +4673,7 @@ local defaultTasks = {
 			"Quest(44096) AS Deficient Eredar Head looted",
 			"Quest(44097) AS Nearly Satisfactory Eredar Head looted",
 			"InventoryItem(139576) OR Quest(43677) AS Visage of the First Wakener obtained",
-			"Quest(43677) AS Visage of the First Wakener used",
+			"Quest(43677) AS Appearance: Thal'kiel's Visage unlocked",
 		},
 	},
 
@@ -4598,6 +4683,10 @@ local defaultTasks = {
 		iconPath = "inv_staff_2h_artifactsargeras_d_05",
 		Criteria = "Quest(43678)",
 		Filter = "Level() < 110 OR NOT Class(WARLOCK)",
+		Objectives = {
+			"InventoryItem(139577) OR Quest(43678) AS The Burning Jewel of Sargeras obtained",
+			"Quest(43678) AS Appearance: Legionterror unlocked",
+		},
 	},
 
 	MILESTONE_LEGION_HIDDENARTIFACTSKIN_WARRIOR_ARMS = {
@@ -4610,6 +4699,7 @@ local defaultTasks = {
 			"Quest(43643) AS Secrets of the Axes",
 			"InventoryItem(139578) OR Quest(43679) AS The Arcanite Bladebreaker obtained",
 			"Quest(43679) AS Arcanite Bladebreaker unlocked",
+			"Quest(43679) AS Appearance: Arcanite Bladebreaker unlocked",
 		},
 	},
 
@@ -4625,7 +4715,7 @@ local defaultTasks = {
 			"InventoryItem(140659) OR InventoryItem(139579) OR Quest(43680) AS Skull of Shar'thos obtained",
 			"InventoryItem(140658) OR InventoryItem(139579) OR Quest(43680) AS Skull of Nithogg obtained",
 			"InventoryItem(139579) OR Quest(43680) AS The Dragonslayers obtained",
-			"Quest(43680) AS Dragonslayer's Edge unlocked",
+			"Quest(43680) AS Appearance: Dragonslayer's Edge unlocked",
 		},
 	},
 
@@ -4639,7 +4729,7 @@ local defaultTasks = {
 			"Quest(44311) AS Burning Plate of the Worldbreaker Available", -- This "Event" quest is required for the appearance to be lootable... I think
 			"Quest(44312) AS Burning Plate of the Worldbreaker Denied", -- Daily quest that can also trigger if the roll failed and it isn't available, after all (RNG)
 			"InventoryItem(139580) OR Quest(43681) AS Burning Plate of the Worldbreaker obtained",
-			"Quest(43681) AS Last Breath of the Worldbreaker unlocked",
+			"Quest(43681) AS Appearance: Last Breath of the Worldbreaker unlocked",
 		},
 	},
 
