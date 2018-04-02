@@ -4851,6 +4851,13 @@ local defaultTasks = {
 		Filter = "Level() < 110 OR Reputation(ARMIES_OF_LEGIONFALL) < EXALTED",
 	},
 
+	WQ_LEGION_PARAGONREWARD_THEWARDENS = {
+		name = "Supplies From the Wardens",
+		iconPath = "inv_legion_chest_warden",
+		Criteria = " NOT ParagonReward(THE_WARDENS)",
+		Filter = "Level() < 110 OR Reputation(THE_WARDENS) < EXALTED",
+	},
+
 	MILESTONE_LEGION_ACCOUNTWIDE_RIDDLERSMOUNT = {
 		name = "Riddler's Mind-Worm",
 		iconPath = "inv_serpentmount_darkblue",
