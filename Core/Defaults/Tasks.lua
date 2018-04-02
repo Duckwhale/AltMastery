@@ -552,20 +552,87 @@ local defaultTasks = {
 			Filter = "Level() < 60 OR NOT WorldEvent(DARKMOON_FAIRE)", -- Doesn't drop anything but junk below level 60, apparently
 		},
 		
-		WEEKLY_LEGION_GREATERINVASIONPOINT = {
-			name = "Greater Invasion Point cleared",
-			description = "Defeat the Legion General by completing the Greater Invasion Point scenario available for the week",
-			notes = "Gear and Veiled Argunite",
+		-- TODO: Remove with next cleanup
+		-- WEEKLY_LEGION_GREATERINVASIONPOINT = {
+			-- name = "Greater Invasion Point cleared",
+			-- description = "Defeat the Legion General by completing the Greater Invasion Point scenario available for the week",
+			-- notes = "Gear and Veiled Argunite",
+			-- iconPath = "inv_artifact_dimensionalrift",
+			-- Criteria = "NumObjectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT\") > 0",
+			-- Filter = "Level() < 110",
+			-- Objectives = {
+				-- "Quest(49166) AS Inquisitor Meto defeated",
+				-- "Quest(49167) AS Mistress Alluradel defeated",
+				-- "Quest(49168) AS Pit Lord Vilemus defeated",
+				-- "Quest(49169) AS Matron Folnuna defeated",
+				-- "Quest(49170) AS Occularus defeated",
+				-- "Quest(49171) AS Sotanathor defeated",
+			-- },
+		-- },
+		
+		WEEKLY_LEGION_GREATERINVASIONPOINT_METO = {
+			name = "Greater Invasion Point: Inquisitor Meto",
 			iconPath = "inv_artifact_dimensionalrift",
-			Criteria = "NumObjectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT\") > 0", -- TODO: "Quest(49165) OR Quest(49166) OR Quest(49167) OR Quest(49168) OR Quest(49169) OR Quest(49171)" once all bosses are tested
-			Filter = "Level() < 110",
+			Criteria = "Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_METO\")",
+			Filter = "(Level() < 110) OR NOT (WorldMapPOI(GREATER_INVASION_POINT_METO) AND NOT Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_METO\"))", -- Show only if the boss is available for the week
+			Objectives = {
+				"Quest(49166) AS Inquisitor Meto defeated",
+				"Quest(49172) AS Bonus Roll used",
+			},
+		},
+
+		WEEKLY_LEGION_GREATERINVASIONPOINT_ALLURADEL = {
+			name = "Greater Invasion Point: Mistress Alluradel",
+			iconPath = "inv_artifact_dimensionalrift",
+			Criteria = "Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_ALLURADEL\")",
+			Filter = "(Level() < 110) OR NOT (WorldMapPOI(GREATER_INVASION_POINT_ALLURADEL) AND NOT Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_ALLURADEL\"))", -- Show only if the boss is available for the week
+			Objectives = {
+				"Quest(49167) AS Mistress Alluradel defeated",
+				"Quest(49173) AS Bonus Roll used",
+			},
+		},
+
+		WEEKLY_LEGION_GREATERINVASIONPOINT_VILEMUS = {
+			name = "Greater Invasion Point: Pit Lord Vilemus",
+			iconPath = "inv_artifact_dimensionalrift",
+			Criteria = "Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_VILEMUS\")",
+			Filter = "(Level() < 110) OR NOT (WorldMapPOI(GREATER_INVASION_POINT_VILEMUS) AND NOT Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_VILEMUS\"))", -- Show only if the boss is available for the week
+			Objectives = {
+				"Quest(49168) AS Pit Lord Vilemus defeated",
+				"Quest(49174) AS Bonus Roll used",
+			},
+		},
+
+		WEEKLY_LEGION_GREATERINVASIONPOINT_FOLNUNA = {
+			name = "Greater Invasion Point: Matron Folnuna",
+			iconPath = "inv_artifact_dimensionalrift",
+			Criteria = "Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_FOLNUNA\")",
+			Filter = "(Level() < 110) OR NOT (WorldMapPOI(GREATER_INVASION_POINT_FOLNUNA) AND NOT Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_FOLNUNA\"))", -- Show only if the boss is available for the week
+			Objectives = {
+				"Quest(49169) AS Matron Folnuna defeated",
+				"Quest(49175) AS Bonus Roll used",
+			},
+		},
+	
+		WEEKLY_LEGION_GREATERINVASIONPOINT_OCCULARUS = {
+			name = "Greater Invasion Point: Occularus",
+			iconPath = "inv_artifact_dimensionalrift",
+			Criteria = "Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_OCCULARUS\")",
+			Filter = "(Level() < 110) OR NOT (WorldMapPOI(GREATER_INVASION_POINT_OCCULARUS) AND NOT Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_OCCULARUS\"))", -- Show only if the boss is available for the week
 			Objectives = {
 				"Quest(49170) AS Occularus defeated",
-				"Quest(49166) AS Inquisitor Meto defeated",
-				"Quest(49167) AS Mistress Alluradel defeated",
-				"Quest(49168) AS Pit Lord Vilemus defeated",
-				"Quest(49169) AS Matron Folnuna defeated",
+				"Quest(49176) AS Bonus Roll used",
+			},
+		},
+		
+		WEEKLY_LEGION_GREATERINVASIONPOINT_SOTANATHOR = {
+			name = "Greater Invasion Point: Sotanathor",
+			iconPath = "inv_artifact_dimensionalrift",
+			Criteria = "Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_SOTANATHOR\")",
+			Filter = "(Level() < 110) OR NOT (WorldMapPOI(GREATER_INVASION_POINT_SOTANATHOR) AND NOT Objectives(\"WEEKLY_LEGION_GREATERINVASIONPOINT_SOTANATHOR\"))", -- Show only if the boss is available for the week
+			Objectives = {
 				"Quest(49171) AS Sotanathor defeated",
+				"Quest(47177) AS Bonus Roll used",
 			},
 		},
 
