@@ -4799,7 +4799,7 @@ local defaultTasks = {
 		name = "Supplies From the Argussian Reach",
 		iconPath = "inv_legion_paragoncache_argussianreach",
 		Criteria = " NOT ParagonReward(ARGUSSIAN_REACH)",
-		Filter = "Level() < 110 OR NOT Reputation(ARGUSSIAN_REACH) >= EXALTED",
+		Filter = "Level() < 110 OR Reputation(ARGUSSIAN_REACH) < EXALTED",
 	},
 
 	WQ_LEGION_PARAGONREWARD_ARMYOFTHELIGHT = {
