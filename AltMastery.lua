@@ -72,6 +72,6 @@ function Addon:OnEnable()
 	
 	
 	-- Force calendar update to have at least somewhat accurate data about world events
-	OpenCalendar() -- doesn't actually open the frame, but it does query the server
-	
+	C_Calendar.OpenCalendar() -- doesn't actually open the frame, but it does query the server
+
 end
