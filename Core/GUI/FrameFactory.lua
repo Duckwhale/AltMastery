@@ -174,6 +174,8 @@ local function GetScaleFactor(self)
 
 -- See https://wow.gamepedia.com/UI_Scale for details
 
+	if GetCurrentResolution() == 0 then return 1 end
+
 	local screenResolution = ({GetScreenResolutions()})[GetCurrentResolution()]
 	local screenWidth, screenHeight = strsplit("x", screenResolution)
 	local scale = 768/screenHeight -- This is the scale factor that will scale textures to the native resolution that the client uses internally
