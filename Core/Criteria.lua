@@ -51,7 +51,7 @@ local UnitFactionGroup = UnitFactionGroup
 local UnitLevel = UnitLevel
 
 -- Blizzard Interface functionality (Maybe not the best idea to rely on it, but hey...)
-local C_ChallengeMode = C_ChallengeMode
+local C_MythicPlus = C_MythicPlus
 local C_Garrison = C_Garrison
 local QuestUtils_IsQuestWorldQuest = QuestUtils_IsQuestWorldQuest
 
@@ -719,11 +719,11 @@ local function MythicPlus(typeID) -- TODO: Upvalues
 	end
 
 	if typeID == 1 then -- WEEKLY_BEST
-		C_ChallengeMode.RequestMapInfo()
-		MythicMaps = C_ChallengeMode.GetMapTable()
+		C_MythicPlus.RequestMapInfo()
+		MythicMaps = C_MythicPlus.GetMapTable()
 		local bestlevel = 0
 		for i = 1, #MythicMaps do
-		   local _, _, level = C_ChallengeMode.GetMapPlayerStats(MythicMaps[i]);
+		   local _, _, level = C_MythicPlus.GetMapPlayerStats(MythicMaps[i]);
 		   --     1    lastCompletionMilliseconds    number    
 		   --     2    bestCompletionMilliseconds    number    
 		   --     3    bestLevel    number    
@@ -755,8 +755,8 @@ local isWeeklyRewardAvailable -- Used to cache the result from the last query. T
 -- Returns whether or not the Mythic Plus reward chest for the week is available
 local function MythicPlusWeeklyReward()
 
-	C_ChallengeMode.RequestRewards()
-	isWeeklyRewardAvailable = C_ChallengeMode.IsWeeklyRewardAvailable() -- Will usually update for the next time the status is queried... not ideal, but asynchronous updating is way too complex for this and not really needed (since the state is updated much more than necessary right now)
+	C_MythicPlus.RequestRewards()
+	isWeeklyRewardAvailable = C_MythicPlus.IsWeeklyRewardAvailable() -- Will usually update for the next time the status is queried... not ideal, but asynchronous updating is way too complex for this and not really needed (since the state is updated much more than necessary right now)
 	
 	return isWeeklyRewardAvailable
 	
