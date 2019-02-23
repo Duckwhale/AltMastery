@@ -202,6 +202,15 @@ local bonusRollQuests = {
 		[47864] = true, -- Mark of Honor x 10
 		[47865] = true, -- Mark of Honor x 20		
 	},
+	-- BFA: Seal of Wartorn Fate
+	[7] = {
+		[52834] = true, -- Seal of Wartorn Fate: Gold
+		[52838] = true, -- Seal of Wartorn Fate: Piles of Gold
+		[52837] = true, -- Seal of Wartorn Fate: War Resources	
+		[52840] = true, -- Seal of Wartorn Fate: Stashed War Resources
+		[52835] = true, -- Seal of Wartorn Fate: Marks of Honor
+		[52839] = true, -- Seal of Wartorn Fate: Additional Marks of Honor
+	},
 }
 
 	
