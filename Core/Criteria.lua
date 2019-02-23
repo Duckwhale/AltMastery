@@ -98,17 +98,22 @@ local function Achievement(achievementID)
 	
 end
 
+local CalendarGetDate = C_Calendar.GetDate
+local CalendarGetNumDayEvents = C_Calendar.GetNumDayEvents
+local CalendarGetHolidayInfo = C_Calendar.GetHolidayInfo
 --- Checks whether a given world event (or holiday) is currently active
 local function WorldEvent(textureID)
 	
 	-- Get day of the month for today
-	local day = select(3, CalendarGetDate())
+	local dateInfo = CalendarGetDate()
+	local day = dateInfo.monthDay
 	local monthOffset = 0
 
 	for index = 1, CalendarGetNumDayEvents(monthOffset, day) do -- Check calendar events for today
 
-		local event = { CalendarGetHolidayInfo(monthOffset, day, index) }
-		local name, desc, texture, startTime, endTime = unpack(event)
+		local holidayInfo = CalendarGetHolidayInfo(monthOffset, day, index)
+		local name = holidayInfo.name
+		local texture = holidayInfo.texture
 		
 		-- Compare texture IDs to find out whether the requested holiday is currently active (this is the only part that's identical across locales... :| Better hope there's no two events using the same icon (TODO))
 		if type(textureID) == "table" then -- There are several that have been used? Just check for all of them - not sure why it changed throughout the evend and which one is the right one now...
