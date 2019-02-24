@@ -449,18 +449,35 @@ local emissaryInfo = {} -- Cache for emissary info, shared between Criteria that
 
 --- Returns info about the currently active emissary quests (bounties)
 -- Helper function, to be used by the Criteria API
-local function GetEmissaryInfo(questID)
 
-	local bounties = GetQuestBountyInfoForMapID(1014) -- Dalaran (Broken Isles) - all Legion WQs should be available from there
+-- TODO: Move elsewhere
+local UIMAPID_LE_DALARAN = 628
+local UIMAPID_BFA_BORALUS = 1161
+
+local function FindBountyForMapID(mapID, questID)
+
+	local bounties = GetQuestBountyInfoForMapID(UIMAPID_LE_DALARAN) -- Dalaran (Broken Isles) - all Legion WQs should be available from there
 	for _, bounty in ipairs(bounties) do -- Check  active emissary quests to see if the given ID matches any one of them
 	
 		if bounty.questID == questID then -- This is the right bounty
 			return bounty
 		end
-		
-		-- If no match was found, return nothing
 	end
 	
+end
+
+local maps = { -- One map per expansion, where emissary quests will be visible (for both factions)
+	LE = UIMAPID_LE_DALARAN,
+	BFA = UIMAPID_BFA_BORALUS,
+}
+
+local function GetEmissaryInfo(questID)
+
+	for expansionShort, mapID in pairs(maps) do -- Check this map and see if the requested emissary quest is active
+		local bountyInfo = FindBountyForMapID(mapID, questID)
+		if bountyInfo ~= nil then return bountyInfo end
+	end
+
 end
 
 --- Returns the number of days until a given emissary quest expires. Only works if it hasn't been completed (which is considered "not active", because the API provides no data about it)
