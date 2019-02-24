@@ -54,6 +54,7 @@ local UnitLevel = UnitLevel
 local C_MythicPlus = C_MythicPlus
 local C_Garrison = C_Garrison
 local QuestUtils_IsQuestWorldQuest = QuestUtils_IsQuestWorldQuest
+local C_AreaPoiInfo = C_AreaPoiInfo
 
 -- Lua API
 local tostring = tostring
@@ -620,7 +621,7 @@ end
 -- Note: This only works with timed POIs (such as invasion points)
 local function WorldMapPOI(areaPOIID)
 	
-	local timeLeftMinutes = C_WorldMap.GetAreaPOITimeLeft(areaPOIID)
+	local timeLeftMinutes = C_AreaPoiInfo.GetAreaPOITimeLeft(areaPOIID)
 	return (timeLeftMinutes ~= nil)
 	
 end
