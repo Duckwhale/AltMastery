@@ -251,24 +251,18 @@ local function Profession(iconID)
 	professions.archaeology = archaeology
 	professions.fishing = fishing
 	professions.cooking = cooking
-	professions.firstAid = firstAid
 	
-	-- local profs = {
-		-- prof1 = prof1,
-		-- prof2 = prof2,
-		-- archaeology = archaeology,
-		-- fishing = fishing,
-		-- cooking = cooking,
-		-- firstAid = firstAid,
-	-- }
-	
-	for key, profession in pairs(professions) do -- Check if the profession matches
+	for key, index in pairs(professions) do -- Check if the profession matches
 		
-		local _, icon, skillLevel = GetProfessionInfo(profession)
+		local _, icon, skillLevel = GetProfessionInfo(index)
+		
+		local name, texture, rank, maxRank, numSpells, spelloffset, skillLine, rankModifier, specializationIndex, specializationOffset, skillLineName = GetProfessionInfo(index)
+		
 		if not iconID or not icon then return false end -- Can't possibly have the profession
 		
 		if (iconID == icon) then -- Player has the requested profession
-			return skillLevel
+			return 800 -- TODO: BFA prepatch broke it, so just do this until it is fixed (will return true if profession is learned, regardless of skill level... meh)
+			--return skillLevel -- TODO: ProfessionSkill > X, Profession = true/false
 		end
 		
 		-- ... keep looking
