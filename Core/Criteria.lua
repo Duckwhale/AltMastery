@@ -882,6 +882,16 @@ local function InboxHasNewMail()
 	-- Implied: else - may have new mail, but won't know until mailbox is checked
 
 end
+
+local emptyInboxTable = { 0, 0 }
+local function InboxHasUnreadMessages()
+
+	local numVisibleMessages, numTotalMessages = GetInboxNumItems() -- Beware: This will return true if there is new mail, but the inbox hasn't been opened -> only use with InboxHasNewMail
+	if numVisibleMessages ~= 0 or not (numTotalMessages == nil or numTotalMessages == 0) then return true -- numTotalMessages is not always returned. If it's nil, that means 0... numVisibleMessages isn't updated live, however, as it is cached from when the player last visited the mailbox (or simply returns 0 before they have done so)
+	else return false end
+	
+end
+
 Criteria = {
 	Invasion = Invasion,
 	BossesKilled = BossesKilled,
@@ -919,6 +929,7 @@ Criteria = {
 	InventoryItemCooldown = InventoryItemCooldown,
 	WorldMapPOI = WorldMapPOI,
 	InboxHasNewMail = InboxHasNewMail,
+	InboxHasUnreadMessages = InboxHasUnreadMessages,
 }
 
 AM.Criteria = Criteria
