@@ -452,13 +452,13 @@ local emissaryInfo = {} -- Cache for emissary info, shared between Criteria that
 -- Helper function, to be used by the Criteria API
 
 -- TODO: Move elsewhere
-local UIMAPID_LE_DALARAN = 628
+local UIMAPID_LE_DALARAN = 627
 local UIMAPID_BFA_BORALUS = 1161
 
 local function FindBountyForMapID(mapID, questID)
 
-	local bounties = GetQuestBountyInfoForMapID(UIMAPID_LE_DALARAN) -- Dalaran (Broken Isles) - all Legion WQs should be available from there
-	for _, bounty in ipairs(bounties) do -- Check  active emissary quests to see if the given ID matches any one of them
+	local bounties = GetQuestBountyInfoForMapID(mapID) -- All WQs should be available from there
+	for _, bounty in ipairs(bounties) do -- Check active emissary quests to see if the given ID matches any one of them
 	
 		if bounty.questID == questID then -- This is the right bounty
 			return bounty
