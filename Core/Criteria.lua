@@ -871,6 +871,17 @@ local function InventoryItemCooldown(itemID)
 	
 end
 
+
+local function InboxHasNewMail()
+
+	local s1, s2, s3 = GetLatestThreeSenders()
+	if s1 or s2 or s3 then -- Has new mail (notification on minimap occurs)
+		return true
+	end
+	
+	-- Implied: else - may have new mail, but won't know until mailbox is checked
+
+end
 Criteria = {
 	Invasion = Invasion,
 	BossesKilled = BossesKilled,
@@ -907,6 +918,7 @@ Criteria = {
 	DailyLFG = DailyLFG,
 	InventoryItemCooldown = InventoryItemCooldown,
 	WorldMapPOI = WorldMapPOI,
+	InboxHasNewMail = InboxHasNewMail,
 }
 
 AM.Criteria = Criteria
