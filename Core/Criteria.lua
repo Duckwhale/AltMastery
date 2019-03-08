@@ -435,7 +435,7 @@ local function Buff(spellID)
 	
 	for i = 1, 40 do -- Check all buffs to see if the requested one is active
 		
-		local buffSpellID = select(11, UnitBuff("player", i))
+		local buffSpellID = select(10, UnitBuff("player", i))
 		if buffSpellID == spellID then -- Found it
 			return true
 		end
