@@ -456,6 +456,8 @@ local emissaryInfo = {} -- Cache for emissary info, shared between Criteria that
 -- TODO: Move elsewhere
 local UIMAPID_LE_DALARAN = 627
 local UIMAPID_BFA_BORALUS = 1161
+local UIMAPID_ARATHI = 14
+local UIMAPID_DARKSHORE = 62
 
 local function FindBountyForMapID(mapID, questID)
 
@@ -469,14 +471,16 @@ local function FindBountyForMapID(mapID, questID)
 	
 end
 
-local maps = { -- One map per expansion, where emissary quests will be visible (for both factions)
+local maps = { -- One map per continent, where emissary and world quests will be visible (for both factions)
 	LE = UIMAPID_LE_DALARAN,
 	BFA = UIMAPID_BFA_BORALUS,
+	EK = UIMAPID_ARATHI,
+	KALIMDOR = UIMAPID_DARKSHORE,
 }
 
 local function GetEmissaryInfo(questID)
 
-	for expansionShort, mapID in pairs(maps) do -- Check this map and see if the requested emissary quest is active
+	for category, mapID in pairs(maps) do -- Check this map and see if the requested emissary quest is active
 		local bountyInfo = FindBountyForMapID(mapID, questID)
 		if bountyInfo ~= nil then return bountyInfo end
 	end
