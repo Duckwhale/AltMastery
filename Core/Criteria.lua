@@ -876,6 +876,185 @@ local function InventoryItemCooldown(itemID)
 end
 
 
+
+local OFFSET_ITEM_ID = 1
+local OFFSET_ENCHANT_ID = 2
+local OFFSET_GEM_ID_1 = 3
+local OFFSET_GEM_ID_2 = 4
+local OFFSET_GEM_ID_3 = 5
+local OFFSET_GEM_ID_4 = 6
+local OFFSET_GEM_BASE = OFFSET_GEM_ID_1
+local OFFSET_SUFFIX_ID = 7
+local OFFSET_FLAGS = 11
+local OFFSET_BONUS_ID = 13
+local OFFSET_UPGRADE_ID = 14 -- Flags = 0x4
+
+-- Helper function: Split item link and return a table with the extracted data
+-- This one waken from the Simulationcraft addon: https://wow.curseforge.com/projects/simulationcraft (thanks, GPL!)
+local function GetItemSplit(itemLink) -- TODO: Rename to something more descriptive?
+ 
+	local itemString = string.match(itemLink, "item:([%-?%d:]+)")
+	local itemSplit = {}
+
+	-- Split data into a table
+	for _, v in ipairs({strsplit(":", itemString)}) do
+		if v == "" then
+			itemSplit[#itemSplit + 1] = 0
+		else
+			itemSplit[#itemSplit + 1] = tonumber(v)
+		end
+	end
+
+	return itemSplit
+
+end
+
+-- Build lookup tables for inventory slots <-> equipped item
+local slotsLUT = {"Head", "Neck", "Shoulder", "Back", "Chest", "Shirt", "Tabard", "Wrist", "Waist", "Legs", "Feet", "Hands", "Finger0", "Finger1", "Trinket0", "Trinket1", "MainHand", "SecondaryHand"}
+
+local slotsReverseLUT = {}
+for k, v in ipairs(slotsLUT) do
+	slotsReverseLUT[v] = k -- [1] = "Head" becomes Head = 1
+end
+
+-- Returns the enchantID of an equipped item
+local function Enchant(slotName)
+   
+   if not slotName or not slotsReverseLUT[slotName] then return end -- Invalid slot/parameter
+   
+   local slotID = GetInventorySlotInfo(slotName .. "Slot")
+   local itemLink = GetInventoryItemLink("player", slotID) -- Shouldn't have to wait for the server here, as all items are already cached if they are equipped (TODO: Or are they? Try deleting the cache?)
+   
+   -- New enchantID extraction
+	local itemSplit = GetItemSplit(itemLink)
+	-- Get enchant ID
+	local enchantID = 0
+	if itemSplit[OFFSET_ENCHANT_ID] > 0 then -- itemString contains a valid enchantID -> return it
+		enchantID = itemSplit[OFFSET_ENCHANT_ID]
+	end
+
+	return enchantID
+	
+end
+
+-- Helper function: Returns a table containing the bonusIDs for a given item
+local function GetItemBonuses(itemLink)
+
+	local itemSplit = GetItemSplit(itemLink)
+	local bonuses = {}
+
+	for index=1, itemSplit[OFFSET_BONUS_ID] do
+		bonuses[#bonuses + 1] = itemSplit[OFFSET_BONUS_ID + index]
+	end
+
+	return bonuses, #bonuses
+
+end
+
+-- Bonus ID LUT (for relevant bonuses - haven't found a complete source of all known IDs, so this only contains the relevant bonus IDs that I looked up myself)
+local bonusLUT = {
+
+	-- Each item seems to have at least some bonus IDs attached to it (LE/BFA items, at least)
+	-- Mandatory bonuses: Origin, UpgradeLevel (may be different for legendary items)
+	-- Optional bonuses: TertiaryStats
+
+	-- Tertiary stats
+	[1808] = "Prismatic Socket", -- Technically called, "1 Prismatic Socket"
+	[4802] = "Prismatic Socket",
+	
+}
+
+-- Returns whether or not an item has an empty Prismatic Gem socket (TODO: This works for Legion items only - the bonus IDs are NOT universal!) - Could be extended for other bonuses, or previous expansions, but this isn't necessary right now
+local function HasPrismaticGemSocket(itemLink)
+
+	local bonuses, numBonuses = GetItemBonuses(itemLink)
+	if bonuses and numBonuses > 0 then -- Has at least one bonus -> check if they are empty gem sockets
+		
+		for i=1, numBonuses do
+			
+			local bonusID = bonuses[i] -- TODO: Use ipairs after testing is complete
+			local bonusName = bonusLUT[bonusID]
+			if bonusName == "Prismatic Socket" then return true end -- TODO: Different name, or constants BONUS_PRISMATIC_SOCKET_LEGION  / BFA ?
+			
+		end
+		
+	end
+	
+	return false
+	
+end
+
+-- Helper function
+local function GetGemItemID(itemLink, index)
+	
+	local _, gemLink = GetItemGem(itemLink, index)
+	
+	if gemLink ~= nil then
+		local itemIdStr = string.match(gemLink, "item:(%d+)")
+		if itemIdStr ~= nil then
+			return tonumber(itemIdStr)
+		end
+	end
+
+	return 0
+
+end
+
+-- Helper function: Returns the socketed gems for a given inventory slot
+local function SocketedGems(itemLink)
+
+	local itemSplit = GetItemSplit(itemLink)
+	local gems = {}
+
+	-- Gems
+	for gemOffset = OFFSET_GEM_ID_1, OFFSET_GEM_ID_4 do
+		
+		local gemIndex = (gemOffset - OFFSET_GEM_BASE) + 1
+		
+		if itemSplit[gemOffset] > 0 then
+			local gemId = GetGemItemID(itemLink, gemIndex)
+			if gemId > 0 then
+				gems[gemIndex] = gemId
+			end
+		else
+			gems[gemIndex] = 0
+		end
+
+	end
+
+	-- Remove any trailing zeros from the gems array
+	while #gems > 0 and gems[#gems] == 0 do
+		table.remove(gems, #gems)
+	end
+
+	return gems, #gems
+
+ end
+
+-- Returns the number of empty gem sockets for a given inventory slot (Only works for Legion and BFA items right now) - TODO: Add support for all expansions (meh)
+local function EmptyGemSockets(slotName)
+
+	local slotID = GetInventorySlotInfo(slotName .. "Slot")
+	local itemLink = GetInventoryItemLink("player", slotID) 
+
+	if HasPrismaticGemSocket(itemLink) then -- Check if the item has any socketed gems
+	
+		local gems, numSocketedGems = SocketedGems(itemLink)
+		if gems then return (1-numSocketedGems) else return 0 end -- return gems and numSocketedGems {TODO: What }
+		-- TODO: 1 is the max no of gems that the item has (always 1 for Legion, but this needs to be improved for reuse)
+	end
+
+	-- For Legion/BFA: Can only have one gem socket as item bonus, so there's no need to count the actual gem sockets if no gems are socketed
+	return 0
+	
+end
+
+
+-- -- Returns whether or not all equipped items are fully socketed (TODO: And enchanted?)
+-- local function
+-- TODO
+-- end
+
 local function InboxHasNewMail()
 
 	local s1, s2, s3 = GetLatestThreeSenders()
@@ -932,6 +1111,8 @@ Criteria = {
 	DailyLFG = DailyLFG,
 	InventoryItemCooldown = InventoryItemCooldown,
 	WorldMapPOI = WorldMapPOI,
+	Enchant = Enchant,
+	EmptyGemSockets = EmptyGemSockets,
 	InboxHasNewMail = InboxHasNewMail,
 	InboxHasUnreadMessages = InboxHasUnreadMessages,
 }
