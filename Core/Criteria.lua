@@ -17,7 +17,7 @@ local addonName, AM = ...
 if not AM then return end
 
 
-local Criteria = {}
+local Criteria
 
 -- WOW API
 local CalendarGetNumDayEvents = C_Calendar.GetNumDayEvents
