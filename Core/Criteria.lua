@@ -20,8 +20,8 @@ if not AM then return end
 local Criteria = {}
 
 -- WOW API
-local CalendarGetNumDayEvents = CalendarGetNumDayEvents
-local CalendarGetHolidayInfo = CalendarGetHolidayInfo
+local CalendarGetNumDayEvents = C_Calendar.GetNumDayEvents
+local CalendarGetHolidayInfo = C_Calendar.GetHolidayInfo
 local GetAchievementInfo = GetAchievementInfo
 local GetContainerNumSlots = GetContainerNumSlots
 local GetContainerItemLink = GetContainerItemLink
@@ -102,8 +102,6 @@ local function Achievement(achievementID)
 end
 
 local CalendarGetDate = C_Calendar.GetDate
-local CalendarGetNumDayEvents = C_Calendar.GetNumDayEvents
-local CalendarGetHolidayInfo = C_Calendar.GetHolidayInfo
 --- Checks whether a given world event (or holiday) is currently active
 local function WorldEvent(textureID)
 	
