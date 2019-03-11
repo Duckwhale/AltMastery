@@ -70,7 +70,7 @@ local NUM_BAG_SLOTS = NUM_BAG_SLOTS
 local firstBagIndex, lastBagIndex = BACKPACK_CONTAINER + 1, NUM_BAG_SLOTS
 
 -- Frames
-local WorldMapFrame
+local WorldMapFrame = WorldMapFrame
 
 -- AltMastery API (TODO)
 local GetNumCompletedObjectives = AM.TaskDB.PrototypeTask.GetNumCompletedObjectives
