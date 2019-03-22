@@ -46,6 +46,8 @@ function Addon:OnInitialize()
 	self:RegisterChatCommand("am", AM.Controllers.SlashCmdHandler) -- Alias
 	self:RegisterChatCommand("amqc", AM.QC.ExecuteChatCommand) -- QuestChecker tool
 	
+	self:RegisterChatCommand("eval", AM.Parser.PrintEvaluation)
+	-- TODO: /am eval and /am qc etc. instead, for release anyway. No need to hog all the slash commands
 	-- Register keybinds
 		BINDING_HEADER_ALTMASTERY = "AltMastery" -- TODO: L
 	_G["BINDING_NAME_ALTMASTERY_TRACKERTOGGLE"] = "Toggle Tracker Window"
