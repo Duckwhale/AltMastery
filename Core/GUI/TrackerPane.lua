@@ -59,11 +59,12 @@ function Tracker:GetLastDisplayedElementIndex()
 		-- Loop variables
 		local usedHeight = 0
 		local numElements = 0 -- These are the elements that did fit
+		local elementHeight = 0
 		for index, entry in ipairs(Tracker.elementsList) do -- 
 			
 			if index >= Tracker.scrollOffset then -- This element is not outside ouf the displayed area due to scrolling and must be considered
 			
-				local elementHeight = display[entry.type .. "Size"]  -- Should always be valid
+				elementHeight = display[entry.type .. "Size"]  -- Should always be valid
 				elementHeight = AM.GUI.Scale(elementHeight) -- Needs to be scaled because GetTrackerHeight() and GetViewportHeight() also return scaled values
 
 				if (usedHeight + elementHeight) > availableHeight then -- This element doesn't fit; use the last one instead
@@ -78,8 +79,13 @@ function Tracker:GetLastDisplayedElementIndex()
 			end
 			
 		end
-AM:Print("No return value for GetLastDisplayedElementIndex!? This will not go over well... -> #Tracker.elementsList = " .. #Tracker.elementsList .. " - scrollOffset = " .. Tracker.scrollOffset .. ", contentHeight = " .. contentHeight .. ", availableHeight = " .. availableHeight .. ", numElements = " .. numElements)		
+		
+AM:Print("No return value for GetLastDisplayedElementIndex!? This will not go over well... -> #Tracker.elementsList = " .. #Tracker.elementsList .. " - scrollOffset = " .. Tracker.scrollOffset .. ", contentHeight = " .. contentHeight .. ", availableHeight = " .. availableHeight .. ", usedHeight = " .. usedHeight .. ", lastUsedElementHeight = " .. elementHeight .. ", numElements = " .. numElements)		
 		-- TODO: Is a return numElements necessary? It should have returned the number of elements already because the content is clearly smaller than the viewport if all items fit inside. And yet, there were some bugs with this when the calculation of the content or viewport heights is wrong (as this function relies on them being accurate to work properly)
+	
+		--return numElements
+		
+	
 	end
 
 end
@@ -221,9 +227,9 @@ end
 
 -- Adds as many widgets to the Tracker content pane as possible, without having them overflow
 local function Render(self)
-	local Scale = AM.GUI.Scale
-	-- TODO: If no entries exist, show a notice? (Empty group header may still exist, unless the group headers are set to be hidden)
 
+	-- TODO: If no entries exist, show a notice? (Empty group header may still exist, unless the group headers are set to be hidden)
+	local Scale = AM.GUI.Scale
 	-- Use dynamically calculated indices to allow scrolling
 	local firstIndex = Tracker:GetFirstDisplayedElementIndex()
 	local lastIndex = Tracker:GetLastDisplayedElementIndex()
@@ -283,7 +289,7 @@ end
 			taskWidget:SetRelativeWidth(1)
 			taskWidget:SetIcon(Task.iconPath)
 			taskWidget:SetType("Task")
-			taskWidget:SetStatus("scale", scaleFactor)
+		--	taskWidget:SetStatus("scale", scaleFactor)
 			taskWidget:SetStatus("objectID", Task.objectID)
 			taskWidget:SetObjectives(Task.Objectives) -- Only useful for "Task" type elements
 			
@@ -330,7 +336,7 @@ end
 			alias = alias or Objective -- Use Criteria if no alias exists
 			
 			objectivesWidget:SetStatus("type", "Objective")
-			objectivesWidget:SetStatus("scale", scaleFactor)
+		--	objectivesWidget:SetStatus("scale", scaleFactor)
 			objectivesWidget:SetText(index .. ". " .. alias) -- Objectives are really just Criteria (strings), so this works
 			objectivesWidget:SetCompletion(isObjectiveCompleted)
 			objectivesWidget:ApplyStatus()
@@ -455,7 +461,7 @@ local function AddGroup(self, Group)
 		
 		local Task = AM.db.global.tasks[taskID]
 		if not Task then -- Task does not exist -> Keep reference, but add INVALID_TASK instead
---			AM:Print(format("The referenced Task %s was not found. It will be replaced with an INVALID_TASK placeholder, but it won't be lost :)", taskID)) --TODO: L
+			AM:Print(format("The referenced Task %s was not found. It will be replaced with an INVALID_TASK placeholder, but it won't be lost :)", taskID)) --TODO: L
 			Task = AM.TaskDB:GetTask("INVALID_TASK")
 			-- Save a note saying which task was replaced with it so the user isn't confused?
 			-- TODO: Hide by default (depends on settings)
