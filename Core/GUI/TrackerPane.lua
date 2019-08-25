@@ -507,6 +507,8 @@ end
 -- Update the active group display (requires )
 local function UpdateGroups(self)
 
+	if not AM.db.global.state then return end -- Don't update if window is hidden (unnecessary)
+
 	-- TODO: Nested Groups -> Limit level of nesting to 2 or 3?
 
 	local Scale = AM.GUI.Scale
