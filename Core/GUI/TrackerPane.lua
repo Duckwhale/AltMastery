@@ -354,6 +354,8 @@ end
 --- Release all the children into the widget pool (managed by AceGUI-3.0)
 local function ReleaseWidgets(self)
 
+	if #usedFrames == 0 then return end
+
 	AM:Debug("Releasing " .. tostring(#usedFrames) .. " children (into the widget pool, silly...)", "TrackerPane")
 	self.widget:ReleaseChildren() --TODO: Is this enough?
 

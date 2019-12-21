@@ -125,6 +125,18 @@ function Parser:IsValid(expression)
 	
 end
 
+-- TODO: Separate debug window. Open with /am eval - consists of text field and TEST button. TEST button evaluates criteria when pressed, prints TRUE (green) or FALSE (red)
+
+-- Evaluates an expression and prints it - useful to check criteria on the fly
+function Parser.PrintEvaluation(expression)
+
+	-- TODO: Debug("Evaluating expression: " .. tostring(expression))
+	--dump(expression)
+	--dump(AltMastery.Parser)
+	AltMastery:Print(tostring(AltMastery.Parser:Evaluate(expression)))
+
+end
+
 AM.Parser = Parser
 
 return Parser

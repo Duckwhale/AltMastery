@@ -3,7 +3,7 @@
     -- -- it under the terms of the GNU General Public License as published by
     -- -- the Free Software Foundation, either version 3 of the License, or
     -- -- (at your option) any later version.
-	
+
     -- -- This program is distributed in the hope that it will be useful,
     -- -- but WITHOUT ANY WARRANTY; without even the implied warranty of
     -- -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -30,11 +30,13 @@ GS.numDisplayedGroups = 0 -- Used to calculate the height of the actual content 
 --- Release all the children into the widget pool (managed by AceGUI-3.0)
 function GS:ReleaseWidgets()
 
+	if not #self.usedFrames then return end
+
 	AM:Debug("Releasing " .. tostring(#self.usedFrames) .. " children (into the widget pool, silly...)", MODULE)
 	self.widget:ReleaseChildren()
 
-	wipe(usedFrames)
-	
+	wipe(self.usedFrames)
+
 end
 
 --- Adds an entry for the given Group to the selector
@@ -51,7 +53,7 @@ function GS:AddGroup(Group, isActiveGroup)
 		AM:Debug("Attempted to add an empty Group -> Aborted", MODULE)
 		return
 	end
-	
+
 	-- Add the given Group
 	local groupWidget = AceGUI:Create("AMSelectorGroup")
 	groupWidget:SetType(isActiveGroup and "ActiveGroup" or "InactiveGroup")
@@ -64,37 +66,37 @@ function GS:AddGroup(Group, isActiveGroup)
 	groupWidget:SetRelativeWidth(1)
 	groupWidget:ApplyStatus()
 	groupWidget:ApplyStatus()
-	
+
 	self.numDisplayedGroups = self.numDisplayedGroups + 1
 	self.usedFrames[#self.usedFrames+1] = groupWidget -- TODO: Is this necessary?
 
-	
+
 end
 
 -- Update the GroupSelector
 function GS:Update()
-	
+
 	self.widget:ReleaseChildren()
-	
+
 	-- Add all Groups (TODO: Only all those that are top level groups)
 	local groups = AM.db.global.groups
 	local activeGroup, activeGroupKey = AM.GroupDB:GetActiveGroup()
-	
+
 	-- Hightlight the active group while adding it
 	-- TODO. Add them in the correct order (using the default groups and their index)
 	-- for key, group in pairs(groups) do -- Add these first, as they are the default groups
 		-- self:AddGroup(group, (key == activeGroupKey))
 	-- end
-	
+
 	for key, group in ipairs(AM.GroupDB:GetOrderedDefaultGroups()) do
 		self:AddGroup(group, (group.id == activeGroupKey))
 	end
-	
+
 	for index, group in ipairs(groups) do -- Add the user-defined groups afterwards (TODO: Setting to only show these? Maybe they don't want to use the default groups)
 		group.id = index
 		self:AddGroup(group, (index == activeGroupKey))
 	end
-	
+
 	-- Update the size of the panel so that it may contain all elements (TODO: overflow handling/scrolling)
 	local activeStyle = AM.GUI:GetActiveStyle()
 	local borderSize = AM.GUI.Scale(activeStyle.edgeSize) -- TODO: Needs more testing-> Always keep 1 pixel to make sure the border backdrop (defined below) remains visible? -- TODO: Use new settings
@@ -102,23 +104,23 @@ function GS:Update()
 	local Scale = AM.GUI.Scale
 	self.widget.content:SetPoint("TOPLEFT", borderSize, -borderSize)
 	self.widget.content:SetPoint("BOTTOMRIGHT", -borderSize, borderSize)
-	
+
 end
 
 
 -- @param frameNo The number of the frame that was selected (used to identify it in the frame pool)
 function GS:SelectGroup(groupID)
-	
+
 	-- Set active Group
 	AM.db.profile.settings.activeGroup = groupID
 	AM.GroupDB:SetActiveGroup(groupID)
-	
+
 	-- TODO: GUI.Update()
 	-- Update Tracker and GroupSelector
 	self:Update()
 	AM.Tracker.scrollOffset = 0 -- TODO: via API?
 	AM.TrackerPane:Update()
-	
+
 end
 
 return GS

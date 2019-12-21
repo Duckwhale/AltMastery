@@ -127,7 +127,7 @@ local defaults = {
 	},
 	
 	debug = {
-		isEnabled = false, -- TODO: Rename to isDebuggingEnableds
+		isEnabled = true, -- TODO: Rename to isDebuggingEnableds
 		isProfilingEnabled = false, -- TODO
 	}
 	

@@ -25,7 +25,7 @@ if not AM then return end
 local defaultStyle = {
 	
 	fonts = {
-		
+	
 		-- Default game fonts:
 			-- ARIALN - login screens, numbers, chat font
 			-- FRIZQT__ - the main WoW fonts
@@ -78,12 +78,20 @@ local defaultStyle = {
 		incomplete = "#FF2020", -- red - incomplete/invalid/error
 		highlight = "#E8B230", -- regular display text
 		normal = "#F1F4FC",
-		inactiveGroup = "#868684",
+		shadow = "#1A1A1A",
+		disabled = "#7A7A7A",
+		inactiveGroup = "#A2A29E",
 		activeGroup = "#FFFFFF",
 	},
 	
 	frameColours = {
 	-- TODO: Borders and inline elements/widgets
+	
+		-- White:
+		-- #FFFFFF = BG
+		-- #F1F4FC = Content
+		-- #AAB6D3 = Accents
+		-- #7186C7 = Elements
 	
 		-- TODO: Not sure which looks best in the final design (check FrameXML colours also)
 		-- TODO: Hex2RGB from TAP/Utils (already tested)
@@ -128,6 +136,19 @@ local defaultStyle = {
 	edgeSize = 2,
 
 }
+	
+-- Add an alternative style just to test the Styles system (bright blue/ish instead of grey/dark)
+local alternativeStyle = {
+
+	frameColours = {
+		ActiveGroupTracker  = { backdrop = "#CACACA", border = "#999999", alpha = 0.8 },
+		DatabaseEditor  = { backdrop = "#CACACA", border = "#999999", alpha = 0.8 },
+		GroupControlPanel = { backdrop = "#1A1A1A", border = "#666666", alpha = 1 },
+	},
+
+	edgeSIze = 2,
+
+}
 
 
 -- Update all stored display styles with their most current value (in case the user has changed it)
@@ -169,7 +190,7 @@ local function SetFrameColour(self, frameObject, colours, edgeSize)
 		 
 		if colours.border then -- Add border (this is optional)
 		
-			frameObject:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8", edgeFile="Interface\\Buttons\\WHITE8X8", edgeSize = edgeSize})
+			frameObject:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8", edgeFile="Interface\\Buttons\\WHITE8X8", edgeSize = edgeSize })
 			local border = { HexToRGB(colours.border, 255) }
 			tinsert(border, colours.borderAlpha or 1)
 			frameObject:SetBackdropBorderColor(unpack(border))

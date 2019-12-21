@@ -49,6 +49,38 @@ local methods = {
 	
 }
 
+-- Upvalues
+local math_floor = math.floor
+
+-- Fix scaling to map 1:1 to screen pixels (avoids graphics glitches that occur if they are floating point numbers)
+local function fixScale(number)
+
+-- /run local f = GetMouseFocus(); print("Size = " .. f:GetWidth().." x "..f:GetHeight().." - GetLeft() = " ..f:GetLeft() ..", GetTop() = " .. f:GetTop())
+
+-- /run local f = GetMouseFocus(); f:SetPoint("TOP", UIParent,  "TOP", 768 - (math.floor(f:GetTop() + 0.5))); print("New GetTop() = " .. f:GetTop())
+
+-- /run local fix = function(n) n = math.floor(n+0.5);n = (n%2==1) and (n+1) or n; return n; end; local f = GetMouseFocus(); print("Old height = " .. f:GetHeight()); f:SetHeight(fix(f:GetHeight())); print("New height = " .. f:GetHeight());
+
+-- /run local f = GetMouseFocus(); f:SetScale(1)
+
+-- /run local x=function(n) n=math.floor(n+0.5);n = (n%2==1) and (n+1) or n; return n; end; local f=GetMouseFocus(); for i=1,f:GetNumPoints() do local t={f:GetPoint(i)};dump(t);f:SetPoint(t[1],t[2],(t[3]),x(t[4]),x(t[5]));local t2={f:GetPoint()};dump(t2) end
+
+-- /run local f = GetMouseFocus(); 
+
+-- /run local f = GetMouseFocus(); 
+
+-- /run local f = GetMouseFocus(); 
+
+-- /run local f = GetMouseFocus(); 
+
+-- /run local f = GetMouseFocus(); 
+
+	number = math_floor(number + 0.5) -- Position at next integer
+	number = (number%2 == 1) and (number + 1) or number  -- If it isn't even, make it so (helps with centering of children)
+	
+	return number
+	
+end
 
 --- Creates a widget compatible with AceGUI-3.0 and registers it
 -- @return A reference to the widget object

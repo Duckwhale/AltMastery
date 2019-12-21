@@ -16,58 +16,57 @@
 local addonName, AM = ...
 if not AM then return end
 
-
+-- AceGUI stuff
 local Type, Version = "AMInlineGroup", 1
 local AceGUI = LibStub("AceGUI-3.0")
 if not AceGUI or (AceGUI:GetWidgetVersion(Type) or 0) >= Version then return end
 
-
-
---- TODO: Allow changing of the icon? (or maybe just do this in the DB)
-local function Icon_OnClick(self)
-	AM:Debug("Icon clicked!", "AMInlineGroup")
-end
-
--- Minimize group or track Task (TODO)?
-local function Label_OnClick(self, ...)
-local event, button = ...
+-- Upvalues
+local tinsert, tconcat, wipe, tostring =  table.insert, table.concat, wipe, tostring -- Lua APIs
 	
+
+--- TODO: Doesn't work anyway (strata/layering issues? Label seems to take precedence)
+-- local function Icon_OnClick(self)
+	-- AM:Debug("Icon clicked!", "AMInlineGroup")
+-- end
+
+-- OnClick: Expand task and toggle objectives (TODO: Same for groups)
+local function Label_OnClick(self, ...)
+	
+	local event, button = ...
 	local status = self.parent.localstatus
 	
 	-- For Groups: Minimize the respective Group, set its text colour to indicate the fact, and hide all contained Tasks (as well as their objectives)
 	if status.type == "Group" then -- Is a Group element -> Minimize/Expand (show/hide its Tasks) (TODO)
 	
---		AM:Debug("This label represents a Group - click to minimize or maximize it")
+		-- TODO
 	
-	else
+	end
 
-		if status.type == "Task" then -- Is a Task element -> Show/hide Objectives (if it has any)
+		-- For Tasks: Hide objectives if the task is tracked; otherwise, set the Task to tracked and show all objectives by expanding the window
+	if status.type == "Task" then -- Is a Task element -> Show/hide Objectives (if it has any)
 
-			
-			if button == "RightButton" then -- Right-click: Dismiss Task (until next reload)
-			
-				--AM:Print("Detected RightButton during OnClick handler")
-				status.isDismissed = true
-				AM.TrackerPane:DismissTask(self.parent)
-				
-			else -- LeftButton implied (TODO: What about MID button?)
-					
-				-- Click -> Track or untrack task
-				if status.canExpand then -- Has objectives that can be shown
-					AM.TrackerPane:ToggleObjectives(self.parent) -- Pass widget so that the Tracker can access it directly
-				end
-				
-			end
-			-- For Tasks: Hide objectives if the task is tracked; otherwise, set the Task to tracked and show all objectives by expanding the window
-
-			
-			-- Shift-click -> Hide? Evaluate criteria? Complete manually?
-			-- Implied else: -- Is Objective -> Can't be expanded anyway
+		if button == "RightButton" then -- Right-click: Dismiss Task (hide until next reload)
 		
+			status.isDismissed = true
+			AM.TrackerPane:DismissTask(self.parent)
+			
 		end
 		
-	end
+		if button == "LeftButton" then -- Click -> Track or untrack task
+				
+			if status.canExpand then -- Has objectives that can be shown
+				AM.TrackerPane:ToggleObjectives(self.parent) -- Pass widget so that the Tracker can access it directly
+			end
+			
+		end
+
+		
+		-- Shift-click -> Hide? Evaluate criteria? Complete manually? (TODO)
+		-- Implied else: -- Is Objective -> Can't be expanded anyway
 	
+	end
+		
 end
 
 --- Color differently to indicate that some action is possible
@@ -91,21 +90,18 @@ local function Label_OnEnter(self)
 	self.parent:ApplyStatus()
 	-- TODO: Show tooltip indicating that the group can be shown/hidden or task objectives can be shown/hidden
 
+--	AM:Print("DEBUG = " .. self.parent:tostring())
+	
 end
 
 --- Reset text colour to the default value
 local function Label_OnLeave(self)
 
-	-- Set text colour to normal
-	-- local r, g, b = AM.Utils.HexToRGB(AM.GUI:GetActiveStyle().fontColours.normal, 255)
-	-- self:SetColor(r, g, b)
-	
-	-- -- Reset inline element's transparency
-
+	-- Reset inline element's transparency and font colour to the default values
 	self.parent.localstatus.isHighlighted = false
 	self.parent:ApplyStatus() -- Reset colour as a side effect
 	
-	-- TODO: Hide tooltip
+	-- TODO: Hide tooltip (Tooltip is NYI)
 	
 end
 
@@ -117,7 +113,7 @@ local function SetIcon(self, icon)
 	
 end
 
--- Set the completedIcon for this element
+-- Set the completedIcon image
 local function SetCompletion(self, isCompleted)
 	
 	-- Update current completion status
@@ -125,19 +121,14 @@ local function SetCompletion(self, isCompleted)
 	
 end
 
+-- Set the text (duh)
 local function SetText(self, text)
 
 	self.localstatus.text = text or self.localstatus.text
-
---	AM:Debug("Set text to " .. tostring(text) .. " for widget of type = " .. tostring(self:IsFlaggedAsGroup() and "Group" or "Task") .. " (isFlaggedAsGroup = " .. tostring(self:IsFlaggedAsGroup()) .. ")", "AMInlineGroup")
-
+	
 end
 	
--- Upvalues
-local tinsert, tconcat, wipe, tostring =  table.insert, table.concat, wipe, tostring -- Lua APIs
-	
-
--- String represenation of a Region's set points
+-- String represenation of a Region's set points (for debugging only)
 local function PrintPoints(self)
 
 	local numPoints = self:GetNumPoints()
@@ -150,7 +141,8 @@ local function PrintPoints(self)
 	return str
 	
 end	
-	
+
+-- Widget methods
 local methods = {
 
 	["tostring"] = function(self)
@@ -173,7 +165,7 @@ local methods = {
 			tinsert(str, k .. ":: " .. PrintPoints(v))
 		end
 		
-
+		tinsert(str, self.localstatus.objectID)
 		
 		self.localstatus.str = str
 		return tconcat(str, "\n")
@@ -183,12 +175,12 @@ local methods = {
 	["ApplyStatus"] = function(self) -- Update the displayed widget with the current status
 
 		-- Shorthands
-		local FixPoints = AM.GUI.FixPoints
+		--local FixPoints = AM.GUI.FixPoints
 		local Scale = AM.GUI.Scale
 		local status = self.localstatus
 		local activeStyle = AM.GUI:GetActiveStyle()
 		local label, completionIcon, content = self.label, self.completionIcon, self.content
-		local border = content:GetParent() -- Technically, the area between content and border is the actual border... TODO: Reverse this so that the border and content can be coloured differently? Also, highlight the CONTENT ("border") when mouseover 
+		local border = content:GetParent() -- Technically, the area between content and border is the actual border... (AceGUI)
 		local settings = AM.db.profile.settings.GUI.Tracker
 		local scaleFactor = status.scale or AM.GUI:GetScaleFactor()
 		local borderWidth = Scale(settings.Content.Elements.borderWidth)
@@ -269,7 +261,12 @@ local contentHeight = elementSize - 2 * marginY - 2 * borderWidth - 2 * padding
 		label:SetFont(fontStyle, fontSize)
 		label.label:SetJustifyV("MIDDLE")
 		label.label:SetWidth(content:GetWidth() - iconSize - padding)
-		if label.label:GetStringWidth() > label.label:GetWidth() then
+		
+		
+		-- TODO: Overflow Handling
+		--- option a) cut off text
+		--- option b) expand by as many lines as necessary, then re-center the icon vertically, then register the new size with the Tracker to allow correct scrolling etc?
+		if label.label:GetStringWidth() > label.label:GetWidth() then -- Text will overflow (or line break, which doesn't look any better) -> Decrease size (workaround... might require a better way to handle it)
 			
 --AM:Print("height = " .. label.label:GetStringHeight())
 		--	local numLines = 2 -- TODO
@@ -282,12 +279,10 @@ local contentHeight = elementSize - 2 * marginY - 2 * borderWidth - 2 * padding
 				label.label:SetFont(fontStyle, fontSize - i)
 			end
 			
-			
-			
 		end
 		
 		label.frame:SetAttribute("name", "label.frame")
-		-- This apparently causes a weird glitch with the objectives, where the label will not be center vertically initially (but fixes itself after mouseover)
+		-- This apparently causes a weird glitch with the objectives, where the label will not be centered vertically initially (but fixes itself after mouseover)
 		-- label.frame:ClearAllPoints()
 		-- label.frame:SetAllPoints()
 		-- label.frame:SetPoint("LEFT", content, "LEFT")
@@ -323,13 +318,6 @@ label.label:SetPoint("LEFT", border, "LEFT", borderWidth + padding + ((isGroup o
 		local x, y = iconSize - borderWidth, abs((elementSize - 2* borderWidth) - iconSize) / 2
 		completionIcon.frame:ClearAllPoints()
 		completionIcon:SetPoint("LEFT", border, "RIGHT", -x, 0)
-	
-	
-		-- TODO: Overflow Handling
-		--- option a) cut off text
-		--- option b) expand by as many lines as necessary, then re-center the icon vertically, then register the new size with the Tracker to allow correct scrolling etc?
-	
---	AM:Print("Finished applying status for element: " .. self:tostring())
 	
 	end,
 	

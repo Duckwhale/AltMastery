@@ -25,7 +25,8 @@ local AceGUI = LibStub("AceGUI-3.0")
 
 
 local function Update(self)
---AM:Print("Tracker Window update started!")
+
+	AM:Print("Tracker Window update started!")
 
 	-- Shorthands
 	local settings = AM.db.profile.settings.GUI
@@ -60,6 +61,7 @@ local function Update(self)
 		local r, g, b = AM.Utils.HexToRGB(activeStyle.frameColours.GroupSelectorPane.border, 255)
 		groupSelectorBorder:SetBackdropBorderColor(r, g, b, activeStyle.frameColours.GroupSelectorPane.borderAlpha) -- This should be updated dynamically (TODO)
 
+		AM:Print("Tracker Window update finished!")
 
 end
 
@@ -192,8 +194,10 @@ end
 local function Toggle(self)
 
 	if not (self.frame and self.frame:IsShown()) then
+		AM.db.global.state = true -- TODO: For all frames, store expanded tasks, etc?
 		self:Show()
 	else
+		AM.db.global.state = false
 		self.frame:Hide()
 		AM.TrackerPane:ReleaseWidgets()
 		-- Also release the TaskPane's contents so they can be recycled (if any changes occur with the next startup)
