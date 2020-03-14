@@ -125,6 +125,8 @@ local constants = { -- Used to look up actual ID if an alias was used
 	
 	-- Currency IDs
 	TOL_BARAD_COMMENDATION = 391,
+	LESSER_CHARM_OF_GOOD_FORTUNE = 738,
+	ELDER_CHARM_OF_GOOD_FORTUNE = 697,
 	MOGU_RUNE_OF_FATE = 752,
 	TIMELESS_COIN = 777,
 	GARRISON_RESOURCES = 824,
@@ -137,6 +139,7 @@ local constants = { -- Used to look up actual ID if an alias was used
 	COINS_OF_AIR = 1416,
 	VEILED_ARGUNITE = 1508,
 	WAKENING_ESSENCE = 1533,
+	WAR_RESOURCES = 1560,
 	
 	-- Expansion IDs
 	EXPANSIONID_LEGION = 6,
@@ -196,6 +199,17 @@ local constants = { -- Used to look up actual ID if an alias was used
 	ARGUSSIAN_REACH = 2170,
 --	ARGUSSIAN_REACH_PARAGON = 2167,
 	TALONS_VENGEANCE = 2018,
+	TORTOLLAN_SEEKERS = 2163,
+	THE_HONORBOUND = 2157,
+	SEVENTH_LEGION = 2159,
+	CHAMPIONS_OF_AZEROTH = 2164,
+	ORDER_OF_EMBERS = 2161,
+	STORMS_WAKE = 2162,
+	PROUDMOORE_ADMIRALTY = 2160,
+	TALANJIS_EXPEDITION = 2156,
+	VOLDUNAI = 2158,
+	ZANDALARI_EMPIRE = 2103,
+
 	
 	-- Contribution IDs (for the Broken Shore Buildings)
 	MAGE_TOWER = 1,
@@ -218,15 +232,42 @@ local constants = { -- Used to look up actual ID if an alias was used
 	REVERED = 7,
 	EXALTED = 8,
 	
-	-- Instance IDs
+	-- Instance IDs (taken from LfgDungeons.db2)
+	
+	KARAZHAN = 175,
+	MAGTHERIDONS_LAIR = 176,
+	GRUULS_LAIR = 177,
+	
 	MANA_TOMBS = 179,
+	
+	SERPENTSHRINE_CAVERN = 194,
+	TEMPEST_KEEP = 193,
+	HYJAL = 195,
 	BLACK_TEMPLE = 196,
+	SUNWELL = 199,
+	
+	EYE_OF_ETERNITY = 223,
+	OBSIDIAN_SANCTUM = 224,
+	NAXXRAMAS = 227,
 	ULDUAR = 243, -- 244 for for 25man difficulty; Since the lockouts are shared this should not matter, as the API returns true for either ID
 	DRAGON_SOUL = 447, -- or 448 - ditto
 	FIRELANDS = 361, -- or 362 - ditto
 	ICECROWN_CITADEL = 279, -- 280 - ditto
 	THRONE_OF_THE_FOUR_WINDS = 317, -- 318 - ditto
 	TRIAL_OF_THE_CRUSADER = 246,
+	-- TODO: VOA, 
+	ONYXIAS_LAIR = 257,
+	RUBY_SANCTUM = 293,
+	
+	LFR_TERRACE_OF_ENDLESS_SPRING = 526,
+	LFR_MOGUSHAN_VAULTS_1 = 527,
+	LFR_MOGUSHAN_VAULTS_2 = 528,
+	LFR_HEART_OF_FEAR_1 = 529,
+	LFR_HEART_OF_FEAR_2 = 530,
+	MOGUSHAN_VAULTS = 531,
+	HEART_OF_FEAR = 533,
+	TERRACE_OF_ENDLESS_SPRING = 535,
+
 	
 	-- Map POI IDs (used for Legion Assaults and Argus Invasion Portals)
 	AZSUNA = 5175,
