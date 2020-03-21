@@ -1,3 +1,24 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("AltMastery", "enGB", true)
 
+-- L["AAAAAAAAAAAAA"] = true
+-- L["AAAAAAAAAAAAA"] = true
+-- L["AAAAAAAAAAAAA"] = true
+L["Please report any issues you encounter, preferably in the GitHub repository. The CurseForge project site is also monitored, but it has a history of being unreliable and so comments may be overlooked :("] = true
+L["Issues and Feature Requests"] = true
+L["The addon comes with a large lists of preset tasks (and groups) that you may find useful. If you believe something is missing, please don't hesitate to contact the development team so that we may look into adding it :)"] = true
+L["Presets"] = true
+L["Critera are, simply put, conditions that need to be met before a group/task is being shown/hidden or (automatically) completed. They can consist of actual Lua code if you like to get fancy, but there are also numerous shortcuts and aliases installed for the most common tasks you might want to track, so that using them becomes fairly straight-forward."] = true
+L["Criteria"] = true
+L["If none are to your liking, you can always create new and custom solutions to track almost anything imaginable - even if it isn't supported out-of-the-box. Feel free to experiment!"] = true
+L["Naturally, not all tasks need to be tracked - they're more like a menu of things you could track, from which you select those that you need to create your very own, delicious meals (the Groups)."] = true
+L["Tasks are exactly what the name implies - some action you want to do or a goal you are trying to achieve, with Milestones being simply Tasks that track non-repeatable Criteria for each character. They may be organized in Groups and will be tracked and shown according to their respective Criteria."] = true
+L["Tasks"] = true
+L["This extra step may seem unnecessary, but it makes restructuring Groups quite fast and responsive. It also enables you to add tasks you don't necessarily want to track right now, as they're stored in their own database and will be available for importing into groups whenever you wish to use them."] = true
+L["It should be said that Tasks and Groups are independent of each other; this means that Groups are used to organize tasks but they don't actually contain them. You can think of it more like containing a reference, so that Groups can be changed repeatedly and Tasks will not be deleted and can be re-used without difficulty, though they also need to be managed separately."] = true
+L["Groups are the main structure used to organize your Tasks and Milestones. They can contain Tasks or other Groups, which means you get to customize the layout of your character's TODO lists in whichever way suits you best."] = true
+L["Groups"] = true
+L["Features"] = true
+L["The addon comes with three key features you should understand in order to use it efficiently. This basic design helps to keep things relatively simple and intuitive, but nevertheless having an idea of how to use each feature properly will allow you to adapt its functionality to your needs more easily."] = true
+L["About this addon"] = true
+L["Profiles"] = true
 L["%s %s for WOW %s loaded!"] = true
