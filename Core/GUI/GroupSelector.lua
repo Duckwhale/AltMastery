@@ -30,11 +30,13 @@ GS.numDisplayedGroups = 0 -- Used to calculate the height of the actual content 
 --- Release all the children into the widget pool (managed by AceGUI-3.0)
 function GS:ReleaseWidgets()
 
+	if not #self.usedFrames then return end
+
 	AM:Debug("Releasing " .. tostring(#self.usedFrames) .. " children (into the widget pool, silly...)", MODULE)
 	self.widget:ReleaseChildren()
 
-	wipe(usedFrames)
-	
+	wipe(self.usedFrames)
+
 end
 
 --- Adds an entry for the given Group to the selector
