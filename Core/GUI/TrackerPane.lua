@@ -354,6 +354,8 @@ end
 --- Release all the children into the widget pool (managed by AceGUI-3.0)
 local function ReleaseWidgets(self)
 
+	if #usedFrames == 0 then return end
+
 	AM:Debug("Releasing " .. tostring(#usedFrames) .. " children (into the widget pool, silly...)", "TrackerPane")
 	self.widget:ReleaseChildren() --TODO: Is this enough?
 
@@ -469,11 +471,11 @@ local function AddGroup(self, Group)
 		end
 
 		if not AM.db.profile.settings.display.showFiltered and AM.Parser:Evaluate(Task.Filter) then -- Don't add Task to the active Group (as it isn't useful for the currently logged in character)
-			AM:Debug("Hiding Task " .. Task.name .. " because it is filtered", "Tracker")
+			-- AM:Debug("Hiding Task " .. Task.name .. " because it is filtered", "Tracker")
 		elseif not AM.db.profile.settings.display.showCompleted and AM.Parser:Evaluate(Task.Criteria) then -- Task is completed and should be hidden according to the settings
-				AM:Debug("Hiding Task " .. Task.name .. " because it is completed", "Tracker")
+				-- AM:Debug("Hiding Task " .. Task.name .. " because it is completed", "Tracker")
 		elseif not AM.db.profile.settings.display.showDismissed and self.dismissedTasks[taskID] then	 -- Task is dismissed and should be hidden for this session
-			AM:Debug("Hiding Task " .. Task.name .. " because it is dismissed", "Tracker")
+			-- AM:Debug("Hiding Task " .. Task.name .. " because it is dismissed", "Tracker")
 		else -- Show Task by adding it to the group
 				self:AddTask(Task, groupWidget)
 		end
@@ -643,24 +645,24 @@ local timeStart = time()
 	-- Reset list of elements, as they have to be freshly calculated after each update
 	wipe(Tracker.elementsList)
 
---local timeWipe = time()
+local timeWipe = time()
 
 	self:ReleaseWidgets()
 
---local timeRelease = time()
+local timeRelease = time()
 
 	self:UpdateGroups()
 
---local timeUpdateGroups = time()
+local timeUpdateGroups = time()
 
---AM:Print("Update complete! #elementsList = " .. #Tracker.elementsList .. ", lastIndex = " .. tostring(Tracker:GetLastDisplayedElementIndex()) .. ", firstIndex = " .. tostring(Tracker:GetFirstDisplayedElementIndex()), MODULE)
+-- AM:Print("Update complete! #elementsList = " .. #Tracker.elementsList .. ", lastIndex = " .. tostring(Tracker:GetLastDisplayedElementIndex()) .. ", firstIndex = " .. tostring(Tracker:GetFirstDisplayedElementIndex()), MODULE)
 
 	self:Render()
 
 local timeRender = time()
 
---AM:Print("Profiling results for " .. MODULE .. ".Update:")
---AM:Print("Total = " .. (timeRender - timeStart) .. ", Wipe = " .. (timeWipe - timeStart) .. ", Release = " .. (timeRelease - timeWipe) .. ", UpdateGroups = " .. (timeUpdateGroups - timeRelease) .. ", Render = " .. (timeRender - timeUpdateGroups))
+AM:Print("Profiling results for " .. MODULE .. ".Update:")
+AM:Print("Total = " .. (timeRender - timeStart) .. ", Wipe = " .. (timeWipe - timeStart) .. ", Release = " .. (timeRelease - timeWipe) .. ", UpdateGroups = " .. (timeUpdateGroups - timeRelease) .. ", Render = " .. (timeRender - timeUpdateGroups))
 
 	lastRenderTime = timeRender
 

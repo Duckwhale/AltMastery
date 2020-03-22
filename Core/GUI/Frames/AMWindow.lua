@@ -29,7 +29,7 @@ local methods = {
 		self.frame:SetFrameStrata("MEDIUM")
 		self:Show()
 	end,
-	
+
 	["OnRelease"] = function(self)
 		self.frame:ClearAllPoints()
 		-- TODO: Is there any data left that should be cleared? Not sure which parts AceGUI wants to be reset
@@ -45,10 +45,42 @@ local methods = {
 
 	["Reset"] = function(self)
 		self.frame:Reset()
-	end,	
-	
+	end,
+
 }
 
+-- Upvalues
+local math_floor = math.floor
+
+-- Fix scaling to map 1:1 to screen pixels (avoids graphics glitches that occur if they are floating point numbers)
+local function fixScale(number)
+
+-- /run local f = GetMouseFocus(); print("Size = " .. f:GetWidth().." x "..f:GetHeight().." - GetLeft() = " ..f:GetLeft() ..", GetTop() = " .. f:GetTop())
+
+-- /run local f = GetMouseFocus(); f:SetPoint("TOP", UIParent,  "TOP", 768 - (math.floor(f:GetTop() + 0.5))); print("New GetTop() = " .. f:GetTop())
+
+-- /run local fix = function(n) n = math.floor(n+0.5);n = (n%2==1) and (n+1) or n; return n; end; local f = GetMouseFocus(); print("Old height = " .. f:GetHeight()); f:SetHeight(fix(f:GetHeight())); print("New height = " .. f:GetHeight());
+
+-- /run local f = GetMouseFocus(); f:SetScale(1)
+
+-- /run local x=function(n) n=math.floor(n+0.5);n = (n%2==1) and (n+1) or n; return n; end; local f=GetMouseFocus(); for i=1,f:GetNumPoints() do local t={f:GetPoint(i)};dump(t);f:SetPoint(t[1],t[2],(t[3]),x(t[4]),x(t[5]));local t2={f:GetPoint()};dump(t2) end
+
+-- /run local f = GetMouseFocus();
+
+-- /run local f = GetMouseFocus();
+
+-- /run local f = GetMouseFocus();
+
+-- /run local f = GetMouseFocus();
+
+-- /run local f = GetMouseFocus();
+
+	number = math_floor(number + 0.5) -- Position at next integer
+	number = (number%2 == 1) and (number + 1) or number  -- If it isn't even, make it so (helps with centering of children)
+
+	return number
+
+end
 
 --- Creates a widget compatible with AceGUI-3.0 and registers it
 -- @return A reference to the widget object
@@ -58,10 +90,10 @@ local function Constructor()
 	local name = Type .. AceGUI:GetNextWidgetNum(Type)
 	local Scale = AM.GUI.Scale
 	local settings = AM.db.profile.settings.GUI -- Only GUI settings are relevant here
-	
+
 	-- Default values for this class
 	local specs = {
-	
+
 		-- The default position is always centered (can be moved by the user afterwards)
 		x = math.floor((UIParent:GetWidth() - Scale(settings.Tracker.width * settings.scale)) / 2 + 0.5),
 		y = math.floor((UIParent:GetHeight() - Scale(settings.Tracker.height * settings.scale)) / 2 + 0.5),
@@ -69,36 +101,36 @@ local function Constructor()
 		height = Scale(settings.Tracker.height * settings.scale), -- TODO: Update dynamically?
 
 	}
-	
+
 	local frame = AM.GUI:CreateMovableFrame(name, specs)
 	frame:SetFrameStrata("MEDIUM") -- TODO: Isn't doing this in OnAquire enough? Also, medium is the default value, anyway...
-	
+
 	-- Apply visuals according to the active style
 	local activeStyle = AM.GUI:GetActiveStyle()
 	local style = activeStyle.frameColours.Window
 	AM.GUI:SetFrameColour(frame, style)
-	
+
 	-- Create content pane
 	local content = CreateFrame("Frame", name .. "Content", frame)	-- Empty frame that will be used to contain all children later
 	local padding = Scale(AM.db.profile.settings.GUI.windowPadding)
 	content:SetPoint("TOPLEFT", padding, -padding)
 	content:SetPoint("BOTTOMRIGHT", -padding, padding)
-	
-	
+
+
 	-- Assemble widget object (to register with AceGUI)
 	local widget = {
-	
+
 		type = Type,
 		frame = frame,
 		content = content,
-		
+
 	}
 
 	-- Add widget methods (mostly for AceGUI)
 	for method, func in pairs(methods) do
 		widget[method] = func
 	end
-	
+
 	-- Le fin
 	return AceGUI:RegisterAsContainer(widget)
 
