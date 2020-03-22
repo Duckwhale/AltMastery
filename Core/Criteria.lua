@@ -131,64 +131,70 @@ local function WorldEvent(textureID)
 		end
 		
 	end
-	
 	-- Returns nil if not found -> Show "?" icon until updated, but also counts as false = not completed
-	
-end
 
+end
 
 --- Checks whether or not an item with the given ID is in the player's inventory, and returns the inventorySlot if it was found
 local function InventoryItem(itemID)
-
-	 -- Temporary values that will be overwritten with the next item
+	-- Temporary values that will be overwritten with the next item
 	local bagID, maxBagID, tempItemLink, tempItemID
-	
+
 	-- Set bag IDs to only scan inventory bags
 	for bag = BACKPACK_CONTAINER, NUM_BAG_SLOTS do -- Scan inventory to see if the item was found in it
-	
 		for slot = 1, GetContainerNumSlots(bag) do -- Compare items in the current bag the requested item
-	
 			tempItemLink = GetContainerItemLink(bag, slot)
 
 			if tempItemLink and tempItemLink:match("item:%d") then -- Is a valid item -> Check it
-			
 				tempItemID = GetItemInfoInstant(tempItemLink)
 				if tempItemID == itemID then -- Found item -> is in inventory
 					return true, bag, slot
 				end
-			
 			end
-
 		end
-		
 	end
-	
+
 	-- If everything has been scanned, clearly the item is not in the player's inventory
 	return false
-	
 end
 
 -- Returns whether or not the daily bonus for a given LFG dungeon is no longer obtainable (i.e., whether or not the dungeon has been completed today)
 local function DailyLFG(dungeonID)
-	
-	local name, typeID, subtypeID, minLevel, maxLevel, recLevel, minRecLevel, maxRecLevel, expansionLevel, groupID, textureFilename, difficulty, maxPlayers, description, isHoliday, bonusRepAmount, minPlayers, isTimeWalker, name2, minGearLevel = GetLFGDungeonInfo(dungeonID)
+	local name,
+		typeID,
+		subtypeID,
+		minLevel,
+		maxLevel,
+		recLevel,
+		minRecLevel,
+		maxRecLevel,
+		expansionLevel,
+		groupID,
+		textureFilename,
+		difficulty,
+		maxPlayers,
+		description,
+		isHoliday,
+		bonusRepAmount,
+		minPlayers,
+		isTimeWalker,
+		name2,
+		minGearLevel = GetLFGDungeonInfo(dungeonID)
 
 	-- Check minimum level first, as otherwise the dungeon can't even be queued for
-	local level  = UnitLevel("player")
+	local level = UnitLevel("player")
 	if not ((level >= minLevel) and (level <= maxLevel)) then
 		return false
 	end
-	
+
 	local doneToday, moneyBase, moneyVar, experienceBase, experienceVar, numRewards = GetLFGDungeonRewards(dungeonID)
 	return doneToday
-
 end
 
 --- Returns the amount of currency owned by the player
 local function Currency(currencyID)
 	return select(2, GetCurrencyInfo(currencyID))
 end
-
 
 local bonusRollQuests = {
 	-- Legion: Seal of Broken Fate
@@ -202,33 +208,28 @@ local bonusRollQuests = {
 		[43510] = true, -- Order Hall
 		[47851] = true, -- Mark of Honor x 5
 		[47864] = true, -- Mark of Honor x 10
-		[47865] = true, -- Mark of Honor x 20		
+		[47865] = true -- Mark of Honor x 20
 	},
 	-- BFA: Seal of Wartorn Fate
 	[7] = {
 		[52834] = true, -- Seal of Wartorn Fate: Gold
 		[52838] = true, -- Seal of Wartorn Fate: Piles of Gold
-		[52837] = true, -- Seal of Wartorn Fate: War Resources	
+		[52837] = true, -- Seal of Wartorn Fate: War Resources
 		[52840] = true, -- Seal of Wartorn Fate: Stashed War Resources
 		[52835] = true, -- Seal of Wartorn Fate: Marks of Honor
-		[52839] = true, -- Seal of Wartorn Fate: Additional Marks of Honor
-	},
+		[52839] = true -- Seal of Wartorn Fate: Additional Marks of Honor
+	}
 }
 
-	
 --- Returns the number of obtained bonus rolls for a given expansion
 local function BonusRolls(expansionID)
-
--- TODO: Better to use name, currentAmount, texture, earnedThisWeek, weeklyMax, totalMax, isDiscovered, rarity = GetCurrencyInfo(id or "currencyLink" or "currencyString") for id = 1273 to get the actual max? (in case of nether disruptor etc)
+	-- TODO: Better to use name, currentAmount, texture, earnedThisWeek, weeklyMax, totalMax, isDiscovered, rarity = GetCurrencyInfo(id or "currencyLink" or "currencyString") for id = 1273 to get the actual max? (in case of nether disruptor etc)
 	-- local currencyIDs = {
-		-- [6] = 1273, -- Legion: Seal of Broken Fate
+	-- [6] = 1273, -- Legion: Seal of Broken Fate
 	-- }
 	-- local count = select(4, GetCurrencyInfo(currencyIDs[expansionID]) or 0 -- TODO: Not very robust yet
--- Edit: Doesn't seem to work for this currency (no max amount)... boo.
+	-- Edit: Doesn't seem to work for this currency (no max amount)... boo.
 
-
-
-	
 	--Count completed bonus roll quests for the week
 	local count = 0
 	for questID in pairs(bonusRollQuests[expansionID] or {}) do
@@ -236,9 +237,8 @@ local function BonusRolls(expansionID)
 			count = count + 1
 		end
 	end
-	
-	return count
 
+	return count
 end
 
 -- TODO: Check for valid values? Might be unnecessary, as errors will simply be evaluated to false
@@ -246,80 +246,88 @@ end
 --- Returns the profession skill level if the player has the given profession, or 0 otherwise
 local professions = {}
 local function Profession(iconID)
-
 	local prof1, prof2, archaeology, fishing, cooking, firstAid = GetProfessions()
 	professions.prof1 = prof1
 	professions.prof2 = prof2
 	professions.archaeology = archaeology
 	professions.fishing = fishing
 	professions.cooking = cooking
-	
+
 	for key, index in pairs(professions) do -- Check if the profession matches
-		
 		local _, icon, skillLevel = GetProfessionInfo(index)
-		
-		local name, texture, rank, maxRank, numSpells, spelloffset, skillLine, rankModifier, specializationIndex, specializationOffset, skillLineName = GetProfessionInfo(index)
-		
-		if not iconID or not icon then return false end -- Can't possibly have the profession
-		
+
+		local name,
+			texture,
+			rank,
+			maxRank,
+			numSpells,
+			spelloffset,
+			skillLine,
+			rankModifier,
+			specializationIndex,
+			specializationOffset,
+			skillLineName = GetProfessionInfo(index)
+
+		if not iconID or not icon then
+			return false
+		end -- Can't possibly have the profession
+
 		if (iconID == icon) then -- Player has the requested profession
 			return 800 -- TODO: BFA prepatch broke it, so just do this until it is fixed (will return true if profession is learned, regardless of skill level... meh)
-			--return skillLevel -- TODO: ProfessionSkill > X, Profession = true/false
+		--return skillLevel -- TODO: ProfessionSkill > X, Profession = true/false
 		end
-		
+
 		-- ... keep looking
-		
 	end
-	
+
 	return 0 -- No match
-		
 end
 
 --- Returns whether all Objectives for a given Task are completed
 -- This is useful to automatically complete Tasks without having to repeat their individual Objective's criteria
 local function Objectives(taskID)
-
 	local Task = AM.TaskDB:GetTask(taskID)
 
-	if not Task or #Task.Objectives == 0 then return end -- Invalid Tasks or Tasks without Objectives can never return true
+	if not Task or #Task.Objectives == 0 then
+		return
+	end -- Invalid Tasks or Tasks without Objectives can never return true
 
 	local numObjectives = #Task.Objectives
 	local numCompletedObjectives = GetNumCompletedObjectives(Task)
 
 	return (numObjectives == numCompletedObjectives)
-
 end
 
 --- Returns the number of completed Objectives for the given Task
 -- This is useful to complete Tasks if any Objectives are completed
 local function NumObjectives(taskID)
-
 	local Task = AM.TaskDB:GetTask(taskID)
 
-	if not Task or #Task.Objectives == 0 then return end -- Invalid Tasks or Tasks without Objectives can never return true
+	if not Task or #Task.Objectives == 0 then
+		return
+	end -- Invalid Tasks or Tasks without Objectives can never return true
 
 	local numCompletedObjectives = GetNumCompletedObjectives(Task)
 	return numCompletedObjectives
-	
 end
 
 --- Returns whether or not the player has reached the given level, or the player's level if none has been given
 local function Level(filterLevel)
-	
 	local level = UnitLevel("player")
-	
-	if type(filterLevel) == "number" then return (filterLevel == level)
-	else return level
+
+	if type(filterLevel) == "number" then
+		return (filterLevel == level)
+	else
+		return level
 	end
-	
 end
 
 --- Returns whether or not a given world quest is currently active (and not completed)
 local function WorldQuest(questID)
-
-	if not C_TaskQuest or not C_TaskQuest.IsActive then return end -- TODO: Upvalue this, or could that cause issues?
+	if not C_TaskQuest or not C_TaskQuest.IsActive then
+		return
+	end -- TODO: Upvalue this, or could that cause issues?
 	return C_TaskQuest.IsActive(questID)
-	
 end
 
 -- Sandboxed constants -> Are only available here if copied over, which isn't ideal (since the Criteria evaluation happens in the sandbox, but these predefined Criteria APIs aren't running inside it)
@@ -333,20 +341,23 @@ local REWARDTYPE_CURRENCY = 3 -- Sandbox.REWARDTYPE_CURRENCY
 -- Format: Texture ID (as used by the WOW API) -> CURRENCY_ID (constants used in the Sandbox environment and the WOW API)
 local supportedCurrencies = {
 	[132775] = ORDER_RESOURCES, -- 1220
-	[1] = VEILED_ARGUNITE, -- 1508 TODO - can't test unless a WQ is up with this
+	[1] = VEILED_ARGUNITE -- 1508 TODO - can't test unless a WQ is up with this
 }
 
 -- Helper function to filter quest rewards
 local function GetQuestReward(questID)
-
-	if not questID then return end
+	if not questID then
+		return
+	end
 
 	-- Check if the quest data is available
-	if not HaveQuestData(questID) then return end -- TODO: Report errors? Pointless, I suppose...
+	if not HaveQuestData(questID) then
+		return
+	end -- TODO: Report errors? Pointless, I suppose...
 
 	-- Query server if reward data is unavailable
-	if (not HaveQuestRewardData (questID)) then -- TODO: upvalue
-		C_TaskQuest.RequestPreloadRewardData (questID) -- TODO: Is this immediately available? Might need a delay/timer
+	if (not HaveQuestRewardData(questID)) then -- TODO: upvalue
+		C_TaskQuest.RequestPreloadRewardData(questID) -- TODO: Is this immediately available? Might need a delay/timer
 	end
 
 	-- Retrieve rewards data
@@ -355,31 +366,30 @@ local function GetQuestReward(questID)
 	local numQuestRewards = GetNumQuestLogRewards(questID)
 
 	if type(numQuestCurrencies) == "number" and numQuestCurrencies > 0 then -- return first currency reward (see below for caveats)
-		
 		-- Detect currency ID (only works for supported currencies, as it requires a lookup)
-		local localizedName, texture, amount = GetQuestLogRewardCurrencyInfo (1, questID)
-		
+		local localizedName, texture, amount = GetQuestLogRewardCurrencyInfo(1, questID)
+
+		-- TODO: Test if the constant exists in the Sandbox
 		local currencyID = supportedCurrencies[curencyID] or 0 -- Invalid type for WQ that award a currency, but not one that is supported by the addon
 		-- TODO: Exact currency likely doesn't matter, as the WQ that are being tracked can only award items, or AP, or OHR (high amount) or Veiled Argunite (low amount), or gold -> needs to be improved later, of course
 		return REWARDTYPE_CURRENCY, amount, currencyID -- currencyID isn't used in the API after this, but having it doesn't hurt in case something breaks and needs testing
-		
 	end
-	
+
 	if type(numQuestRewards) == "number" and numQuestRewards > 0 then -- return first item reward (same issues)
-		
-		local itemName, itemTexture, quantity, quality, isUsable, itemID = GetQuestLogRewardInfo (1, questID)
-		
-		if not itemID then return end
+		local itemName, itemTexture, quantity, quality, isUsable, itemID = GetQuestLogRewardInfo(1, questID)
+
+		if not itemID then
+			return
+		end
 		return REWARDTYPE_ITEM, quantity, itemID --, itemTexture
-		
 	end
-	
+
 	-- for i = 1, numQuestCurrencies do -- TODO: Multiple currencies aren't supported
-	
-		-- local name, texture, numItems = GetQuestLogRewardCurrencyInfo (i, questID)
-		-- if type(texture) == "string" or type(texture) == "number" and type(numItems) == "number" and numItems > 0 then -- Is avalid currency reward -> return its texture, not name (TODO: it may be possible to do that if only some currencies are supported, but the API is 100% English so that'll have to do)
-			-- return REWARDTYPE_CURRENCY, numItems, texture -- TODO: Always returns the first currency - right now this works, but it may give unintended results if there are WQ with multiple rewards
-		-- end
+
+	-- local name, texture, numItems = GetQuestLogRewardCurrencyInfo (i, questID)
+	-- if type(texture) == "string" or type(texture) == "number" and type(numItems) == "number" and numItems > 0 then -- Is avalid currency reward -> return its texture, not name (TODO: it may be possible to do that if only some currencies are supported, but the API is 100% English so that'll have to do)
+	-- return REWARDTYPE_CURRENCY, numItems, texture -- TODO: Always returns the first currency - right now this works, but it may give unintended results if there are WQ with multiple rewards
+	-- end
 
 	-- end
 
@@ -388,20 +398,18 @@ local function GetQuestReward(questID)
 	end
 
 	-- Note: Doesn't work if the quest rewards multiple types, or even multiples of one specific type, at once, but this doesn't happen for world quests (and since this entire API will only be used for them, it's acceptable like this)
-
 end
-
 
 -- Returns the rewards for a given world quest (if it is active and not completed)
 local function GetWorldQuestReward(questID)
-	
 	-- Check if it's actually a World Quest
-	if not QuestUtils_IsQuestWorldQuest(questID) then return end 
-	
+	if not QuestUtils_IsQuestWorldQuest(questID) then
+		return
+	end
+
 	local rewardType, amount, ID = GetQuestReward(questID)
-	
+
 	return rewardType, amount
-	
 end
 
 -- Alias functions for ease-of-use (readability when used in Criteria)
@@ -415,37 +423,31 @@ end
 
 --- Returns whether or not the given world quest has valuable rewards (arbitrarily set, for now - testing only)
 local function IsWorldQuestRewarding(questID)
-
 	local isValuable =
-		(WorldQuestRewardType(questID) == REWARDTYPE_CURRENCY and WorldQuestRewardAmount(questID) > 500) -- Large amounts of Order Resources (no Veiled Argunite)
-		or
-		(WorldQuestRewardType(questID) == REWARDTYPE_ITEM and WorldQuestRewardAmount(questID) > 1) -- Reputation tokens or several Primal Sargerites (no AP tokens)
-		or
+		(WorldQuestRewardType(questID) == REWARDTYPE_CURRENCY and WorldQuestRewardAmount(questID) > 500) or -- Large amounts of Order Resources (no Veiled Argunite)
+		(WorldQuestRewardType(questID) == REWARDTYPE_ITEM and WorldQuestRewardAmount(questID) > 1) or -- Reputation tokens or several Primal Sargerites (no AP tokens)
 		(WorldQuestRewardType(questID) == REWARDTYPE_GOLD and WorldQuestRewardAmount(questID) > 3000000) -- More than 300g (meh)
-	
+
 	return isValuable
-	
+
 	--"(WorldQuestRewardType(aaaaaaaa) == REWARDTYPE_CURRENCY AND WorldQuestRewardAmount(aaaaaaaa) > 500) OR (WorldQuestRewardType(aaaaaaaa) == REWARDTYPE_ITEM AND WorldQuestRewardAmount(aaaaaaaa) > 1) OR (WorldQuestRewardType(aaaaaaaa) == REWARDTYPE_GOLD AND WorldQuestRewardAmount(aaaaaaaa) > 3000000)"
 end
 
 local function Buff(spellID)
-	
-	if not type(spellID) == "number" then return end
-	
+	if not type(spellID) == "number" then
+		return
+	end
+
 	for i = 1, 40 do -- Check all buffs to see if the requested one is active
-		
 		local buffSpellID = select(10, UnitBuff("player", i))
 		if buffSpellID == spellID then -- Found it
 			return true
 		end
-		
 	end
-	
+
 	-- Didn't find it
 	return false
-	
 end
-
 
 local emissaryInfo = {} -- Cache for emissary info, shared between Criteria that use the BountyQuest API (but it isn't stored, yet -> TODO)
 
@@ -459,36 +461,33 @@ local UIMAPID_ARATHI = 14
 local UIMAPID_DARKSHORE = 62
 
 local function FindBountyForMapID(mapID, questID)
-
 	local bounties = GetQuestBountyInfoForMapID(mapID) -- All WQs should be available from there
 	for _, bounty in ipairs(bounties) do -- Check active emissary quests to see if the given ID matches any one of them
-	
 		if bounty.questID == questID then -- This is the right bounty
 			return bounty
 		end
 	end
-	
 end
 
-local maps = { -- One map per continent, where emissary and world quests will be visible (for both factions)
+local maps = {
+	-- One map per continent, where emissary and world quests will be visible (for both factions)
 	LE = UIMAPID_LE_DALARAN,
 	BFA = UIMAPID_BFA_BORALUS,
 	EK = UIMAPID_ARATHI,
-	KALIMDOR = UIMAPID_DARKSHORE,
+	KALIMDOR = UIMAPID_DARKSHORE
 }
 
 local function GetEmissaryInfo(questID)
-
 	for category, mapID in pairs(maps) do -- Check this map and see if the requested emissary quest is active
 		local bountyInfo = FindBountyForMapID(mapID, questID)
-		if bountyInfo ~= nil then return bountyInfo end
+		if bountyInfo ~= nil then
+			return bountyInfo
+		end
 	end
-
 end
 
 --- Returns the number of days until a given emissary quest expires. Only works if it hasn't been completed (which is considered "not active", because the API provides no data about it)
 local function Emissary(questID) -- TODO: Upvalues?
-
 	local bounty = GetEmissaryInfo(questID)
 	if not bounty then -- The emissary quest is not active
 		return 0
@@ -496,38 +495,30 @@ local function Emissary(questID) -- TODO: Upvalues?
 
 	local timeLeft = C_TaskQuest.GetQuestTimeLeftMinutes(bounty.questID)
 	local statusText, description, isFinish, questDone, questNeed = GetQuestObjectiveInfo(bounty.questID, 1, false)
-	-- print(statusText, timeLeft) 
+	-- print(statusText, timeLeft)
 	if timeLeft then -- Emissary quest is active -> check if it matches
-
-		if bounty.questID ==questID then -- This is the correct emissary quest -> Find out which position (in terms of expiry date) it occupies, e.g. <1day = 1, <2 days = 2, <3 days = 3
-	--print(questID, statusText)
+		if bounty.questID == questID then -- This is the correct emissary quest -> Find out which position (in terms of expiry date) it occupies, e.g. <1day = 1, <2 days = 2, <3 days = 3
+			--print(questID, statusText)
 			local minutesUntilDailyReset = math.ceil(GetQuestResetTime() / 60 + 0.5)
 			local gracePeriod = 65 -- Using 65 minutes = 1 hour + 5 minutes, as emissaries have 1 day between them; there is a slight delay in the API updating (2 mins or so) and there could also be an issue with DST -> Precision doesn't matter, as they can never overlap -> TODO: Sync via GetServerTime()?
-					
-			for i=1, 3 do -- Calculate approximate reset times for each day (and emissary active that ends here)
 
+			for i = 1, 3 do -- Calculate approximate reset times for each day (and emissary active that ends here)
 				-- Calculate the reset time interval, which is an approximate to account for the delayed API updates
-				local minutesLeft = (i-1) * 1440 + minutesUntilDailyReset -- Each day has 24 hours = 24 * 60 = 1440 minutes, minus the time already passed today. Therefore, this is the time that the i-th emissary has before it expires (EXACT)
-	--print(i, minutesLeft)									
+				local minutesLeft = (i - 1) * 1440 + minutesUntilDailyReset -- Each day has 24 hours = 24 * 60 = 1440 minutes, minus the time already passed today. Therefore, this is the time that the i-th emissary has before it expires (EXACT)
+				--print(i, minutesLeft)
 				-- Note: It may seem pointless to do it like this, as the bounties line up if all three are available, but if one is completed then the indices will shift and there is a mismatch which is being accounted for here
-				if timeLeft >= (minutesLeft - gracePeriod)  and timeLeft <= (minutesLeft + gracePeriod) then -- The i-th emissary expires in the same interval as the bounty that is currently being checked -> This is the DAY it expires, including today (1 = today, 2 = tomorrow, 3 = the day after tomorrow)
-	--print(i, "matched!")					
+				if timeLeft >= (minutesLeft - gracePeriod) and timeLeft <= (minutesLeft + gracePeriod) then -- The i-th emissary expires in the same interval as the bounty that is currently being checked -> This is the DAY it expires, including today (1 = today, 2 = tomorrow, 3 = the day after tomorrow)
+					--print(i, "matched!")
 					return i -- The given emissary expires in the interval around the i-th day's reset period, so this must be the right day
-				
 				end
-			
 			end
-
 		end
-	
 	end
-	
+
 	return 0 -- Emissary quest is not active -> Can be interpreted as "active for 0 days" = invalid or completed
- 
 end
 
 local function EmissaryProgress(questID) -- TODO: Upvalues?
-
 	local bounty = GetEmissaryInfo(questID)
 	if not bounty then -- The emissary quest is not active
 		return 0
@@ -537,152 +528,164 @@ local function EmissaryProgress(questID) -- TODO: Upvalues?
 	local statusText, description, isFinish, questDone, questNeed = GetQuestObjectiveInfo(bounty.questID, 1, false)
 
 	return questDone
-	
 end
 
 local function Faction(factionName)
-
 	if factionName then -- Is valid faction
-	
 		local playerFaction = UnitFactionGroup("player")
 		return (playerFaction == factionName)
-		
 	end
-
 end
 
 -- Returns the contribution state for Broken Shore buildings (TODO: Filter by buff if all we want is the free follower token? Maybe for a separate Task, in addition to the legendary crafting material - also add task to use them?)
 local function ContributionState(contributionID) -- TODO: Upvalues
-
 	-- IDs = 1, 3, 4 are set only (maybe they will add more in the future?)
---	local contributionName = C_ContributionCollector.GetName(contributionID);
-	local state, stateAmount, timeOfNextStateChange = C_ContributionCollector.GetState(contributionID);
+	--	local contributionName = C_ContributionCollector.GetName(contributionID);
+	local state, stateAmount, timeOfNextStateChange = C_ContributionCollector.GetState(contributionID)
 	--local appearanceData = CONTRIBUTION_APPEARANCE_DATA[state];
 
 	return state
-	
 end
 
 -- Returns the reward spell (buff) currently active for the given contribution (Broken Shore building)
 local function ContributionBuff(contributionID) -- TODO: Upvalues
-	
 	local _, rewardSpellID = C_ContributionCollector.GetBuffs(contributionID)
 	return rewardSpellID -- The first one doesn't really matter, as it's always the same (and it is a zone-wide buff, so it can't be tracked like other buffs)
-	
 end
 
 -- Returns the reputation level for a given faction
 local function Reputation(factionID)
-	
-	local name, description, standingID, barMin, barMax, barValue, atWarWith, canToggleAtWar, isHeader,
-    isCollapsed, hasRep, isWatched, isChild, factionID, hasBonusRepGain, canBeLFGBonus = GetFactionInfoByID(factionID)
-	
+	local name,
+		description,
+		standingID,
+		barMin,
+		barMax,
+		barValue,
+		atWarWith,
+		canToggleAtWar,
+		isHeader,
+		isCollapsed,
+		hasRep,
+		isWatched,
+		isChild,
+		factionID,
+		hasBonusRepGain,
+		canBeLFGBonus = GetFactionInfoByID(factionID)
+
 	return standingID
-	
 end
 
 -- Saved dungeon lockout exists for a given dungeon ID
 local function DungeonLockout(dungeonID)
-   
-   for index = 1, GetNumSavedInstances() do -- Check if instance matches the requested dungeon ID
-      
-      local instanceName, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(index)
-      
-      local dungeonName = GetLFGDungeonInfo(dungeonID)
-      
-      if instanceName:gmatch(dungeonName) and encounterProgress and locked then -- Is probably the same dungeon? There might be issues if the dungeons are named ambiguously? (TODO)
-     --    AM:Print("Found lockout for instance = " .. instanceName .. " (dungeonName = " .. dungeonName .. ") - Defeated bosses: " .. encounterProgress .. "/" .. numEncounters)
-         return true
-      end
-      
-   end
-   
-   -- Nothing saved -> Dungeon is not locked out
-   return false
-   
+	for index = 1, GetNumSavedInstances() do -- Check if instance matches the requested dungeon ID
+		local instanceName,
+			id,
+			reset,
+			difficulty,
+			locked,
+			extended,
+			instanceIDMostSig,
+			isRaid,
+			maxPlayers,
+			difficultyName,
+			numEncounters,
+			encounterProgress = GetSavedInstanceInfo(index)
+
+		local dungeonName = GetLFGDungeonInfo(dungeonID)
+
+		if instanceName:gmatch(dungeonName) and encounterProgress and locked then -- Is probably the same dungeon? There might be issues if the dungeons are named ambiguously? (TODO)
+			--    AM:Print("Found lockout for instance = " .. instanceName .. " (dungeonName = " .. dungeonName .. ") - Defeated bosses: " .. encounterProgress .. "/" .. numEncounters)
+			return true
+		end
+	end
+
+	-- Nothing saved -> Dungeon is not locked out
+	return false
 end
 
 local function BossesKilled(instanceID)
-   
-   for index = 1, GetNumSavedInstances() do -- Check if instance matches the requested dungeon ID
-      
-      local instanceName, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(index)
-      
-      local dungeonOrRaidName = GetLFGDungeonInfo(instanceID)
-      
-      if instanceName:match(dungeonOrRaidName) and encounterProgress and locked then -- Is probably the same dungeon? There might be issues if the dungeons are named ambiguously? (TODO)
-  --      AM:Print("Found lockout for instance = " .. instanceName .. " (dungeonOrRaidName = " .. dungeonOrRaidName .. ") - Defeated bosses: " .. encounterProgress .. "/" .. numEncounters)
-         return encounterProgress
-      end
-      
-   end
-   
-   -- Nothing saved -> Dungeon is not locked out
-   return 0
-   
+	for index = 1, GetNumSavedInstances() do -- Check if instance matches the requested dungeon ID
+		local instanceName,
+			id,
+			reset,
+			difficulty,
+			locked,
+			extended,
+			instanceIDMostSig,
+			isRaid,
+			maxPlayers,
+			difficultyName,
+			numEncounters,
+			encounterProgress = GetSavedInstanceInfo(index)
+
+		local dungeonOrRaidName = GetLFGDungeonInfo(instanceID)
+
+-- TODO: Fails for LFR, as both have the same name. difficulty needs to be accounted for...
+		if instanceName:match(dungeonOrRaidName) and encounterProgress and locked then -- Is probably the same dungeon? There might be issues if the dungeons are named ambiguously? (TODO)
+			--      AM:Print("Found lockout for instance = " .. instanceName .. " (dungeonOrRaidName = " .. dungeonOrRaidName .. ") - Defeated bosses: " .. encounterProgress .. "/" .. numEncounters)
+			return encounterProgress
+		end
+	end
+
+	-- Nothing saved -> Dungeon is not locked out
+	return 0
 end
 
 -- Returns whether or not a given world map POI is currently displayed/active
 -- Note: This only works with timed POIs (such as invasion points)
 local function WorldMapPOI(areaPOIID)
-	
 	local timeLeftMinutes = C_AreaPoiInfo.GetAreaPOITimeLeft(areaPOIID)
 	return (timeLeftMinutes ~= nil)
-	
 end
 
 -- Returns whether or not a Legion Assault ("Invasion") is currently ongoing for the given POI ID (=one for each zone)
 local function Invasion(POI) -- TODO: Upvalues
-
 	local timeLeftMinutes = C_WorldMap.GetAreaPOITimeLeft(POI)
 	if timeLeftMinutes and timeLeftMinutes > 0 and timeLeftMinutes < 361 then -- Invasion is in progress -- According to the author of LegionInvasonTimer, some realms can return values that are too large when an event starts (?) -> Better to be safe than to be sorry
 		return true
 	end
 
 	return false
-	
 end
 
-	-- for index = 1, GetNumSavedInstances() do -- Check if instance matches the requested dungeon ID
-		
-		-- local name, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(index)
-		
-		-- if id == dungeonID then -- Instance matches; TODO: What about the difficulty?
-			-- return true
-		-- end	
-			
-	-- end
-	
-	-- -- Nothing saved -> Dungeon is not locked out
-	-- return false
+-- for index = 1, GetNumSavedInstances() do -- Check if instance matches the requested dungeon ID
+
+-- local name, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(index)
+
+-- if id == dungeonID then -- Instance matches; TODO: What about the difficulty?
+-- return true
+-- end
+
+-- end
+
+-- -- Nothing saved -> Dungeon is not locked out
+-- return false
 --- Returns whether or not the current zone matches a given map
 -- Note: Will not function properly if the WorldMapFrame is shown, to prevent the displayed map from changing while the player has it opened
 local function Zone(zoneMapID)
-
---print("WorldMapFrame is visible", WorldMapFrame:IsShown())
+	--print("WorldMapFrame is visible", WorldMapFrame:IsShown())
 
 	if WorldMapFrame and not WorldMapFrame:IsShown() then -- Can switch map to get current zone map ID (there is no better way in the API, unfortunately...)
-	   SetMapToCurrentZone()
-	   local mapID, isContinent = GetCurrentMapAreaID()
---print("Current map is continent", isContinent)
-	   
-	   if not isContinent then -- Map is set to continent after a UI reload until it has changed once, which means it's practically useless as it won't display the current ZONE (TODO: Does changing the map via the above API call work to fix this, or does it have to be done by the user?)
+		SetMapToCurrentZone()
+		local mapID, isContinent = GetCurrentMapAreaID()
+		--print("Current map is continent", isContinent)
+
+		if not isContinent then -- Map is set to continent after a UI reload until it has changed once, which means it's practically useless as it won't display the current ZONE (TODO: Does changing the map via the above API call work to fix this, or does it have to be done by the user?)
 			return (zoneMapID == mapID)
---print("MapID is", mapID)
-	   end
+		--print("MapID is", mapID)
+		end
 	end
 
 	-- Returns nil if World map is open -> displays "?" icon temporarily (not ideal, but well... it should hardly matter)
-	
-end	
-	
+end
+
 --- Local helper function (TODO: Move elsewhere and integrate in proper initialisation routine)
 -- This just needs to be called once after logging in to populate the subzones LUT with their localised zone names (before the SubZone criteria can be used)
 -- They are initialised with the localized names to make sure that subzone lookups work across all client versions
 local function GetSubZonesLUT()
-	
-	local subZones = { -- TODO: Inefficient to do this here - move to initialisation routine?
-		
+	local subZones = {
+		-- TODO: Inefficient to do this here - move to initialisation routine?
+
 		-- Broken Isles (without Argus)
 		[1007] = {
 			[GetMapNameByID(1015)] = true, -- Azsuna
@@ -692,20 +695,17 @@ local function GetSubZonesLUT()
 			[GetMapNameByID(1024)] = true, -- Highmountain
 			[GetMapNameByID(1017)] = true, -- Stormheim
 			[GetMapNameByID(1033)] = true, -- Suramar
-			[GetMapNameByID(1018)] = true, -- Val'sharah 		
+			[GetMapNameByID(1018)] = true -- Val'sharah
 		},
-		
 		-- Argus
 		[1184] = {
 			[GetMapNameByID(1170)] = true, -- Mac'Aree
 			[GetMapNameByID(1171)] = true, -- Antoran Wastes
-			[GetMapNameByID(1135)] = true, -- Krokuun		
-		},
-		
+			[GetMapNameByID(1135)] = true -- Krokuun
+		}
 	}
-	
+
 	return subZones
-	
 end
 
 -- Cached LUTs
@@ -714,34 +714,26 @@ local subZones
 -- Returns whether or not the current zone is a subzone of a given map
 -- Used for zone-specific buffs that span across one or several subzones of any given continent (e.g., Draenor, Argus, ...)
 local function SubZone(mapID)
-
 	subZones = subZones or GetSubZonesLUT() -- Build LUT if this is the first time the criterion is being checked
 
 	if mapID and subZones[mapID] then -- LUT has an entry for the given zone (continent) -> Check if the current zone is part of it
-	
 		-- Special case: Dalaran (Northrend) should not count as a Broken Isles zone
 		if mapID == 1007 then -- Is BROKEN_ISLES
-			
 			if Zone(504) then -- Player is currently in the OLD Dalaran, which has the same name but should not count as a Broken Isles zone -> Override the subzone detection
 				return false
 			end
 		-- TODO
-		
 		end
-	
+
 		return (subZones[mapID][GetRealZoneText()]) ~= nil -- Will be true if an entry exists = current zone is a subzone of the given map/continent. If it's nil, that's fine as it will simply be evaluated as false, so no further logic is required here
-	
 	end
-
-end	
-
+end
 
 local MythicMaps = {}
-	
-local function MythicPlus(typeID) -- TODO: Upvalues
 
+local function MythicPlus(typeID) -- TODO: Upvalues
 	if typeID == 2 then -- ALL_TIME_BEST
-		-- TODO
+	-- TODO
 	end
 
 	if typeID == 1 then -- WEEKLY_BEST
@@ -749,58 +741,52 @@ local function MythicPlus(typeID) -- TODO: Upvalues
 		MythicMaps = C_MythicPlus.GetMapTable()
 		local bestlevel = 0
 		for i = 1, #MythicMaps do
-		   local _, _, level = C_MythicPlus.GetMapPlayerStats(MythicMaps[i]);
-		   --     1    lastCompletionMilliseconds    number    
-		   --     2    bestCompletionMilliseconds    number    
-		   --     3    bestLevel    number    
-		   --     4    affixIDs    number[]    
-		   --     5    bestLevelYear    number    
-		   --     6    bestLevelMonth    number    
-		   --     7    bestLevelDay    number    
-		   --     8    bestLevelHour    number    
-		   --     9    bestLevelMinute    number    
-		   --     10    bestSpecIDs1    number    
-		   --     +    (bestSpecIDs2), ...
-		   if level then
-	--		  print("Level", level)
-			  
-			  if level > bestlevel then
-				 bestlevel = level
-			  end
-		   end
+			local _, _, level = C_MythicPlus.GetMapPlayerStats(MythicMaps[i])
+			--     1    lastCompletionMilliseconds    number
+			--     2    bestCompletionMilliseconds    number
+			--     3    bestLevel    number
+			--     4    affixIDs    number[]
+			--     5    bestLevelYear    number
+			--     6    bestLevelMonth    number
+			--     7    bestLevelDay    number
+			--     8    bestLevelHour    number
+			--     9    bestLevelMinute    number
+			--     10    bestSpecIDs1    number
+			--     +    (bestSpecIDs2), ...
+			if level then
+				--		  print("Level", level)
+
+				if level > bestlevel then
+					bestlevel = level
+				end
+			end
 		end
 
-	--	print("Best level", bestlevel)
+		--	print("Best level", bestlevel)
 		return bestlevel
 	end
-	
 end
 
-
-local isWeeklyRewardAvailable -- Used to cache the result from the last query. The server doesn't always update fast enough to display it right away, and pausing the Criteria check to wait for it isn't feasible
+local isWeeklyRewardAvailable  -- Used to cache the result from the last query. The server doesn't always update fast enough to display it right away, and pausing the Criteria check to wait for it isn't feasible
 -- Returns whether or not the Mythic Plus reward chest for the week is available
 local function MythicPlusWeeklyReward()
-
 	C_MythicPlus.RequestRewards()
 	isWeeklyRewardAvailable = C_MythicPlus.IsWeeklyRewardAvailable() -- Will usually update for the next time the status is queried... not ideal, but asynchronous updating is way too complex for this and not really needed (since the state is updated much more than necessary right now)
-	
+
 	return isWeeklyRewardAvailable
-	
 end
 
 -- Returns whether or not a given faction has a Paragon Reward available that hasn't been collected yet
 --- @factionID The ID of the ORIGINAL (not Paragon) faction
 -- @return hasRewardPending of the C_Reputation API
 local function ParagonReward(factionID)
-
 	local currentValue, threshold, rewardQuestID, hasRewardPending = C_Reputation.GetFactionParagonInfo(factionID) -- TODO: Upvalue
 
 	return hasRewardPending
-	
-end	
+end
 
-
-local autocompleteSpells = { -- Maps classId (https://wow.gamepedia.com/ClassId) to autocomplete spell IDs - if the class has one - or false
+local autocompleteSpells = {
+	-- Maps classId (https://wow.gamepedia.com/ClassId) to autocomplete spell IDs - if the class has one - or false
 	221597, -- Warrior: Call the Val'kyr
 	221587, -- Paladin: Vanguard of the Silver Hand
 	false, -- Hunter
@@ -812,69 +798,60 @@ local autocompleteSpells = { -- Maps classId (https://wow.gamepedia.com/ClassId)
 	219540, -- Warlock: Unleash Infernal
 	false, -- Monk
 	false, -- Druid
-	221561, -- Demon Hunter: Rift Cannon
+	221561 -- Demon Hunter: Rift Cannon
 }
 
 -- Returns whether or not the class' autocomplete WQ spell (OH talent) is available
 local function AutoCompleteSpellUsed()
-	
 	local classID = select(3, UnitClass("player"))
 	local classAutocompleteSpellID = autocompleteSpells[classID]
 
 	local talentTrees = C_Garrison.GetTalentTreeIDsByClassID(LE_GARRISON_TYPE_7_0, classID) -- Order Hall talents
 
-	if not talentTrees then return end
+	if not talentTrees then
+		return
+	end
 
 	for treeIndex, treeID in ipairs(talentTrees) do -- ?_? Can there actually be more than one talent tree? I've only seen one so far, but maybe there is a point to this nested structure...
-		
 		local _, _, tree = C_Garrison.GetTalentTreeInfoForID(treeID)
-		
+
 		for talentIndex, talent in ipairs(tree) do -- Iterate the talent entries and try to find the class' respective WQ autocomplete talent
-		
 			if talent.perkSpellID == classAutocompleteSpellID and talent.selected then -- Talent is available -> Check its cooldown (will always be 0 if not available, so simply checking for the cooldown directly doesn't work)
 				local start, duration, enabled, modRate = GetSpellCooldown(classAutocompleteSpellID)
 				return not (start == 0 and duration == 0) -- Spell is not on cooldown
-				
 			end
-		
 		end
-	
 	end
-	
 end
 
 -- Returns whether or not all of the player's bag slots are occupied with bags of the given bagSize
 --- Empty slots will always make this return false, as numSlots is returned as 0 by the API
 local function BagSize(bagSize)
-
 	bagSize = bagSize or 0
 
-	for bagIndex=firstBagIndex, lastBagIndex do -- Check if this bag is of the given bagSize
-
+	for bagIndex = firstBagIndex, lastBagIndex do -- Check if this bag is of the given bagSize
 		local numSlots = GetContainerNumSlots(bagIndex)
 		local isCorrectBagSize = (numSlots == bagSize)
-		
-		if not isCorrectBagSize then return false end -- Only return if at least one bag doesn't match the given bagSize
-	
+
+		if not isCorrectBagSize then
+			return false
+		end -- Only return if at least one bag doesn't match the given bagSize
 	end
-	
+
 	return true -- All bags passed the test
-	
 end
 
 -- Returns the cooldown of an item in the player's inventory, 0 if it is not on cooldown, and nil if it wasn't found
 -- TODO: Only checks the first item, so don't use it with non-unique items =)
 local function InventoryItemCooldown(itemID)
-
 	local amount, bag, slot = InventoryItem(itemID)
-	if not amount then return end -- Item was not found -> return nil
-	
+	if not amount then
+		return
+	end -- Item was not found -> return nil
+
 	local start, duration, enable = GetContainerItemCooldown(bag, slot)
 	return duration -- Should be 0 if not on cooldown. If it doesn't have one, enabled will be 1 -- TODO: Does this matter if used with items that have no CD?
-	
 end
-
-
 
 local OFFSET_ITEM_ID = 1
 local OFFSET_ENCHANT_ID = 2
@@ -891,7 +868,6 @@ local OFFSET_UPGRADE_ID = 14 -- Flags = 0x4
 -- Helper function: Split item link and return a table with the extracted data
 -- This one waken from the Simulationcraft addon: https://wow.curseforge.com/projects/simulationcraft (thanks, GPL!)
 local function GetItemSplit(itemLink) -- TODO: Rename to something more descriptive?
- 
 	local itemString = string.match(itemLink, "item:([%-?%d:]+)")
 	local itemSplit = {}
 
@@ -905,11 +881,29 @@ local function GetItemSplit(itemLink) -- TODO: Rename to something more descript
 	end
 
 	return itemSplit
-
 end
 
 -- Build lookup tables for inventory slots <-> equipped item
-local slotsLUT = {"Head", "Neck", "Shoulder", "Back", "Chest", "Shirt", "Tabard", "Wrist", "Waist", "Legs", "Feet", "Hands", "Finger0", "Finger1", "Trinket0", "Trinket1", "MainHand", "SecondaryHand"}
+local slotsLUT = {
+	"Head",
+	"Neck",
+	"Shoulder",
+	"Back",
+	"Chest",
+	"Shirt",
+	"Tabard",
+	"Wrist",
+	"Waist",
+	"Legs",
+	"Feet",
+	"Hands",
+	"Finger0",
+	"Finger1",
+	"Trinket0",
+	"Trinket1",
+	"MainHand",
+	"SecondaryHand"
+}
 
 local slotsReverseLUT = {}
 for k, v in ipairs(slotsLUT) do
@@ -918,13 +912,14 @@ end
 
 -- Returns the enchantID of an equipped item
 local function Enchant(slotName)
-   
-   if not slotName or not slotsReverseLUT[slotName] then return end -- Invalid slot/parameter
-   
-   local slotID = GetInventorySlotInfo(slotName .. "Slot")
-   local itemLink = GetInventoryItemLink("player", slotID) -- Shouldn't have to wait for the server here, as all items are already cached if they are equipped (TODO: Or are they? Try deleting the cache?)
-   
-   -- New enchantID extraction
+	if not slotName or not slotsReverseLUT[slotName] then
+		return
+	end -- Invalid slot/parameter
+
+	local slotID = GetInventorySlotInfo(slotName .. "Slot")
+	local itemLink = GetInventoryItemLink("player", slotID) -- Shouldn't have to wait for the server here, as all items are already cached if they are equipped (TODO: Or are they? Try deleting the cache?)
+
+	-- New enchantID extraction
 	local itemSplit = GetItemSplit(itemLink)
 	-- Get enchant ID
 	local enchantID = 0
@@ -933,61 +928,51 @@ local function Enchant(slotName)
 	end
 
 	return enchantID
-	
 end
 
 -- Helper function: Returns a table containing the bonusIDs for a given item
 local function GetItemBonuses(itemLink)
-
 	local itemSplit = GetItemSplit(itemLink)
 	local bonuses = {}
 
-	for index=1, itemSplit[OFFSET_BONUS_ID] do
+	for index = 1, itemSplit[OFFSET_BONUS_ID] do
 		bonuses[#bonuses + 1] = itemSplit[OFFSET_BONUS_ID + index]
 	end
 
 	return bonuses, #bonuses
-
 end
 
 -- Bonus ID LUT (for relevant bonuses - haven't found a complete source of all known IDs, so this only contains the relevant bonus IDs that I looked up myself)
 local bonusLUT = {
-
 	-- Each item seems to have at least some bonus IDs attached to it (LE/BFA items, at least)
 	-- Mandatory bonuses: Origin, UpgradeLevel (may be different for legendary items)
 	-- Optional bonuses: TertiaryStats
 
 	-- Tertiary stats
 	[1808] = "Prismatic Socket", -- Technically called, "1 Prismatic Socket"
-	[4802] = "Prismatic Socket",
-	
+	[4802] = "Prismatic Socket"
 }
 
 -- Returns whether or not an item has an empty Prismatic Gem socket (TODO: This works for Legion items only - the bonus IDs are NOT universal!) - Could be extended for other bonuses, or previous expansions, but this isn't necessary right now
 local function HasPrismaticGemSocket(itemLink)
-
 	local bonuses, numBonuses = GetItemBonuses(itemLink)
 	if bonuses and numBonuses > 0 then -- Has at least one bonus -> check if they are empty gem sockets
-		
-		for i=1, numBonuses do
-			
+		for i = 1, numBonuses do
 			local bonusID = bonuses[i] -- TODO: Use ipairs after testing is complete
 			local bonusName = bonusLUT[bonusID]
-			if bonusName == "Prismatic Socket" then return true end -- TODO: Different name, or constants BONUS_PRISMATIC_SOCKET_LEGION  / BFA ?
-			
+			if bonusName == "Prismatic Socket" then
+				return true
+			end -- TODO: Different name, or constants BONUS_PRISMATIC_SOCKET_LEGION  / BFA ?
 		end
-		
 	end
-	
+
 	return false
-	
 end
 
 -- Helper function
 local function GetGemItemID(itemLink, index)
-	
 	local _, gemLink = GetItemGem(itemLink, index)
-	
+
 	if gemLink ~= nil then
 		local itemIdStr = string.match(gemLink, "item:(%d+)")
 		if itemIdStr ~= nil then
@@ -996,20 +981,17 @@ local function GetGemItemID(itemLink, index)
 	end
 
 	return 0
-
 end
 
 -- Helper function: Returns the socketed gems for a given inventory slot
 local function SocketedGems(itemLink)
-
 	local itemSplit = GetItemSplit(itemLink)
 	local gems = {}
 
 	-- Gems
 	for gemOffset = OFFSET_GEM_ID_1, OFFSET_GEM_ID_4 do
-		
 		local gemIndex = (gemOffset - OFFSET_GEM_BASE) + 1
-		
+
 		if itemSplit[gemOffset] > 0 then
 			local gemId = GetGemItemID(itemLink, gemIndex)
 			if gemId > 0 then
@@ -1018,7 +1000,6 @@ local function SocketedGems(itemLink)
 		else
 			gems[gemIndex] = 0
 		end
-
 	end
 
 	-- Remove any trailing zeros from the gems array
@@ -1027,51 +1008,125 @@ local function SocketedGems(itemLink)
 	end
 
 	return gems, #gems
-
- end
+end
 
 -- Returns the number of empty gem sockets for a given inventory slot (Only works for Legion and BFA items right now) - TODO: Add support for all expansions (meh)
 local function EmptyGemSockets(slotName)
-
 	local slotID = GetInventorySlotInfo(slotName .. "Slot")
-	local itemLink = GetInventoryItemLink("player", slotID) 
+	local itemLink = GetInventoryItemLink("player", slotID)
 
 	if HasPrismaticGemSocket(itemLink) then -- Check if the item has any socketed gems
-	
 		local gems, numSocketedGems = SocketedGems(itemLink)
-		if gems then return (1-numSocketedGems) else return 0 end -- return gems and numSocketedGems {TODO: What }
-		-- TODO: 1 is the max no of gems that the item has (always 1 for Legion, but this needs to be improved for reuse)
+		if gems then
+			return (1 - numSocketedGems)
+		else
+			return 0
+		end -- return gems and numSocketedGems {TODO: What }
+	-- TODO: 1 is the max no of gems that the item has (always 1 for Legion, but this needs to be improved for reuse)
 	end
 
 	-- For Legion/BFA: Can only have one gem socket as item bonus, so there's no need to count the actual gem sockets if no gems are socketed
 	return 0
-	
 end
-
 
 -- -- Returns whether or not all equipped items are fully socketed (TODO: And enchanted?)
 -- local function
 -- TODO
 -- end
 
-local function InboxHasNewMail()
+-- Thin wrapper for the Garrison API (for readability and ease of use/proofing against future changes)
+local function HasGarrison(garrisonType)
+	return C_Garrison.HasGarrison(garrisonType)
+end
 
+local function HasBuilding(buildingID)
+end
+
+-- Returns the status of work orders for the given buildingID (note: OH troop recruiters also count as "buildings" here, it's the same API after all)
+-- Return values (constants)
+--/dump C_Garrison.GetLandingPageShipmentInfo(130)
+-- WO_STATUS_NONE = 0 -> Can't pick up or queue new work orders (also returned if WO aren't available for this workOrderID)
+-- WO_STATUS_PICKUP = 1 -> Work orders available for pickup
+-- WO_STATUS_NOPICKUP_QUEUE = 2 -> New work orders can be queued
+local function WorkOrderStatus(garrisonBuildingID)
+	if not (C_Garrison.HasGarrison(LE_GARRISON_TYPE_6_0) or C_Garrison.HasGarrison(LE_GARRISON_TYPE_7_0)) then -- No garrison available -> No work orders either
+		return 0
+	end
+
+	-- TODO: Does this need to be requested? Maybe if Garrison UI is not loaded yet or the landing page was not opened? (will update with next check, similar to Mythic+ data... not ideal, I guess)
+	C_Garrison.RequestLandingPageShipmentInfo()
+
+	-- WOD Garrison: Check if buildings have work orders
+	local buildings = C_Garrison.GetBuildings(LE_GARRISON_TYPE_6_0)
+	local numBuildings = #buildings
+	if (numBuildings > 0) then
+		--		print("numBuildings = " .. tostring(numBuildings))
+
+		for i = 1, numBuildings do
+			local buildingID = buildings[i].buildingID
+			--dump(buildings[i])
+			--			 print("buildingID = " .. tostring(buildingID) .. ", texPrefix = " .. tostring(buildings[i].texPrefix))
+			-- local id, name, texPrefix, icon, description, rank, currencyID, currencyQty, goldQty, buildTime, needsPlan, isPrebuilt, possSpecs, upgrades, canUpgrade, isMaxLevel, hasFollowerSlot = C_Garrison.GetBuildingInfo(buildingID)
+			--			print(id, name, texPrefix, icon, description, rank, currencyID, currencyQty, goldQty, buildTime, needsPlan, isPrebuilt, possSpecs, upgrades, canUpgrade, isMaxLevel, hasFollowerSlot)
+			--			print("---")
+			if buildingID and buildingID == garrisonBuildingID then
+				--				print("Matched buildingID with garrisonBuildingID: " .. garrisonBuildingID)
+				local name,
+					texture,
+					shipmentCapacity,
+					shipmentsReady,
+					shipmentsTotal,
+					creationTime,
+					duration,
+					timeleftString,
+					itemName,
+					itemIcon,
+					itemQuality,
+					itemID = C_Garrison.GetLandingPageShipmentInfo(buildingID)
+				--				print(name, texture, shipmentCapacity, shipmentsReady, shipmentsTotal, creationTime, duration, timeleftString, itemName, itemIcon, itemQuality, itemID)
+				if name and (shipmentsReady or 0) > 0 then -- Shipments are ready for pickup (and new ones can be queued afterwards)
+					return 1
+				elseif name and shipmentCapacity > (shipmentsTotal or 0) then -- More work orders can be queued
+					return 2
+				else -- None can be queued
+					return 0
+				end
+			end
+		end
+	else
+		--		print("numBuildings = " .. tostring(numBuildings))
+	end
+end
+
+-- Returns the status of troop recruitment for the given troop entry ID
+local function TroopStatus(troopID)
+	-- Legion Order Hall: Check if troops can be recruited
+	local followerShipments = C_Garrison.GetFollowerShipments(LE_GARRISON_TYPE_7_0)
+end
+
+local function TradeskillRecipeCooldown(recipeID)
+	local cd = C_TradeSkillUI.GetRecipeCooldown(recipeID) -- TODO: Only returns valid cooldown if the tradeskill UI is open / was open recently?
+
+	return cd or 0
+end
+
+local function InboxHasNewMail()
 	local s1, s2, s3 = GetLatestThreeSenders()
 	if s1 or s2 or s3 then -- Has new mail (notification on minimap occurs)
 		return true
 	end
-	
-	-- Implied: else - may have new mail, but won't know until mailbox is checked
 
+	-- Implied: else - may have new mail, but won't know until mailbox is checked
 end
 
-local emptyInboxTable = { 0, 0 }
+local emptyInboxTable = {0, 0}
 local function InboxHasUnreadMessages()
-
 	local numVisibleMessages, numTotalMessages = GetInboxNumItems() -- Beware: This will return true if there is new mail, but the inbox hasn't been opened -> only use with InboxHasNewMail
-	if numVisibleMessages ~= 0 or not (numTotalMessages == nil or numTotalMessages == 0) then return true -- numTotalMessages is not always returned. If it's nil, that means 0... numVisibleMessages isn't updated live, however, as it is cached from when the player last visited the mailbox (or simply returns 0 before they have done so)
-	else return false end
-	
+	if numVisibleMessages ~= 0 or not (numTotalMessages == nil or numTotalMessages == 0) then
+		return true -- numTotalMessages is not always returned. If it's nil, that means 0... numVisibleMessages isn't updated live, however, as it is cached from when the player last visited the mailbox (or simply returns 0 before they have done so)
+	else
+		return false
+	end
 end
 
 Criteria = {
@@ -1112,8 +1167,11 @@ Criteria = {
 	WorldMapPOI = WorldMapPOI,
 	Enchant = Enchant,
 	EmptyGemSockets = EmptyGemSockets,
+	HasGarrison = HasGarrison,
+	WorkOrderStatus = WorkOrderStatus,
+	TradeskillRecipeCooldown = TradeskillRecipeCooldown,
 	InboxHasNewMail = InboxHasNewMail,
-	InboxHasUnreadMessages = InboxHasUnreadMessages,
+	InboxHasUnreadMessages = InboxHasUnreadMessages
 }
 
 AM.Criteria = Criteria
