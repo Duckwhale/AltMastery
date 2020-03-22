@@ -13,13 +13,17 @@
     -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ----------------------------------------------------------------------------------------------------------------------
 
-local addonName, AM = ...
-if not AM then return end
+local addonName, addonTable = ...
+local AM = AltMastery
 
-function SlashCmdHandler()
-	
-	AM:Debug("SlashCmdHandler called", "Controllers")
-	
+function AM:OnChatCommand(input)
+
+	AM:Debug(format("SlashCmdHandler called with input %s", tostring(input)), "Controllers")
+
+	if input == "debug" then
+
+	end
+
 	if AM.FF.Config then
 		-- TODO: Taint?
 		-- Open config GUI (Blizzard options interface)
@@ -27,7 +31,7 @@ function SlashCmdHandler()
 		InterfaceOptionsFrame_OpenToCategory(AM.optionsFrame) -- So this second call SHOULD usually fix it (unless there are loads of addons which are listed before this one - which is unlikely thanks to the name starting with an "A")
 		-- TODO: Actually, even just scrolling down (so addons with "A" aren't displayed anymore) will cause this issue to manifest... Yay >_>
 	end
-	
+
 end
 
 

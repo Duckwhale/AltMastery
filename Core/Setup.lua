@@ -13,8 +13,11 @@
     -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ----------------------------------------------------------------------------------------------------------------------
 
-local addonName, AM = ...
-if not AM then return end
+local addonName, addonTable = ...
+
+local AceAddon = LibStub("AceAddon-3.0")
+AltMastery = AceAddon:NewAddon("AltMastery", "AceConsole-3.0", "AceEvent-3.0")
+local AM = AltMastery
 
 -- Set up table structures for modules (TODO: Which of these actually need to be defined here vs. in their respective modules?)
 AM.Controllers = {}
@@ -28,6 +31,7 @@ AM.Settings = {}
 
 
 -- Localization table
+-- todo move to Locales?
 AM.L = LibStub("AceLocale-3.0"):GetLocale("AltMastery", false)
 
 

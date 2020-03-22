@@ -13,8 +13,8 @@
     -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ---------------
 
-local addonName, AM = ...
-if not AM then return end
+local addonName, addonTable = ...
+local AM = AltMastery
 
 local Type, Version = "AMWindow", 1
 local AceGUI = LibStub("AceGUI-3.0")

@@ -13,19 +13,19 @@
     -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ---------------
 
-local addonName, AM = ...
-if not AM then return end
+local addonName, addonTable = ...
+local AM = AltMastery
 
 -- TODO: Try different fonts to see which works best and use those for the default style (after key features are done)
 -- TODO: Recognize fonts from LibSharedMedia3-.0? (allow user to pick them for custom styles)
 -- TODO: Bar textures (also from LSM)
- 
- 
+
+
 -- Default style for the display (TODO: It's the only one, as others are NYI)
 local defaultStyle = {
-	
+
 	fonts = {
-	
+
 		-- Default game fonts:
 			-- ARIALN - login screens, numbers, chat font
 			-- FRIZQT__ - the main WoW fonts
@@ -43,7 +43,7 @@ local defaultStyle = {
 			tasks = "Interface\\Addons\\AltMastery\\Media\\expressway rg.ttf",
 			objectives = "Interface\\Addons\\AltMastery\\Media\\expressway rg.ttf",
 			objectives = "Interface\\Addons\\AltMastery\\Media\\Comfortaa-Light.ttf", -- TODO: License
-		-- TODO. Licenses, only use relevant fonts, SharedMediaFonts	
+		-- TODO. Licenses, only use relevant fonts, SharedMediaFonts
 		headers = "Fonts\\FRIZQT__.TTF",  -- For group headers
 		default = "Fonts\\FRIZQT__.TTF", -- AKA GameFontNormal
 		numbers = "Fonts\\ARIALN.TTF", -- AKA GameFontSmall
@@ -60,20 +60,20 @@ local defaultStyle = {
 		test7 = "Interface\\Addons\\AltMastery\\Media\\constan.ttf",
 		test8 = "Interface\\Addons\\AltMastery\\Media\\consola.ttf",
 		test9 = "Interface\\Addons\\AltMastery\\Media\\calibri.ttf",
-		
+
 	},
-	
+
 	fontSizes = {
-	
+
 		small = 10,
 		medium = 12,
 		normal = 13,
 		large = 16,
-	
+
 	},
-	
+
 	fontColours = {
-	
+
 		completed = "#00FF00", -- bright green - completed/confirmation
 		incomplete = "#FF2020", -- red - incomplete/invalid/error
 		highlight = "#E8B230", -- regular display text
@@ -83,16 +83,16 @@ local defaultStyle = {
 		inactiveGroup = "#A2A29E",
 		activeGroup = "#FFFFFF",
 	},
-	
+
 	frameColours = {
 	-- TODO: Borders and inline elements/widgets
-	
+
 		-- White:
 		-- #FFFFFF = BG
 		-- #F1F4FC = Content
 		-- #AAB6D3 = Accents
 		-- #7186C7 = Elements
-	
+
 		-- TODO: Not sure which looks best in the final design (check FrameXML colours also)
 		-- TODO: Hex2RGB from TAP/Utils (already tested)
 		test1 = "#828296", -- blue-ish grey
@@ -116,27 +116,27 @@ local defaultStyle = {
 		test5 = "#4D4D4D", -- dark grey (IT scrollbar bg)
 		test6 = "#404040", -- dark grey (IT active button bg)
 		test7 = "#E6CC80", -- artifact colour
-		
+
 	},
-	
+
 	-- Armory, Flat, Button, Cilo, Glass, Gradient, Healbot, Ishan?, Serenity, Melli/Dark, Minimalist, Otravi, Ruben, Smooth/v2, Smudge, WGlass
 	groupSelectorTexture = "Interface\\Addons\\AltMastery\\Media\\" .. "Ruben" .. ".tga",
 
-	
-	--"Interface\\AchievementFrame\\UI-Achievement-AchievementBackground"
-	
-	
-	--"Interface\\PaperDollInfoFrame\\UI-Character-Skills-Bar.blp",	
-	
 
-	
+	--"Interface\\AchievementFrame\\UI-Achievement-AchievementBackground"
+
+
+	--"Interface\\PaperDollInfoFrame\\UI-Character-Skills-Bar.blp",
+
+
+
 	iconReady = "Interface\\RaidFrame\\ReadyCheck-Ready",
 	iconNotReady = "Interface\\RaidFrame\\ReadyCheck-NotReady",
 	iconWaiting = "Interface\\RaidFrame\\ReadyCheck-Waiting",
 	edgeSize = 2,
 
 }
-	
+
 -- Add an alternative style just to test the Styles system (bright blue/ish instead of grey/dark)
 local alternativeStyle = {
 
@@ -156,7 +156,7 @@ local alternativeStyle = {
 local function UpdateStyles()
 
 	AM.GUI.Styles.Default = defaultStyle
-	
+
 	--TODO: <Update user-edited styles from AceConfig here>
 
 end
@@ -170,41 +170,41 @@ local function GetActiveStyle(self)
 
 	local style = AM.db.profile.settings.display.activeStyle or AM.GUI:GetDefaultSettings().display.activeStyle
 	return AM.GUI.Styles[style] or defaultStyle
-	
+
 end
 
 -- Sets the backdrop (and border) colour(s) for a given frame or texture
 -- @param frameObject A reference to the frame object
 -- @colours A table containing the frame colours in hexadecimal #rrggbb representation (HTML style)
 local function SetFrameColour(self, frameObject, colours, edgeSize)
-	
+
 	local HexToRGB = AM.Utils.HexToRGB
 	local backdrop = { HexToRGB(colours.backdrop, 255) }
 	tinsert(backdrop, colours.alpha)
-	
+
 	if not frameObject then return colours end
-	
+
 	edgeSize = edgeSize or AM.GUI:GetActiveStyle().edgeSize
-	
+
 	if frameObject:IsObjectType("Frame") then -- Set backdrop via Frame API
-		 
+
 		if colours.border then -- Add border (this is optional)
-		
+
 			frameObject:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8", edgeFile="Interface\\Buttons\\WHITE8X8", edgeSize = edgeSize })
 			local border = { HexToRGB(colours.border, 255) }
 			tinsert(border, colours.borderAlpha or 1)
 			frameObject:SetBackdropBorderColor(unpack(border))
-			
+
 		else -- Don't add a border texture
 			frameObject:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8" })
 		end
-		
+
 		frameObject:SetBackdropColor(unpack(backdrop))
-		
+
 	else -- Frame is texture -> Set backdrop by simply colouring it differently
 		frameObject:SetColorTexture(backdrop) -- TODO: Not currently used anywhere? (No textures exist)
 	end
-	
+
 end
 
 

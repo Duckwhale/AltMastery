@@ -10,12 +10,8 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ----------------------------------------------------------------------------------------------------------------------
-local addonName, AM = ...
-if not AM then
-	return
-end
-
-AltMastery = AM -- Global to create an alias for keybinds, unit tests, and general convenience (ingame access/debugging)
+local addonName, addonTable = ...
+local AM = AltMastery
 
 -- Shared variables
 local L = AM.L
@@ -25,11 +21,8 @@ local FF = {
 }
 AM.FF = FF
 
--- Libraries
-local Addon = LibStub("AceAddon-3.0"):NewAddon("AltMastery", "AceConsole-3.0", "AceEvent-3.0")
-
 -- Initialisation
-function Addon:OnInitialize()
+function AltMastery:OnInitialize()
 	-- Initialise AceDB-3.0 database (used to store the settings, tasks, and groups) and upgrade it if the internal structures have changed
 	AM.DB.Initialise()
 	if AM.DB.NeedsMigration() then
@@ -42,12 +35,12 @@ function Addon:OnInitialize()
 	end
 
 	-- Register slash commands
-	self:RegisterChatCommand("altmastery", AM.Controllers.SlashCmdHandler)
-	self:RegisterChatCommand("am", AM.Controllers.SlashCmdHandler)
+	self:RegisterChatCommand("altmastery", "OnChatCommand")
+	self:RegisterChatCommand("am", "OnChatCommand")
 	-- Alias
-	self:RegisterChatCommand("amqc", AM.QC.ExecuteChatCommand)
+	-- self:RegisterChatCommand("amqc", AM.QC.ExecuteChatCommand)
 	-- QuestChecker tool
-	self:RegisterChatCommand("eval", AM.Parser.PrintEvaluation)
+	-- self:RegisterChatCommand("eval", AM.Parser.PrintEvaluation)
 	-- TODO: /am eval and /am qc etc. instead, for release anyway. No need to hog all the slash commands
 
 	-- Register keybinds
@@ -58,7 +51,7 @@ function Addon:OnInitialize()
 	-- TODO: More nuanced slash args for /amqc start, stop, reset, print (use AceConsole msg arg)
 end
 
-function Addon.OnEnable()
+function AltMastery.OnEnable()
 	local clientVersion = GetBuildInfo()
 
 	AM:Print(format(L["%s %s for WOW %s loaded!"], addonName, AM.versionString, clientVersion))

@@ -21,8 +21,9 @@
 -- @section GUI
 
 
-local addonName, AM = ...
-if not AM then return end
+local addonName, addonTable = ...
+local AM = AltMastery
+
 
 
 -- Updates the GUI to display the most recent information

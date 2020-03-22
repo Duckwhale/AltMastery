@@ -3,7 +3,7 @@
     -- -- it under the terms of the GNU General Public License as published by
     -- -- the Free Software Foundation, either version 3 of the License, or
     -- -- (at your option) any later version.
-	
+
     -- -- This program is distributed in the hope that it will be useful,
     -- -- but WITHOUT ANY WARRANTY; without even the implied warranty of
     -- -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -13,8 +13,8 @@
     -- -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- ----------------------------------------------------------------------------------------------------------------------
 
-local addonName, AM = ...
-if not AM then return end
+local addonName, addonTable = ...
+local AM = AltMastery
 
 
 -- HexToRGB() was taken from TotalAP's Utils module (it's already tested for robustness, but not useful enough to be its own library)
@@ -29,17 +29,17 @@ if not AM then return end
 -- @usage HexToRGB("FFFEFD") -> { 255, 254, 253 }
 -- @usage HexToRGB("asdf") -> { 0, 0, 0 }
 local function HexToRGB(hexString, divisor)
-	
+
 	local R = { 0, 0, 0 } -- This is used for invalid parameters and as a default value
 
 	if not hexString or type(hexString) ~= "string" then return R end
 
 	local r, g, b = hexString:match("^#?(%x%x)(%x%x)(%x%x)$")
-	
+
 	if not (r and g and b) then return R end
 
 	return tonumber("0x" .. r) / (divisor or 1), tonumber("0x" .. g) / (divisor or 1), tonumber("0x" .. b) / (divisor or 1)
-	
+
 end
 
 

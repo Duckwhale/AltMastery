@@ -13,8 +13,8 @@
     -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ---------------
 
-local addonName, AM = ...
-if not AM then return end
+local addonName, addonTable = ...
+local AM = AltMastery
 
 
 --- Returns a customised layout function (for use with AceGUI)
@@ -24,7 +24,7 @@ local function GetLayout(layout)
 
 	-- TODO: Not sure how far the default layouts will take us; this might be obsolete before everything is said and done
 	-- TODO: Layouting needs to be interrupted (combat taint perhaps?) - Start/Pause/Resume? Need to look into this further
-	
+
 end
 
 --- TODO: Super messy, but eh. Will refactor later... maybe.
@@ -50,18 +50,18 @@ local ModifiedFlowLayout = function(content, children)
 		local rowheight = 0
 		local rowoffset = 0
 		local lastrowoffset
-		
+
 		local width = content.width or content:GetWidth() or 0
-		
+
 		--control at the start of the row
 		local rowstart
 		local rowstartoffset
 		local lastrowstart
 		local isfullheight
-		
+
 		local frameoffset
 		local lastframeoffset
-		local oversize 
+		local oversize
 		for i = 1, #children do
 			local child = children[i]
 			oversize = nil
@@ -69,17 +69,17 @@ local ModifiedFlowLayout = function(content, children)
 			local frameheight = frame.height or frame:GetHeight() or 0
 			local framewidth = frame.width or frame:GetWidth() or 0
 			lastframeoffset = frameoffset
-			-- HACK: Why did we set a frameoffset of (frameheight / 2) ? 
+			-- HACK: Why did we set a frameoffset of (frameheight / 2) ?
 			-- That was moving all widgets half the widgets size down, is that intended?
 			-- Actually, it seems to be neccessary for many cases, we'll leave it in for now.
 			-- If widgets seem to anchor weirdly with this, provide a valid alignoffset for them.
 			-- TODO: Investigate moar!
 			frameoffset = child.alignoffset or (frameheight / 2)
-			
+
 			if child.width == "relative" then
 				framewidth = width * child.relWidth
 			end
-			
+
 			frame:Show()
 			frame:ClearAllPoints()
 			if i == 1 then
@@ -118,11 +118,11 @@ local ModifiedFlowLayout = function(content, children)
 				else
 					--handles cases where the new height is higher than either control because of the offsets
 					--math.max(rowheight-rowoffset+frameoffset, frameheight-frameoffset+rowoffset)
-					
+
 					--offset is always the larger of the two offsets
 					rowoffset = math_max(rowoffset, frameoffset)
 					rowheight = math_max(rowheight, rowoffset + (frameheight / 2))
-					
+
 					frame:SetPoint("TOPLEFT", children[i-1].frame, "TOPRIGHT", 0, frameoffset - lastframeoffset)
 					usedwidth = framewidth + usedwidth
 				end
@@ -131,11 +131,11 @@ local ModifiedFlowLayout = function(content, children)
 			if child.width == "fill" then
 				safelayoutcall(child, "SetWidth", width)
 				frame:SetPoint("RIGHT", content)
-				
+
 				usedwidth = 0
 				rowstart = frame
 				rowstartoffset = frameoffset
-				
+
 				if child.DoLayout then
 					child:DoLayout()
 				end
@@ -144,7 +144,7 @@ local ModifiedFlowLayout = function(content, children)
 				rowstartoffset = rowoffset
 			elseif child.width == "relative" then
 				safelayoutcall(child, "SetWidth", width * child.relWidth)
-				
+
 				if child.DoLayout then
 					child:DoLayout()
 				end
@@ -153,13 +153,13 @@ local ModifiedFlowLayout = function(content, children)
 					frame:SetPoint("RIGHT", content)
 				end
 			end
-			
+
 			if child.height == "fill" then
 				frame:SetPoint("BOTTOM", content)
 				isfullheight = true
 			end
 		end
-		
+
 		--anchor the last row, if its full height needs a special case since  its height has just been changed by the anchor
 		if isfullheight then
 --print("height: " .. tostring(height)	)
@@ -168,7 +168,7 @@ local ModifiedFlowLayout = function(content, children)
 --print("HEIGHT: " .. (height + (rowoffset - rowstartoffset) + 3))
 			rowstart:SetPoint("TOPLEFT", content, "TOPLEFT", 0, -(height + (rowoffset - rowstartoffset) + 3))
 		end
-		
+
 		height = height + rowheight + 3
 		safecall(content.obj.LayoutFinished, content.obj, nil, height)
 	end
@@ -180,7 +180,7 @@ local function CustomRowsLayout(content, children)
 	local width = content.width or content:GetWidth() or 0
 	for i = 1, #children do
 		local child = children[i]
-		
+
 		local frame = child.frame
 		frame:ClearAllPoints()
 		frame:Show()
@@ -194,29 +194,29 @@ local function CustomRowsLayout(content, children)
 		--if i == #children then
 			frame:SetPoint("BOTTOMLEFT", content)
 		end
-		
+
 		if child.width == "fill" then
 			child:SetWidth(width)
 			frame:SetPoint("RIGHT", content)
-			
+
 			if child.DoLayout then
 				child:DoLayout()
 			end
 		elseif child.width == "relative" then
 			child:SetWidth(width * child.relWidth)
-			
+
 			if child.DoLayout then
 				child:DoLayout()
 			end
 		end
-		
+
 		height = height + (frame.height or frame:GetHeight() or 0)
 --print("HEIGHT: " .. height)
 	end
 	if content.obj.LayoutFinished  then content.obj.LayoutFinished(content.obj, nil, height) end
 end
 AceGUI:RegisterLayout("AMRows", CustomRowsLayout)
-	
+
 AM.GUI.GetLayout = GetLayout
 
 return AM

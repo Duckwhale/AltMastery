@@ -13,10 +13,8 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ---------------
 
-local addonName, AM = ...
-if not AM then
-	return
-end
+local addonName, addonTable = ...
+local AM = AltMastery
 
 -- Externals
 local LibStub = LibStub

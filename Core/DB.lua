@@ -13,8 +13,8 @@
     -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ---------------
 
-local addonName, AM = ...
-if not AM then return end
+local addonName, addonTable = ...
+local AM = AltMastery
 
 
 -- Upvalues
@@ -32,7 +32,7 @@ local migrations = {
 			-- Do stuff here if the structures changed
 		]],
 		"Didn't change anything - just testing the migration process (still updates the db version to 1)"
-	} 
+	}
 }
 
 
@@ -47,20 +47,20 @@ local function NeedsMigration()
 		return true
 
 	end
-	
+
 	local currentDatabaseVersion = AM.db.global.version or 0 -- Last DB update occured in r<X>, where X is the version no. stored in the global AceDB-3.0 data type
 	local lastUpdateVersion = migrations[#migrations][1] -- Last change to the DB structure occured in r<X>, where X is the version no. stored in the first field of the migration table
 	AM:Debug("Detected most recent model upgrade in r" .. tostring(lastUpdateVersion) .. " - current database structure was last changed in r" .. tostring(currentDatabaseVersion), "DB")
-	
+
 	if currentDatabaseVersion < lastUpdateVersion then -- This version requires an upgrade
-	
+
 		AM:Debug("Database model was altered since the currently used DB was last updated -> Needs migration", "DB")
 		return true
-	
+
 	else AM:Debug("Database model is up-to-date and doesn't need to be migrated at this point", "DB") end
 
 	return false
-	
+
 end
 
 --- Apply any DB model upgrades that the current release version requires
@@ -68,29 +68,29 @@ local function Migrate()
 
 -- Apply as many updates as necessary to get to the most current version
 	for index, migrationTable in ipairs(migrations) do -- Apply the necessary updates
-		
+
 			local currentDatabaseVersion = AM.db.global.version or 0
-		
+
 			local newDatabaseVersion, migrationCode, upgradeNotes = unpack(migrationTable)
 			if currentDatabaseVersion < newDatabaseVersion then -- Apply this update
-			
+
 				AM:Debug("Found that migration changeset #" .. index .. " hasn't been applied yet -> Upgrading structures from r" .. tostring(currentDatabaseVersion) .. " to r" .. tostring(newDatabaseVersion), "DB")
 				local Migrate, err = loadstring(migrationCode)
 				if not err then -- Migration code is valid (SHOULD always be the case... but to err is human - heh) -> Run it
-					
+
 					Migrate()
 					AM:Debug("Upgraded successfully. Notes: " .. tostring(upgradeNotes))
 					-- TODO: Set new DB version here?
-					
+
 				else -- Yeah, that didn't go as planned...
-					
+
 					AM:Debug("Error loading migration changeset to upgrade from r" .. tostring(currentDatabaseVersion) .. " to r" .. tostring(newDatabaseVerson), "DB")
 					AM:Debug("Error message: " .. tostring(err), "DB")
-					
+
 				end
-			
+
 			end
-			
+
 		end
 
 		local currentAddonVersion = AM.versionString:match("r(%d+)") or 0 -- Always apply all upgrades while debugging (to see if something breaks)
@@ -110,43 +110,43 @@ local function Initialise()
 	-- Add prototype to default tasks (so that AceDB won't try to store it, causing localisation issues if users switch the client language and suddenly have their old locale's prototype task as an actual TaskDB entry because it is considered a non-default entry)
 	local prototypeTask = AM.TaskDB.PrototypeTask
 	defaultTasks[prototypeTask.name] = prototypeTask
-	
+
 	local prototypeGroup = AM.GroupDB.PrototypeGroup
 	defaultGroups[prototypeGroup.name] = prototypeGroup
-	
+
 	-- TODO: Add default settings? (Not necessary, as they aren't object-oriented)
-	
+
 	-- Assemble the defaults table for AceDB-3.0 (contains all predefined Groups, Tasks, and the current default settings)
 	local defaults = {
-		
+
 		global = { -- Tasks and Groups belong here
-			
+
 			tasks = defaultTasks,
 			groups = defaultGroups,
 			version = 0,
 			layoutCache = {}
 
-		}, 
-		
+		},
+
 		profile = { -- Settings go there
-		
+
 			settings = defaultSettings,
-		
+
 		}
-		
+
 	}
-	
+
 	AM.db = LibStub("AceDB-3.0"):New("AltMasteryDB", defaults, true)
 
 end
 
 
 DB = {
-	
+
 	NeedsMigration = NeedsMigration,
 	Initialise = Initialise,
 	Migrate = Migrate,
-	
+
 }
 
 AM.DB = DB
