@@ -31,7 +31,7 @@ local GetAchievementInfo = GetAchievementInfo
 -- Valid terms that need to be substituted
 local operands = { "AND", "OR", "NOT" } -- TODO: Advanced bit operators? - XOR, ANY, NONE (SQL basically) etc.
 -- local evaluators = { -- TODO: Move to sandbox
-	
+
 	-- ["Class"] = "AltMastery.Criteria.Class",
 	-- ["Achievement"] = "AltMastery.Criteria.Achievement",
 	-- ["WorldQuest"] = false,
@@ -51,40 +51,40 @@ local operands = { "AND", "OR", "NOT" } -- TODO: Advanced bit operators? - XOR, 
 	-- ["Gold"] = false,
 	-- ["Spec"] = false,
 	-- ["Talent"] = false,
-	
+
 -- }
 
 -- Evaluates completion criteria given as an expression
 function Parser:Evaluate(expression, silentMode)
-	
+
 	-- Fix upper-case operands (Lua doesn't recognize those, but they are much easier to read and therefore should be supported)
 	for i, o in pairs(operands) do -- Replace with lower case
 		expression = expression:gsub(" " .. o .. " ", " " .. string_lower(o) .. " ") -- The spaces are to avoid messing up words, such as "WarriOR"
 	end
-	
+
 	-- Find alias if one exists (only applies to Objectives)
 	local alias = expression:match("%sAS%s(.+)$")
 	if alias ~= nil then -- Remove alias and save it for later
-	
+
 		--AM:Debug("Evaluate -> Found alias: \"" .. alias .. "\"", "Parser")
 		expression = expression:match("(.*) AS ") -- Cut off the part that is interpreted as an alias
-		
+
 	end
-	
+
 	-- Assemble string that can be loaded (TODO: ?? symbols in string are annoying)
 	local sandboxedExpression = [[
 		-- Evaluate criteria using the Criteria functions made available in the sandbox and store its return value
-		local isCriteriaFulfilled = 
+		local isCriteriaFulfilled =
 		]]
-		
+
 		.. expression ..
-		
+
 		[[
 		-- Will return the already-evaluated expression's return value as soon as the chunk is executed (i.e., NOT when calling loadstring, but after having a chance to verify its integrity)
 		return isCriteriaFulfilled
-		
+
 	]]
-	
+
 	-- Run expression as sandboxed chunk to let Lua evaluate it
 	local chunk, errorMsg = loadstring(sandboxedExpression)
 	if chunk ~= nil then -- Is valid expression and can be executed
@@ -93,14 +93,14 @@ function Parser:Evaluate(expression, silentMode)
 		local callSucceeded, isCriteriaFulfilled  = pcall(chunk)
 --	if not silentMode then 	AM:Debug("Evaluate -> Expression " .. tostring(expression) .. " evaluated to: " .. tostring(isCriteriaFulfilled) .. ", callSucceeded = " .. tostring(callSucceeded), "Parser") end
 		return isCriteriaFulfilled, alias, errorMsg
-		
+
 	else
 --		AM:Debug("Evaluate -> Expression was invalid and will not be evaluated", "Parser")
 	end
-	
+
 	-- Invalid expressions will simply return nil
 	return nil, "", "Invalid expression"
-	
+
 end
 
 -- Validates completion critera format given as an expression
@@ -108,11 +108,11 @@ function Parser:IsValid(expression)
 
 --	AM:Debug("IsValid -> Validating expression = " .. tostring(expression), "Parser")
 	local isValid
-	
+
 	-- Rule out wrong argument types
 	if type(expression) ~= "string" then isValid = false -- Also rejects empty expressions = type is nil
 	else -- Check if the expression has valid syntax
-		
+
 		local r = Parser:Evaluate(expression, true)
 --		AM:Debug("IsValid -> Expression \"" .. tostring(expression) .. "\" evaluated to " .. tostring(r), "Parser")
 		-- If it was a valid expression, Lua should have been able to fully evaluate it, resulting in a simple boolean value
@@ -122,7 +122,7 @@ function Parser:IsValid(expression)
 	end
 
 	return isValid
-	
+
 end
 
 -- TODO: Separate debug window. Open with /am eval - consists of text field and TEST button. TEST button evaluates criteria when pressed, prints TRUE (green) or FALSE (red)
