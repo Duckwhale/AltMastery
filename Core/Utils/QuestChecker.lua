@@ -13,8 +13,8 @@
     -- -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -- ----------------------------------------------------------------------------------------------------------------------
 
-local addonName, AM = ...
-if not AM then return end
+local addonName, addonTable = ...
+local AM = AltMastery
 
 -- Tool for detecting completed quests - useful for hidden/tracking quests that do not complete via regular turnin, and as such cannot be detected by listening to the respective events
 -- Example: Arachnis killed, Kosumoth's Orbs, etc.
