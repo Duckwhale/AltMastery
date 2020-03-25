@@ -131,6 +131,11 @@ local defaultGroups = { -- TODO: Generate automatically from import table (only 
 			----------------------------------------------
 
 			-- BFA
+
+			-- 8.3 stuff
+			"WEEKLY_BFA_MINIVISION",
+			"DAILY_BFA_MINIVISION",
+
 			-- Warfronts
 			"WEEKLY_BFA_WARFRONT_ARATHI",
 			"WEEKLY_BFA_WARFRONT_DARKSHORE",

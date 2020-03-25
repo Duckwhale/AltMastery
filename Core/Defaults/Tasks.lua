@@ -136,6 +136,22 @@ local PrototypeTask = {
 
 --- Table containing the default Tasks (as DIFF - only the entries that differ from the Prototype are included here)
 local defaultTasks = {
+
+	DAILY_BFA_MINIVISION = {
+		name = "Vision of the Black Empire: Daily Lockout",
+		iconPath = "inv_enchanting_wod_essence2",
+		Criteria = "Quest(58085)",
+		Filter = "Level() < 120",
+		-- Also requires campaign progress, so hide this if not progressed enough?
+	},
+
+	WEEKLY_BFA_MINIVISION = {
+		name = "Vision of the Black Empire: Weekly Bonus",
+		iconPath = "archaeology_5_0_mogucoin",
+		Criteria = "Quest(58815)",
+		Filter = "Level() < 120 OR Quest(58085)", -- Hide if already locked out for the day, since the vision can't be entered again anyway
+	},
+
 -- TODO: Better naming scheme for consistency
 		MILESTONE_WOTLK_LEGENDARY_SHADOWMOURNE = {
 			name = "Shadowmourne",
